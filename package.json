@@ -4,6 +4,8 @@
   "description": "Frontend for orchard pig site",
   "main": "index.js",
   "scripts": {
+    "build": "npm build",
+    "start": "npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
