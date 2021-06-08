@@ -2,7 +2,7 @@
   "name": "orchard_pig_frontend",
   "version": "1.0.0",
   "description": "Frontend for orchard pig site",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "npm build",
     "start": "npm start",
