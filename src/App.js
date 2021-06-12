@@ -5,7 +5,7 @@ import Toast from './Toast'
 
 class App {
   constructor(){
-    this.name = "Haircuts"
+    this.name = "Orchard-Pig"
     this.version = "1.0.0"
     //this.apiBase = 'http://localhost:3000'
     this.apiBase = 'https://orchard-pig-backend.herokuapp.com'

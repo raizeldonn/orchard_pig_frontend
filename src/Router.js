@@ -63,6 +63,8 @@ export function gotoRoute(pathname){
 
 
 // allows anchor <a> links to load routes
+// it is essentially an event handler - hence the
+// shorthand var reference (e) and has associated useful functions
 export function anchorRoute(e){
 	e.preventDefault()	
 	const pathname = e.target.closest('a').pathname

@@ -13,6 +13,8 @@ class SignUpView{
     Utils.pageIntroAnim()
   }
 
+  // this is essentially an event handler - hence the
+  // shorthand var reference (e) and has associated useful methods
   signUpSubmitHandler(e){
     e.preventDefault()    
     const submitBtn = document.querySelector('.submit-btn')
