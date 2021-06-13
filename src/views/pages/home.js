@@ -15,7 +15,8 @@ class HomeView {
     console.log('HomeView.init')
     document.title = 'Home'    
     this.render()    
-    Utils.pageIntroAnim()    
+    Utils.pageIntroAnim()
+    TeamAPI.getTeam()  
   }
   
   // method from lit library which allows us 
