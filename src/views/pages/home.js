@@ -7,6 +7,7 @@ import {html, render } from 'lit-html'
 import App from './../../App'
 import {gotoRoute, anchorRoute } from './../../Router'
 import Auth from './../../Auth'
+import TeamAPI from './../../TeamAPI'
 import Utils from './../../Utils'
 
 class HomeView {
@@ -25,7 +26,8 @@ class HomeView {
       
       <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
-
+        <h1>Team-Linen:</h1>
+        <h2> ${TeamAPI.getTeam}</h2>
         <h3>Button example:</h3>
         <sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
         <p>&nbsp;</p>
