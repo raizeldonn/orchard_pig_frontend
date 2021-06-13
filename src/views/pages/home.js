@@ -15,8 +15,7 @@ class HomeView {
     console.log('HomeView.init')
     document.title = 'Home'    
     this.render()    
-    Utils.pageIntroAnim()
-    TeamAPI.getTeam()  
+    Utils.pageIntroAnim()    
   }
   
   // method from lit library which allows us 
@@ -28,7 +27,6 @@ class HomeView {
       <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
         <h1>Team-Linen:</h1>
-        <h2> ${TeamAPI.team}</h2>
         <h3>Button example:</h3>
         <sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
         <p>&nbsp;</p>

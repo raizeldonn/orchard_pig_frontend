@@ -1924,7 +1924,7 @@ exports.default = void 0;
 var _litHtml = require("lit-html");
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n  <div class=\"app-splash\">\n    <div class=\"inner\">\n      <img class=\"app-logo\" src=\"/images/logo.svg\" />\n      <sl-spinner style=\"font-size: 2em;\"></sl-spinner>\n    </div>\n  </div>\n"]);
+  const data = _taggedTemplateLiteral(["\n\n  <div class=\"app-splash\">\n    <div class=\"inner\">\n      <img class=\"app-logo\" src=\"/images/OP_logo_2012_medium.png\" />\n      <sl-spinner style=\"font-size: 2em;\"></sl-spinner>\n    </div>\n  </div>\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7610,7 +7610,50 @@ class Auth {
 var _default = new Auth();
 
 exports.default = _default;
-},{"./App":"App.js","./Router":"Router.js","./views/partials/splash":"views/partials/splash.js","lit-html":"../node_modules/lit-html/lit-html.js","./Toast":"Toast.js"}],"Utils.js":[function(require,module,exports) {
+},{"./App":"App.js","./Router":"Router.js","./views/partials/splash":"views/partials/splash.js","lit-html":"../node_modules/lit-html/lit-html.js","./Toast":"Toast.js"}],"TeamAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class TeamAPI {
+  constructor() {
+    this.team = {};
+  }
+
+  async getTeam() {
+    // validate
+    //if(!userId) return
+    // fetch the json data
+    const response = await fetch("".concat(_App.default.apiBase, "/team")); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // throw error (exit this function)      
+
+      throw new Error('Problem getting team');
+    } // convert response payload into json - store as data
+
+
+    const data = await response.json();
+    console.log(data); // return data
+
+    return data;
+  }
+
+}
+
+var _default = new TeamAPI();
+
+exports.default = _default;
+},{"./App":"App.js"}],"Utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7661,20 +7704,22 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _App = _interopRequireDefault(require("./../../App"));
-
 var _litHtml = require("lit-html");
+
+var _App = _interopRequireDefault(require("./../../App"));
 
 var _Router = require("./../../Router");
 
 var _Auth = _interopRequireDefault(require("./../../Auth"));
+
+var _TeamAPI = _interopRequireDefault(require("./../../TeamAPI"));
 
 var _Utils = _interopRequireDefault(require("./../../Utils"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7692,7 +7737,9 @@ class HomeView {
     this.render();
 
     _Utils.default.pageIntroAnim();
-  }
+  } // method from lit library which allows us 
+  // to render html from within js to a container
+
 
   render() {
     const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
@@ -7704,7 +7751,7 @@ class HomeView {
 var _default = new HomeView();
 
 exports.default = _default;
-},{"./../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../Utils":"Utils.js"}],"views/pages/404.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js"}],"views/pages/404.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7768,7 +7815,7 @@ var _Utils = _interopRequireDefault(require("./../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["      \n      <div class=\"page-content page-centered\">\n        <div class=\"signinup-box\">\n          <img class=\"signinup-logo\" src=\"/images/logo.svg\">          \n          <sl-form class=\"form-signup dark-theme\" @sl-submit=", ">          \n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"password\" type=\"password\" placeholder=\"Password\" required toggle-password></sl-input>\n            </div>\n            <sl-button class=\"submit-btn\" type=\"primary\" submit style=\"width: 100%;\">Sign In</sl-button>\n          </sl-form>\n          <p>No Account? <a href=\"/signup\" @click=", ">Sign Up</a></p>\n        </div>\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["      \n      <div class=\"page-content page-centered\">\n        <div class=\"signinup-box\">\n          <img class=\"signinup-logo\" src=\"/images/OP_logo_2012_medium.png\">          \n          <sl-form class=\"form-signup dark-theme\" @sl-submit=", ">          \n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"password\" type=\"password\" placeholder=\"Password\" required toggle-password></sl-input>\n            </div>\n            <sl-button class=\"submit-btn\" type=\"primary\" submit style=\"width: 100%;\">Sign In</sl-button>\n          </sl-form>\n          <p>No Account? <a href=\"/signup\" @click=", ">Sign Up</a></p>\n        </div>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7830,7 +7877,7 @@ var _Utils = _interopRequireDefault(require("./../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["      \n      <div class=\"page-content page-centered\">      \n        <div class=\"signinup-box\">\n        <img class=\"signinup-logo\" src=\"/images/logo.svg\">\n          <h1>Sign Up</h1>\n          <sl-form class=\"form-signup\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"password\" type=\"password\" placeholder=\"Password\" required toggle-password></sl-input>\n            </div>            \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Sign Up</sl-button>\n          </sl-form>\n          <p>Have an account? <a href=\"/signin\" @click=", ">Sign In</a></p>\n        </div>\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["      \n      <div class=\"page-content page-centered\">      \n        <div class=\"signinup-box\">\n        <img class=\"signinup-logo\" src=\"/images/OP_logo_2012_medium.png\">\n          <h1>Sign Up</h1>\n          <sl-form class=\"form-signup\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"password\" type=\"password\" placeholder=\"Password\" required toggle-password></sl-input>\n            </div>            \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Sign Up</sl-button>\n          </sl-form>\n          <p>Have an account? <a href=\"/signin\" @click=", ">Sign In</a></p>\n        </div>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7848,7 +7895,9 @@ class SignUpView {
     this.render();
 
     _Utils.default.pageIntroAnim();
-  }
+  } // this is essentially an event handler - hence the
+  // shorthand var reference (e) and has associated useful methods
+
 
   signUpSubmitHandler(e) {
     e.preventDefault();
@@ -13899,6 +13948,8 @@ exports.default = _default;
 function gotoRoute(pathname) {
   AppRouter.gotoRoute(pathname);
 } // allows anchor <a> links to load routes
+// it is essentially an event handler - hence the
+// shorthand var reference (e) and has associated useful functions
 
 
 function anchorRoute(e) {
@@ -13924,7 +13975,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class App {
   constructor() {
-    this.name = "Haircuts";
+    this.name = "Orchard-Pig";
     this.version = "1.0.0"; //this.apiBase = 'http://localhost:3000'
 
     this.apiBase = 'https://orchard-pig-backend.herokuapp.com';
@@ -15906,7 +15957,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56435" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63509" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -10,7 +10,7 @@ class TeamAPI {
 
   async getTeam(){
     // validate
-    if(!userId) return
+    //if(!userId) return
     
     // fetch the json data
     const response = await fetch(`${App.apiBase}/team`)
@@ -26,7 +26,8 @@ class TeamAPI {
     
     // convert response payload into json - store as data
     const data = await response.json()
-    this.team = JSON.Stringify(data)
+    console.log(data)
+    
 
     // return data
     return data
