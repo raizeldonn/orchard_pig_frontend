@@ -13,10 +13,11 @@ import Utils from './../../Utils'
 class HomeView {
   init(){    
     console.log('HomeView.init')
-    document.title = 'Home'    
+    document.title = 'Home'   
     this.render()    
     Utils.pageIntroAnim()    
   }
+ 
   
   // method from lit library which allows us 
   // to render html from within js to a container
