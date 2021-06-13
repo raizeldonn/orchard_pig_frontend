@@ -13,11 +13,20 @@ import Utils from './../../Utils'
 class HomeView {
   init(){    
     console.log('HomeView.init')
-    document.title = 'Home'   
-    this.render()    
+    document.title = 'Home'  
+    this.team = null 
+    this.render()  
     Utils.pageIntroAnim()    
   }
  
+  async getTeam(){
+    try {
+      this.team = await TeamAPI.getTeam()      
+      this.render()
+    }catch(err){
+      Toast.show(err, 'error')
+    }
+  }
   
   // method from lit library which allows us 
   // to render html from within js to a container
@@ -28,6 +37,7 @@ class HomeView {
       <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
         <h1>Team-Linen:</h1>
+        <h2>${this.team}</h2>
         <h3>Button example:</h3>
         <sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
         <p>&nbsp;</p>
