@@ -7763,7 +7763,7 @@ class HomeView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, JSON.stringify((0, _TeamAPI.default)()), () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, JSON.stringify(_TeamAPI.default.getTeam()), () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -15978,7 +15978,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57160" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55632" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
