@@ -27,7 +27,7 @@ class HomeView {
       <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
         <h1>Team-Linen:</h1>
-        <h2> ${TeamAPI.getTeam}</h2>
+        <h2> ${TeamAPI.team}</h2>
         <h3>Button example:</h3>
         <sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
         <p>&nbsp;</p>

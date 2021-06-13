@@ -3,7 +3,12 @@ import App from './App'
 
 class TeamAPI {
 
-async getTeam(){
+
+  constructor(){
+    this.team = {}
+  }
+
+  async getTeam(){
     // validate
     if(!userId) return
     
@@ -21,7 +26,8 @@ async getTeam(){
     
     // convert response payload into json - store as data
     const data = await response.json()
-    
+    this.team = JSON.Stringify(data)
+
     // return data
     return data
   }
