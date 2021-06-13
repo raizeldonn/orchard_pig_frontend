@@ -9,19 +9,23 @@ import {gotoRoute, anchorRoute } from './../../Router'
 import Auth from './../../Auth'
 import TeamAPI from './../../TeamAPI'
 import Utils from './../../Utils'
+import Toast from '../../Toast'
 
 class HomeView {
   init(){    
     console.log('HomeView.init')
     document.title = 'Home'  
     this.team = null 
+    this.getTeam()
     this.render()  
     Utils.pageIntroAnim()    
   }
  
   async getTeam(){
     try {
-      this.team = await TeamAPI.getTeam()      
+      this.team = await TeamAPI.getTeam()
+      //***** */
+      console.log(this.team)
       this.render()
     }catch(err){
       Toast.show(err, 'error')
@@ -37,7 +41,8 @@ class HomeView {
       <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
         <h1>Team-Linen:</h1>
-        <h2>${this.team}</h2>
+        <h2>${JSON.stringify(TeamAPI.firstName)}${JSON.stringify(TeamAPI.lastName)} ${JSON.stringify(TeamAPI.role)}  </h2>
+   
         <h3>Button example:</h3>
         <sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
         <p>&nbsp;</p>

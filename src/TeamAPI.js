@@ -5,7 +5,9 @@ class TeamAPI {
 
 
   constructor(){
-    this.team = {}
+    this.firstName = {}
+    this.lastName = {}
+    this.role = {}
   }
 
   async getTeam(){
@@ -27,7 +29,11 @@ class TeamAPI {
     // convert response payload into json - store as data
     const data = await response.json()
     console.log(data)
-    
+    this.teamString = JSON.stringify(data)
+
+    // this.firstName = data.first_name
+    // this.lastName = data.last_name
+    // this.role = data.role
 
     // return data
     return data

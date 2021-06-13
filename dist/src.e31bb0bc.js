@@ -7624,7 +7624,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class TeamAPI {
   constructor() {
-    this.team = {};
+    this.firstName = {};
+    this.lastName = {};
+    this.role = {};
   }
 
   async getTeam() {
@@ -7643,7 +7645,11 @@ class TeamAPI {
 
 
     const data = await response.json();
-    console.log(data); // return data
+    console.log(data);
+    this.teamString = JSON.stringify(data); // this.firstName = data.first_name
+    // this.lastName = data.last_name
+    // this.role = data.role
+    // return data
 
     return data;
   }
@@ -7716,10 +7722,12 @@ var _TeamAPI = _interopRequireDefault(require("./../../TeamAPI"));
 
 var _Utils = _interopRequireDefault(require("./../../Utils"));
 
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h2>", "</h2>\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h2>", "", " ", "  </h2>\n   \n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7735,6 +7743,7 @@ class HomeView {
     console.log('HomeView.init');
     document.title = 'Home';
     this.team = null;
+    this.getTeam();
     this.render();
 
     _Utils.default.pageIntroAnim();
@@ -7742,17 +7751,19 @@ class HomeView {
 
   async getTeam() {
     try {
-      this.team = await _TeamAPI.default.getTeam();
+      this.team = await _TeamAPI.default.getTeam(); //***** */
+
+      console.log(this.team);
       this.render();
     } catch (err) {
-      Toast.show(err, 'error');
+      _Toast.default.show(err, 'error');
     }
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, this.team, () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, JSON.stringify(_TeamAPI.default.firstName), JSON.stringify(_TeamAPI.default.lastName), JSON.stringify(_TeamAPI.default.role), () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -7761,7 +7772,7 @@ class HomeView {
 var _default = new HomeView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js"}],"views/pages/404.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js","../../Toast":"Toast.js"}],"views/pages/404.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
