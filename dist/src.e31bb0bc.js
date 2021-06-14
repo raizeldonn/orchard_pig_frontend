@@ -7646,12 +7646,28 @@ class TeamAPI {
 
     const data = await response.json();
     console.log(data);
-    this.teamString = JSON.stringify(data); // this.firstName = data.first_name
-    // this.lastName = data.last_name
-    // this.role = data.role
+    var dataArray = []; //loops through data 
+
+    for (var i = 0; i < data.length; i++) {
+      dataArray[i] = data[i];
+      console.log(dataArray[i].first_name);
+      console.log(dataArray[i].last_name);
+      console.log(dataArray[i].role);
+    }
+
+    for (var i = 0; i < data.length; i++) {
+      console.log(dataArray[i].first_name);
+      console.log(dataArray[i].last_name);
+      console.log(dataArray[i].role);
+    } // data.forEach(function(obj) { 
+    //   console.log(obj.first_name);
+    //   console.log(obj.last_name);
+    //   console.log(obj.role);
+    // });
     // return data
 
-    return data;
+
+    return dataArray;
   }
 
 }
@@ -7727,7 +7743,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h2>", "</h2>\n   \n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7743,8 +7759,7 @@ class HomeView {
     console.log('HomeView.init');
     document.title = 'Home';
     this.team = null;
-    this.getTeam();
-    this.render();
+    this.getTeam(); //this.render()  
 
     _Utils.default.pageIntroAnim();
   }
@@ -7763,7 +7778,7 @@ class HomeView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, JSON.stringify(_TeamAPI.default.getTeam()), () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, this.team[0].first_name, this.team[0].last_name, this.team[0].role, this.team[1].first_name, this.team[1].last_name, this.team[1].role, this.team[2].first_name, this.team[2].last_name, this.team[2].role, this.team[3].first_name, this.team[3].last_name, this.team[3].role, this.team[4].first_name, this.team[4].last_name, this.team[4].role, () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
