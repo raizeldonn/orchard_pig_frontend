@@ -5,7 +5,9 @@ class TeamAPI {
 
 
   constructor(){
-    this.team = {}
+    this.firstName = {}
+    this.lastName = {}
+    this.role = {}
   }
 
   async getTeam(){
@@ -27,10 +29,32 @@ class TeamAPI {
     // convert response payload into json - store as data
     const data = await response.json()
     console.log(data)
-    
+   
+    var dataArray = []
+    //loops through data 
+    for (var i=0; i<data.length; i++){
+      dataArray[i] = data[i];
+        console.log(dataArray[i].first_name);
+        console.log(dataArray[i].last_name);
+        console.log(dataArray[i].role);
+    }
 
+    for (var i=0; i<data.length; i++){
+        console.log(dataArray[i].first_name);
+        console.log(dataArray[i].last_name);
+        console.log(dataArray[i].role);
+    }
+
+
+
+
+    // data.forEach(function(obj) { 
+    //   console.log(obj.first_name);
+    //   console.log(obj.last_name);
+    //   console.log(obj.role);
+    // });
     // return data
-    return data
+    return dataArray
   }
 }
 
