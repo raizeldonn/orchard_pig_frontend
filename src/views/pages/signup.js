@@ -47,7 +47,7 @@ class SignUpView{
               <sl-input name="password" type="password" placeholder="Password" required toggle-password></sl-input>
             </div>
             <div class="input-group">
-            <sl-input name="role" type="hidden" style="visibility:hidden" required value="user"></sl-input>
+            <sl-input name="role" type="hidden" style="display:none" required value="user"></sl-input>
           </div>
             <sl-button type="primary" class="submit-btn" submit style="width: 100%;">Sign Up</sl-button>
           </sl-form>
