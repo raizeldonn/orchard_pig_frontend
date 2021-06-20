@@ -7542,7 +7542,8 @@ class Auth {
 
     localStorage.setItem('accessToken', data.accessToken); // set current user
 
-    this.currentUser = data.user; // console.log(this.currentUser)           
+    this.currentUser = data.user;
+    this.currentJWT = data.accessToken; // console.log(this.currentUser)           
     // redirect to home
 
     _Router.default.init();
@@ -7743,7 +7744,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "Token: ", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n      \n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "Token: ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div>\n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7778,7 +7779,7 @@ class HomeView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentJWT, _Auth.default.currentUser.firstName, this.team[0].first_name, this.team[0].last_name, this.team[0].role, this.team[1].first_name, this.team[1].last_name, this.team[1].role, this.team[2].first_name, this.team[2].last_name, this.team[2].role, this.team[3].first_name, this.team[3].last_name, this.team[3].role, this.team[4].first_name, this.team[4].last_name, this.team[4].role, () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, _Auth.default.currentJWT, this.team[0].first_name, this.team[0].last_name, this.team[0].role, this.team[1].first_name, this.team[1].last_name, this.team[1].role, this.team[2].first_name, this.team[2].last_name, this.team[2].role, this.team[3].first_name, this.team[3].last_name, this.team[3].role, this.team[4].first_name, this.team[4].last_name, this.team[4].role, () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -15993,7 +15994,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55316" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60852" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
