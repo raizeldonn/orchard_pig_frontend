@@ -7542,8 +7542,7 @@ class Auth {
 
     localStorage.setItem('accessToken', data.accessToken); // set current user
 
-    this.currentUser = data.user;
-    this.currentJWT = data.accessToken; // console.log(this.currentUser)           
+    this.currentUser = data.user; // console.log(this.currentUser)           
     // redirect to home
 
     _Router.default.init();
