@@ -56,7 +56,8 @@ class Auth {
     // save access token (jwt) to local storage
     localStorage.setItem('accessToken', data.accessToken)
     // set current user
-    this.currentUser = data.user      
+    this.currentUser = data.user
+    this.currentJWT = data.accessToken      
     // console.log(this.currentUser)           
     // redirect to home
     Router.init()
