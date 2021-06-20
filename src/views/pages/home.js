@@ -36,7 +36,7 @@ class HomeView {
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header title="Home" user=${JSON.stringify(Auth.currentUser)}></va-app-header>
+      <va-app-header title="Home" user=${JSON.stringify(Auth.currentUser)}Token: ${Auth.currentJWT}></va-app-header>
       
       <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
