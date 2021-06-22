@@ -33,13 +33,13 @@ class HomeView {
   }
   
   // method from lit library which allows us 
-  // to render html from within js to a container
+  // to render html from within js to a container //Token: ${Auth.currentJWT}
   render(){
     const template = html`
       <va-app-header title="Home" user=${JSON.stringify(Auth.currentUser)}></va-app-header>
       
       <div class="page-content">
-        <h1 class="anim-in">Hey ${Auth.currentUser.firstName}Token: ${Auth.currentJWT}</h1>
+        <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
         <h1>Team-Linen:</h1>
         <h2>${this.team[0].first_name}${this.team[0].last_name}${this.team[0].role}</h2>
         <h2>${this.team[1].first_name}${this.team[1].last_name}${this.team[1].role}</h2>
