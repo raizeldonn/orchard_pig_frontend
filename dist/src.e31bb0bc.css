@@ -1,25 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,300;0,500;1,100;1,200;1,500&display=swap");
+@import url("https://use.typekit.net/hld5ccx.css%22");
 :root {
-  --base-txt-color: #222;
-  --heading-color: #333;
-  --base-font-family: "Work Sans", sans-serif;
+  --base-txt-color: rgb(0, 0, 0);
+  --heading-color: rgb(0, 0, 0);
+  --base-font-family: "Rockwell", sans-serif;
   --body-bg: #fff;
-  --brand-color: #3cc6b9;
-  --link-color: --brand-color;
+  --med-blue: #4186B7;
+  --dark-blue: #2A5879;
+  --olive: #717B39;
+  --brown: #AE6D47;
+  --sand: #DCCBBC;
+  --white: #ffffff;
   --app-header-height: 60px;
   --app-header-txt-color: #fff;
   --app-header-title-font-size: 1.6em;
-  --sl-color-primary-50: #f4f4f4;
-  --sl-color-primary-100: #daf4f2;
-  --sl-color-primary-200: #b2e9e4;
-  --sl-color-primary-300: #8bddd5;
-  --sl-color-primary-400: #63d2c7;
-  --sl-color-primary-500: #3cc6b9;
-  --sl-color-primary-600: #2fa096;
-  --sl-color-primary-700: #237971;
-  --sl-color-primary-800: #18514c;
-  --sl-color-primary-900: #0c2a27;
-  --sl-focus-ring-color-primary: rgba(60, 198, 185, 0.1);
 }
 
 * {
@@ -40,6 +34,9 @@ body {
 h1, h2, h3, h5, h6 {
   margin: 0 0 0.5em;
   color: var(--heading-color);
+  font-size: 70px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 a {
@@ -101,7 +98,6 @@ a {
   right: 0;
   bottom: 0;
   overflow-y: scroll;
-  padding: 1em;
 }
 .page-content.no-pad {
   padding: 0;
@@ -132,6 +128,41 @@ a {
 .guide-step img {
   width: 100%;
   height: auto;
+}
+
+.home-section {
+  height: 100vh;
+  padding: 1em;
+}
+
+.home-section.rooted {
+  background-color: var(--dark-blue);
+}
+.home-section.rooted h1 {
+  padding-top: 1em;
+  transform: rotate(-8deg);
+}
+
+.home-section.hog {
+  background-color: var(--white);
+}
+.home-section.hog h1 {
+  text-align: center;
+  margin: auto;
+  width: 60%;
+}
+.home-section.hog #social {
+  width: 50%;
+  margin: auto;
+}
+
+.home-section.craft-cider {
+  background-color: var(--sand);
+}
+
+.home-section.pig-deal {
+  background-color: var(--olive);
+  display: flex;
 }
 
 @media all and (max-width: 768px) {

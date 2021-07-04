@@ -36,9 +36,52 @@ class HomeView {
   // to render html from within js to a container
   render(){
     const template = html`
+
       <va-app-header title="Home" user=${JSON.stringify(Auth.currentUser)}></va-app-header>
-      
+
       <div class="page-content">
+      
+        <section class='home-section rooted'>
+          <h1>Rooted In Somerset</h1>
+        </section>
+
+        <section class='home-section hog' >
+          <h1>The cider you won't be able to help but hog</h1>
+          <div id="social"><p>social media links here</p></div>
+        </section>
+
+        <section class='home-section craft-cider'>
+          <h1>Craft Cider Like no Other</h1>
+          <p>
+            West Country bitter cider apples are impossible to beat. 
+            We don't hide behind bubbles.
+            our gently sparkling cider is like no other.
+          </p>
+          <sl-button @click=${() => gotoRoute('/shop')} >Shop Now</sl-button>
+        </section>
+
+        <section class='home-section pig-deal'>
+          <div class='left'>
+            <p>image here</p>
+          </div>
+          <div class='right'>
+            <h1>So Whats the Pig deal?</h1>
+            <p>
+              It all began with a discovery.
+            West Country apples make the best cider.
+            Ever since we worked that out we have been developing our one of a kind craft cider.
+            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.
+            </p>
+          </div>
+        </section>
+      
+      </div>
+
+
+
+
+
+      <!-- <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
         <h1>Team-Linen:</h1>
         <h2>${this.team[0].first_name}${this.team[0].last_name}${this.team[0].role}</h2>
@@ -52,7 +95,7 @@ class HomeView {
         <h3>Link example</h3>
         <a href="/profile" @click=${anchorRoute}>View Profile</a>
         
-      </div>
+      </div> -->
      
     `
     render(template, App.rootEl)

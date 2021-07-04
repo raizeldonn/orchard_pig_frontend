@@ -20,6 +20,9 @@ body {
 h1,h2,h3,h5,h6 {
   margin: 0 0 .5em;
   color: var(--heading-color);
+  font-size: 70px;
+  font-weight:bold;
+  text-transform: uppercase;
 }
 
 // links ---------------
@@ -89,7 +92,6 @@ a {
   right: 0;
   bottom: 0;
   overflow-y: scroll;
-  padding: 1em;
   &.no-pad {
     padding: 0;
   }
@@ -122,6 +124,42 @@ a {
     width: 100%;
     height: auto;
   }
+}
+
+// Home Page -------------------
+.home-section{
+  height: 100vh;
+  padding: 1em;
+}
+
+.home-section.rooted{
+  background-color: var(--dark-blue);
+  h1{
+    padding-top: 1em;
+    transform: rotate(-8deg);
+  }
+}
+
+.home-section.hog{
+  background-color: var(--white);
+  h1{
+    text-align: center;
+    margin:auto;
+    width: 60%;
+  }
+  #social{
+    width: 50%;
+    margin: auto;
+  }
+}
+
+.home-section.craft-cider{
+  background-color: var(--sand);
+}
+
+.home-section.pig-deal{
+  background-color: var(--olive);
+  display: flex;
 }
 
 // RESPONSIVE - MOBILE -------------------
