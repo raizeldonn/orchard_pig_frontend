@@ -3,8 +3,13 @@ import homeView from './views/pages/home'
 import fourOFourView from './views/pages/404'
 import signinView from './views/pages/signin'
 import signupView from './views/pages/signup'
-import profileView from './views/pages/profile'
-import editProfileView from './views/pages/editProfile'
+import aboutView from './views/pages/about'
+import checkoutView from './views/pages/checkout'
+import ageConfirmView from './views/pages/age_confirmation'
+import contactView from './views/pages/contact'
+import gameView from './views/pages/game'
+import productView from './views/pages/products'
+
 
 // define routes
 const routes = {
@@ -12,8 +17,12 @@ const routes = {
 	'404' : fourOFourView,
 	'/signin': signinView,
 	'/signup': signupView,
-	'/profile': profileView,
-	'/editProfile': editProfileView	
+	'/about': aboutView,
+	'/checkout': checkoutView,
+	'/ageconfirm': ageConfirmView,
+	'/contact': contactView,
+	'/game': gameView,
+	'/product': productView
 }
 
 class Router {

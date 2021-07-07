@@ -69,53 +69,53 @@ class Auth {
     render(splash, App.rootEl)
     
     // check local token is there
-    if(!localStorage.accessToken){
-      // no local token!
-      Toast.show("Please sign in")    
+    if(!localStorage.over18 || localStorage.over18 == false){
+      // under 18
+      //    Toast.show("Please sign in")    
       // redirect to sign in page      
-      gotoRoute('/signin')
+      gotoRoute('/ageconfirm')
       return
     }
     
-    // token must exist - validate token via the backend
-    const response = await fetch(`${App.apiBase}/auth/validate`, {
-      method: 'GET',
-      headers: {        
-        "Authorization": `Bearer ${localStorage.accessToken}`
-      }
-    })
+  //   // token must exist - validate token via the backend
+  //   const response = await fetch(`${App.apiBase}/auth/validate`, {
+  //     method: 'GET',
+  //     headers: {        
+  //       "Authorization": `Bearer ${localStorage.accessToken}`
+  //     }
+  //   })
     
-    // if response not ok
-    if(!response.ok){             
-      // console log error
-      const err = await response.json()
-      if(err) console.log(err)
-      // delete local token
-      localStorage.removeItem('accessToken')
-      Toast.show("session expired, please sign in")
-      // redirect to sign in      
-      gotoRoute('/signin')
-      return
+  //   // if response not ok
+  //   if(!response.ok){             
+  //     // console log error
+  //     const err = await response.json()
+  //     if(err) console.log(err)
+  //     // delete local token
+  //     localStorage.removeItem('accessToken')
+  //     Toast.show("session expired, please sign in")
+  //     // redirect to sign in      
+  //     gotoRoute('/signin')
+  //     return
+  //   }
+    
+  //   // token is valid!
+  //   const data = await response.json()
+  //   // console.log(data)
+  //   // set currentUser obj
+  //   this.currentUser = data.user
+  //   // run success
+      success()
     }
-    
-    // token is valid!
-    const data = await response.json()
-    // console.log(data)
-    // set currentUser obj
-    this.currentUser = data.user
-    // run success
-    success()
-  }
 
-  signOut(){
-    Toast.show("You are signed out")
-    // delete local token
-    localStorage.removeItem('accessToken')       
-    // redirect to sign in    
-    gotoRoute('/signin')
-    // unset currentUser
-    this.currentUser = null
-  }
+  // signOut(){
+  //   Toast.show("You are signed out")
+  //   // delete local token
+  //   localStorage.removeItem('accessToken')       
+  //   // redirect to sign in    
+  //   gotoRoute('/signin')
+  //   // unset currentUser
+  //   this.currentUser = null
+  // }
 }
 
 export default new Auth()

@@ -172,9 +172,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
             <sl-avatar style="--size: 24px;" image=${(this.user && this.user.avatar) ? `${App.apiBase}/images/${this.user.avatar}` : ''}></sl-avatar> ${this.user && this.user.firstName}
           </a>
           <sl-menu>            
-            <sl-menu-item @click="${() => gotoRoute('/profile')}">Profile</sl-menu-item>
-            <sl-menu-item @click="${() => gotoRoute('/editProfile')}">Edit Profile</sl-menu-item>
-            <sl-menu-item @click="${() => Auth.signOut()}">Sign Out</sl-menu-item>
+            <sl-menu-item @click="${() => gotoRoute('/products')}">Shop</sl-menu-item>
+            <sl-menu-item @click="${() => gotoRoute('/game')}">Win</sl-menu-item>
+            <sl-menu-item @click="${() => gotoRoute('/about')}">About Us</sl-menu-item>
+            <sl-menu-item @click="${() => gotoRoute('/contact')}">Contact Us</sl-menu-item>
           </sl-menu>
         </sl-dropdown>
       </nav>
