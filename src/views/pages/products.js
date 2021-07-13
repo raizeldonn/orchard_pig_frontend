@@ -56,24 +56,28 @@ class ProductsView {
     })
   }
 
+  addToCart(product){
+    console.log("added to cart: " + product.name);
+  }
+
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
     const template = html`
       <va-app-header title="Products" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
-      <div class="page-content">        
+      <div class="page-content products">        
         <div class='products-grid'>
             ${this.products == null ? html `
               <sl-spinner></sl-spinner>
             ` : html `
             <!--map is very similar to for each-->
               ${this.products.map(product => html`
-                <sl-card class='product-card'>  
-                  <img @click=${() => this.moreInfoHandler(product)} slot='image' src='${App.apiBase}/${product.image}' alt='${product.name}'>
-                  <p>${product.name}</p>
-                  <p>$${product.price.$numberDecimal}</p>
-                  <button >Add To Cart</button>
-                </sl-card>
+                <div class='product-card'>  
+                  <img @click=${() => this.moreInfoHandler(product)} src='${App.apiBase}/${product.image}' alt='${product.name}'>
+                  <h2>${product.shortName}</h2>
+                  <h3>$${product.price.$numberDecimal}</h3>
+                  <button @click=${() => this.addToCart(product)}>Add To Cart</button>
+                </div>
               `)}
             `}
           </div>

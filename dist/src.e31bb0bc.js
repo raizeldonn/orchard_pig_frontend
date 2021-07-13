@@ -8318,7 +8318,7 @@ var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject7() {
-  const data = _taggedTemplateLiteral(["\n                <sl-card class='product-card'>  \n                  <img @click=", " slot='image' src='", "/", "' alt='", "'>\n                  <p>", "</p>\n                  <p>$", "</p>\n                  <button >Add To Cart</button>\n                </sl-card>\n              "]);
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <img @click=", " src='", "/", "' alt='", "'>\n                  <h2>", "</h2>\n                  <h3>$", "</h3>\n                  <button @click=", ">Add To Cart</button>\n                </div>\n              "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -8348,7 +8348,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\"></va-app-header>\n      <div class=\"page-content products\">        \n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -8427,12 +8427,16 @@ class ProductsView {
     this.productDialog.addEventListener('sl-after-hide', () => {
       this.productDialog.remove();
     });
+  }
+
+  addToCart(product) {
+    console.log("added to cart: " + product.name);
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, product.price.$numberDecimal)))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.shortName, product.price.$numberDecimal, () => this.addToCart(product))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -10527,7 +10531,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59337" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57847" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

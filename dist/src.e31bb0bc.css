@@ -3,7 +3,8 @@
 :root {
   --base-txt-color: rgb(0, 0, 0);
   --heading-color: rgb(0, 0, 0);
-  --base-font-family: "Rockwell", sans-serif;
+  --base-font-family: "Lato", sans-serif;
+  --heading-font-family: "Rockwell", sans-serif;
   --body-bg: #fff;
   --med-blue: #4186B7;
   --dark-blue: #2A5879;
@@ -36,7 +37,19 @@ h1, h2, h3, h5, h6 {
   color: var(--heading-color);
   font-size: 70px;
   font-weight: bold;
+  font-family: var(--heading-font-family);
   text-transform: uppercase;
+}
+
+button {
+  background-color: var(--dark-blue);
+  color: white;
+  text-transform: uppercase;
+  border-radius: 30px;
+  padding: 2%;
+  border: none;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
 }
 
 a {
@@ -209,13 +222,7 @@ a {
 }
 .home-section.craft-cider button.shop-now {
   font-size: 35px;
-  font-family: var(--base-font-family);
-  padding: 1%;
-  background-color: var(--med-blue);
   color: black;
-  text-transform: uppercase;
-  border: solid 10px black;
-  border-radius: 5px;
   position: absolute;
   transform: translateX(220%);
   bottom: 20%;
@@ -248,6 +255,43 @@ a {
 .home-section.pig-deal .right p {
   font-weight: bold;
   font-size: 18px;
+}
+
+.products {
+  padding: 5%;
+}
+.products .products-grid {
+  display: grid;
+}
+.products .products-grid .product-card:nth-child(odd) {
+  grid-column: 1/2;
+}
+.products .products-grid .product-card:nth-child(even) {
+  grid-column: 2/3;
+  transform: translateY(30%);
+}
+.products .products-grid img {
+  width: 345px;
+  border: white 10px solid;
+  border-radius: 10px;
+  box-shadow: 5px 5px 8px 5px #888888;
+}
+.products .products-grid h2 {
+  font-size: 50px;
+  position: absolute;
+  transform: translateY(-900%);
+  margin-left: 250px;
+}
+.products .products-grid h3 {
+  font-size: 48px;
+  position: absolute;
+  margin-left: 290px;
+  transform: translateY(-830%);
+}
+.products .products-grid button {
+  margin-left: 290px;
+  transform: translateY(-800%);
+  box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.7);
 }
 
 @media all and (max-width: 768px) {
