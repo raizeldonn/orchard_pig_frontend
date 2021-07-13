@@ -137,6 +137,7 @@ a {
 
 .home-section.rooted {
   background-color: var(--dark-blue);
+  /*background-image: url("../images/home-splash.png");*/
 }
 .home-section.rooted h1 {
   padding-top: 1em;

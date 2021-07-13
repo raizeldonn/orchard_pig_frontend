@@ -7737,7 +7737,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n          <h1>Rooted In Somerset</h1>\n        </section>\n\n        <section class='home-section hog' >\n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\"><p>social media links here</p></div>\n        </section>\n\n        <section class='home-section craft-cider'>\n          <h1>Craft Cider Like no Other</h1>\n          <p>\n            West Country bitter cider apples are impossible to beat. \n            We don't hide behind bubbles.\n            our gently sparkling cider is like no other.\n          </p>\n          <sl-button @click=", " >Shop Now</sl-button>\n        </section>\n\n        <section class='home-section pig-deal'>\n          <div class='left'>\n            <p>image here</p>\n          </div>\n          <div class='right'>\n            <h1>So Whats the Pig deal?</h1>\n            <p>\n              It all began with a discovery.\n            West Country apples make the best cider.\n            Ever since we worked that out we have been developing our one of a kind craft cider.\n            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.\n            </p>\n          </div>\n        </section>\n      \n      </div>\n\n\n\n\n\n      <!-- <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n        <h1>Team-Linen:</h1>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h2>", "", "", "</h2>\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", ">View Profile</sl-button>\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        \n      </div> -->\n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n          <h1>Rooted In Somerset</h1>\n        </section>\n\n        <section class='home-section hog' >\n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\"><p>social media links here</p></div>\n        </section>\n\n        <section class='home-section craft-cider'>\n          <h1>Craft Cider Like no Other</h1>\n          <p>\n            West Country bitter cider apples are impossible to beat. \n            We don't hide behind bubbles.\n            our gently sparkling cider is like no other.\n          </p>\n          <sl-button @click=", " >Shop Now</sl-button>\n        </section>\n\n        <section class='home-section pig-deal'>\n          <div class='left'>\n            <p>image here</p>\n          </div>\n          <div class='right'>\n            <h1>So Whats the Pig deal?</h1>\n            <p>\n              It all began with a discovery.\n            West Country apples make the best cider.\n            Ever since we worked that out we have been developing our one of a kind craft cider.\n            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.\n            </p>\n          </div>\n        </section>\n      \n      </div>\n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7751,9 +7751,10 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class HomeView {
   init() {
     console.log('HomeView.init');
-    document.title = 'Home';
-    this.team = null;
-    this.getTeam(); //this.render()  
+    document.title = 'Home'; //this.team = null 
+    //this.getTeam()
+
+    this.render();
 
     _Utils.default.pageIntroAnim();
   }
@@ -7772,13 +7773,29 @@ class HomeView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), () => (0, _Router.gotoRoute)('/shop'), _Auth.default.currentUser.firstName, this.team[0].first_name, this.team[0].last_name, this.team[0].role, this.team[1].first_name, this.team[1].last_name, this.team[1].role, this.team[2].first_name, this.team[2].last_name, this.team[2].role, this.team[3].first_name, this.team[3].last_name, this.team[3].role, this.team[4].first_name, this.team[4].last_name, this.team[4].role, () => (0, _Router.gotoRoute)('/profile'), _Router.anchorRoute);
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), () => (0, _Router.gotoRoute)('/shop'));
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
 }
 
 var _default = new HomeView();
+/*<div class="page-content">
+<h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
+<h1>Team-Linen:</h1>
+<h2>${this.team[0].first_name}${this.team[0].last_name}${this.team[0].role}</h2>
+<h2>${this.team[1].first_name}${this.team[1].last_name}${this.team[1].role}</h2>
+<h2>${this.team[2].first_name}${this.team[2].last_name}${this.team[2].role}</h2>
+<h2>${this.team[3].first_name}${this.team[3].last_name}${this.team[3].role}</h2>
+<h2>${this.team[4].first_name}${this.team[4].last_name}${this.team[4].role}</h2>
+<h3>Button example:</h3>
+<sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
+<p>&nbsp;</p>
+<h3>Link example</h3>
+<a href="/profile" @click=${anchorRoute}>View Profile</a>
+
+</div>*/
+
 
 exports.default = _default;
 },{"lit-html":"../node_modules/lit-html/lit-html.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js","../../Toast":"Toast.js"}],"views/pages/404.js":[function(require,module,exports) {
@@ -8329,7 +8346,7 @@ const routes = {
   '/ageconfirm': _age_confirmation.default,
   '/contact': _contact.default,
   '/game': _game.default,
-  '/product': _products.default
+  '/products': _products.default
 };
 
 class Router {
@@ -10191,18 +10208,8 @@ var _App = _interopRequireDefault(require("./../App"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject2() {
-  const data = _taggedTemplateLiteral(["\n          <h1 class=\"page-title\">", "</h1>\n        "]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        background: var(--brand-color);\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        color: #fff;\n        display: flex;\n        z-index: 9;\n        box-shadow: 4px 0px 10px rgba(0,0,0,0.2);\n        align-items: center;\n      }\n      \n\n      .app-header-main {\n        flex-grow: 1;\n        display: flex;\n        align-items: center;\n      }\n\n      .app-header-main::slotted(h1){\n        color: #fff;\n      }\n\n      .app-logo a {\n        color: #fff;\n        text-decoration: none;\n        font-weight: bold;\n        font-size: 1.2em;\n        padding: .6em;\n        display: inline-block;        \n      }\n\n      .app-logo img {\n        width: 90px;\n      }\n      \n      .hamburger-btn::part(base) {\n        color: #fff;\n      }\n\n      .app-top-nav {\n        display: flex;\n        height: 100%;\n        align-items: center;\n      }\n\n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: #fff;\n      }\n      \n      .app-side-menu-items a {\n        display: block;\n        padding: .5em;\n        text-decoration: none;\n        font-size: 1.3em;\n        color: #333;\n      }\n\n      .app-side-menu-logo {\n        width: 120px;\n        margin-bottom: 1em;\n        position: absolute;\n        top: 2em;\n        left: 1.5em;\n      }\n\n      .page-title {\n        color: var(--app-header-txt-color);\n        margin-right: 0.5em;\n        font-size: var(--app-header-title-font-size);\n      }\n\n      /* active nav links */\n      .app-top-nav a.active,\n      .app-side-menu-items a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-top-nav {\n          display: none;\n        }\n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <sl-icon-button class=\"hamburger-btn\" name=\"list\" @click=\"", "\" style=\"font-size: 1.5em;\"></sl-icon-button>       \n      \n      <div class=\"app-header-main\">\n        ", "\n        <slot></slot>\n      </div>\n\n      <nav class=\"app-top-nav\">\n        <a href=\"/\" @click=\"", "\">Home</a>        \n        <sl-dropdown>\n          <a slot=\"trigger\" href=\"#\" @click=\"", "\">\n            <sl-avatar style=\"--size: 24px;\" image=", "></sl-avatar> ", "\n          </a>\n          <sl-menu>            \n            <sl-menu-item @click=\"", "\">Shop</sl-menu-item>\n            <sl-menu-item @click=\"", "\">Win</sl-menu-item>\n            <sl-menu-item @click=\"", "\">About Us</sl-menu-item>\n            <sl-menu-item @click=\"", "\">Contact Us</sl-menu-item>\n          </sl-menu>\n        </sl-dropdown>\n      </nav>\n    </header>\n\n    <sl-drawer class=\"app-side-menu\" placement=\"left\">\n      <img class=\"app-side-menu-logo\" src=\"/images/logo.svg\">\n      <nav class=\"app-side-menu-items\">\n        <a href=\"/\" @click=\"", "\">Home</a>\n        <a href=\"/profile\" @click=\"", "\">Profile</a>\n        <a href=\"#\" @click=\"", "\">Sign Out</a>\n      </nav>  \n    </sl-drawer>\n    "]);
+  const data = _taggedTemplateLiteral(["\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        background: var(--brand-color);\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        color: #fff;\n        display: flex;\n        z-index: 9;\n        box-shadow: 4px 0px 10px rgba(0,0,0,0.2);\n        align-items: center;\n      }\n      \n\n      .app-header-main {\n        flex-grow: 1;\n        display: flex;\n        align-items: center;\n      }\n\n      .app-header-main::slotted(h1){\n        color: #fff;\n      }\n\n      .app-logo a {\n        color: #fff;\n        text-decoration: none;\n        font-weight: bold;\n        font-size: 1.2em;\n        padding: .6em;\n        display: inline-block;        \n      }\n\n      .app-logo img {\n        width: 90px;\n      }\n      \n      .hamburger-btn::part(base) {\n        color: black;\n      }\n\n      .app-top-nav {\n        display: flex;\n        height: 100%;\n        align-items: center;\n      }\n\n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n      }\n      \n      .app-side-menu-items a {\n        display: block;\n        padding: .5em;\n        text-decoration: none;\n        font-size: 1.3em;\n        color: #333;\n      }\n\n      .app-side-menu-logo {\n        width: 120px;\n        margin-bottom: 1em;\n        position: absolute;\n        top: 2em;\n        left: 1.5em;\n      }\n\n      .page-title {\n        color: var(--app-header-txt-color);\n        margin-right: 0.5em;\n        font-size: var(--app-header-title-font-size);\n      }\n\n      /* active nav links */\n      .app-top-nav a.active,\n      .app-side-menu-items a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-top-nav {\n          display: none;\n        }\n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <nav class=\"app-top-nav\">\n          <a href=\"/products\" @click=\"", "\">Home</a>\n          <a href=\"/products\" @click=\"", "\">Shop</a>  \n          <a href=\"/game\" @click=\"", "\">Win</a>  \n          <a href=\"/about\" @click=\"", "\">About Us</a>  \n          <a href=\"/contact\" @click=\"", "\">Contact Us</a>  \n      </nav>\n      <nav class=\"app-top-nav\">\n        <a @click=\"", "\">Cart</a>\n      </nav>      \n    </header>\n\n    <sl-drawer class=\"app-side-menu\">\n      <h1>Your Cart</h1>\n      <p>Product Name</p> \n      <p>Product Amount</p>\n      <p>$ Product Price</p>\n      <h3>Total</h3>\n      <sl-button @click=\"", "\">Checkout</sl-button>\n    </sl-drawer>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10251,20 +10258,13 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
     appMenu.show();
   }
 
-  menuClick(e) {
-    e.preventDefault();
-    const pathname = e.target.closest('a').pathname;
-    const appSideMenu = this.shadowRoot.querySelector('.app-side-menu'); // hide appMenu
-
-    appSideMenu.hide();
-    appSideMenu.addEventListener('sl-after-hide', () => {
-      // goto route after menu is hidden
-      (0, _Router.gotoRoute)(pathname);
-    });
+  checkoutClick() {
+    //initialise all the vars needed for a checkout
+    (0, _Router.gotoRoute)('/checkout');
   }
 
   render() {
-    return (0, _litElement.html)(_templateObject(), this.hamburgerClick, this.title ? (0, _litElement.html)(_templateObject2(), this.title) : "", _Router.anchorRoute, e => e.preventDefault(), this.user && this.user.avatar ? "".concat(_App.default.apiBase, "/images/").concat(this.user.avatar) : '', this.user && this.user.firstName, () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/game'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), this.menuClick, this.menuClick, () => _Auth.default.signOut());
+    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/game'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), this.hamburgerClick, this.checkoutClick);
   }
 
 });
@@ -10385,7 +10385,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49438" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58890" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

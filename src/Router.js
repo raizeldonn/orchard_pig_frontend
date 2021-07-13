@@ -22,7 +22,7 @@ const routes = {
 	'/ageconfirm': ageConfirmView,
 	'/contact': contactView,
 	'/game': gameView,
-	'/product': productView
+	'/products': productView
 }
 
 class Router {
