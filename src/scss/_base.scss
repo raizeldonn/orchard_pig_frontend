@@ -134,10 +134,14 @@ a {
 
 .home-section.rooted{
   background-color: var(--dark-blue);
-  /*background-image: url("../images/home-splash.png");*/
+  background-image: url("../../static/images/home-splash-2.png");
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: contain;
   h1{
     padding-top: 1em;
     transform: rotate(-8deg);
+    text-align: center;
   }
 }
 
@@ -145,22 +149,107 @@ a {
   background-color: var(--white);
   h1{
     text-align: center;
-    margin:auto;
-    width: 60%;
+    margin:40px auto;
+    width: 50%;
+    font-style: italic;
+    text-shadow: -2px 2px black;
+    font-size: 80px;
   }
   #social{
     width: 50%;
-    margin: auto;
+    margin: 30px auto;
+    text-align: center;
+    i{
+      font-size: 40px;
+      margin: 10px;
+    }
   }
+  .fp-1{
+    right: 10%;
+    bottom: 4%;
+  }
+}
+
+.foot-print{
+  height: 30vh;
+  position: absolute;
 }
 
 .home-section.craft-cider{
   background-color: var(--sand);
+  position: relative;
+  .split-heading{
+    display: flex;
+    width: 90%;
+    margin: auto;
+    h1{
+      font-style: italic;
+      text-shadow: -2px 2px black;
+    }
+    h1:nth-child(2){
+      margin-left: 10%;
+    }
+  }
+  p{
+    font-weight: bold;
+    font-size: 24px;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+  }
+  .pink-tilted{
+    height: 65vh;
+    margin: auto;
+    align-self: center;
+    display: block;
+  }
+  button.shop-now{
+    font-size: 35px;
+    font-family: var(--base-font-family);
+    padding: 1%;
+    background-color: var(--med-blue);
+    color: black;
+    text-transform: uppercase;
+    border: solid 10px black;
+    border-radius: 5px;
+    position: absolute;
+    transform: translateX(220%);
+    bottom: 20%;
+    margin: auto;
+    cursor: pointer;
+    
+  }
+  
 }
 
 .home-section.pig-deal{
   background-color: var(--olive);
   display: flex;
+  h1{
+    text-transform: initial;
+  }
+  .left{
+    width: 140%;
+    display: flex;
+    flex-direction: column;
+    margin: 3%;
+    img{
+      width:100%;
+      margin-top: auto;
+      margin-bottom: auto;
+      display: block;
+    }
+  }
+  .right{
+    div{
+      padding: 4%;
+    }
+    p{
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+  
 }
 
 // RESPONSIVE - MOBILE -------------------

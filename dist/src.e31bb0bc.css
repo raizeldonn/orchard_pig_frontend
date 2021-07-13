@@ -11,7 +11,7 @@
   --brown: #AE6D47;
   --sand: #DCCBBC;
   --white: #ffffff;
-  --app-header-height: 60px;
+  --app-header-height: 50px;
   --app-header-txt-color: #fff;
   --app-header-title-font-size: 1.6em;
 }
@@ -137,11 +137,15 @@ a {
 
 .home-section.rooted {
   background-color: var(--dark-blue);
-  /*background-image: url("../images/home-splash.png");*/
+  background-image: url("/home-splash-2.40814d4a.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .home-section.rooted h1 {
   padding-top: 1em;
   transform: rotate(-8deg);
+  text-align: center;
 }
 
 .home-section.hog {
@@ -149,21 +153,101 @@ a {
 }
 .home-section.hog h1 {
   text-align: center;
-  margin: auto;
-  width: 60%;
+  margin: 40px auto;
+  width: 50%;
+  font-style: italic;
+  text-shadow: -2px 2px black;
+  font-size: 80px;
 }
 .home-section.hog #social {
   width: 50%;
-  margin: auto;
+  margin: 30px auto;
+  text-align: center;
+}
+.home-section.hog #social i {
+  font-size: 40px;
+  margin: 10px;
+}
+.home-section.hog .fp-1 {
+  right: 10%;
+  bottom: 4%;
+}
+
+.foot-print {
+  height: 30vh;
+  position: absolute;
 }
 
 .home-section.craft-cider {
   background-color: var(--sand);
+  position: relative;
+}
+.home-section.craft-cider .split-heading {
+  display: flex;
+  width: 90%;
+  margin: auto;
+}
+.home-section.craft-cider .split-heading h1 {
+  font-style: italic;
+  text-shadow: -2px 2px black;
+}
+.home-section.craft-cider .split-heading h1:nth-child(2) {
+  margin-left: 10%;
+}
+.home-section.craft-cider p {
+  font-weight: bold;
+  font-size: 24px;
+  width: 40%;
+  margin: auto;
+  text-align: center;
+}
+.home-section.craft-cider .pink-tilted {
+  height: 65vh;
+  margin: auto;
+  align-self: center;
+  display: block;
+}
+.home-section.craft-cider button.shop-now {
+  font-size: 35px;
+  font-family: var(--base-font-family);
+  padding: 1%;
+  background-color: var(--med-blue);
+  color: black;
+  text-transform: uppercase;
+  border: solid 10px black;
+  border-radius: 5px;
+  position: absolute;
+  transform: translateX(220%);
+  bottom: 20%;
+  margin: auto;
+  cursor: pointer;
 }
 
 .home-section.pig-deal {
   background-color: var(--olive);
   display: flex;
+}
+.home-section.pig-deal h1 {
+  text-transform: initial;
+}
+.home-section.pig-deal .left {
+  width: 140%;
+  display: flex;
+  flex-direction: column;
+  margin: 3%;
+}
+.home-section.pig-deal .left img {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: block;
+}
+.home-section.pig-deal .right div {
+  padding: 4%;
+}
+.home-section.pig-deal .right p {
+  font-weight: bold;
+  font-size: 18px;
 }
 
 @media all and (max-width: 768px) {

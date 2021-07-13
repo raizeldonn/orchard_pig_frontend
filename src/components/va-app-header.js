@@ -62,15 +62,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         right: 0;
         left: 0;
         height: var(--app-header-height);
-        color: #fff;
         display: flex;
         z-index: 9;
         box-shadow: 4px 0px 10px rgba(0,0,0,0.2);
         align-items: center;
       }
-      
 
-      .app-header-main {
+      /* .app-header-main {
         flex-grow: 1;
         display: flex;
         align-items: center;
@@ -78,9 +76,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .app-header-main::slotted(h1){
         color: #fff;
-      }
+      } */
 
-      .app-logo a {
+      /* .app-logo a {
         color: #fff;
         text-decoration: none;
         font-weight: bold;
@@ -91,7 +89,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .app-logo img {
         width: 90px;
-      }
+      } */
       
       .hamburger-btn::part(base) {
         color: black;
@@ -102,6 +100,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         height: 100%;
         align-items: center;
       }
+      
+      .right{
+          position: absolute;
+          right: 2%;
+        }
+
+      .nav-logo{
+        width: 15%;
+        transform: translateY(15%) translateX(70%);
+        cursor: pointer;
+        display: block;
+      }
 
       .app-top-nav a {
         display: inline-block;
@@ -110,26 +120,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         color: black;
       }
       
+      /*items in the cart menu */
       .app-side-menu-items a {
         display: block;
         padding: .5em;
         text-decoration: none;
         font-size: 1.3em;
         color: #333;
-      }
-
-      .app-side-menu-logo {
-        width: 120px;
-        margin-bottom: 1em;
-        position: absolute;
-        top: 2em;
-        left: 1.5em;
-      }
-
-      .page-title {
-        color: var(--app-header-txt-color);
-        margin-right: 0.5em;
-        font-size: var(--app-header-title-font-size);
       }
 
       /* active nav links */
@@ -150,15 +147,16 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
     <header class="app-header">
       <nav class="app-top-nav">
-          <a href="/products" @click="${() => gotoRoute('/')}">Home</a>
+          <a href="/" @click="${() => gotoRoute('/')}">Home</a>
           <a href="/products" @click="${() => gotoRoute('/products')}">Shop</a>  
           <a href="/game" @click="${() => gotoRoute('/game')}">Win</a>  
           <a href="/about" @click="${() => gotoRoute('/about')}">About Us</a>  
           <a href="/contact" @click="${() => gotoRoute('/contact')}">Contact Us</a>  
       </nav>
-      <nav class="app-top-nav">
+      <nav class="app-top-nav right">
         <a @click="${this.hamburgerClick}">Cart</a>
-      </nav>      
+      </nav>
+      <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'></a>     
     </header>
 
     <sl-drawer class="app-side-menu">

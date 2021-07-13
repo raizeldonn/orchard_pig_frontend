@@ -46,32 +46,49 @@ class HomeView {
         </section>
 
         <section class='home-section hog' >
+          <img class='foot-print fp-one' src='/images/foot-print.png'>
+          <img class='foot-print fp-two' src='/images/foot-print.png'>
+          <img class='foot-print fp-three' src='/images/foot-print.png'>
+          <img class='foot-print fp-four' src='/images/foot-print.png'>
           <h1>The cider you won't be able to help but hog</h1>
-          <div id="social"><p>social media links here</p></div>
+          <div id="social">
+            <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
+            <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
+            <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter-square"></i></a>
+          </div>
+          
+          <!-- <sl-icon name='facebook'></sl-icon>
+          <sl-icon name='instagram'></sl-icon>
+          <sl-icon name='twitter'></sl-icon> -->
         </section>
 
         <section class='home-section craft-cider'>
-          <h1>Craft Cider Like no Other</h1>
+          <img class='foot-print fp-five' src='/images/foot-print.png'>
+          <img class='foot-print fp-six' src='/images/foot-print.png'>
+          <img class='foot-print fp-seven' src='/images/foot-print.png'>
+          <div class='split-heading'><h1>Craft Cider</h1><h1>Like no Other</h1></div>
           <p>
             West Country bitter cider apples are impossible to beat. 
             We don't hide behind bubbles.
             our gently sparkling cider is like no other.
           </p>
-          <sl-button @click=${() => gotoRoute('/shop')} >Shop Now</sl-button>
+          <img class='pink-tilted' src='/images/pink-tilted.png'>
+          <button class='shop-now' @click=${() => gotoRoute('/products')} >Shop Now</button>
         </section>
 
         <section class='home-section pig-deal'>
           <div class='left'>
-            <p>image here</p>
+          <img src='/images/pig-deal.png'>
           </div>
           <div class='right'>
-            <h1>So Whats the Pig deal?</h1>
+            <div>
+            <h1>So, Whats the Pig deal?</h1>
             <p>
               It all began with a discovery.
             West Country apples make the best cider.
             Ever since we worked that out we have been developing our one of a kind craft cider.
             Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.
-            </p>
+            </p> </div>
           </div>
         </section>
       
