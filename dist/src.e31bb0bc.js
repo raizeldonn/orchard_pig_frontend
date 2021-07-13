@@ -8247,7 +8247,53 @@ class ProductsView {
 var _default = new ProductsView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/products.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"ProductsAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class ProductsAPI {
+  constructor() {
+    this.firstName = {};
+    this.lastName = {};
+    this.role = {};
+  }
+
+  async getProducts() {
+    // fetch the json data
+    const response = await fetch("".concat(_App.default.apiBase, "/products"), {
+      headers: {
+        "Authorization": "Bearer ".concat(localStorage.accessToken)
+      }
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // throw error (exit this function)      
+
+      throw new Error('Problem getting products');
+    } // convert response payload into json - store as data
+
+
+    const data = await response.json(); // return data
+
+    return data;
+  }
+
+}
+
+var _default = new ProductsAPI();
+
+exports.default = _default;
+},{"./App":"App.js"}],"views/pages/products.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8265,10 +8311,74 @@ var _Auth = _interopRequireDefault(require("../../Auth"));
 
 var _Utils = _interopRequireDefault(require("../../Utils"));
 
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
+var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject7() {
+  const data = _taggedTemplateLiteral(["\n                <sl-card class='product-card'>  \n                  <img @click=", " slot='image' src='", "/", "' alt='", "'>\n                  <p>", "</p>\n                  <p>$", "</p>\n                  <button >Add To Cart</button>\n                </sl-card>\n              "]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  const data = _taggedTemplateLiteral(["\n            <!--map is very similar to for each-->\n              ", "\n            "]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  const data = _taggedTemplateLiteral(["\n              <sl-spinner></sl-spinner>\n            "]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral([""]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral([" <p>allergen: ", "</p>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <h1>Page title</h1>\n        <p>Page content ...</p>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n        <img slot='image' src='", "/", "' alt='", "'>\n        <p>", "</p>\n        <p>", "</p>\n        <p>", "x", "ml</p>\n        <p>flavour: ", "</p>\n        <p>", "</p>\n        <p>", "</p>\n        ", "\n        <button>Add to cart</button>\n        <p>Share this product</p>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8282,15 +8392,47 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class ProductsView {
   init() {
     document.title = 'Products';
+    this.products = null;
+    this.productDialog = null;
     this.render();
 
     _Utils.default.pageIntroAnim();
+
+    this.getProducts();
+  }
+
+  async getProducts() {
+    try {
+      this.products = await _ProductsAPI.default.getProducts();
+      console.log(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  } //when user selects 'more info' create & show a more info dialog
+
+
+  moreInfoHandler(product) {
+    //create cleaner dialog
+    this.productDialog = document.createElement('sl-dialog');
+    this.productDialog.className = 'product-dialog'; //add content
+
+    const dialogContent = (0, _litHtml.html)(_templateObject(), _App.default.apiBase, product.image, product.name, product.name, product.price.$numberDecimal, product.packSize, product.qty, product.flavour, product.description, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
+    (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
+
+    document.body.append(this.productDialog); //show the dialog
+
+    this.productDialog.show(); //on hide, delete the dialog
+
+    this.productDialog.addEventListener('sl-after-hide', () => {
+      this.productDialog.remove();
+    });
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser)); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, product.price.$numberDecimal)))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8302,7 +8444,7 @@ class ProductsView {
 var _default = new ProductsView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"Router.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js","./../../ProductsAPI":"ProductsAPI.js"}],"Router.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10385,7 +10527,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56038" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59337" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
