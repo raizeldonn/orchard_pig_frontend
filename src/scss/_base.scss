@@ -35,6 +35,13 @@ button{
   border: none;
   font-family: var(--heading-font-family);
   font-size: 20px; 
+  cursor: pointer;
+  box-shadow: -2px 2px 3px rgba(0,0,0,0.9);
+  transition: transform .2s;
+  &:hover{
+    //box-shadow: 7px 7px 30px -10px rgb(0, 0, 0, 20%);
+    transform: translateY(-2px);
+  }
 }
 
 // links ---------------
@@ -138,6 +145,31 @@ a {
   }
 }
 
+// Age Confirm Page --------------
+.age-confirm{
+  .img-cont{
+  position: relative;
+    .orchard-img{
+      width: 100vw;
+    }
+    .logo{
+      position: absolute;
+      bottom: -15%;
+      left: 30%;
+      width: 40%;
+    }
+  }
+  h1, p{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .center-btn{
+    width:15%;
+    margin:auto;
+  }
+}
+
 // Home Page -------------------
 .home-section{
   height: 100vh;
@@ -145,11 +177,16 @@ a {
 }
 
 .home-section.rooted{
-  background-color: var(--dark-blue);
-  background-image: url("../../static/images/home-splash-2.png");
-  background-position: center;
-  background-repeat: no-repeat; 
-  background-size: contain;
+  position: relative;
+  background: linear-gradient(180deg, rgba(36,76,106,1) 0%, rgba(64,132,182,1) 100%);
+  .splash{
+    height: 110vh;
+    margin-left: auto;
+    margin-right:auto;
+    position: absolute;
+    bottom:0;
+    left: 0;
+  }
   h1{
     padding-top: 1em;
     transform: rotate(-8deg);
@@ -164,7 +201,7 @@ a {
     margin:40px auto;
     width: 50%;
     font-style: italic;
-    text-shadow: -2px 2px black;
+    text-shadow: -2px 2px 5px black;
     font-size: 80px;
   }
   #social{
@@ -223,7 +260,6 @@ a {
     bottom: 20%;
     margin: auto;
     cursor: pointer;
-    
   }
   
 }
@@ -275,6 +311,11 @@ a {
       border: white 10px solid;
       border-radius: 10px;
       box-shadow: 5px 5px 8px 5px #888888;
+      transition: all 0.4s ease-in-out;
+      &:hover{
+        cursor: pointer;
+        width: 350px;
+      }
     }
     h2{
       font-size: 50px;
@@ -290,6 +331,7 @@ a {
     }
     button{
       margin-left: 290px;
+      padding: 2%;
       transform: translateY(-800%);
       box-shadow: -5px 5px 5px rgba(0,0,0,0.7);
     }

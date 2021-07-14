@@ -50,6 +50,12 @@ button {
   border: none;
   font-family: var(--heading-font-family);
   font-size: 20px;
+  cursor: pointer;
+  box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.9);
+  transition: transform 0.2s;
+}
+button:hover {
+  transform: translateY(-2px);
 }
 
 a {
@@ -143,17 +149,44 @@ a {
   height: auto;
 }
 
+.age-confirm .img-cont {
+  position: relative;
+}
+.age-confirm .img-cont .orchard-img {
+  width: 100vw;
+}
+.age-confirm .img-cont .logo {
+  position: absolute;
+  bottom: -15%;
+  left: 30%;
+  width: 40%;
+}
+.age-confirm h1, .age-confirm p {
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+}
+.age-confirm .center-btn {
+  width: 15%;
+  margin: auto;
+}
+
 .home-section {
   height: 100vh;
   padding: 1em;
 }
 
 .home-section.rooted {
-  background-color: var(--dark-blue);
-  background-image: url("/home-splash-2.40814d4a.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  position: relative;
+  background: linear-gradient(180deg, #244c6a 0%, #4084b6 100%);
+}
+.home-section.rooted .splash {
+  height: 110vh;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .home-section.rooted h1 {
   padding-top: 1em;
@@ -169,7 +202,7 @@ a {
   margin: 40px auto;
   width: 50%;
   font-style: italic;
-  text-shadow: -2px 2px black;
+  text-shadow: -2px 2px 5px black;
   font-size: 80px;
 }
 .home-section.hog #social {
@@ -275,6 +308,11 @@ a {
   border: white 10px solid;
   border-radius: 10px;
   box-shadow: 5px 5px 8px 5px #888888;
+  transition: all 0.4s ease-in-out;
+}
+.products .products-grid img:hover {
+  cursor: pointer;
+  width: 350px;
 }
 .products .products-grid h2 {
   font-size: 50px;
@@ -290,6 +328,7 @@ a {
 }
 .products .products-grid button {
   margin-left: 290px;
+  padding: 2%;
   transform: translateY(-800%);
   box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.7);
 }

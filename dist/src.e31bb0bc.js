@@ -7737,7 +7737,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n          <h1>Rooted In Somerset</h1>\n        </section>\n\n        <section class='home-section hog' >\n          <img class='foot-print fp-one' src='/images/foot-print.png'>\n          <img class='foot-print fp-two' src='/images/foot-print.png'>\n          <img class='foot-print fp-three' src='/images/foot-print.png'>\n          <img class='foot-print fp-four' src='/images/foot-print.png'>\n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\">\n            <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n            <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n            <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter-square\"></i></a>\n          </div>\n          \n          <!-- <sl-icon name='facebook'></sl-icon>\n          <sl-icon name='instagram'></sl-icon>\n          <sl-icon name='twitter'></sl-icon> -->\n        </section>\n\n        <section class='home-section craft-cider'>\n          <img class='foot-print fp-five' src='/images/foot-print.png'>\n          <img class='foot-print fp-six' src='/images/foot-print.png'>\n          <img class='foot-print fp-seven' src='/images/foot-print.png'>\n          <div class='split-heading'><h1>Craft Cider</h1><h1>Like no Other</h1></div>\n          <p>\n            West Country bitter cider apples are impossible to beat. \n            We don't hide behind bubbles.\n            our gently sparkling cider is like no other.\n          </p>\n          <img class='pink-tilted' src='/images/pink-tilted.png'>\n          <button class='shop-now' @click=", " >Shop Now</button>\n        </section>\n\n        <section class='home-section pig-deal'>\n          <div class='left'>\n          <img src='/images/pig-deal.png'>\n          </div>\n          <div class='right'>\n            <div>\n            <h1>So, Whats the Pig deal?</h1>\n            <p>\n              It all began with a discovery.\n            West Country apples make the best cider.\n            Ever since we worked that out we have been developing our one of a kind craft cider.\n            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.\n            </p> </div>\n          </div>\n        </section>\n      \n      </div>\n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n        <img class=\"splash\" src=\"images/home-splash-wide.png\">\n          <h1>Rooted In Somerset</h1>\n        </section>\n\n        <section class='home-section hog' >\n          <img class='foot-print fp-one' src='/images/foot-print.png'>\n          <img class='foot-print fp-two' src='/images/foot-print.png'>\n          <img class='foot-print fp-three' src='/images/foot-print.png'>\n          <img class='foot-print fp-four' src='/images/foot-print.png'>\n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\">\n            <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n            <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n            <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter-square\"></i></a>\n          </div>\n          \n          <!-- <sl-icon name='facebook'></sl-icon>\n          <sl-icon name='instagram'></sl-icon>\n          <sl-icon name='twitter'></sl-icon> -->\n        </section>\n\n        <section class='home-section craft-cider'>\n          <img class='foot-print fp-five' src='/images/foot-print.png'>\n          <img class='foot-print fp-six' src='/images/foot-print.png'>\n          <img class='foot-print fp-seven' src='/images/foot-print.png'>\n          <div class='split-heading'><h1>Craft Cider</h1><h1>Like no Other</h1></div>\n          <p>\n            West Country bitter cider apples are impossible to beat. \n            We don't hide behind bubbles.\n            our gently sparkling cider is like no other.\n          </p>\n          <img class='pink-tilted' src='/images/pink-tilted.png'>\n          <button class='shop-now' @click=", " >Shop Now</button>\n        </section>\n\n        <section class='home-section pig-deal'>\n          <div class='left'>\n          <img src='/images/pig-deal.png'>\n          </div>\n          <div class='right'>\n            <div>\n            <h1>So, Whats the Pig deal?</h1>\n            <p>\n              It all began with a discovery.\n            West Country apples make the best cider.\n            Ever since we worked that out we have been developing our one of a kind craft cider.\n            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.\n            </p> </div>\n          </div>\n        </section>\n      \n      </div>\n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8098,7 +8098,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"AgeConfirm\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <!-- background image -->\n        <!-- logo -->\n        <h1> Rooted in Somerset</h1>\n        <p>You must be over 18 to enter this site</p>\n        <sl-button @click=", ">I am 18 or over</sl-button>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class=\"age-confirm\">   \n        <div class=\"img-cont\">\n          <img class='orchard-img' src=\"images/age-check.png\">\n          <img class='logo' src='images/logo-black.png'>\n        </div>   \n        <h1> Rooted in Somerset</h1>\n        <p>You must be over 18 to enter this site</p>\n        <div class='center-btn'>\n          <button @click=", ">I am 18 or over</button>\n        </div>\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8125,7 +8125,7 @@ class AgeConfirmView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), this.confirmAge.bind(this)); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.confirmAge.bind(this)); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8158,7 +8158,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Contact\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <h1>Contact Us</h1>\n        <p>google maps integration</p>\n        <p>social media links</p>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Contact\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <h1>Contact Us</h1>\n        <div class=\"mapouter\">\n          <div class=\"gmap_canvas\">\n            <iframe width=\"450\" height=\"420\" id=\"gmap_canvas\" src=\"https://maps.google.com/maps?q=Glastonbury,%20Somerset&t=&z=17&ie=UTF8&iwloc=&output=embed\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>\n            <a href=\"https://123movies-to.org\">123movies</a>\n            <br>\n            <style>.mapouter{position:relative;text-align:right;height:420px;width:450px;}</style>\n            <a href=\"https://www.embedgooglemap.net\"></a>\n            <style>.gmap_canvas {overflow:hidden;background:none!important;height:420px;width:450px;}</style>\n          </div>\n        </div>\n        <p>social media links</p>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10486,7 +10486,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -10531,7 +10531,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57847" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61579" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

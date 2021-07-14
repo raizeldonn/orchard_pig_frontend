@@ -6,7 +6,6 @@ import Auth from '../../Auth'
 import Utils from '../../Utils'
 import Toast from '../../Toast'
 import ProductsAPI from './../../ProductsAPI';
-
 class ProductsView {
   init(){
     document.title = 'Products'    
