@@ -8378,7 +8378,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n        <img slot='image' src='", "/", "' alt='", "'>\n        <p>", "</p>\n        <p>", "</p>\n        <p>", "x", "ml</p>\n        <p>flavour: ", "</p>\n        <p>", "</p>\n        <p>", "</p>\n        ", "\n        <button>Add to cart</button>\n        <p>Share this product</p>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 90vw;\n        }\n        img.pp-img{\n          height: 80vh;\n        }\n        .product-dialog::part(body){\n          display: grid;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          transform: translateY(-1000%) translateX(65%);\n        }\n        .pp-left h3{\n          font-size: 32px;\n          transform: translateY(-1200%) translateX(75%);\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n        }\n        .pp-boxes p{\n          border: 0.5px solid black;\n          width: 50%;\n          padding: 1em;\n        }\n        #desc{\n          font-weight: 300;\n        }\n        #dietary{\n          font-style: italic;\n        }\n        #share{\n          font-weight: bold;\n        }\n      </style>\n\n        <div class='pp-left'>\n          <img class='pp-img' src='", "/", "' alt='", "'>\n          <h2>", "</h2>\n          <h3>$", "</h3>\n        </div>\n        <div class='pp-right'>\n          <div class='pp-boxes'>\n            <p>4.5% ABV</p>\n            <p>", "x", "ml</p>\n          </div>\n          <p>flavour: ", "</p>\n          <p id='desc'>", "</p>\n          <p id='dietary'>", "</p>\n          ", "\n          <button>Add to cart</button>\n          <p id='share'>Share this product</p>\n        </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8417,7 +8417,7 @@ class ProductsView {
     this.productDialog = document.createElement('sl-dialog');
     this.productDialog.className = 'product-dialog'; //add content
 
-    const dialogContent = (0, _litHtml.html)(_templateObject(), _App.default.apiBase, product.image, product.name, product.name, product.price.$numberDecimal, product.packSize, product.qty, product.flavour, product.description, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
+    const dialogContent = (0, _litHtml.html)(_templateObject(), _App.default.apiBase, product.image, product.name, product.shortName, product.price.$numberDecimal, product.packSize, product.qty, product.flavour, product.description, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
     (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
 
     document.body.append(this.productDialog); //show the dialog
@@ -10531,7 +10531,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57247" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57721" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

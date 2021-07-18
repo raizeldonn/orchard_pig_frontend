@@ -33,16 +33,66 @@ class ProductsView {
     this.productDialog.className = 'product-dialog'
     //add content
     const dialogContent = html`
-        <img slot='image' src='${App.apiBase}/${product.image}' alt='${product.name}'>
-        <p>${product.name}</p>
-        <p>${product.price.$numberDecimal}</p>
-        <p>${product.packSize}x${product.qty}ml</p>
-        <p>flavour: ${product.flavour}</p>
-        <p>${product.description}</p>
-        <p>${product.dietary}</p>
-        ${product.allergen? html` <p>allergen: ${product.allergen}</p>` : html``}
-        <button>Add to cart</button>
-        <p>Share this product</p>
+
+      <style>
+        .product-dialog{
+          --width: 90vw;
+        }
+        img.pp-img{
+          height: 80vh;
+        }
+        .product-dialog::part(body){
+          display: grid;
+        }
+        .pp-left h2{
+          font-size: 36px;
+          transform: translateY(-1000%) translateX(65%);
+        }
+        .pp-left h3{
+          font-size: 32px;
+          transform: translateY(-1200%) translateX(75%);
+        }
+        .pp-right{
+          grid-column: 2/3;
+          margin-left: 20%;
+        }
+        .pp-boxes{
+          display: flex;
+          width: 80%;
+        }
+        .pp-boxes p{
+          border: 0.5px solid black;
+          width: 50%;
+          padding: 1em;
+        }
+        #desc{
+          font-weight: 300;
+        }
+        #dietary{
+          font-style: italic;
+        }
+        #share{
+          font-weight: bold;
+        }
+      </style>
+
+        <div class='pp-left'>
+          <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'>
+          <h2>${product.shortName}</h2>
+          <h3>$${product.price.$numberDecimal}</h3>
+        </div>
+        <div class='pp-right'>
+          <div class='pp-boxes'>
+            <p>4.5% ABV</p>
+            <p>${product.packSize}x${product.qty}ml</p>
+          </div>
+          <p>flavour: ${product.flavour}</p>
+          <p id='desc'>${product.description}</p>
+          <p id='dietary'>${product.dietary}</p>
+          ${product.allergen? html` <p>allergen: ${product.allergen}</p>` : html``}
+          <button>Add to cart</button>
+          <p id='share'>Share this product</p>
+        </div>
     `
     render(dialogContent, this.productDialog)
     //append to document.body
