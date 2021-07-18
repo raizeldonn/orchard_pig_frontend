@@ -154,6 +154,7 @@ a {
 }
 .age-confirm .img-cont .orchard-img {
   width: 100vw;
+  filter: brightness(150%);
 }
 .age-confirm .img-cont .logo {
   position: absolute;
