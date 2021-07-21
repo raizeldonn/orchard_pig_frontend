@@ -7737,7 +7737,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n        <img class=\"splash\" src=\"images/home-splash-wider.png\">\n          <h1>Rooted In Somerset</h1>\n        </section>\n\n        <section class='home-section hog' >\n          <img class='foot-print fp-one' src='/images/foot-print.png'>\n          <img class='foot-print fp-two' src='/images/foot-print.png'>\n          <img class='foot-print fp-three' src='/images/foot-print.png'>\n          <img class='foot-print fp-four' src='/images/foot-print.png'>\n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\">\n            <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n            <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n            <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter-square\"></i></a>\n          </div>\n          \n          <!-- <sl-icon name='facebook'></sl-icon>\n          <sl-icon name='instagram'></sl-icon>\n          <sl-icon name='twitter'></sl-icon> -->\n        </section>\n\n        <section class='home-section craft-cider'>\n          <img class='foot-print fp-five' src='/images/foot-print.png'>\n          <img class='foot-print fp-six' src='/images/foot-print.png'>\n          <img class='foot-print fp-seven' src='/images/foot-print.png'>\n          <div class='split-heading'><h1>Craft Cider</h1><h1>Like no Other</h1></div>\n          <p>\n            West Country bitter cider apples are impossible to beat. \n            We don't hide behind bubbles.\n            our gently sparkling cider is like no other.\n          </p>\n          <img class='pink-tilted' src='/images/pink-tilted.png'>\n          <button class='shop-now' @click=", " >Shop Now</button>\n        </section>\n\n        <section class='home-section pig-deal'>\n          <div class='left'>\n          <img src='/images/pig-deal.png'>\n          </div>\n          <div class='right'>\n            <div>\n            <h1>So, Whats the Pig deal?</h1>\n            <p>\n              It all began with a discovery.\n            West Country apples make the best cider.\n            Ever since we worked that out we have been developing our one of a kind craft cider.\n            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.\n            </p> </div>\n          </div>\n        </section>\n      \n      </div>\n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n        <img class=\"splash\" src=\"images/home-splash.png\">\n          <h1>Rooted In Somerset</h1>\n        </section>\n\n        <section class='home-section hog' >\n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\">\n            <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n            <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n            <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter-square\"></i></a>\n          </div>\n          \n          <!-- <sl-icon name='facebook'></sl-icon>\n          <sl-icon name='instagram'></sl-icon>\n          <sl-icon name='twitter'></sl-icon> -->\n        </section>\n\n        <section class='home-section craft-cider'>\n          <div class='split-heading'><h1>Craft Cider</h1><h1>Like no Other</h1></div>\n          <p>\n            West Country bitter cider apples are impossible to beat. \n            We don't hide behind bubbles.\n            our gently sparkling cider is like no other.\n          </p>\n          <img class='pink-tilted' src='/images/pink-tilted.png'>\n          <button class='shop-now' @click=", " >Shop Now</button>\n        </section>\n\n        <section class='home-section pig-deal'>\n          <div class='left'>\n          <img src='/images/pig-deal.png'>\n          </div>\n          <div class='right'>\n            <div>\n            <h1>So, Whats the Pig deal?</h1>\n            <p>\n              It all began with a discovery.\n            West Country apples make the best cider.\n            Ever since we worked that out we have been developing our one of a kind craft cider.\n            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.\n            </p> </div>\n          </div>\n        </section>\n\n        <footer>\n          <div>\n              <h3>Contact</h3>\n              <p>275 Burnfield Road, Thornliebank</p>\n              <p>01632 960493</p>\n              <p>oink@orchardpig.co.uk</p>\n          </div>\n          <div>\n            <img @click=\"", "\" class='footer-logo' src='/images/logo-white-cut.png'></a>  \n          </div>\n          <div>\n            <div id=\"social\">\n              <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n              <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n              <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter-square\"></i></a>\n            </div>\n          </div>\n        </footer>\n\n      \n      </div>\n\n      \n      \n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7773,7 +7773,7 @@ class HomeView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), () => (0, _Router.gotoRoute)('/products'));
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/'));
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -8317,8 +8317,28 @@ var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject9() {
+  const data = _taggedTemplateLiteral([""]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <img @click=", " src='", "/", "' alt='", "'>\n                  <h2>", "</h2>\n                  <h3>$", "</h3>\n                  <button @click=", ">Add To Cart</button>\n                </div>\n                "]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject7() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <img @click=", " src='", "/", "' alt='", "'>\n                  <h2>", "</h2>\n                  <h3>$", "</h3>\n                  <button @click=", ">Add To Cart</button>\n                </div>\n              "]);
+  const data = _taggedTemplateLiteral(["\n                ", "\n                \n              "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -8378,7 +8398,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 90vw;\n        }\n        img.pp-img{\n          height: 80vh;\n        }\n        .product-dialog::part(body){\n          display: grid;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          transform: translateY(-1000%) translateX(65%);\n        }\n        .pp-left h3{\n          font-size: 32px;\n          transform: translateY(-1200%) translateX(75%);\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n        }\n        .pp-boxes p{\n          border: 0.5px solid black;\n          width: 50%;\n          padding: 1em;\n        }\n        #desc{\n          font-weight: 300;\n        }\n        #dietary{\n          font-style: italic;\n        }\n        #share{\n          font-weight: bold;\n        }\n      </style>\n\n        <div class='pp-left'>\n          <img class='pp-img' src='", "/", "' alt='", "'>\n          <h2>", "</h2>\n          <h3>$", "</h3>\n        </div>\n        <div class='pp-right'>\n          <div class='pp-boxes'>\n            <p>4.5% ABV</p>\n            <p>", "x", "ml</p>\n          </div>\n          <p>flavour: ", "</p>\n          <p id='desc'>", "</p>\n          <p id='dietary'>", "</p>\n          ", "\n          <button>Add to cart</button>\n          <p id='share'>Share this product</p>\n        </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-right-top{\n          background-color: #D4E7F8;\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n\n        <div class='pp-left'>\n          <h2>", "</h2>\n          <img class='pp-img' src='", "/", "' alt='", "'>\n        </div>\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p>", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p>", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <h3>&pound;", "</h3>\n                <button>Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p>", "</p>\n            <img src='/images/vegan-white.png'>\n            <p>", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8417,7 +8437,7 @@ class ProductsView {
     this.productDialog = document.createElement('sl-dialog');
     this.productDialog.className = 'product-dialog'; //add content
 
-    const dialogContent = (0, _litHtml.html)(_templateObject(), _App.default.apiBase, product.image, product.name, product.shortName, product.price.$numberDecimal, product.packSize, product.qty, product.flavour, product.description, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
+    const dialogContent = (0, _litHtml.html)(_templateObject(), product.name, _App.default.apiBase, product.image, product.name, product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
     (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
 
     document.body.append(this.productDialog); //show the dialog
@@ -8436,7 +8456,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.shortName, product.price.$numberDecimal, () => this.addToCart(product))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.shortName, product.price.$numberDecimal, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject9()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -10414,7 +10434,34 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js"}],"components/va-app-footer.js":[function(require,module,exports) {
+"use strict";
+
+var _litElement = require("@polymer/lit-element");
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      footer{\n        display: flex;\n        height: var(--app-header-height);\n        width: 100%;\n        background-color: grey;\n        position: absolute;\n        bottom: 0;\n        left: 0;\n        div{\n          width: 30%;\n        }\n      }\n      \n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n      }\n\n    </style>\n\n    <footer>\n      <div style=\"background-color: Red;\">\n\n      </div>\n      <div style=\"background-color: green;\">\n\n      </div>\n      <div style=\"background-color: blue;\">\n\n      </div>\n    </footer>\n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+customElements.define('va-app-footer', class AppFooter extends _litElement.LitElement {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return (0, _litElement.html)(_templateObject());
+  }
+
+});
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -10493,6 +10540,8 @@ var _App = _interopRequireDefault(require("./App.js"));
 
 require("./components/va-app-header");
 
+require("./components/va-app-footer");
+
 require("./scss/master.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -10503,7 +10552,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener('DOMContentLoaded', () => {
   _App.default.init();
 });
-},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./components/va-app-footer":"components/va-app-footer.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -10531,7 +10580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57721" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61755" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

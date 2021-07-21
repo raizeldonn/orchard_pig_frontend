@@ -42,15 +42,11 @@ class HomeView {
       <div class="page-content">
       
         <section class='home-section rooted'>
-        <img class="splash" src="images/home-splash-wider.png">
+        <img class="splash" src="images/home-splash.png">
           <h1>Rooted In Somerset</h1>
         </section>
 
         <section class='home-section hog' >
-          <img class='foot-print fp-one' src='/images/foot-print.png'>
-          <img class='foot-print fp-two' src='/images/foot-print.png'>
-          <img class='foot-print fp-three' src='/images/foot-print.png'>
-          <img class='foot-print fp-four' src='/images/foot-print.png'>
           <h1>The cider you won't be able to help but hog</h1>
           <div id="social">
             <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
@@ -64,9 +60,6 @@ class HomeView {
         </section>
 
         <section class='home-section craft-cider'>
-          <img class='foot-print fp-five' src='/images/foot-print.png'>
-          <img class='foot-print fp-six' src='/images/foot-print.png'>
-          <img class='foot-print fp-seven' src='/images/foot-print.png'>
           <div class='split-heading'><h1>Craft Cider</h1><h1>Like no Other</h1></div>
           <p>
             West Country bitter cider apples are impossible to beat. 
@@ -92,8 +85,31 @@ class HomeView {
             </p> </div>
           </div>
         </section>
+
+        <footer>
+          <div>
+              <h3>Contact</h3>
+              <p>275 Burnfield Road, Thornliebank</p>
+              <p>01632 960493</p>
+              <p>oink@orchardpig.co.uk</p>
+          </div>
+          <div>
+            <img @click="${() => gotoRoute('/')}" class='footer-logo' src='/images/logo-white-cut.png'></a>  
+          </div>
+          <div>
+            <div id="social">
+              <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
+              <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
+              <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter-square"></i></a>
+            </div>
+          </div>
+        </footer>
+
       
       </div>
+
+      
+      
      
     `
     render(template, App.rootEl)

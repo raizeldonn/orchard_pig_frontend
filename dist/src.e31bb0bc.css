@@ -45,10 +45,10 @@ button {
   background-color: var(--dark-blue);
   color: white;
   text-transform: uppercase;
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 2%;
   border: none;
-  font-family: var(--heading-font-family);
+  font-family: var(--base-font-family);
   font-size: 20px;
   cursor: pointer;
   box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.9);
@@ -179,15 +179,15 @@ a {
 
 .home-section.rooted {
   position: relative;
-  background: linear-gradient(180deg, #244c6a 0%, #4084b6 100%);
+  background: linear-gradient(0deg, #2d5777 0%, #3a78a4 100%);
 }
 .home-section.rooted .splash {
-  height: 110vh;
+  height: 100vh;
   margin-left: auto;
   margin-right: auto;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 7%;
 }
 .home-section.rooted h1 {
   padding-top: 1em;
@@ -214,15 +214,6 @@ a {
 .home-section.hog #social i {
   font-size: 40px;
   margin: 10px;
-}
-.home-section.hog .fp-1 {
-  right: 10%;
-  bottom: 4%;
-}
-
-.foot-print {
-  height: 30vh;
-  position: absolute;
 }
 
 .home-section.craft-cider {
@@ -291,46 +282,66 @@ a {
   font-size: 18px;
 }
 
+footer {
+  padding: 1%;
+  color: white;
+  display: flex;
+  height: 150px;
+  width: 100%;
+  background-color: #494949;
+}
+footer div {
+  width: 33%;
+}
+footer .footer-logo {
+  width: 60%;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+footer h3 {
+  font-size: 22px;
+  color: white;
+  margin-bottom: 0;
+}
+footer p {
+  margin-bottom: 0;
+}
+footer #social {
+  margin: auto;
+  width: 50%;
+  margin-top: 50px;
+}
+footer #social i {
+  font-size: 40px;
+  margin: 8px;
+}
+
 .products {
   padding: 5%;
 }
 .products .products-grid {
   display: grid;
-}
-.products .products-grid .product-card:nth-child(odd) {
-  grid-column: 1/2;
-}
-.products .products-grid .product-card:nth-child(even) {
-  grid-column: 2/3;
-  transform: translateY(30%);
+  grid-template-columns: repeat(3, 33.3%);
 }
 .products .products-grid img {
-  width: 345px;
-  border: white 10px solid;
-  border-radius: 10px;
-  box-shadow: 5px 5px 8px 5px #888888;
-  transition: all 0.4s ease-in-out;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .products .products-grid img:hover {
   cursor: pointer;
-  width: 350px;
 }
 .products .products-grid h2 {
-  font-size: 50px;
-  position: absolute;
-  transform: translateY(-900%);
-  margin-left: 250px;
+  font-size: 38px;
 }
 .products .products-grid h3 {
   font-size: 48px;
-  position: absolute;
-  margin-left: 290px;
-  transform: translateY(-830%);
 }
 .products .products-grid button {
   margin-left: 290px;
   padding: 2%;
-  transform: translateY(-800%);
   box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.7);
 }
 

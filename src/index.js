@@ -2,6 +2,7 @@ import App from './App.js'
 
 // components (custom web components)
 import './components/va-app-header'
+import './components/va-app-footer'
 
 // styles
 import './scss/master.scss'
