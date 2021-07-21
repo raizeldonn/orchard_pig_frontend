@@ -68,8 +68,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       }
       
       .right{
-          position: absolute;
-          right: 2%;
+          
         }
 
       .nav-logo{
@@ -87,6 +86,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         color: black;
         font-family: var(--heading-font-family);
         text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .cart-logo{
+        width: 3%;
+        cursor: pointer;
+        position: absolute;
+        right: 2%;
+        top: 6px;
       }
       
       /*items in the cart menu */
@@ -115,16 +123,23 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     </style>
 
     <header class="app-header">
+      <!-- <div class="hover-footprints">
+        <img class='nav-fp' src='/images/logo-black.png'>
+        <img class='nav-fp' src='/images/logo-black.png'>
+        <img class='nav-fp' src='/images/logo-black.png'>
+        <img class='nav-fp' src='/images/logo-black.png'>
+        <img class='nav-fp' src='/images/logo-black.png'>
+      </div> -->
       <nav class="app-top-nav">
           <a @click="${() => gotoRoute('/')}">Home</a>
           <a @click="${() => gotoRoute('/products')}">Shop</a>  
           <a @click="${() => gotoRoute('/about')}">About Us</a>  
           <a @click="${() => gotoRoute('/contact')}">Contact</a> 
-          <a @click="${() => gotoRoute('/game')}" style="color: Red;">Win</a>   
+          <a @click="${() => gotoRoute('/game')}" style="color: Red; transform: scale(1.2);">Win</a>   
       </nav>
-      <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'></a> 
+        <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       <nav class="app-top-nav right">
-        <a @click="${this.hamburgerClick}">Cart</a>
+        <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples-black.png' alt='apple-basket'>
       </nav>
           
     </header>

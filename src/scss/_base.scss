@@ -329,6 +329,13 @@ footer{
     .products-grid{
       display: grid;
       grid-template-columns: repeat(3, 33.3%);
+      grid-row-gap: 80px;
+
+    .product-card{
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
     img{
       width: 60%;
       margin-left: auto;
@@ -344,8 +351,9 @@ footer{
       font-size: 48px;
     }
     button{
-      margin-left: 290px;
       padding: 2%;
+      width: 50%;
+      margin: auto;
       box-shadow: -5px 5px 5px rgba(0,0,0,0.7);
     }
   }

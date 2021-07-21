@@ -324,6 +324,12 @@ footer #social i {
 .products .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 33.3%);
+  grid-row-gap: 80px;
+}
+.products .products-grid .product-card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 .products .products-grid img {
   width: 60%;
@@ -340,8 +346,9 @@ footer #social i {
   font-size: 48px;
 }
 .products .products-grid button {
-  margin-left: 290px;
   padding: 2%;
+  width: 50%;
+  margin: auto;
   box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.7);
 }
 
