@@ -8328,7 +8328,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <img @click=", " src='", "/", "' alt='", "'>\n                  <h2>", "</h2>\n                  <h3>$", "</h3>\n                  <button @click=", ">Add To Cart</button>\n                </div>\n                "]);
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <img @click=", " src='", "/", "' alt='", "'>\n                  <h2>", "</h2>\n                  <h3>&pound;", "</h3>\n                  <button @click=", ">Add To Cart</button>\n                </div>\n                "]);
 
   _templateObject8 = function _templateObject8() {
     return data;

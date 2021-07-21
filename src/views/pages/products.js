@@ -168,7 +168,7 @@ class ProductsView {
                 <div class='product-card'>  
                   <img @click=${() => this.moreInfoHandler(product)} src='${App.apiBase}/${product.image}' alt='${product.name}'>
                   <h2>${product.shortName}</h2>
-                  <h3>$${product.price.$numberDecimal}</h3>
+                  <h3>&pound;${product.price.$numberDecimal}</h3>
                   <button @click=${() => this.addToCart(product)}>Add To Cart</button>
                 </div>
                 ` : html ``}
