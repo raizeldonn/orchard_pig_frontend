@@ -56,7 +56,6 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         box-sizing: border-box;
       }
       .app-header {
-        background: var(--brand-color);
         position: fixed;
         top: 0;
         right: 0;
@@ -67,39 +66,6 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         box-shadow: 4px 0px 10px rgba(0,0,0,0.2);
         align-items: center;
       }
-
-      /* .app-header-main {
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
-      }
-
-      .app-header-main::slotted(h1){
-        color: #fff;
-      } */
-
-      /* .app-logo a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.2em;
-        padding: .6em;
-        display: inline-block;        
-      }
-
-      .app-logo img {
-        width: 90px;
-      } */
-      
-      .hamburger-btn::part(base) {
-        color: black;
-      }
-
-      .app-top-nav {
-        display: flex;
-        height: 100%;
-        align-items: center;
-      }
       
       .right{
           position: absolute;
@@ -107,8 +73,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         }
 
       .nav-logo{
-        width: 15%;
-        transform: translateY(15%) translateX(70%);
+        width: 9%;
+        position: absolute;
+        left: 45%;
         cursor: pointer;
         display: block;
       }
@@ -118,6 +85,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         padding: .8em;
         text-decoration: none;
         color: black;
+        font-family: var(--heading-font-family);
+        text-transform: uppercase;
       }
       
       /*items in the cart menu */
@@ -147,18 +116,20 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
     <header class="app-header">
       <nav class="app-top-nav">
-          <a href="/" @click="${() => gotoRoute('/')}">Home</a>
-          <a href="/products" @click="${() => gotoRoute('/products')}">Shop</a>  
-          <a href="/game" @click="${() => gotoRoute('/game')}">Win</a>  
-          <a href="/about" @click="${() => gotoRoute('/about')}">About Us</a>  
-          <a href="/contact" @click="${() => gotoRoute('/contact')}">Contact Us</a>  
+          <a @click="${() => gotoRoute('/')}">Home</a>
+          <a @click="${() => gotoRoute('/products')}">Shop</a>  
+          <a @click="${() => gotoRoute('/about')}">About Us</a>  
+          <a @click="${() => gotoRoute('/contact')}">Contact</a> 
+          <a @click="${() => gotoRoute('/game')}" style="color: Red;">Win</a>   
       </nav>
+      <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'></a> 
       <nav class="app-top-nav right">
         <a @click="${this.hamburgerClick}">Cart</a>
       </nav>
-      <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'></a>     
+          
     </header>
 
+    <!--CART----------------------->
     <sl-drawer class="app-side-menu">
       <h1>Your Cart</h1>
       <p>Product Name</p> 
