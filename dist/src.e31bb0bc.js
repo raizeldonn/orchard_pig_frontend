@@ -7988,7 +7988,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <h1>About Us</h1>\n        <p>Image Carousel Here</p>\n        <h4>Crack a cold one, n' let us tell you a story...</h4>\n        <p>lorem ipsum.....</p>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About\" user=\"", "\"></va-app-header>\n      <div class=\"page-content about-page\">  \n      <!-- <img class='prints' src='/images/steps-transparent.png'>   -->\n        \n        <div class='about-carousel'> \n          <img class='carousel-img' src='/images/image1.jpeg'>  \n        </div>\n        <h4>Crack a cold one n' let us tell you a story</h4>\n\n        <div class='about-us-flex'>\n          <div class='info info-left'>\n            <h2>It all started</h2>\n            <p>just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>\n            Orchard Pig was born out of a shared passion for great food and Old Spots, <br>\n            the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>\n          </div>\n          <img  class='img-right' src='/images/op-founder.png'> \n        </div>\n        <div class='about-us-flex'>\n          <img class='img-left' src='/images/op-sail.png'> \n          <div class='info info-right'>\n            <h2>'Stay rooted'</h2>\n            <p>\u2018Stay rooted\u2019 is what we say to the modern world. <br><br>\n            Appreciating simplicity (and cider), <br><br>\n            We like to poke fun at the world and ourselves\u2026 and each other. \n            </p>\n          </div>\n        </div>\n        <div class='about-us-flex'>\n          <div class='info info-left'>\n            <h2>Orchard Pig's</h2>\n            <p>home in West Bradley Orchards is well and truly rooted in Somerset\u2019s cider-making history, dating back to the 1850s and W.T. Allen\u2019s, award winning Somerset cider.</p>\n          </div>\n          <img class='img-right' src='/images/op-pub.png'> \n        </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10580,7 +10580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59133" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49515" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
