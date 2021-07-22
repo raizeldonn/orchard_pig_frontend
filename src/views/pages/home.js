@@ -42,7 +42,7 @@ class HomeView {
       <div class="page-content">
       
         <section class='home-section rooted'>
-        <img class="splash" src="images/home-splash.png">
+        <!--<img class="splash" src="images/home-splash-2.png">-->
           <h1>Rooted In Somerset</h1>
         </section>
 

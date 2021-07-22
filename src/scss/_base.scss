@@ -173,13 +173,15 @@ a {
 
 // Home Page -------------------
 .home-section{
-  height: 100vh;
+  height: 95vh;
   padding: 1em;
 }
 
 .home-section.rooted{
   position: relative;
-  background: linear-gradient(0deg, rgba(45,87,119,1) 0%, rgba(58,120,164,1) 100%);
+  background-image: url("../../static/images/home-splash-2.png");
+  background-size: cover;
+  background-position: center;
   .splash{
     height: 100vh;
     margin-left: auto;
