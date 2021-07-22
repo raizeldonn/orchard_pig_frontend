@@ -18,19 +18,35 @@ class ContactView {
   render(){
     const template = html`
       <va-app-header title="Contact" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
-      <div class="page-content">        
-        <h1>Contact Us</h1>
-        <div class="mapouter">
-          <div class="gmap_canvas">
-            <iframe width="450" height="420" id="gmap_canvas" src="https://maps.google.com/maps?q=Glastonbury,%20Somerset&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-            <a href="https://123movies-to.org">123movies</a>
-            <br>
-            <style>.mapouter{position:relative;text-align:right;height:420px;width:450px;}</style>
-            <a href="https://www.embedgooglemap.net"></a>
-            <style>.gmap_canvas {overflow:hidden;background:none!important;height:420px;width:450px;}</style>
+      <div class="page-content contact-page">   
+        <img class='pigsteps' src='/images/pigsteps.png'>
+        <div class='heading-flex'> 
+          <h1></h1>
+          <h1>Get In Touch</h1>
+        </div>     
+        <div class='flex'>
+          <div class="mapouter">
+            <div class="gmap_canvas">
+              <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=275%20Burnfield%20Road,%20Thornliebank&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+          </div>
+          <div class='left'>
+            <div class='contact-info-grid'> 
+              <img src='/images/pin-white.png'>
+              <p>275 Burnfield Road, Thornliebank</p>
+              <img src='/images/phone-white.png'>
+              <p>01632 960493</p>
+              <img src='/images/email-white.png'>
+              <p>oink@orchardpig.co.uk</p>
+            </div>
+            <div class='sm-icons'> 
+              <img src='/images/facebook-white.png'>
+              <img src='/images/instagram-white.png'>
+              <img src='/images/twitter-white.png'>
+            </div>
           </div>
         </div>
-        <p>social media links</p>
+        
         
       </div>      
     `

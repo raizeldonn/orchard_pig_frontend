@@ -364,7 +364,80 @@ footer{
 
 // Product Dialog  ------------------------------
 
+// Contact Page -------------------------------
+.contact-page{
+  background-color: var(--med-blue);
+  overflow: hidden;
+  // background-image: url(../../static/images/pigsteps.png);
+  // background-size: contain;
+  // background-repeat: no-repeat;
+  // background-position: bottom;
+  .pigsteps{
+    position: absolute;
+    width:80%;
+    transform: rotate(-15deg);
+    bottom: 5%;
+    right: -5%;
+    z-index: -1;
+  }
+  .heading-flex{
+    display: flex;
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 0;
+  }
+  h1{
+    font-size: 40px;
+    text-align: center;
+    width: 100%;
+  }
+  .flex{
+    display: flex;
+    width: 70%;
+    height: 60%;
+    margin: auto;
+  }
+  .left{
+    margin-left:5%;
+    color: white;
+    width: 100%;
+    background-color: var(--dark-blue);
+    border-radius: 5px;
+    img{
+      width: 40px;
+    }
+    .contact-info-grid{
+      display:grid;
+      padding: 10%;
+      margin: auto;
+      grid-row-gap: 10px;
+      grid-template-columns: repeat(2, auto);
+    }
+    .sm-icons{
+      display: flex;
+      width: 70%;
+      margin: auto;
+      img{
+        margin: 0 10%;
+      }
+    }
+  }
 
+  .mapouter{
+    position:relative;
+    text-align:right;
+    width:100%;
+    height: 340px;
+  }
+
+  #gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    width:100%;
+    height: 340px;
+  }
+}
 
 // RESPONSIVE - MOBILE -------------------
 @media all and (max-width: 768px){ 
