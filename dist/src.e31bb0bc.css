@@ -406,8 +406,11 @@ footer #social i {
   width: 70%;
   margin: auto;
 }
-.contact-page .left .sm-icons img {
+.contact-page .left .sm-icons a {
   margin: 0 10%;
+}
+.contact-page .left .sm-icons a img {
+  cursor: pointer;
 }
 .contact-page .mapouter {
   position: relative;

@@ -418,8 +418,11 @@ footer{
       display: flex;
       width: 70%;
       margin: auto;
-      img{
+      a{
         margin: 0 10%;
+        img{
+          cursor: pointer;
+        }
       }
     }
   }

@@ -40,9 +40,9 @@ class ContactView {
               <p>oink@orchardpig.co.uk</p>
             </div>
             <div class='sm-icons'> 
-              <img src='/images/facebook-white.png'>
-              <img src='/images/instagram-white.png'>
-              <img src='/images/twitter-white.png'>
+            <a href='https://www.facebook.com/OrchardPig'><img src='/images/facebook-white.png'></a>
+            <a href='https://www.instagram.com/theorchardpig/'><img src='/images/instagram-white.png'></a>
+            <a href='https://twitter.com/Orchardpig'><img src='/images/twitter-white.png'></a>
             </div>
           </div>
         </div>
