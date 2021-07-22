@@ -64,7 +64,7 @@ class HomeView {
           <p>
             West Country bitter cider apples are impossible to beat. 
             We don't hide behind bubbles.
-            our gently sparkling cider is like no other.
+            Our gently sparkling cider is like no other.
           </p>
           <img class='pink-tilted' src='/images/pink-tilted.png'>
           <button class='shop-now' @click=${() => gotoRoute('/products')} >Shop Now</button>
