@@ -8328,7 +8328,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <img @click=", " src='", "/", "' alt='", "'>\n                  <h2>", "</h2>\n                  <h3>&pound;", "</h3>\n                  <button @click=", ">Add To Cart</button>\n                </div>\n                "]);
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img @click=", " src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <button @click=", ">Buy Now</button>\n                </div>\n                "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -8368,7 +8368,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\"></va-app-header>\n      <div class=\"page-content products\">        \n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\"></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -8456,7 +8456,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.shortName, product.price.$numberDecimal, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject9()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, () => this.moreInfoHandler(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject9()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -10580,7 +10580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54519" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52453" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

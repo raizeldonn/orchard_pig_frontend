@@ -157,7 +157,11 @@ class ProductsView {
   render(){
     const template = html`
       <va-app-header title="Products" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
-      <div class="page-content products">        
+      <div class="page-content products">      
+        <h1>Meet Our Pigs</h1>  
+        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>
+        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>
+        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>
         <div class='products-grid'>
             ${this.products == null ? html `
               <sl-spinner></sl-spinner>
@@ -166,10 +170,10 @@ class ProductsView {
               ${this.products.map(product => html`
                 ${product.containerType == "bottle" ? html`
                 <div class='product-card'>  
-                  <img @click=${() => this.moreInfoHandler(product)} src='${App.apiBase}/${product.image}' alt='${product.name}'>
+                  <!-- <img @click=${() => this.moreInfoHandler(product)} src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
+                  <img @click=${() => this.moreInfoHandler(product)} src='/images/${product.item}.png' alt='${product.name}'>
                   <h2>${product.shortName}</h2>
-                  <h3>&pound;${product.price.$numberDecimal}</h3>
-                  <button @click=${() => this.addToCart(product)}>Add To Cart</button>
+                  <button @click=${() => this.addToCart(product)}>Buy Now</button>
                 </div>
                 ` : html ``}
                 
