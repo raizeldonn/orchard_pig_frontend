@@ -161,6 +161,13 @@ a {
     width:15%;
     margin:auto;
   }
+  button {
+    background-color: var(--dark-blue);
+    padding: 2%;
+    font-size: 20px;
+    box-shadow: -2px 2px 3px rgb(0 0 0 / 90%);
+    transition: transform .2s;
+  }
 }
 
 // Home Page -------------------

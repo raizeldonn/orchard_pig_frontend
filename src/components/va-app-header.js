@@ -134,12 +134,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           <a @click="${() => gotoRoute('/')}">Home</a>
           <a @click="${() => gotoRoute('/products')}">Shop</a>  
           <a @click="${() => gotoRoute('/about')}">About Us</a>  
-          <a @click="${() => gotoRoute('/contact')}">Contact</a> 
-          <a @click="${() => gotoRoute('/game')}" style="color: Red; transform: scale(1.2);">Win</a>   
+          <a @click="${() => gotoRoute('/contact')}">Contact</a>   
       </nav>
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       <nav class="app-top-nav right">
-        <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples-black.png' alt='apple-basket'>
+        <!-- change to apples2 or apples to see other options -->
+        <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
       </nav>
           
     </header>
