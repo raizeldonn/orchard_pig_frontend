@@ -206,7 +206,7 @@ a {
   color: white;
   .pigsteps{
     width:90%;
-    transform: rotate(5deg) translateY(-150px);
+    transform: rotate(5deg) translateY(-100px);
     z-index: -1;
   }
   h1{
@@ -248,13 +248,13 @@ a {
     margin-bottom: 0;
     margin-top: 20px;
     position: relative;
-    font-size: 68px;
+    font-size: 5vw;
     color: #21272C;
   }
   h3{
     text-align: right;
     text-transform: initial;
-    font-size: 40px;
+    font-size: 4vw;
     color: #21272C;
   }
   div{
@@ -267,12 +267,12 @@ a {
   p{
     color: #21272C;
     font-family: var(--heading-font-family);
-    font-size: 42px;
+    font-size: 3.7vw;
     text-align: center;
   }
   button{
     background-color:  #21272C;
-    font-size: 22px;
+    font-size: 2vw;
     padding: 1% 2.5%;
     display: block;
     margin: 0 auto;
@@ -535,15 +535,5 @@ footer{
     .info-left{
       padding-right: 0;
     }
-  }
-}
-
-
-// RESPONSIVE - MOBILE -------------------
-@media all and (max-width: 768px){ 
-
-  .signinup-box {
-    width: 90%;
-    max-width: none;
   }
 }

@@ -208,7 +208,7 @@ a {
 }
 .home-section.hog .pigsteps {
   width: 90%;
-  transform: rotate(5deg) translateY(-150px);
+  transform: rotate(5deg) translateY(-100px);
   z-index: -1;
 }
 .home-section.hog h1 {
@@ -250,13 +250,13 @@ a {
   margin-bottom: 0;
   margin-top: 20px;
   position: relative;
-  font-size: 68px;
+  font-size: 5vw;
   color: #21272C;
 }
 .home-section.new-pig h3 {
   text-align: right;
   text-transform: initial;
-  font-size: 40px;
+  font-size: 4vw;
   color: #21272C;
 }
 .home-section.new-pig div {
@@ -269,12 +269,12 @@ a {
 .home-section.new-pig p {
   color: #21272C;
   font-family: var(--heading-font-family);
-  font-size: 42px;
+  font-size: 3.7vw;
   text-align: center;
 }
 .home-section.new-pig button {
   background-color: #21272C;
-  font-size: 22px;
+  font-size: 2vw;
   padding: 1% 2.5%;
   display: block;
   margin: 0 auto;
@@ -520,12 +520,6 @@ footer #social i {
   padding-right: 0;
 }
 
-@media all and (max-width: 768px) {
-  .signinup-box {
-    width: 90%;
-    max-width: none;
-  }
-}
 .input-group {
   margin-bottom: 0.5em;
 }
@@ -575,6 +569,97 @@ sl-dialog::part(title) {
 .toast-entry.is-error {
   background: #d4195d;
   color: #fff;
+}
+
+@media all and (max-width: 1125px) {
+  .home-section.hog h1 {
+    font-size: 50px;
+  }
+
+  .home-section.new-pig .pigsteps {
+    transform: rotate(-5deg) translateY(-20px) scaleX(-1);
+  }
+}
+@media all and (max-width: 1000px) {
+  .home-section.rooted h1 {
+    font-size: 50px;
+  }
+
+  .home-section.hog h1 {
+    font-size: 40px;
+  }
+  .home-section.hog .pigsteps {
+    width: 100%;
+    transform: rotate(5deg) translateY(-20px);
+  }
+
+  .home-section.new-pig img.pink-tilted {
+    height: 110%;
+    bottom: -5%;
+  }
+  .home-section.new-pig .pigsteps {
+    transform: rotate(-5deg) translateY(20px) scaleX(-1);
+  }
+}
+@media all and (max-width: 800px) {
+  .home-section {
+    height: 60vh;
+  }
+
+  .home-section.hog h1 {
+    width: 100%;
+  }
+  .home-section.hog p {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  .home-section.hog .pigsteps {
+    transform: rotate(5deg) translateY(-100px);
+  }
+
+  .home-section.new-pig img.pink-tilted {
+    left: -5%;
+  }
+  .home-section.new-pig .pigsteps {
+    transform: rotate(-5deg) translateY(0px) scaleX(-1);
+  }
+}
+@media all and (max-width: 768px) {
+  .signinup-box {
+    width: 90%;
+    max-width: none;
+  }
+
+  .home-section.hog #social {
+    margin: 30px auto;
+  }
+
+  .home-section.new-pig .pigsteps {
+    transform: rotate(-5deg) translateY(100px) scaleX(-1);
+  }
+}
+@media all and (max-width: 640px) {
+  .home-section.rooted h1 {
+    font-size: 28px;
+  }
+
+  .home-section.hog h1 {
+    font-size: 28px;
+  }
+  .home-section.hog #social {
+    width: 70%;
+  }
+  .home-section.hog p {
+    font-size: 16px;
+  }
+  .home-section.hog .pigsteps {
+    width: 130%;
+    transform: rotate(5deg) translateY(-30px);
+  }
+
+  .home-section.new-pig .pigsteps {
+    transform: rotate(-5deg) translateY(200px) scaleX(-1);
+  }
 }
 
 /*# sourceMappingURL=/src.e31bb0bc.css.map */

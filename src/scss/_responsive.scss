@@ -1,0 +1,116 @@
+
+@media all and (max-width: 1125px){ 
+
+    .home-section.hog{
+      h1{
+        font-size: 50px;
+      }
+    }
+    .home-section.new-pig{
+        .pigsteps{
+            transform: rotate(-5deg) translateY(-20px) scaleX(-1);
+          }
+    }
+    
+}
+  
+  @media all and (max-width: 1000px){ 
+  
+    .home-section.rooted{
+      h1{
+        font-size: 50px;
+      }
+    }
+    .home-section.hog{
+      h1{
+        font-size: 40px;
+      }
+      .pigsteps{
+        width:100%;
+        transform: rotate(5deg) translateY(-20px);
+      }
+    }
+    .home-section.new-pig{
+        img.pink-tilted{
+            height: 110%;
+            bottom: -5%;
+        }
+        .pigsteps{
+            transform: rotate(-5deg) translateY(20px) scaleX(-1);
+          }
+    }
+  }
+  
+  @media all and (max-width: 800px){ 
+  
+    .home-section{
+      height: 60vh;
+    }
+    .home-section.hog{
+      h1{
+        width: 100%;
+      }
+      p{
+        margin-top: 20px;
+        font-size: 20px;
+      }
+      .pigsteps{
+        transform: rotate(5deg) translateY(-100px);
+      }
+    }
+    .home-section.new-pig{
+        img.pink-tilted{
+          left: -5%;
+        }
+        .pigsteps{
+            transform: rotate(-5deg) translateY(0px) scaleX(-1);
+          }
+    }
+}
+  
+  @media all and (max-width: 768px){ 
+  
+    .signinup-box {
+      width: 90%;
+      max-width: none;
+      }
+    .home-section.hog{
+        #social{
+            margin: 30px auto;
+        }
+    }
+    .home-section.new-pig{
+        .pigsteps{
+            transform: rotate(-5deg) translateY(100px) scaleX(-1);
+          }
+    }
+}
+  
+  @media all and (max-width: 640px){ 
+    .home-section.rooted{
+      h1{
+        font-size: 28px;
+      }
+    }
+    .home-section.hog{
+      h1{
+        font-size: 28px;
+      }
+      #social{
+        width: 70%;
+      }
+      p{
+        font-size: 16px;
+      }
+      .pigsteps{
+        width: 130%;
+        transform: rotate(5deg) translateY(-30px);
+      }
+    }
+    .home-section.new-pig{
+        .pigsteps{
+            transform: rotate(-5deg) translateY(200px) scaleX(-1);
+          }
+    }
+    
+  }
