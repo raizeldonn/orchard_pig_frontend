@@ -44,46 +44,47 @@ class HomeView {
         <section class='home-section rooted'>
         <!--<img class="splash" src="images/home-splash-2.png">-->
           <h1>Rooted In Somerset</h1>
+          <p>Want to earn a discount for your next order?</p>
+          <button  @click=${() => gotoRoute('/game')}>Find the pig to win!</button>
         </section>
 
         <section class='home-section hog' >
+        
           <h1>The cider you won't be able to help but hog</h1>
           <div id="social">
             <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
             <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
-            <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter-square"></i></a>
+            <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter"></i></a>
           </div>
+          <p>This little pig went to our socials, will you?</p>
+          <img class='pigsteps' src='/images/pigsteps.png'>
           
           <!-- <sl-icon name='facebook'></sl-icon>
           <sl-icon name='instagram'></sl-icon>
           <sl-icon name='twitter'></sl-icon> -->
         </section>
 
-        <section class='home-section craft-cider'>
-          <div class='split-heading'><h1>Craft Cider</h1><h1>Like no Other</h1></div>
-          <p>
-            West Country bitter cider apples are impossible to beat. 
-            We don't hide behind bubbles.
-            Our gently sparkling cider is like no other.
-          </p>
-          <img class='pink-tilted' src='/images/pink-tilted.png'>
-          <button class='shop-now' @click=${() => gotoRoute('/products')} >Shop Now</button>
+        <section class='home-section new-pig'>
+          <img class='pink-tilted' src='/images/home-pinks.png'>
+          <h1>There's a new pig in town</h1>
+          <h3>and its....delicious!</h3>
+          <div>
+            <p>Wanna try it?</p>
+            <button @click=${() => gotoRoute('/products')}>Click Here</button>
+          </div>
+          <img class='pigsteps' src='/images/pigsteps.png'>
+          
         </section>
 
-        <section class='home-section pig-deal'>
-          <div class='left'>
-          <img src='/images/pig-deal.png'>
-          </div>
-          <div class='right'>
-            <div>
-            <h1>So, Whats the Pig deal?</h1>
-            <p>
-              It all began with a discovery.
-            West Country apples make the best cider.
-            Ever since we worked that out we have been developing our one of a kind craft cider.
-            Vegan friendly, lightly sparkling and downright delicious, your taste buds will thank you.
-            </p> </div>
-          </div>
+        <section class='disclaimer'>
+          <p>
+            This website has been created as part of an assignment in an approved course of study for Curtin University 
+            and contains copyright material not created by the author. 
+            All copyright material used remains copyright of the respective owners 
+            and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). 
+            No part of this work may be reproduced without consent of the original copyright owners. 
+            See code comments for references.
+          </p>
         </section>
 
         <footer>

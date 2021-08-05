@@ -27,21 +27,13 @@ h1,h2,h3,h5,h6 {
 }
 
 button{
-  background-color: var(--dark-blue);
   color: white;
   text-transform: uppercase;
   border-radius: 5px;
-  padding: 2%;
+  padding: 1%;
   border: none;
   font-family: var(--base-font-family);
-  font-size: 20px; 
   cursor: pointer;
-  box-shadow: -2px 2px 3px rgba(0,0,0,0.9);
-  transition: transform .2s;
-  &:hover{
-    //box-shadow: 7px 7px 30px -10px rgb(0, 0, 0, 20%);
-    transform: translateY(-2px);
-  }
 }
 
 // links ---------------
@@ -191,109 +183,125 @@ a {
     left: 7%;
   }
   h1{
-    padding-top: 1em;
-    transform: rotate(-8deg);
+    color: white;
+    transform: rotate(-1deg);
     text-align: center;
+    margin-bottom: 0;
+  }
+  p{
+    color: white;
+    text-align: center;
+    font-family: var(--heading-font-family);
+  }
+  button{
+    background-color: #F4372D;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 0 20px 8px rgba(255, 180, 176, 0.9);
   }
 }
 
 .home-section.hog{
-  background-color: var(--white);
+  background-color: var(--brown);
+  color: white;
+  .pigsteps{
+    width:90%;
+    transform: rotate(5deg) translateY(-150px);
+    z-index: -1;
+  }
   h1{
     text-align: center;
     margin:40px auto;
-    width: 50%;
-    font-style: italic;
-    text-shadow: -2px 2px 5px black;
-    font-size: 80px;
+    width: 70%;
+    font-size: 58px;
+    color: White;
   }
   #social{
     width: 50%;
-    margin: 30px auto;
+    margin: 60px auto;
     text-align: center;
     i{
-      font-size: 40px;
-      margin: 10px;
-    }
-  }
-}
-
-.home-section.craft-cider{
-  background-color: var(--sand);
-  position: relative;
-  .split-heading{
-    display: flex;
-    width: 90%;
-    margin: auto;
-    h1{
-      font-style: italic;
-      text-shadow: -2px 2px black;
-    }
-    h1:nth-child(2){
-      margin-left: 10%;
+      font-size: 50px;
+      margin: 14px;
     }
   }
   p{
-    font-weight: bold;
-    font-size: 24px;
-    width: 40%;
-    margin: auto;
     text-align: center;
+    font-family: var(--heading-font-family);
+    font-size: 26px;
+    margin-top: 80px;
   }
-  .pink-tilted{
-    height: 65vh;
-    margin: auto;
-    align-self: center;
-    display: block;
-  }
-  button.shop-now{
-    font-size: 35px;
-    color: black;
-    position: absolute;
-    transform: translateX(220%);
-    bottom: 20%;
-    margin: auto;
-    cursor: pointer;
-  }
-  
 }
 
-.home-section.pig-deal{
-  background-color: var(--olive);
-  display: flex;
+.home-section.new-pig{
+  background-color: var(--sand);
+  padding-right: 30px;
+  position: relative;
+  img.pink-tilted{
+    position: absolute;
+    height: 120%;
+    bottom: -10%;
+    left: 0;
+  }
   h1{
+    text-align: right;
+    margin-bottom: 0;
+    margin-top: 20px;
+    position: relative;
+    font-size: 68px;
+    color: #21272C;
+  }
+  h3{
+    text-align: right;
     text-transform: initial;
+    font-size: 40px;
+    color: #21272C;
   }
-  .left{
-    width: 140%;
-    display: flex;
-    flex-direction: column;
-    margin: 3%;
-    img{
-      width:100%;
-      margin-top: auto;
-      margin-bottom: auto;
-      display: block;
-    }
+  div{
+    margin-left: auto;
+    display: block;
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 10%;
   }
-  .right{
-    div{
-      padding: 4%;
-    }
-    p{
-      font-weight: bold;
-      font-size: 18px;
-    }
+  p{
+    color: #21272C;
+    font-family: var(--heading-font-family);
+    font-size: 42px;
+    text-align: center;
   }
-  
+  button{
+    background-color:  #21272C;
+    font-size: 22px;
+    padding: 1% 2.5%;
+    display: block;
+    margin: 0 auto;
+    z-index: 5;
+    position: relative;
+  }
+  .pigsteps{
+    width:95%;
+    transform: rotate(-5deg) translateY(-50px) scaleX(-1);
+  }
+}
+
+.disclaimer{
+  background-color: rgb(73, 73, 73);
+  color: white;
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 20vh;
+  padding: 1.6em;
 }
 
 // Footer -------------------------------------
 footer{
-  padding: 1%;
+  padding: 1.5em;
+  margin: 0;
   color: white;
   display: flex;
-  height: 150px;
+  height: auto;
   width: 100%;
   background-color: rgb(73, 73, 73);
   div{
