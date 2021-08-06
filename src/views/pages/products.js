@@ -6,6 +6,7 @@ import Auth from '../../Auth'
 import Utils from '../../Utils'
 import Toast from '../../Toast'
 import ProductsAPI from './../../ProductsAPI';
+
 class ProductsView {
   init(){
     document.title = 'Products'    
@@ -110,7 +111,8 @@ class ProductsView {
 
         <div class='pp-left'>
           <h2>${product.name}</h2>
-          <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'>
+          <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
+          <img class='pp-img' src='../../../static/images/${product.image}' alt='${product.name}'>
         </div>
         <div class='pp-right'>
           <div class='pp-right-top'>
