@@ -56,6 +56,14 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     //initialise all the vars needed for a checkout
     gotoRoute('/checkout')
   }
+  toggle(){
+    const dropdownMenu = this.shadowRoot.querySelector('.app-menu')
+    if (dropdownMenu.style.display == "none") {
+    dropdownMenu.style.display = "block";
+  } else {
+    dropdownMenu.style.display = "none";
+  }
+}
 
 
 
@@ -63,13 +71,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     return html `
 
     <script>
-    container = document.querySelector('.app-header');
-    dropdown = container.querySelector('sl-dropdown');
-  
-    dropdown.addEventListener('sl-select', event => {
-      selectedItem = event.detail.item;
-      console.log(selectedItem.value);
-    });
+    
+    
     </script>
     <style>      
       * {
@@ -92,6 +95,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .nav-logo{
         width: 9%;
+        min-width: 70px;
         position: absolute;
         left: 45%;
         cursor: pointer;
@@ -110,7 +114,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .app-menu {
         font-family: var(--heading-font-family);
+        margin-top: 16px;
+        border: none;
+        width: 100%;
       }
+      
       .app-menu a {
         display: block;
         width: 100%;
@@ -123,23 +131,35 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       }
       .app-menu li {
         list-style-type: none;
-        border: 1px solid black;
-        padding-left: 40%;
-        background-color: rgba(255,255,255,0.8);
-        opca
-        
+        border: 1px solid lightgray;
+        margin-bottom: 1px;
+        text-align: center;
+        padding-left: 0px;
+        background-color: rgba(255,255,255,0.9);
       }
-      .menu-items {
-        font-family: serif;
-        text-transform: uppercase;
+
+      .app-menu ul {
+        margin: 0px;
+        padding: 0px;
+        
       }
 
       .cart-logo{
         width: 3%;
+        min-width: 30px;
+        min-height: 30px;
         cursor: pointer;
         position: absolute;
         right: 2%;
         top: 6px;
+      }
+      #hamburger {
+        
+        margin: 8px 5px 0px 10px;
+
+      }
+      button {
+        background-color: white;
       }
       
       /*items in the cart menu */
@@ -171,12 +191,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         }
         .app-menu {
           display: block;
-          margin-top: 5px;
-          border: none;
-          width: 100%;
-        }
-        .app-mobile-nav ul {
-          padding: 0px;
+ 
         }
         .app-top-nav li {
           display: block;
@@ -221,26 +236,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
         </ul>
       </nav>
-
+      
       <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       
       <!-- dropdown menu -->
-      <sl-dropdown style="display:none" class="hamburger" placement="top-start">
-        <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-        <sl-button slot="trigger"><img alt="menu" width="30px" height="30px" src='/images/menu.png'></sl-button>
-        <sl-menu>
-          <sl-menu-item value="/" class="menu-items">Home</sl-menu-item>
-          <sl-menu-item value="/products" class="menu-items">Shop</sl-menu-item>
-          <sl-menu-item value="/about" class="menu-items">About</sl-menu-item>
-          <sl-menu-divider value="/contact" class="menu-items"></sl-menu-divider>
-          <sl-menu-item class="menu-items">Contact</sl-menu-item>
-        </sl-menu>
-      </sl-dropdown>
-      
 
+      
+      <img @click="${this.toggle}" id="hamburger" alt="menu" width="25px" height="25px" src='/images/menu.png'>
       <div class="app-menu"> 
-      <button onclick="myFunction()" class="app-menu"><img alt="menu" width="30px" height="30px" src='/images/menu.png'</button>
-      <div id="myDropdown" class="app-menu">
+      <div id="drop-menu" class="app-menu">
       <ul>
         <li><a @click="${() => gotoRoute('/')}">Home</a></li>
         <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
@@ -249,12 +253,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       </ul>
       </div>
     </div>
-      <nav class="app-top-nav right">
+      <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
       </nav>
-
-  
 
     </header>
 
