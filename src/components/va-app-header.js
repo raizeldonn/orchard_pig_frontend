@@ -49,8 +49,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     gotoRoute('/checkout')
   }
 
+  
+
   render(){    
     return html`
+
     <style>      
       * {
         box-sizing: border-box;
@@ -69,7 +72,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       .right{
           
-        }
+      }
 
       .nav-logo{
         width: 9%;
@@ -79,8 +82,6 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         display: block;
       }
       
-   
-
       .app-top-nav a {
         display: inline-block;
         padding: .8em;
@@ -90,7 +91,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         text-transform: uppercase;
         cursor: pointer;
       }
-      .app-mobile-nav a {
+
+      .app-menu a {
         display: block;
         width: 100%;
         padding: .8em;
@@ -100,7 +102,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         text-transform: uppercase;
         cursor: pointer;
       }
-      .app-mobile-nav li {
+      .app-menu li {
         list-style-type: none;
         border: 1px solid black;
         padding-left: 40%;
@@ -144,7 +146,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           display: none;
           width: 100%;
         }
-        .app-mobile-nav {
+        .app-menu {
           display: block;
           margin-top: var(--app-header-height);
         }
@@ -169,7 +171,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           float: left;
           width: 20%;
         }
-        .app-mobile-nav {
+        .app-menu {
           display: none;
           padding none;
         }
@@ -194,21 +196,28 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         </ul>
           </nav>
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
-        <nav class="app-mobile-nav">
-        <ul>
-          <li><a @click="${() => gotoRoute('/')}">Home</a></li>
-          <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
-          <li><a @click="${() => gotoRoute('/about')}">About Us</a></li> 
-          <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
-        </ul>
-          </nav>
+      
       
         <nav class="app-top-nav right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
       </nav>
+
           
     </header>
+<!-- dropdown menu -->
+    <sl-dropdown  class="app-menu" placement="top-start">
+  <sl-button slot="trigger" caret>Edit</sl-button>
+  <sl-menu>
+    <sl-menu-item>Cut</sl-menu-item>
+    <sl-menu-item>Copy</sl-menu-item>
+    <sl-menu-item>Paste</sl-menu-item>
+    <sl-menu-divider></sl-menu-divider>
+    <sl-menu-item>Find</sl-menu-item>
+    <sl-menu-item>Replace</sl-menu-item>
+  </sl-menu>
+</sl-dropdown>
+
 
     <!--CART----------------------->
     <sl-drawer class="app-side-menu">
@@ -221,5 +230,20 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     </sl-drawer>
     `
   }
-  
+
+  menuToggleAndGo(route){
+    document.getElementById("menu").style.display = 'block' ? 'none' : 'block';
+    gotoRoute(route);
+  }
+
+  menuToggle(){
+    var menu = document.getElementById("menu");
+      if (menu.style.display === "none"){
+        menu.style.display = "block";
+      } else {
+        menu.style.display = "none";
+      }
+  }
+ 
+ 
 })
