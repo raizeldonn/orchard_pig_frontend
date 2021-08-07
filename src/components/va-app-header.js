@@ -78,6 +78,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         cursor: pointer;
         display: block;
       }
+      
+   
 
       .app-top-nav a {
         display: inline-block;
@@ -87,6 +89,24 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         font-family: var(--heading-font-family);
         text-transform: uppercase;
         cursor: pointer;
+      }
+      .app-mobile-nav a {
+        display: block;
+        width: 100%;
+        padding: .8em;
+        text-decoration: none;
+        color: black;
+        font-family: var(--heading-font-family);
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+      .app-mobile-nav li {
+        list-style-type: none;
+        border: 1px solid black;
+        padding-left: 40%;
+        background-color: rgba(255,255,255,0.8);
+        opca
+        
       }
 
       .cart-logo{
@@ -106,6 +126,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         color: #333;
       }
 
+
       /* active nav links */
       .app-top-nav a.active,
       .app-side-menu-items a.active {
@@ -115,8 +136,42 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       /* RESPONSIVE - MOBILE ------------------- */
       @media all and (max-width: 768px){       
         
+        .app-header {
+          display: block;
+          height: var(--app-header-height-mobile);
+        }
         .app-top-nav {
           display: none;
+          width: 100%;
+        }
+        .app-mobile-nav {
+          display: block;
+          margin-top: var(--app-header-height);
+        }
+        .app-mobile-nav ul {
+          padding: 0px;
+        }
+        .app-top-nav li {
+          display: block;
+          width: 100%;
+        }
+      }
+
+      @media all and (min-width: 769px){       
+        
+        .app-top-nav {
+          display: block;
+        }
+        .app-top-nav ul {
+          list-style-type : none;
+        }
+        .app-top-nav li {
+          float: left;
+          width: 20%;
+        }
+        .app-mobile-nav {
+          display: none;
+          padding none;
         }
       }
 
@@ -131,13 +186,24 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         <img class='nav-fp' src='/images/logo-black.png'>
       </div> -->
       <nav class="app-top-nav">
-          <a @click="${() => gotoRoute('/')}">Home</a>
-          <a @click="${() => gotoRoute('/products')}">Shop</a>  
-          <a @click="${() => gotoRoute('/about')}">About Us</a>  
-          <a @click="${() => gotoRoute('/contact')}">Contact</a>   
-      </nav>
+        <ul>
+          <li><a @click="${() => gotoRoute('/')}">Home</a></li>
+          <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
+          <li><a @click="${() => gotoRoute('/about')}">About Us</a></li> 
+          <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
+        </ul>
+          </nav>
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
-      <nav class="app-top-nav right">
+        <nav class="app-mobile-nav">
+        <ul>
+          <li><a @click="${() => gotoRoute('/')}">Home</a></li>
+          <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
+          <li><a @click="${() => gotoRoute('/about')}">About Us</a></li> 
+          <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
+        </ul>
+          </nav>
+      
+        <nav class="app-top-nav right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
       </nav>
