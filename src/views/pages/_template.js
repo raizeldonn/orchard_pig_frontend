@@ -20,7 +20,7 @@ class TemplateView {
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header title="Profile" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
+      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content">        
         <h1>Page title</h1>
         <p>Page content ...</p>

@@ -166,13 +166,14 @@ class ProductsView {
   addToCart(product){
     console.log("added to cart: " + product.name);
     CartAPI.addProduct(product.item, product.name, 1, product.packSize, product.containerVolume, product.price);
+    this.render()
   }
 
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header title="Products" user="${JSON.stringify(Auth.currentUser)}" products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content products">      
         <h1>Meet Our Pigs</h1>  
         <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>

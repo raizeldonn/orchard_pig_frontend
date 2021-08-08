@@ -98,7 +98,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         width: 9%;
         min-width: 70px;
         position: absolute;
-        left: 40%;
+        left: 45%;
         cursor: pointer;
         display: block;
       }
@@ -148,8 +148,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         border: 0px;
         margin-bottom: 0px;
         text-align: center;
-        padding-right: auto;
-        padding-left: auto;
+        padding-left: 0px;
         background-color: rgba(255,255,255,1.0);
       }
 
@@ -263,33 +262,36 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       <!-- Icons made by <a href="https://www.flaticon.com/authors/xnimrodx" title="xnimrodx">xnimrodx</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
       <img @click="${this.toggle}" id="close" alt="close" width="28px" height="28px" src='/images/close.png'>
       
-   
+      <div id="drop-menu" class="app-menu">
+      <ul>
+        <li><a @click="${() => gotoRoute('/')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Home</a></li>
+        <li><a @click="${() => gotoRoute('/products')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Shop</a></li>
+        <li><a @click="${() => gotoRoute('/about')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>About</a></li>
+        <li><a @click="${() => gotoRoute('/contact')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Contact</a></li>
+        <li><a @click="${() => gotoRoute('/game')}" style="color: red;"><img class='nav-fp' src='/images/navbar-pigstep.png'>Play - Find the Pig!</a></li>
+      </ul>
+      </div>
     
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
       </nav>
 
-
-      <div id="drop-menu" class="app-menu">
-      <ul>
-        <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/about')}">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/contact')}">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-      </ul>
-      </div>
-      
     </header>
+
 
 
 
 
     <!--CART----------------------->
     <sl-drawer class="app-side-menu">
-      
-      <h1>Your Cart</h1>
+    ${this.products == null ? html `
+
+      <p>your cart is empty</p>
+
+    ` : html `
+
+    <h1>Your Cart</h1>
       ${this.products.map(product => html`
         <img src='/images/${product.item}.png' alt='${product.name}'>
         <p>${product.name}</p> 
@@ -298,8 +300,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       `)}
 
       <h3>Total: &pound;${CartAPI.getTotal()}.00</h3>
-      
       <button @click="${this.checkoutClick}">Checkout</button>
+    `}
+    
     </sl-drawer>
     `
   }

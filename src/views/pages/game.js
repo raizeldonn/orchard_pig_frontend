@@ -16,7 +16,7 @@ class ProductsView {
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header title="Products" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
+      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content">        
         <h1>Pig Game</h1>
         <p>Play to win</p>
