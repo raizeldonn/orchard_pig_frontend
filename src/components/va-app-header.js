@@ -115,7 +115,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       .app-menu {
         display: none;
         font-family: var(--heading-font-family);
-        margin-top: 15px;
+        margin-top: 11px;
         border: none;
         width: 100%;
       }
@@ -132,11 +132,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       }
       .app-menu li {
         list-style-type: none;
-        border: 1px solid lightgray;
-        margin-bottom: 1px;
+        border: 0px;
+        margin-bottom: 0px;
         text-align: center;
         padding-left: 0px;
-        background-color: rgba(255,255,255,0.9);
+        background-color: rgba(255,255,255,1.0);
       }
 
       .app-menu ul {
