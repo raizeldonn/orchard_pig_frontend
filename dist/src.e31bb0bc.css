@@ -202,6 +202,7 @@ a {
   transform: rotate(-1deg);
   text-align: center;
   margin-bottom: 0;
+  font-size: max(5.2vw, 28);
 }
 .home-section.rooted p {
   color: white;
@@ -228,7 +229,7 @@ a {
   text-align: center;
   margin: 40px auto;
   width: 70%;
-  font-size: 58px;
+  font-size: max(4.4vw, 28px);
   color: White;
 }
 .home-section.hog #social {
@@ -617,23 +618,12 @@ sl-dialog::part(title) {
 
 @media all and (max-width: 1125px) {
   /* HOME SECTION */
-  .home-section.hog h1 {
-    font-size: 50px;
-  }
-
   .home-section.new-pig .pigsteps {
     transform: rotate(-5deg) translateY(-20px) scaleX(-1);
   }
 }
 @media all and (max-width: 1000px) {
   /* HOME SECTION */
-  .home-section.rooted h1 {
-    font-size: 50px;
-  }
-
-  .home-section.hog h1 {
-    font-size: 40px;
-  }
   .home-section.hog .pigsteps {
     width: 100%;
     transform: rotate(5deg) translateY(-20px);
@@ -729,13 +719,6 @@ sl-dialog::part(title) {
   }
 }
 @media all and (max-width: 640px) {
-  .home-section.rooted h1 {
-    font-size: 28px;
-  }
-
-  .home-section.hog h1 {
-    font-size: 28px;
-  }
   .home-section.hog #social {
     width: 70%;
   }
