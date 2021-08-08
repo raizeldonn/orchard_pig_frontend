@@ -165,6 +165,8 @@ class ProductsView {
         <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>
         <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>
         <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>
+        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>
+        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>
         <div class='products-grid'>
             ${this.products == null ? html `
               <sl-spinner></sl-spinner>
