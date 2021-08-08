@@ -57,11 +57,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     gotoRoute('/checkout')
   }
   toggle() {
-    const dropdownMenu = this.shadowRoot.querySelector('.app-menu')
+    const dropdownMenu = this.shadowRoot.querySelector('.app-menu');
+    const hamburger = this.shadowRoot.querySelector('#hamburger');
+    const close = this.shadowRoot.querySelector('#close');
+
     if (dropdownMenu.style.display == "block") {
       dropdownMenu.style.display = "none";
+      hamburger.style.display = "block";
+      close.style.display = "none";
     } else {
       dropdownMenu.style.display = "block";
+      hamburger.style.display = "none";
+      close.style.display = "block";
     }
   }
 
@@ -127,6 +134,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         text-transform: uppercase;
         cursor: pointer;
       }
+
+      .app-menu .nav-fp {
+        visibility: hidden;
+        z-index: -100;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .app-menu a:hover .nav-fp  {
+        visibility: visible;
+      }
+      
+
       .app-menu li {
         list-style-type: none;
         border: 0px;
@@ -152,6 +171,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         top: 6px;
       }
       #hamburger {
+        margin: 8px 5px 0px 10px;
+      }
+      #close {
+        display: none;
         margin: 8px 5px 0px 10px;
       }
       button {
@@ -223,7 +246,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         <img class='nav-fp' src='/images/logo-black.png'>
         <img class='nav-fp' src='/images/logo-black.png'>
       </div> -->
-
+      
       <nav class="app-top-nav">
         <ul>
           <li><a @click="${() => gotoRoute('/')}">Home</a></li>
@@ -239,13 +262,16 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       <!-- dropdown menu -->
       <!-- Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
       <img @click="${this.toggle}" id="hamburger" alt="menu" width="28px" height="28px" src='/images/menu.png'>
+      <!-- Icons made by <a href="https://www.flaticon.com/authors/xnimrodx" title="xnimrodx">xnimrodx</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+      <img @click="${this.toggle}" id="close" alt="close" width="28px" height="28px" src='/images/close.png'>
       
       <div id="drop-menu" class="app-menu">
       <ul>
-        <li><a @click="${() => gotoRoute('/')}">Home</a></li>
-        <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
-        <li><a @click="${() => gotoRoute('/about')}">About</a></li>
-        <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>
+        <li><a @click="${() => gotoRoute('/')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Home</a></li>
+        <li><a @click="${() => gotoRoute('/products')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Shop</a></li>
+        <li><a @click="${() => gotoRoute('/about')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>About</a></li>
+        <li><a @click="${() => gotoRoute('/contact')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Contact</a></li>
+        <li><a @click="${() => gotoRoute('/game')}" style="color: red;"><img class='nav-fp' src='/images/navbar-pigstep.png'>Play - Find the Pig!</a></li>
       </ul>
       </div>
     
