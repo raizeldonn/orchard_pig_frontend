@@ -240,8 +240,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
 
       <!-- dropdown menu -->
-      <!-- Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>-->
-      <img @click="${this.toggle}" id="hamburger" alt="menu" width="25px" height="25px" src='/images/menu.png'>
+      <!-- Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+      <img @click="${this.toggle}" id="hamburger" alt="menu" width="28px" height="28px" src='/images/menu.png'>
       
       <div id="drop-menu" class="app-menu">
       <ul>
