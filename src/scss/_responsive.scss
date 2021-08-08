@@ -2,31 +2,18 @@
 @media all and (max-width: 1125px){ 
 
   /* HOME SECTION */
-    .home-section.hog{
-      h1{
-        font-size: 50px;
+    .home-section.new-pig{
+      .pigsteps{
+        transform: rotate(-5deg) translateY(-20px) scaleX(-1);
       }
     }
-    .home-section.new-pig{
-        .pigsteps{
-            transform: rotate(-5deg) translateY(-20px) scaleX(-1);
-          }
-    }
-    
+
 }
   
   @media all and (max-width: 1000px){ 
   
     /* HOME SECTION */
-    .home-section.rooted{
-      h1{
-        font-size: 50px;
-      }
-    }
     .home-section.hog{
-      h1{
-        font-size: 40px;
-      }
       .pigsteps{
         width:100%;
         transform: rotate(5deg) translateY(-20px);
@@ -38,8 +25,8 @@
             bottom: -5%;
         }
         .pigsteps{
-            transform: rotate(-5deg) translateY(20px) scaleX(-1);
-          }
+          transform: rotate(-5deg) translateY(20px) scaleX(-1);
+        }
     }
 
     /* PRODUCTS PAGE */
@@ -149,15 +136,7 @@
 }
   
   @media all and (max-width: 640px){ 
-    .home-section.rooted{
-      h1{
-        font-size: 28px;
-      }
-    }
     .home-section.hog{
-      h1{
-        font-size: 28px;
-      }
       #social{
         width: 70%;
       }
