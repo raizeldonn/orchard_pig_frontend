@@ -79,7 +79,7 @@ class ProductsView {
           margin-left: 20%;
         }
         .pp-right-top{
-          background-color: #D4E7F8;
+          background-color: var(--light-blue);
           border-radius: 5px;
           color: black;
           padding: 15px;

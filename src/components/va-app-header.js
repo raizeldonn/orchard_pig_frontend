@@ -177,20 +177,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       button {
         background-color: white;
       }
-      
-      /*items in the cart menu */
-      .app-side-menu-items a {
-        display: block;
-        padding: .5em;
-        text-decoration: none;
-        font-size: 1.3em;
-        color: #333;
-      }
 
 
       /* active nav links */
-      .app-top-nav a.active,
-      .app-side-menu-items a.active {
+      .app-top-nav a.active {
         font-weight: bold;
       }
 
@@ -283,24 +273,77 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
 
 
+    <!--CART - styles----------------------->
+
+    <style>
+      .app-side-menu{
+        font-family: var(--base-font-family);
+      }
+      h1{
+        font-family: var(--heading-font-family);
+        padding: 0;
+        margin: 0;
+        padding-bottom: 30px;
+      }
+      sl-drawer.app-side-menu::part(panel){
+        background-color: var(--light-blue);
+        --header-spacing: 0;
+      }
+      sl-drawer.app-side-menu::part(title){
+        line-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .app-side-menu .cart-product{
+          display: grid;
+          width: 70%;
+          grid-template-columns: repeat(2, auto);
+      }
+      .cart-img{
+        height: 20vh;
+        margin-bottom: 30px;
+      }
+      .product-name{
+        font-weight: bold;
+      }
+      .checkout-btn {
+        color: white;
+        background-color: var(--dark-blue);
+        text-transform: uppercase;
+        border: none;
+        font-family: var(--base-font-family);
+        cursor: pointer;
+        padding: 2% 4%;
+        border-radius: 8px;
+        font-size: 20px;
+        width: 100%;
+      }
+
+
+    </style>
+
     <!--CART----------------------->
     <sl-drawer class="app-side-menu">
     ${this.products == null ? html `
 
-      <p>your cart is empty</p>
+      <p>your basket is empty</p>
 
     ` : html `
 
-    <h1>Your Cart</h1>
+    <h1>Your Basket</h1>
       ${this.products.map(product => html`
-        <img src='/images/${product.item}.png' alt='${product.name}'>
-        <p>${product.name}</p> 
-        <p>${product.quantity}</p>
-        <p>&pound;${product.price.$numberDecimal}</p>
+        <div class='cart-product'>
+          <img class='cart-img' src='/images/${product.item}.png' alt='${product.name}'>
+          <div class='cart-product-info'>
+            <p class='product-name'>${product.name}</p> 
+            <p>Quantity: ${product.quantity}</p>
+            <p>&pound;${product.price.$numberDecimal}</p>
+          </div>
+        </div>
       `)}
 
-      <h3>Total: &pound;${CartAPI.getTotal()}.00</h3>
-      <button @click="${this.checkoutClick}">Checkout</button>
+      <h3>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
+      <button class='checkout-btn' @click="${this.checkoutClick}">Checkout</button>
     `}
     
     </sl-drawer>
