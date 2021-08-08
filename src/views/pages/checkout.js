@@ -16,10 +16,35 @@ class CheckoutView {
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header title="Checkout" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
-      <div class="page-content">        
-        <h1>Page title</h1>
-        <p>Page content ...</p>
+      <div class='checkout-header'>
+        <h1>Checkout</h1>
+        <img class='nav-logo' src='/images/logo-black.png'>
+      </div>
+
+      <div class="page-content checkout">        
+        <h2>Shipping Details</h2>
+        
+        <sl-form class="form-shipping" @sl-submit=${this.shippingSubmitHandler}>
+            <div class="input-group">
+              <sl-input name="firstName" type="text" placeholder="First Name" required></sl-input>
+            </div>
+            <div class="input-group">
+              <sl-input name="lastName" type="text" placeholder="Last Name" required></sl-input>
+            </div>
+            <div class="input-group">
+              <sl-input name="email" type="email" placeholder="Email" required></sl-input>
+            </div>
+            <div class="input-group">
+              <sl-input name="phoneNumber" type="text" placeholder="Phone Number" required></sl-input>
+            </div>    
+            <div class="input-group">
+              <sl-input name="address" type="text" placeholder="Address" required></sl-input>
+            </div>
+            <div class="input-group">
+              <sl-input name="address" type="text" placeholder="Address Line 2 (optional)" required></sl-input>
+            </div>       
+            <sl-button type="primary" class="submit-btn" submit style="width: 100%;">Sign Up</sl-button>
+          </sl-form>
         
       </div>      
     `
