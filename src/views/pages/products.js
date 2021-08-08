@@ -27,6 +27,14 @@ class ProductsView {
     }
   }
 
+  hoverImage(product){
+    document.getElementById(product.name).src="/images/" + product.item  + "_steps.png"
+  }
+
+  unhoverImage(product){
+    document.getElementById(product.name).src="/images/" + product.item  + ".png"
+  }
+
   //when user selects 'more info' create & show a more info dialog
   moreInfoHandler(product){
     //create cleaner dialog
@@ -176,7 +184,8 @@ class ProductsView {
                 ${product.containerType == "bottle" ? html`
                 <div class='product-card'>  
                   <!-- <img @click=${() => this.moreInfoHandler(product)} src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
-                  <img @click=${() => this.moreInfoHandler(product)} src='/images/${product.item}.png' alt='${product.name}'>
+                  <img id='${product.name}' @click=${() => this.moreInfoHandler(product)} @mouseover=${() => this.hoverImage(product)}  @mouseout=${() => this.unhoverImage(product)}
+                      src='/images/${product.item}.png' alt='${product.name}'>
                   <h2>${product.shortName}</h2>
                   <button @click=${() => this.addToCart(product)}>Buy Now</button>
                 </div>

@@ -8328,7 +8328,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img @click=", " src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <button @click=", ">Buy Now</button>\n                </div>\n                "]);
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <button @click=", ">Buy Now</button>\n                </div>\n                "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -8429,6 +8429,14 @@ class ProductsView {
     } catch (err) {
       _Toast.default.show(err, 'error');
     }
+  }
+
+  hoverImage(product) {
+    document.getElementById(product.name).src = "/images/" + product.item + "_steps.png";
+  }
+
+  unhoverImage(product) {
+    document.getElementById(product.name).src = "/images/" + product.item + ".png";
   } //when user selects 'more info' create & show a more info dialog
 
 
@@ -8456,7 +8464,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, () => this.moreInfoHandler(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject9()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject9()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
