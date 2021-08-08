@@ -31,7 +31,7 @@ class AboutView {
         </div>
         <h4>Crack a cold one n' let us tell you a story</h4>
 
-        <!-- <div class='about-us-flex'> -->
+        <div class='about-us-flex'>
           <div class='info info-left '>
             <h2>It all started</h2>
             <p>just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>
@@ -39,7 +39,7 @@ class AboutView {
             the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>
           </div>
           <img  class='img-right' src='/images/op-founder.png'> 
-        <!-- </div> -->
+        </div>
         <div class='about-us-flex'>
           <img class='img-left' src='/images/op-sail.png'> 
           <div class='info info-right'>
