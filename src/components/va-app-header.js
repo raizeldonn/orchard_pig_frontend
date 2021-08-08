@@ -56,14 +56,14 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     //initialise all the vars needed for a checkout
     gotoRoute('/checkout')
   }
-  toggle(){
+  toggle() {
     const dropdownMenu = this.shadowRoot.querySelector('.app-menu')
-    if (dropdownMenu.style.display == "none") {
-    dropdownMenu.style.display = "block";
-  } else {
-    dropdownMenu.style.display = "none";
+    if (dropdownMenu.style.display == "block") {
+      dropdownMenu.style.display = "none";
+    } else {
+      dropdownMenu.style.display = "block";
+    }
   }
-}
 
 
 
@@ -86,7 +86,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         height: var(--app-header-height);
         display: flex;
         z-index: 9;
-        box-shadow: 4px 0px 10px rgba(0,0,0,0.2);
+        //box-shadow: 4px 0px 10px rgba(0,0,0,0.2);
         align-items: center;
       }
       
@@ -113,8 +113,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       }
 
       .app-menu {
+        display: none;
         font-family: var(--heading-font-family);
-        margin-top: 16px;
+        margin-top: 15px;
         border: none;
         width: 100%;
       }
@@ -154,9 +155,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         top: 6px;
       }
       #hamburger {
-        
         margin: 8px 5px 0px 10px;
-
       }
       button {
         background-color: white;
@@ -189,10 +188,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           display: none;
           width: 100%;
         }
-        .app-menu {
-          display: block;
- 
-        }
+       
         .app-top-nav li {
           display: block;
           width: 100%;
@@ -214,6 +210,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         .app-menu {
           display: none;
           padding none;
+        }
+        #hamburger {
+          display: none;
         }
       }
 
@@ -239,11 +238,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       
-      <!-- dropdown menu -->
 
-      
+      <!-- dropdown menu -->
       <img @click="${this.toggle}" id="hamburger" alt="menu" width="25px" height="25px" src='/images/menu.png'>
-      <div class="app-menu"> 
+      
       <div id="drop-menu" class="app-menu">
       <ul>
         <li><a @click="${() => gotoRoute('/')}">Home</a></li>
@@ -252,13 +250,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>
       </ul>
       </div>
-    </div>
+    
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
       </nav>
 
     </header>
+
+
 
 
 
