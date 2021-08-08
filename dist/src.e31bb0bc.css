@@ -359,39 +359,62 @@ footer #social i {
 .products .pigsteps {
   position: absolute;
   width: 90%;
+  z-index: 1;
 }
 .products .pigsteps.pigsteps1 {
-  transform: scaleX(-1);
+  transform: scaleX(-1) rotate(8deg);
 }
 .products .pigsteps.pigsteps2 {
-  transform: translateY(800px);
+  transform: translateY(800px) rotate(-20deg);
 }
 .products .pigsteps.pigsteps3 {
-  transform: scaleX(-1) translateY(1600px);
+  transform: scaleX(-1) translateY(1700px) rotate(10deg);
+}
+.products .pigsteps.pigsteps4, .products .pigsteps.pigsteps5 {
+  display: none;
 }
 .products .products-grid {
   display: grid;
   grid-template-columns: repeat(2, auto);
+  z-index: 100;
+  position: relative;
+  width: 90%;
+  margin: auto;
+}
+.products .products-grid .product-card {
+  height: 80vh;
+}
+.products .products-grid .product-card:nth-child(2n) {
+  margin-top: 250px;
 }
 .products .products-grid img {
   height: 90vh;
   margin-left: auto;
   margin-right: auto;
+  z-index: 100;
+  position: relative;
 }
 .products .products-grid img:hover {
   cursor: pointer;
 }
 .products .products-grid h2 {
-  font-size: 4vw;
+  font-size: max(4vw, 34px);
   text-transform: initial;
   font-weight: 300;
   transform: translateY(-450px) translateX(300px);
+  margin-bottom: 10px;
+  z-index: 100;
+  position: relative;
 }
 .products .products-grid button {
-  padding: 1% 3%;
+  padding: 2% 0%;
+  width: 150px;
   background-color: #142838;
-  font-size: 1.7vw;
+  font-size: max(1.5vw, 16px);
+  border-radius: 8px;
   transform: translateY(-450px) translateX(300px);
+  z-index: 100;
+  position: relative;
 }
 
 .contact-page {
@@ -406,17 +429,12 @@ footer #social i {
   right: -5%;
   z-index: -1;
 }
-.contact-page .heading-flex {
-  display: flex;
-  width: 70%;
-  margin: auto;
-  margin-top: 5%;
-  margin-bottom: 0;
-}
 .contact-page h1 {
   font-size: 40px;
   text-align: center;
   width: 100%;
+  color: white;
+  margin-top: 80px;
 }
 .contact-page .flex {
   display: flex;
@@ -456,13 +474,13 @@ footer #social i {
   position: relative;
   text-align: right;
   width: 100%;
-  height: 340px;
+  height: 99.5%;
 }
-.contact-page #gmap_canvas {
+.contact-page .gmap_canvas {
   overflow: hidden;
   background: none !important;
   width: 100%;
-  height: 340px;
+  height: 99.5%;
 }
 
 .about-page {
@@ -598,6 +616,7 @@ sl-dialog::part(title) {
 }
 
 @media all and (max-width: 1125px) {
+  /* HOME SECTION */
   .home-section.hog h1 {
     font-size: 50px;
   }
@@ -607,6 +626,7 @@ sl-dialog::part(title) {
   }
 }
 @media all and (max-width: 1000px) {
+  /* HOME SECTION */
   .home-section.rooted h1 {
     font-size: 50px;
   }
@@ -626,8 +646,23 @@ sl-dialog::part(title) {
   .home-section.new-pig .pigsteps {
     transform: rotate(-5deg) translateY(20px) scaleX(-1);
   }
+
+  /* PRODUCTS PAGE */
+  .products .products-grid h2, .products .products-grid button {
+    transform: translateY(-450px) translateX(250px);
+  }
+}
+@media all and (max-width: 900px) {
+  /* PRODUCTS PAGE */
+  .products .products-grid img {
+    height: 80vh;
+  }
+  .products .products-grid h2, .products .products-grid button {
+    transform: translateY(-450px) translateX(210px);
+  }
 }
 @media all and (max-width: 800px) {
+  /* HOME SECTION */
   .home-section {
     height: 60vh;
   }
@@ -648,6 +683,31 @@ sl-dialog::part(title) {
   }
   .home-section.new-pig .pigsteps {
     transform: rotate(-5deg) translateY(0px) scaleX(-1);
+  }
+
+  /* PRODUCTS PAGE */
+  .products .products-grid {
+    grid-template-columns: repeat(1, auto);
+  }
+  .products .products-grid .product-card {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .products .products-grid .product-card:nth-child(2n) {
+    margin-top: 100px;
+  }
+  .products .pigsteps.pigsteps3 {
+    transform: scaleX(-1) translateY(1400px) rotate(10deg);
+  }
+  .products .pigsteps.pigsteps4, .products .pigsteps.pigsteps5 {
+    display: block;
+  }
+  .products .pigsteps.pigsteps4 {
+    transform: scaleX(-1) translateY(2000px) rotate(20deg);
+  }
+  .products .pigsteps.pigsteps5 {
+    transform: scaleX(-1) translateY(2900px) rotate(-20deg);
   }
 }
 @media all and (max-width: 768px) {
@@ -689,6 +749,20 @@ sl-dialog::part(title) {
 
   .home-section.new-pig .pigsteps {
     transform: rotate(-5deg) translateY(200px) scaleX(-1);
+  }
+
+  /* PRODUCTS PAGE */
+  .products .products-grid {
+    margin-left: 0;
+  }
+  .products .products-grid .product-card {
+    height: 50vh;
+  }
+  .products .products-grid img {
+    height: 50vh;
+  }
+  .products .products-grid h2, .products .products-grid button {
+    transform: translateY(-370px) translateX(160px);
   }
 }
 

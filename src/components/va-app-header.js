@@ -86,11 +86,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         height: var(--app-header-height);
         display: flex;
         z-index: 9;
-        //box-shadow: 4px 0px 10px rgba(0,0,0,0.2);
+        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/
         align-items: center;
-      }
-      
-      .right{
       }
 
       .nav-logo{
@@ -209,7 +206,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         }
         .app-menu {
           display: none;
-          padding none;
+          padding: none;
         }
         #hamburger {
           display: none;

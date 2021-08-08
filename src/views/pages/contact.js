@@ -20,14 +20,11 @@ class ContactView {
       <va-app-header title="Contact" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
       <div class="page-content contact-page">   
         <img class='pigsteps' src='/images/pigsteps.png'>
-        <div class='heading-flex'> 
-          <h1></h1>
-          <h1>Get In Touch</h1>
-        </div>     
+        <h1>Get In Touch</h1> 
         <div class='flex'>
           <div class="mapouter">
             <div class="gmap_canvas">
-              <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=275%20Burnfield%20Road,%20Thornliebank&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+              <iframe style="height:99.5%;" id="gmap_canvas" src="https://maps.google.com/maps?q=275%20Burnfield%20Road,%20Thornliebank&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             </div>
           </div>
           <div class='left'>

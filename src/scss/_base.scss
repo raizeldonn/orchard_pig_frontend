@@ -390,46 +390,62 @@ footer {
   .pigsteps {
     position: absolute;
     width: 90%;
+    z-index: 1;
   }
-
-  .pigsteps.pigsteps1 {
-    transform: scaleX(-1);
+  .pigsteps.pigsteps1{
+    transform: scaleX(-1) rotate(8deg);
   }
-
-  .pigsteps.pigsteps2 {
-    transform: translateY(800px);
+  .pigsteps.pigsteps2{
+    transform: translateY(800px) rotate(-20deg);
   }
-
-  .pigsteps.pigsteps3 {
-    transform: scaleX(-1) translateY(1600px);
+  .pigsteps.pigsteps3{
+    transform: scaleX(-1) translateY(1700px) rotate(10deg);
   }
-
-  .products-grid {
+  .pigsteps.pigsteps4, .pigsteps.pigsteps5{
+    display: none;
+  }
+  .products-grid{
     display: grid;
     grid-template-columns: repeat(2, auto);
+    z-index: 100;
+    position: relative;
+    width: 90%;
+    margin: auto;
 
-    img {
+    .product-card{
+      height: 80vh;
+    }
+    .product-card:nth-child(2n){
+      margin-top: 250px;
+    }
+    img{
       height: 90vh;
       margin-left: auto;
       margin-right: auto;
-
-      &:hover {
+      z-index: 100;
+      position: relative;
+      &:hover{
         cursor: pointer;
       }
     }
-
-    h2 {
-      font-size: 4vw;
+    h2{
+      font-size: max(4vw, 34px);
       text-transform: initial;
       font-weight: 300;
       transform: translateY(-450px) translateX(300px);
+      margin-bottom: 10px;
+      z-index: 100;
+      position: relative;
     }
-
-    button {
-      padding: 1% 3%;
+    button{
+      padding: 2% 0%;
+      width: 150px;
       background-color: #142838;
-      font-size: 1.7vw;
+      font-size: max(1.5vw, 16px);
+      border-radius: 8px;
       transform: translateY(-450px) translateX(300px);
+      z-index: 100;
+      position: relative;
     }
   }
 
@@ -454,19 +470,12 @@ footer {
     right: -5%;
     z-index: -1;
   }
-
-  .heading-flex {
-    display: flex;
-    width: 70%;
-    margin: auto;
-    margin-top: 5%;
-    margin-bottom: 0;
-  }
-
-  h1 {
+  h1{
     font-size: 40px;
     text-align: center;
     width: 100%;
+    color: white;
+    margin-top: 80px;
   }
 
   .flex {
@@ -510,18 +519,18 @@ footer {
     }
   }
 
-  .mapouter {
-    position: relative;
-    text-align: right;
-    width: 100%;
-    height: 340px;
+  .mapouter{
+    position:relative;
+    text-align:right;
+    width:100%;
+    height: 99.5%;
   }
 
-  #gmap_canvas {
-    overflow: hidden;
-    background: none !important;
-    width: 100%;
-    height: 340px;
+  .gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    width:100%;
+    height: 99.5%;
   }
 }
 
