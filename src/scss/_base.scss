@@ -433,17 +433,12 @@ footer{
     right: -5%;
     z-index: -1;
   }
-  .heading-flex{
-    display: flex;
-    width: 70%;
-    margin: auto;
-    margin-top: 5%;
-    margin-bottom: 0;
-  }
   h1{
     font-size: 40px;
     text-align: center;
     width: 100%;
+    color: white;
+    margin-top: 80px;
   }
   .flex{
     display: flex;
@@ -484,14 +479,14 @@ footer{
     position:relative;
     text-align:right;
     width:100%;
-    height: 340px;
+    height: 99.5%;
   }
 
-  #gmap_canvas {
+  .gmap_canvas {
     overflow:hidden;
     background:none!important;
     width:100%;
-    height: 340px;
+    height: 99.5%;
   }
 }
 
