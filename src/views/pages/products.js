@@ -6,6 +6,7 @@ import Auth from '../../Auth'
 import Utils from '../../Utils'
 import Toast from '../../Toast'
 import ProductsAPI from './../../ProductsAPI';
+import CartAPI from './../../CartAPI';
 
 class ProductsView {
   init(){
@@ -159,15 +160,19 @@ class ProductsView {
     })
   }
 
+  // if the user presses 'add to cart' from product page, then qty == 1
+  // else grab the qty that the user has entered
+  // as it will be easier than havign to update the quantity when it is already in the cart
   addToCart(product){
     console.log("added to cart: " + product.name);
+    CartAPI.addProduct(product.item, product.name, 1, product.packSize, product.containerVolume, product.price);
   }
 
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header title="Products" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
+      <va-app-header title="Products" user="${JSON.stringify(Auth.currentUser)}" products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content products">      
         <h1>Meet Our Pigs</h1>  
         <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>

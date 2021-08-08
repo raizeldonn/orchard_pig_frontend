@@ -13,7 +13,7 @@ import {
 } from './../Router'
 import Auth from './../Auth'
 import App from './../App'
-
+import CartAPI from './../CartAPI';
 
 customElements.define('va-app-header', class AppHeader extends LitElement {
   constructor() {
@@ -22,10 +22,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
   static get properties() {
     return {
-      title: {
-        type: String
-      },
-      user: {
+      products: {
         type: Object
       }
     }
@@ -288,12 +285,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
     <!--CART----------------------->
     <sl-drawer class="app-side-menu">
+      
       <h1>Your Cart</h1>
-      <p>Product Name</p> 
-      <p>Product Amount</p>
-      <p>$ Product Price</p>
-      <h3>Total</h3>
-      <sl-button @click="${this.checkoutClick}">Checkout</sl-button>
+      ${this.products.map(product => html`
+        <img src='/images/${product.item}.png' alt='${product.name}'>
+        <p>${product.name}</p> 
+        <p>${product.quantity}</p>
+        <p>&pound;${product.price.$numberDecimal}</p>
+      `)}
+
+      <h3>Total: &pound;${CartAPI.getTotal()}.00</h3>
+      
+      <button @click="${this.checkoutClick}">Checkout</button>
     </sl-drawer>
     `
   }

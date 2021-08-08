@@ -7737,7 +7737,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button>\n        </section>\n\n        <section class='home-section hog' >\n        \n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\">\n            <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n            <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n            <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter\"></i></a>\n          </div>\n          <p>This little pig went to our socials, will you?</p>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n          <!-- <sl-icon name='facebook'></sl-icon>\n          <sl-icon name='instagram'></sl-icon>\n          <sl-icon name='twitter'></sl-icon> -->\n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <h1>There's a new pig in town</h1>\n          <h3>and its....delicious!</h3>\n          <div>\n            <p>Wanna try it?</p>\n            <button @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='disclaimer'>\n          <p>\n            This website has been created as part of an assignment in an approved course of study for Curtin University \n            and contains copyright material not created by the author. \n            All copyright material used remains copyright of the respective owners \n            and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). \n            No part of this work may be reproduced without consent of the original copyright owners. \n            See code comments for references.\n          </p>\n        </section>\n\n        <footer>\n          <div>\n              <h3>Contact</h3>\n              <p>275 Burnfield Road, Thornliebank</p>\n              <p>01632 960493</p>\n              <p>oink@orchardpig.co.uk</p>\n          </div>\n          <div>\n            <img @click=\"", "\" class='footer-logo' src='/images/logo-white-cut.png'></a>  \n          </div>\n          <div>\n            <div id=\"social\">\n              <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n              <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n              <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter-square\"></i></a>\n            </div>\n          </div>\n        </footer>\n\n      \n      </div>\n\n      \n      \n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" user=", " products=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button>\n        </section>\n\n        <section class='home-section hog' >\n        \n          <h1>The cider you won't be able to help but hog</h1>\n          <div id=\"social\">\n            <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n            <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n            <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter\"></i></a>\n          </div>\n          <p>This little pig went to our socials, will you?</p>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n          <!-- <sl-icon name='facebook'></sl-icon>\n          <sl-icon name='instagram'></sl-icon>\n          <sl-icon name='twitter'></sl-icon> -->\n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <h1>There's a new pig in town</h1>\n          <h3>and its....delicious!</h3>\n          <div>\n            <p>Wanna try it?</p>\n            <button @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='disclaimer'>\n          <p>\n            This website has been created as part of an assignment in an approved course of study for Curtin University \n            and contains copyright material not created by the author. \n            All copyright material used remains copyright of the respective owners \n            and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). \n            No part of this work may be reproduced without consent of the original copyright owners. \n            See code comments for references.\n          </p>\n        </section>\n\n        <footer>\n          <div>\n              <h3>Contact</h3>\n              <p>275 Burnfield Road, Thornliebank</p>\n              <p>01632 960493</p>\n              <p>oink@orchardpig.co.uk</p>\n          </div>\n          <div>\n            <img @click=\"", "\" class='footer-logo' src='/images/logo-white-cut.png'></a>  \n          </div>\n          <div>\n            <div id=\"social\">\n              <a href='https://www.facebook.com/OrchardPig'><i class=\"fab fa-facebook-square\" ></i></a>\n              <a href='https://www.instagram.com/theorchardpig/'><i class=\"fab fa-instagram\"></i></a>\n              <a href='https://twitter.com/Orchardpig'><i class=\"fab fa-twitter-square\"></i></a>\n            </div>\n          </div>\n        </footer>\n\n      \n      </div>\n\n      \n      \n     \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7773,7 +7773,7 @@ class HomeView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), () => (0, _Router.gotoRoute)('/game'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/'));
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), localStorage.getItem('cartProducts'), () => (0, _Router.gotoRoute)('/game'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/'));
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -8293,6 +8293,69 @@ class ProductsAPI {
 var _default = new ProductsAPI();
 
 exports.default = _default;
+},{"./App":"App.js"}],"CartAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class CartAPI {
+  constructor() {
+    _defineProperty(this, "cartProducts", []);
+  }
+
+  async addProduct(item, name, quantity, packSize, containerVolume, price) {
+    let product = {
+      item: item,
+      name: name,
+      quantity: quantity,
+      packSize: packSize,
+      containerVolume: containerVolume,
+      price: price
+    };
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    }
+
+    this.cartProducts.push(product);
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+  }
+
+  async getProducts() {
+    return JSON.stringify(localStorage.getItem('cartProducts')); // if(localStorage.getItem('cartProducts')){
+    //     this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    //     return this.cartProducts
+    // }
+  }
+
+  getTotal() {
+    let total = 0;
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    }
+
+    this.cartProducts.forEach(product => {
+      total += parseInt(product.price.$numberDecimal);
+    });
+    return total;
+  }
+
+}
+
+var _default = new CartAPI();
+
+exports.default = _default;
 },{"./App":"App.js"}],"views/pages/products.js":[function(require,module,exports) {
 "use strict";
 
@@ -8314,6 +8377,8 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 var _Toast = _interopRequireDefault(require("../../Toast"));
 
 var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
+
+var _CartAPI = _interopRequireDefault(require("./../../CartAPI"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8368,7 +8433,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\"></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Products\" user=\"", "\" products=", "></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -8455,16 +8520,21 @@ class ProductsView {
     this.productDialog.addEventListener('sl-after-hide', () => {
       this.productDialog.remove();
     });
-  }
+  } // if the user presses 'add to cart' from product page, then qty == 1
+  // else grab the qty that the user has entered
+  // as it will be easier than havign to update the quantity when it is already in the cart
+
 
   addToCart(product) {
     console.log("added to cart: " + product.name);
+
+    _CartAPI.default.addProduct(product.item, product.name, 1, product.packSize, product.containerVolume, product.price);
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject9()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject4(), JSON.stringify(_Auth.default.currentUser), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject5()) : (0, _litHtml.html)(_templateObject6(), this.products.map(product => (0, _litHtml.html)(_templateObject7(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject9()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8476,7 +8546,7 @@ class ProductsView {
 var _default = new ProductsView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js","./../../ProductsAPI":"ProductsAPI.js"}],"Router.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js","./../../ProductsAPI":"ProductsAPI.js","./../../CartAPI":"CartAPI.js"}],"Router.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10380,10 +10450,22 @@ var _Auth = _interopRequireDefault(require("./../Auth"));
 
 var _App = _interopRequireDefault(require("./../App"));
 
+var _CartAPI = _interopRequireDefault(require("./../CartAPI"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject2() {
+  const data = _taggedTemplateLiteral(["\n        <img src='/images/", ".png' alt='", "'>\n        <p>", "</p> \n        <p>", "</p>\n        <p>&pound;", "</p>\n      "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 45%;\n        cursor: pointer;\n        display: block;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu {\n        display: none;\n        font-family: var(--heading-font-family);\n        margin-top: 11px;\n        border: none;\n        width: 100%;\n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu .nav-fp {\n        visibility: hidden;\n        z-index: -100;\n        margin-left: auto;\n        margin-right: auto;\n      }\n      .app-menu a:hover .nav-fp  {\n        visibility: visible;\n      }\n      \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n      }\n      button {\n        background-color: white;\n      }\n      \n      /*items in the cart menu */\n      .app-side-menu-items a {\n        display: block;\n        padding: .5em;\n        text-decoration: none;\n        font-size: 1.3em;\n        color: #333;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active,\n      .app-side-menu-items a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height-mobile);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n        .app-menu {\n          display: none;\n          padding: none;\n        }\n        #hamburger {\n          display: none;\n        }\n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <!-- <div class=\"hover-footprints\">\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n      </div> -->\n      \n      <nav class=\"app-top-nav\">\n        <ul>\n          <li><a @click=\"", "\">Home</a></li>\n          <li><a @click=\"", "\">Shop</a></li>\n          <li><a @click=\"", "\">About Us</a></li> \n          <li><a @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      \n\n      <!-- dropdown menu -->\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n      <div id=\"drop-menu\" class=\"app-menu\">\n      <ul>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Home</a></li>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Shop</a></li>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>About</a></li>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Contact</a></li>\n        <li><a @click=\"", "\" style=\"color: red;\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Play - Find the Pig!</a></li>\n      </ul>\n      </div>\n    \n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n      </nav>\n\n    </header>\n\n\n\n\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n      <h1>Your Cart</h1>\n      <p>Product Name</p> \n      <p>Product Amount</p>\n      <p>$ Product Price</p>\n      <h3>Total</h3>\n      <sl-button @click=\"", "\">Checkout</sl-button>\n    </sl-drawer>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 45%;\n        cursor: pointer;\n        display: block;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu {\n        display: none;\n        font-family: var(--heading-font-family);\n        margin-top: 11px;\n        border: none;\n        width: 100%;\n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu .nav-fp {\n        visibility: hidden;\n        z-index: -100;\n        margin-left: auto;\n        margin-right: auto;\n      }\n      .app-menu a:hover .nav-fp  {\n        visibility: visible;\n      }\n      \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n      }\n      button {\n        background-color: white;\n      }\n      \n      /*items in the cart menu */\n      .app-side-menu-items a {\n        display: block;\n        padding: .5em;\n        text-decoration: none;\n        font-size: 1.3em;\n        color: #333;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active,\n      .app-side-menu-items a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height-mobile);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n        .app-menu {\n          display: none;\n          padding: none;\n        }\n        #hamburger {\n          display: none;\n        }\n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <!-- <div class=\"hover-footprints\">\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n      </div> -->\n      \n      <nav class=\"app-top-nav\">\n        <ul>\n          <li><a @click=\"", "\">Home</a></li>\n          <li><a @click=\"", "\">Shop</a></li>\n          <li><a @click=\"", "\">About Us</a></li> \n          <li><a @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      \n\n      <!-- dropdown menu -->\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n      <div id=\"drop-menu\" class=\"app-menu\">\n      <ul>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Home</a></li>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Shop</a></li>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>About</a></li>\n        <li><a @click=\"", "\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Contact</a></li>\n        <li><a @click=\"", "\" style=\"color: red;\"><img class='nav-fp' src='/images/navbar-pigstep.png'>Play - Find the Pig!</a></li>\n      </ul>\n      </div>\n    \n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n      </nav>\n\n    </header>\n\n\n\n\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n      \n      <h1>Your Cart</h1>\n      ", "\n\n      <h3>Total: &pound;", ".00</h3>\n      \n      <button @click=\"", "\">Checkout</button>\n    </sl-drawer>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10401,10 +10483,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
 
   static get properties() {
     return {
-      title: {
-        type: String
-      },
-      user: {
+      products: {
         type: Object
       }
     };
@@ -10454,11 +10533,11 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   }
 
   render() {
-    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.hamburgerClick, this.checkoutClick);
+    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.hamburgerClick, this.products.map(product => (0, _litElement.html)(_templateObject2(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal)), _CartAPI.default.getTotal(), this.checkoutClick);
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js"}],"components/va-app-footer.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js","./../CartAPI":"CartAPI.js"}],"components/va-app-footer.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("@polymer/lit-element");
@@ -10604,7 +10683,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54631" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60690" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -37,7 +37,7 @@ class HomeView {
   render(){
     const template = html`
 
-      <va-app-header title="Home" user=${JSON.stringify(Auth.currentUser)}></va-app-header>
+      <va-app-header title="Home" user=${JSON.stringify(Auth.currentUser)} products=${localStorage.getItem('cartProducts')}></va-app-header>
 
       <div class="page-content">
       
