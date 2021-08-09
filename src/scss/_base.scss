@@ -1,16 +1,25 @@
 // Base
 
 @font-face {
-  font-family: RockwellBold;
-  src: url('../fonts/rockwell-bold.ttf');
-
-}
-
-@font-face {
   font-family: Rockwell;
   src: url('../fonts/rockwell.ttf');
-
 }
+@font-face {
+  font-family: RockwellBold;
+  src: url('../fonts/rockwell-bold.ttf');
+}
+@font-face {
+  font-family: Lato;
+  src: url('../fonts/lato.ttf');
+}
+@font-face {
+  font-family: LatoBold;
+  src: url('../fonts/lato-bold.ttf');
+}
+
+
+
+
 
 * {
   box-sizing: border-box;
