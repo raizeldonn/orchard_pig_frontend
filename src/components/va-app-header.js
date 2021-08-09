@@ -115,6 +115,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .app-menu {
         display: none;
+        position: absolute;
         font-family: var(--heading-font-family);
         margin-top: 11px;
         border: none;
@@ -173,6 +174,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       #close {
         display: none;
         margin: 8px 5px 0px 10px;
+        
       }
       button {
         background-color: white;
