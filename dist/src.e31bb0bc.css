@@ -603,6 +603,74 @@ footer #social i {
 
 .checkout {
   background-color: var(--light-blue);
+  display: flex;
+}
+.checkout .right {
+  width: 30%;
+  padding: 30px;
+}
+.checkout .left {
+  padding: 30px;
+  width: 70%;
+}
+.checkout .left .name-input {
+  display: flex;
+}
+.checkout .left .name-input sl-input::part(form-control) {
+  width: 100%;
+}
+.checkout .left .name-input sl-input#right::part(form-control) {
+  margin-left: 20%;
+}
+.checkout h1 {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 30px;
+  font-size: 32px;
+  text-transform: initial;
+}
+.checkout h2 {
+  font-size: 32px;
+  text-transform: initial;
+}
+.checkout h3 {
+  font-family: var(--base-font-family);
+  text-transform: initial;
+  font-size: 19px;
+}
+.checkout .cart-product {
+  display: grid;
+  width: 70%;
+  grid-template-columns: repeat(2, auto);
+}
+.checkout .cart-img {
+  height: 20vh;
+  margin-bottom: 30px;
+  margin-right: 20px;
+}
+.checkout .product-name {
+  font-weight: bold;
+}
+.checkout .checkout-btn {
+  color: white;
+  background-color: var(--med-blue);
+  text-transform: uppercase;
+  border: none;
+  font-family: var(--base-font-family);
+  cursor: pointer;
+  padding: 2% 4%;
+  border-radius: 8px;
+  font-size: 20px;
+  width: 100%;
+}
+.checkout sl-form.form-shipping::part(base) {
+  width: 80%;
+}
+.checkout sl-input::part(base) {
+  border: solid black 1px;
+}
+.checkout sl-select::part(base) {
+  border: solid black 1px;
 }
 
 .input-group {
