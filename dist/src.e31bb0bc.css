@@ -20,12 +20,20 @@
 }
 
 @font-face {
+  font-family: Rockwell;
+  src: url("/rockwell.87572e8a.ttf");
+}
+@font-face {
   font-family: RockwellBold;
   src: url("/rockwell-bold.c9857f1a.ttf");
 }
 @font-face {
-  font-family: Rockwell;
-  src: url("/rockwell.87572e8a.ttf");
+  font-family: Lato;
+  src: url("/lato.3bb7d66f.ttf");
+}
+@font-face {
+  font-family: LatoBold;
+  src: url("/lato-bold.b47b8680.ttf");
 }
 * {
   box-sizing: border-box;
