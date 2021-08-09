@@ -1,5 +1,17 @@
 // Base
 
+@font-face {
+  font-family: RockwellBold;
+  src: url('../fonts/rockwell-bold.ttf');
+
+}
+
+@font-face {
+  font-family: Rockwell;
+  src: url('../fonts/rockwell.ttf');
+
+}
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
