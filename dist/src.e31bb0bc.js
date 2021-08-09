@@ -8043,7 +8043,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Checkout\" user=\"", "\"></va-app-header>\n      <div class=\"page-content\">        \n        <h1>Page title</h1>\n        <p>Page content ...</p>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout\">        \n        <h2>Shipping Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" placeholder=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address Line 2 (optional)\" required></sl-input>\n            </div>       \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Sign Up</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8065,7 +8065,7 @@ class CheckoutView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser)); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.shippingSubmitHandler); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 

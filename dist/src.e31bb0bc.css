@@ -582,6 +582,29 @@ footer #social i {
 .about-page .about-us-flex .info-left {
   padding-right: 0;
 }
+
+.checkout-header {
+  height: var(--app-header-height);
+  background-color: white;
+}
+.checkout-header h1 {
+  font-size: 30px;
+  text-transform: initial;
+  padding: 10px;
+  display: inline-block;
+}
+.checkout-header .nav-logo {
+  width: 9%;
+  min-width: 70px;
+  position: absolute;
+  left: 45%;
+  display: inline-block;
+}
+
+.checkout {
+  background-color: var(--light-blue);
+}
+
 .input-group {
   margin-bottom: 0.5em;
 }

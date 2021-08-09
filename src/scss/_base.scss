@@ -656,7 +656,26 @@ footer {
     }
   }
 
+}
 
-  @media all and (max-width: 768px) {}
-
+// Checkout Page 1 -------------------------------
+.checkout-header{
+  height: var(--app-header-height);
+  background-color: white;
+  h1{
+    font-size: 30px;
+    text-transform: initial;
+    padding: 10px;
+    display: inline-block;
+  }
+  .nav-logo{
+    width: 9%;
+    min-width: 70px;
+    position: absolute;
+    left: 45%;
+    display: inline-block;
+  }
+}
+.checkout{
+  background-color: var(--light-blue);
 }
