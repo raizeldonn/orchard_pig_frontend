@@ -4,7 +4,7 @@
   --base-txt-color: rgb(0, 0, 0);
   --heading-color: rgb(0, 0, 0);
   --base-font-family: "Lato", sans-serif;
-  --heading-font-family: "Rockwell", sans-serif;
+  --heading-font-family: "RockwellBold", sans-serif;
   --body-bg: #fff;
   --light-blue: #D4E7F8;
   --med-blue: #4186B7;
@@ -19,6 +19,14 @@
   --app-header-title-font-size: 1.6em;
 }
 
+@font-face {
+  font-family: RockwellBold;
+  src: url("/rockwell-bold.c9857f1a.ttf");
+}
+@font-face {
+  font-family: Rockwell;
+  src: url("/rockwell.87572e8a.ttf");
+}
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
