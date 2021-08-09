@@ -98,7 +98,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         width: 9%;
         min-width: 70px;
         position: absolute;
-        left: 45%;
+        left: 40%;
         cursor: pointer;
         display: block;
       }
@@ -254,11 +254,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       <div id="drop-menu" class="app-menu">
       <ul>
-        <li><a @click="${() => gotoRoute('/')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Home</a></li>
-        <li><a @click="${() => gotoRoute('/products')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Shop</a></li>
-        <li><a @click="${() => gotoRoute('/about')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>About</a></li>
-        <li><a @click="${() => gotoRoute('/contact')}"><img class='nav-fp' src='/images/navbar-pigstep.png'>Contact</a></li>
-        <li><a @click="${() => gotoRoute('/game')}" style="color: red;"><img class='nav-fp' src='/images/navbar-pigstep.png'>Play - Find the Pig!</a></li>
+        <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+        <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+        <li><a @click="${() => gotoRoute('/about')}">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+        <li><a @click="${() => gotoRoute('/contact')}">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+        <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
       </ul>
       </div>
     
