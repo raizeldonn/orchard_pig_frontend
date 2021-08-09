@@ -17,10 +17,22 @@ class Checkout1View {
     Utils.pageIntroAnim()
   }
 
-  shippingSubmitHandler(e){
+  async shippingSubmitHandler(e){
     e.preventDefault()    
     const formData = e.detail.formData
     
+    let firstName = formData.get('firstName')
+    let lastName = formData.get('lastName')
+    let email = formData.get('email')
+
+    try{
+      await OrderAPI.createGuest(firstName, lastName, email)
+    }
+    catch(err){
+      console.log(err)
+    }
+    
+
     OrderAPI.shippingInfo(formData)
     gotoRoute('/checkout2')
   }
@@ -29,7 +41,6 @@ class Checkout1View {
     try{
       this.products = localStorage.getItem('cartProducts')
       this.products = JSON.parse(this.products)
-      console.log(this.products)
       this.render()
     }catch(err){
       Toast.show(err, 'error')
@@ -79,8 +90,8 @@ class Checkout1View {
                 <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>
                 <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\
               </sl-select>
-            </div>       
-            <button class="checkout-btn" submit">Payment Details</button>
+            </div>  
+            <button class="checkout-btn" submit>Payment Details</button>     
           </sl-form>
       </div>
 

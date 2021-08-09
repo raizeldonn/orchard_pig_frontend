@@ -21,7 +21,6 @@ class Checkout2View {
     try{
       this.products = localStorage.getItem('cartProducts')
       this.products = JSON.parse(this.products)
-      console.log(this.products)
       this.render()
     }catch(err){
       Toast.show(err, 'error')

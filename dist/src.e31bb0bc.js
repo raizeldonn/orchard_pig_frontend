@@ -8032,17 +8032,52 @@ exports.default = void 0;
 
 var _App = _interopRequireDefault(require("./App"));
 
+var _Toast = _interopRequireDefault(require("./Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class OrderAPI {
   constructor() {
+    this.guestUser = {};
     this.shipping = {};
     this.payment = {};
   }
 
+  async createGuest(firstName, lastName, email) {
+    let userData = {
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email
+    };
+    const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
+      method: 'POST',
+      body: {
+        "firstName": "raizel",
+        "lastName": "donnebaum",
+        "email": "raizel@gmail.com"
+      }
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // show error      
+
+      _Toast.default.show("Problem getting user: ".concat(response.status)); // run fail() functon if set
+
+
+      if (typeof fail == 'function') fail();
+    } /// sign up success - show toast and redirect to sign in page
+
+
+    this.guestUser = userData;
+    console.log(guestUser);
+  }
+
   shippingInfo(formData) {
+    let fail = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     this.shipping = formData;
-    console.log("shipping: " + this.shipping);
+    console.log("shipping: " + JSON.stringify(this.shipping));
   }
 
   paymentInfo(formData) {
@@ -8055,7 +8090,7 @@ class OrderAPI {
 var _default = new OrderAPI();
 
 exports.default = _default;
-},{"./App":"App.js"}],"CartAPI.js":[function(require,module,exports) {
+},{"./App":"App.js","./Toast":"Toast.js"}],"CartAPI.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8175,7 +8210,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>       \n            <button class=\"checkout-btn\" submit\">Payment Details</button>\n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>       \n            <button class=\"checkout-btn\" submit\">Payment Details</button>\n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8196,9 +8231,18 @@ class Checkout1View {
     _Utils.default.pageIntroAnim();
   }
 
-  shippingSubmitHandler(e) {
+  async shippingSubmitHandler(e) {
     e.preventDefault();
     const formData = e.detail.formData;
+    let firstName = formData.get('firstName');
+    let lastName = formData.get('lastName');
+    let email = formData.get('email');
+
+    try {
+      await _OrderAPI.default.createGuest(firstName, lastName, email);
+    } catch (err) {
+      console.log(err);
+    }
 
     _OrderAPI.default.shippingInfo(formData);
 
@@ -8209,7 +8253,6 @@ class Checkout1View {
     try {
       this.products = localStorage.getItem('cartProducts');
       this.products = JSON.parse(this.products);
-      console.log(this.products);
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -8317,7 +8360,6 @@ class Checkout2View {
     try {
       this.products = localStorage.getItem('cartProducts');
       this.products = JSON.parse(this.products);
-      console.log(this.products);
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -11032,7 +11074,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55067" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63411" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
