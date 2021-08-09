@@ -51,7 +51,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
   checkoutClick() {
     //initialise all the vars needed for a checkout
-    gotoRoute('/checkout')
+    gotoRoute('/checkout1')
   }
   toggle() {
     const dropdownMenu = this.shadowRoot.querySelector('.app-menu');

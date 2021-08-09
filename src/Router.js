@@ -4,7 +4,9 @@ import fourOFourView from './views/pages/404'
 import signinView from './views/pages/signin'
 import signupView from './views/pages/signup'
 import aboutView from './views/pages/about'
-import checkoutView from './views/pages/checkout'
+import checkout1View from './views/pages/checkout1'
+import checkout2View from './views/pages/checkout2'
+import checkout3View from './views/pages/checkout3'
 import ageConfirmView from './views/pages/age_confirmation'
 import contactView from './views/pages/contact'
 import gameView from './views/pages/game'
@@ -18,7 +20,9 @@ const routes = {
 	'/signin': signinView,
 	'/signup': signupView,
 	'/about': aboutView,
-	'/checkout': checkoutView,
+	'/checkout1': checkout1View,
+	'/checkout2': checkout2View,
+	'/checkout3': checkout2View,
 	'/ageconfirm': ageConfirmView,
 	'/contact': contactView,
 	'/game': gameView,

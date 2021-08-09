@@ -8022,7 +8022,40 @@ class AboutView {
 var _default = new AboutView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/checkout.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"OrderAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class OrderAPI {
+  constructor() {
+    this.shipping = {};
+    this.payment = {};
+  }
+
+  shippingInfo(formData) {
+    this.shipping = formData;
+    console.log("shipping: " + this.shipping);
+  }
+
+  paymentInfo(formData) {
+    this.payment = formData;
+    console.log("payment: " + this.payment);
+  }
+
+}
+
+var _default = new OrderAPI();
+
+exports.default = _default;
+},{"./App":"App.js"}],"views/pages/checkout1.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8040,10 +8073,12 @@ var _Auth = _interopRequireDefault(require("../../Auth"));
 
 var _Utils = _interopRequireDefault(require("../../Utils"));
 
+var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout\">        \n        <h2>Shipping Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" placeholder=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address Line 2 (optional)\" required></sl-input>\n            </div>       \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Sign Up</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout\">        \n        <h2>Shipping Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" placeholder=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' placeholder='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>       \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Payment Details</sl-button>\n          </sl-form>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout\">        \n        <h2>Shipping Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" placeholder=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' placeholder='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>       \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Payment Details</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8054,12 +8089,21 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-class CheckoutView {
+class Checkout1View {
   init() {
-    document.title = 'Checkout';
+    document.title = 'Checkout1';
     this.render();
 
     _Utils.default.pageIntroAnim();
+  }
+
+  shippingSubmitHandler(e) {
+    e.preventDefault();
+    const formData = e.detail.formData;
+
+    _OrderAPI.default.shippingInfo(formData);
+
+    (0, _Router.gotoRoute)('/checkout2');
   } // method from lit library which allows us 
   // to render html from within js to a container
 
@@ -8074,10 +8118,144 @@ class CheckoutView {
 
 }
 
-var _default = new CheckoutView();
+var _default = new Checkout1View();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/age_confirmation.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js"}],"views/pages/checkout2.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litHtml = require("lit-html");
+
+var _App = _interopRequireDefault(require("../../App"));
+
+var _Router = require("../../Router");
+
+var _Auth = _interopRequireDefault(require("../../Auth"));
+
+var _Utils = _interopRequireDefault(require("../../Utils"));
+
+var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout2\">        \n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" placeholder=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" placeholder=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" placeholder=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" placeholder=\"CVV\" required></sl-input>\n            </div>      \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Review Order</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+class Checkout2View {
+  init() {
+    document.title = 'Checkout2';
+    this.render();
+
+    _Utils.default.pageIntroAnim();
+  }
+
+  paymentSubmitHandler(e) {
+    e.preventDefault();
+    const formData = e.detail.formData;
+
+    _OrderAPI.default.paymentInfo(formData);
+
+    (0, _Router.gotoRoute)('/checkout3');
+  } // method from lit library which allows us 
+  // to render html from within js to a container
+
+
+  render() {
+    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler); // this assigns the template html container to App.rootEl
+    // which provides the html to the <div id="root"></div> element 
+    // in the index.html parent page
+
+    (0, _litHtml.render)(template, _App.default.rootEl);
+  }
+
+}
+
+var _default = new Checkout2View();
+
+exports.default = _default;
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js"}],"views/pages/checkout3.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litHtml = require("lit-html");
+
+var _App = _interopRequireDefault(require("../../App"));
+
+var _Router = require("../../Router");
+
+var _Auth = _interopRequireDefault(require("../../Auth"));
+
+var _Utils = _interopRequireDefault(require("../../Utils"));
+
+var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
+
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout3\">        \n        <h2>Review Order</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" placeholder=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" placeholder=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" placeholder=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" placeholder=\"CVV\" required></sl-input>\n            </div>      \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Place Order</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+class Checkout3View {
+  init() {
+    document.title = 'Checkout3';
+    this.render();
+
+    _Utils.default.pageIntroAnim();
+  }
+
+  placeOrderSubmitHandler(e) {
+    e.preventDefault();
+    const formData = e.detail.formData; //OrderAPI.placeOrder()
+
+    (0, _Router.gotoRoute)('/');
+
+    _Toast.default.show('Thank you for your order');
+  } // method from lit library which allows us 
+  // to render html from within js to a container
+
+
+  render() {
+    const template = (0, _litHtml.html)(_templateObject(), this.placeOrderSubmitHandler); // this assigns the template html container to App.rootEl
+    // which provides the html to the <div id="root"></div> element 
+    // in the index.html parent page
+
+    (0, _litHtml.render)(template, _App.default.rootEl);
+  }
+
+}
+
+var _default = new Checkout3View();
+
+exports.default = _default;
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../Toast":"Toast.js"}],"views/pages/age_confirmation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8568,7 +8746,11 @@ var _signup = _interopRequireDefault(require("./views/pages/signup"));
 
 var _about = _interopRequireDefault(require("./views/pages/about"));
 
-var _checkout = _interopRequireDefault(require("./views/pages/checkout"));
+var _checkout = _interopRequireDefault(require("./views/pages/checkout1"));
+
+var _checkout2 = _interopRequireDefault(require("./views/pages/checkout2"));
+
+var _checkout3 = _interopRequireDefault(require("./views/pages/checkout3"));
 
 var _age_confirmation = _interopRequireDefault(require("./views/pages/age_confirmation"));
 
@@ -8588,7 +8770,9 @@ const routes = {
   '/signin': _signin.default,
   '/signup': _signup.default,
   '/about': _about.default,
-  '/checkout': _checkout.default,
+  '/checkout1': _checkout.default,
+  '/checkout2': _checkout2.default,
+  '/checkout3': _checkout2.default,
   '/ageconfirm': _age_confirmation.default,
   '/contact': _contact.default,
   '/game': _game.default,
@@ -8648,7 +8832,7 @@ function anchorRoute(e) {
   const pathname = e.target.closest('a').pathname;
   AppRouter.gotoRoute(pathname);
 }
-},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/about":"views/pages/about.js","./views/pages/checkout":"views/pages/checkout.js","./views/pages/age_confirmation":"views/pages/age_confirmation.js","./views/pages/contact":"views/pages/contact.js","./views/pages/game":"views/pages/game.js","./views/pages/products":"views/pages/products.js"}],"App.js":[function(require,module,exports) {
+},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/about":"views/pages/about.js","./views/pages/checkout1":"views/pages/checkout1.js","./views/pages/checkout2":"views/pages/checkout2.js","./views/pages/checkout3":"views/pages/checkout3.js","./views/pages/age_confirmation":"views/pages/age_confirmation.js","./views/pages/contact":"views/pages/contact.js","./views/pages/game":"views/pages/game.js","./views/pages/products":"views/pages/products.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10535,7 +10719,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
 
   checkoutClick() {
     //initialise all the vars needed for a checkout
-    (0, _Router.gotoRoute)('/checkout');
+    (0, _Router.gotoRoute)('/checkout1');
   }
 
   toggle() {
@@ -10658,7 +10842,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -10705,7 +10889,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58040" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63274" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

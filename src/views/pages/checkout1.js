@@ -4,12 +4,21 @@ import App from '../../App'
 import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import OrderAPI from '../../OrderAPI'
 
-class CheckoutView {
+class Checkout1View {
   init(){
-    document.title = 'Checkout'    
+    document.title = 'Checkout1'    
     this.render()    
     Utils.pageIntroAnim()
+  }
+
+  shippingSubmitHandler(e){
+    e.preventDefault()    
+    const formData = e.detail.formData
+    
+    OrderAPI.shippingInfo(formData)
+    gotoRoute('/checkout2')
   }
 
   // method from lit library which allows us 
@@ -41,9 +50,15 @@ class CheckoutView {
               <sl-input name="address" type="text" placeholder="Address" required></sl-input>
             </div>
             <div class="input-group">
-              <sl-input name="address" type="text" placeholder="Address Line 2 (optional)" required></sl-input>
+              <sl-input name="address" type="text" placeholder="Address Line 2 (optional)"></sl-input>
+            </div> 
+            <div class="input-group">
+              <sl-select name='shipping' placeholder='Select a shipping option' required>
+                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>
+                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\
+              </sl-select>
             </div>       
-            <sl-button type="primary" class="submit-btn" submit style="width: 100%;">Sign Up</sl-button>
+            <sl-button type="primary" class="submit-btn" submit style="width: 100%;">Payment Details</sl-button>
           </sl-form>
         
       </div>      
@@ -56,4 +71,4 @@ class CheckoutView {
 }
 
 
-export default new CheckoutView()
+export default new Checkout1View()
