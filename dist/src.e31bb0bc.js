@@ -8055,6 +8055,69 @@ class OrderAPI {
 var _default = new OrderAPI();
 
 exports.default = _default;
+},{"./App":"App.js"}],"CartAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class CartAPI {
+  constructor() {
+    _defineProperty(this, "cartProducts", []);
+  }
+
+  async addProduct(item, name, quantity, packSize, containerVolume, price) {
+    let product = {
+      item: item,
+      name: name,
+      quantity: quantity,
+      packSize: packSize,
+      containerVolume: containerVolume,
+      price: price
+    };
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    }
+
+    this.cartProducts.push(product);
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+  }
+
+  async getProducts() {
+    return JSON.stringify(localStorage.getItem('cartProducts')); // if(localStorage.getItem('cartProducts')){
+    //     this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    //     return this.cartProducts
+    // }
+  }
+
+  getTotal() {
+    let total = 0;
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    }
+
+    this.cartProducts.forEach(product => {
+      total += parseInt(product.price.$numberDecimal);
+    });
+    return total;
+  }
+
+}
+
+var _default = new CartAPI();
+
+exports.default = _default;
 },{"./App":"App.js"}],"views/pages/checkout1.js":[function(require,module,exports) {
 "use strict";
 
@@ -8075,10 +8138,44 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 
 var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
 
+var _CartAPI = _interopRequireDefault(require("../../CartAPI"));
+
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral(["\n            ", "\n        "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral(["<p>no products</p>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout\">        \n        <h2>Shipping Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" placeholder=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' placeholder='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>       \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Payment Details</sl-button>\n          </sl-form>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout\">        \n        <h2>Shipping Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" placeholder=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' placeholder='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>       \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Payment Details</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>       \n            <button class=\"checkout-btn\" submit\">Payment Details</button>\n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>       \n            <button class=\"checkout-btn\" submit\">Payment Details</button>\n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8092,7 +8189,9 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class Checkout1View {
   init() {
     document.title = 'Checkout1';
+    this.products = null;
     this.render();
+    this.getProducts();
 
     _Utils.default.pageIntroAnim();
   }
@@ -8104,12 +8203,27 @@ class Checkout1View {
     _OrderAPI.default.shippingInfo(formData);
 
     (0, _Router.gotoRoute)('/checkout2');
+  }
+
+  getProducts() {
+    try {
+      this.products = localStorage.getItem('cartProducts');
+      this.products = JSON.parse(this.products);
+      console.log(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  continueShopping() {
+    (0, _Router.gotoRoute)('/products');
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.shippingSubmitHandler); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.shippingSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8121,7 +8235,7 @@ class Checkout1View {
 var _default = new Checkout1View();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js"}],"views/pages/checkout2.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../CartAPI":"CartAPI.js","../../Toast":"Toast.js"}],"views/pages/checkout2.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8141,10 +8255,44 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 
 var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
 
+var _CartAPI = _interopRequireDefault(require("../../CartAPI"));
+
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral(["\n            ", "\n        "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral(["<p>no products</p>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout2\">        \n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" placeholder=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" placeholder=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" placeholder=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" placeholder=\"CVV\" required></sl-input>\n            </div>      \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Review Order</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left'>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" label=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" label=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8158,9 +8306,22 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class Checkout2View {
   init() {
     document.title = 'Checkout2';
+    this.products = null;
     this.render();
+    this.getProducts();
 
     _Utils.default.pageIntroAnim();
+  }
+
+  getProducts() {
+    try {
+      this.products = localStorage.getItem('cartProducts');
+      this.products = JSON.parse(this.products);
+      console.log(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
   }
 
   paymentSubmitHandler(e) {
@@ -8175,7 +8336,7 @@ class Checkout2View {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8187,7 +8348,7 @@ class Checkout2View {
 var _default = new Checkout2View();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js"}],"views/pages/checkout3.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../CartAPI":"CartAPI.js","../../Toast":"Toast.js"}],"views/pages/checkout3.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8207,12 +8368,44 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 
 var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
 
+var _CartAPI = _interopRequireDefault(require("../../CartAPI"));
+
 var _Toast = _interopRequireDefault(require("../../Toast"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral(["\n            ", "\n        "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral(["<p>no products</p>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout3\">        \n        <h2>Review Order</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" placeholder=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" placeholder=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" placeholder=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" placeholder=\"CVV\" required></sl-input>\n            </div>      \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Place Order</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout3\">        \n      \n      <div class='left'>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" label=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" label=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8226,24 +8419,37 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class Checkout3View {
   init() {
     document.title = 'Checkout3';
+    this.products = null;
     this.render();
+    this.getProducts();
 
     _Utils.default.pageIntroAnim();
   }
 
-  placeOrderSubmitHandler(e) {
+  getProducts() {
+    try {
+      this.products = localStorage.getItem('cartProducts');
+      this.products = JSON.parse(this.products);
+      console.log(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  paymentSubmitHandler(e) {
     e.preventDefault();
-    const formData = e.detail.formData; //OrderAPI.placeOrder()
+    const formData = e.detail.formData;
 
-    (0, _Router.gotoRoute)('/');
+    _OrderAPI.default.paymentInfo(formData);
 
-    _Toast.default.show('Thank you for your order');
+    (0, _Router.gotoRoute)('/checkout3');
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.placeOrderSubmitHandler); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8255,7 +8461,7 @@ class Checkout3View {
 var _default = new Checkout3View();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../Toast":"Toast.js"}],"views/pages/age_confirmation.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../CartAPI":"CartAPI.js","../../Toast":"Toast.js"}],"views/pages/age_confirmation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8469,69 +8675,6 @@ class ProductsAPI {
 }
 
 var _default = new ProductsAPI();
-
-exports.default = _default;
-},{"./App":"App.js"}],"CartAPI.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("./App"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class CartAPI {
-  constructor() {
-    _defineProperty(this, "cartProducts", []);
-  }
-
-  async addProduct(item, name, quantity, packSize, containerVolume, price) {
-    let product = {
-      item: item,
-      name: name,
-      quantity: quantity,
-      packSize: packSize,
-      containerVolume: containerVolume,
-      price: price
-    };
-
-    if (localStorage.getItem('cartProducts')) {
-      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-    }
-
-    this.cartProducts.push(product);
-    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
-  }
-
-  async getProducts() {
-    return JSON.stringify(localStorage.getItem('cartProducts')); // if(localStorage.getItem('cartProducts')){
-    //     this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-    //     return this.cartProducts
-    // }
-  }
-
-  getTotal() {
-    let total = 0;
-
-    if (localStorage.getItem('cartProducts')) {
-      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-    }
-
-    this.cartProducts.forEach(product => {
-      total += parseInt(product.price.$numberDecimal);
-    });
-    return total;
-  }
-
-}
-
-var _default = new CartAPI();
 
 exports.default = _default;
 },{"./App":"App.js"}],"views/pages/products.js":[function(require,module,exports) {
@@ -8772,7 +8915,7 @@ const routes = {
   '/about': _about.default,
   '/checkout1': _checkout.default,
   '/checkout2': _checkout2.default,
-  '/checkout3': _checkout2.default,
+  '/checkout3': _checkout3.default,
   '/ageconfirm': _age_confirmation.default,
   '/contact': _contact.default,
   '/game': _game.default,
@@ -10842,7 +10985,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -10889,7 +11032,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63274" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55067" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

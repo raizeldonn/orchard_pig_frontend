@@ -22,7 +22,7 @@ const routes = {
 	'/about': aboutView,
 	'/checkout1': checkout1View,
 	'/checkout2': checkout2View,
-	'/checkout3': checkout2View,
+	'/checkout3': checkout3View,
 	'/ageconfirm': ageConfirmView,
 	'/contact': contactView,
 	'/game': gameView,
