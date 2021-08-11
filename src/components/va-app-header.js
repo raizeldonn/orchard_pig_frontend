@@ -69,7 +69,22 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     }
   }
 
-
+  hamburgerMenuClick(){  
+    const appMenu = this.shadowRoot.querySelector('.app-side-menu')
+    appMenu.show()
+  }
+  
+  menuClick(e){
+    e.preventDefault()
+    const pathname = e.target.closest('a').pathname
+    const appSideMenu = this.shadowRoot.querySelector('.app-side-menu')
+    // hide appMenu
+    appSideMenu.hide()
+    appSideMenu.addEventListener('sl-after-hide', () => {
+      // goto route after menu is hidden
+      gotoRoute(pathname)
+    })
+  }
 
   render() {
     return html `
@@ -254,16 +269,17 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       <!-- Icons made by <a href="https://www.flaticon.com/authors/xnimrodx" title="xnimrodx">xnimrodx</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
       <img @click="${this.toggle}" id="close" alt="close" width="28px" height="28px" src='/images/close.png'>
       
-      <div id="drop-menu" class="app-menu">
-      <ul>
-        <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/about')}">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/contact')}">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-      </ul>
-      </div>
-    
+
+      <sl-drawer class="app-drop-menu" placement="left">
+      <img class="app-side-menu-logo" src="/images/logo-black.svg">
+      <nav class="app-side-menu-items">
+        <a href="/" @click="${this.menuClick}">Home</a>
+        <a href="/profile" @click="${this.menuClick}">Profile</a>
+        <a href="#" @click="${() => Auth.signOut()}">Sign Out</a>
+      </nav>  
+    </sl-drawer>
+  
+     
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
@@ -352,6 +368,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     `
   }
 
+  // <div id="drop-menu" class="app-menu">
+  // <ul>
+  //   <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+  //   <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+  //   <li><a @click="${() => gotoRoute('/about')}">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+  //   <li><a @click="${() => gotoRoute('/contact')}">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+  //   <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+  // </ul>
+  // </div>
 
 
 })

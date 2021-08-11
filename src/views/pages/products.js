@@ -69,6 +69,10 @@ class ProductsView {
           font-size: 36px;
           color: white;
         }
+        .pp-left button {
+          color: black;
+          font-family: var(--base-font-family);
+        }
         .pp-right h3{
           font-size: 32px;
           font-family :var(--base-font-family);
@@ -123,7 +127,13 @@ class ProductsView {
           <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
           <!-- pull images from frontend  -->
           <img class='pp-img' src='/images/${product.item}.png' alt='${product.name}'>
+        
+        <div class='pp-button'>
+          <button>Bottles</button>
+          <button>Cans</button>
         </div>
+        </div>
+
         <div class='pp-right'>
           <div class='pp-right-top'>
               <div class='pp-boxes'>
