@@ -117,10 +117,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         display: none;
         position: absolute;
         font-family: var(--heading-font-family);
-        margin-top: 11px;
+        margin-top: 14px;
         border: none;
         width: 100%;
-        z-index: 110;
+        z-index: 110
         
       }
       
@@ -193,7 +193,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         
         .app-header {
           display: block;
-          height: var(--app-header-height-mobile);
+          height: var(--app-header-height);
         }
         .app-top-nav {
           display: none;
@@ -208,6 +208,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       @media all and (min-width: 769px){       
         
+        #hamburger {
+          visibility: hidden;
+          position: absolute;
+          left: 10px;
+          top: 8px;
+        }
+        #close {
+          visibility: hidden;
+          position: absolute;
+          left: 10px;
+          top: 8px;
+        }
         .app-top-nav {
           display: block;
         }
@@ -219,12 +231,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           width: 20%;
         }
         .app-menu {
+          visibility: hidden;
           display: none;
           padding: none;
+          
         }
-        #hamburger {
-          display: none;
-        }
+       
       }
 
     </style>
@@ -254,10 +266,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       <!-- Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
       <img @click="${this.toggle}" id="hamburger" alt="menu" width="28px" height="28px" src='/images/menu.png'>
-      
-      <div id="drop-menu" class="app-menu">
       <!-- Icons made by <a href="https://www.flaticon.com/authors/xnimrodx" title="xnimrodx">xnimrodx</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
       <img @click="${this.toggle}" id="close" alt="close" width="28px" height="28px" src='/images/close.png'>
+      
+      <div id="drop-menu" class="app-menu">
+    
       <ul>
         <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
         <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
