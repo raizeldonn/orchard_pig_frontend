@@ -18,15 +18,15 @@ class ProductsView {
     this.getProducts()
   }
 
-  async getProducts(){
-    try{
-      this.products = await ProductsAPI.getProducts()
-      console.log(this.products)
-      this.render()
-    }catch(err){
-      Toast.show(err, 'error')
-    }
-  }
+  // async getProducts(){
+  //   try{
+  //     this.products = await ProductsAPI.getProducts()
+  //     console.log(this.products)
+  //     this.render()
+  //   }catch(err){
+  //     Toast.show(err, 'error')
+  //   }
+  // }
 
   hoverImage(product){
     document.getElementById(product.name).src="/images/" + product.item  + "_steps.png"

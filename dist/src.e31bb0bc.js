@@ -7712,7 +7712,53 @@ class Utils {
 var _default = new Utils();
 
 exports.default = _default;
-},{"gsap":"../node_modules/gsap/index.js"}],"views/pages/home.js":[function(require,module,exports) {
+},{"gsap":"../node_modules/gsap/index.js"}],"ProductsAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class ProductsAPI {
+  constructor() {
+    this.firstName = {};
+    this.lastName = {};
+    this.role = {};
+  }
+
+  async getProducts() {
+    // fetch the json data
+    const response = await fetch("".concat(_App.default.apiBase, "/products"), {
+      headers: {
+        "Authorization": "Bearer ".concat(localStorage.accessToken)
+      }
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // throw error (exit this function)      
+
+      throw new Error('Problem getting products');
+    } // convert response payload into json - store as data
+
+
+    const data = await response.json(); // return data
+
+    return data;
+  }
+
+}
+
+var _default = new ProductsAPI();
+
+exports.default = _default;
+},{"./App":"App.js"}],"views/pages/home.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7734,6 +7780,8 @@ var _Utils = _interopRequireDefault(require("./../../Utils"));
 
 var _Toast = _interopRequireDefault(require("../../Toast"));
 
+var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
@@ -7752,11 +7800,14 @@ class HomeView {
   init() {
     console.log('HomeView.init');
     document.title = 'Home'; //this.team = null 
-    //this.getTeam()
+
+    this.products = null; //this.getTeam()
 
     this.render();
 
     _Utils.default.pageIntroAnim();
+
+    this.getProducts();
   }
 
   async getTeam() {
@@ -7765,6 +7816,16 @@ class HomeView {
 
       console.log(this.team);
       this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  async getProducts() {
+    try {
+      this.products = await _ProductsAPI.default.getProducts();
+      console.log("AllProducts: ", this.products);
+      localStorage.setItem('allProducts', JSON.stringify(this.products));
     } catch (err) {
       _Toast.default.show(err, 'error');
     }
@@ -7798,7 +7859,7 @@ var _default = new HomeView();
 
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js","../../Toast":"Toast.js"}],"views/pages/404.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js","../../Toast":"Toast.js","./../../ProductsAPI":"ProductsAPI.js"}],"views/pages/404.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8673,53 +8734,7 @@ class ProductsView {
 var _default = new ProductsView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"ProductsAPI.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("./App"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-class ProductsAPI {
-  constructor() {
-    this.firstName = {};
-    this.lastName = {};
-    this.role = {};
-  }
-
-  async getProducts() {
-    // fetch the json data
-    const response = await fetch("".concat(_App.default.apiBase, "/products"), {
-      headers: {
-        "Authorization": "Bearer ".concat(localStorage.accessToken)
-      }
-    }); // if response not ok
-
-    if (!response.ok) {
-      // console log error
-      const err = await response.json();
-      if (err) console.log(err); // throw error (exit this function)      
-
-      throw new Error('Problem getting products');
-    } // convert response payload into json - store as data
-
-
-    const data = await response.json(); // return data
-
-    return data;
-  }
-
-}
-
-var _default = new ProductsAPI();
-
-exports.default = _default;
-},{"./App":"App.js"}],"views/pages/products.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/products.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8847,17 +8862,16 @@ class ProductsView {
     _Utils.default.pageIntroAnim();
 
     this.getProducts();
-  }
+  } // async getProducts(){
+  //   try{
+  //     this.products = await ProductsAPI.getProducts()
+  //     console.log(this.products)
+  //     this.render()
+  //   }catch(err){
+  //     Toast.show(err, 'error')
+  //   }
+  // }
 
-  async getProducts() {
-    try {
-      this.products = await _ProductsAPI.default.getProducts();
-      console.log(this.products);
-      this.render();
-    } catch (err) {
-      _Toast.default.show(err, 'error');
-    }
-  }
 
   hoverImage(product) {
     document.getElementById(product.name).src = "/images/" + product.item + "_steps.png";
@@ -10856,7 +10870,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 40%;\n        cursor: pointer;\n        display: block;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu {\n        display: none;\n        position: absolute;\n        font-family: var(--heading-font-family);\n        margin-top: 14px;\n        border: none;\n        width: 100%;\n<<<<<<< HEAD\n<<<<<<< HEAD\n        z-index: 110\n=======\n        z-index: 1000;\n        \n>>>>>>> assignment3\n=======\n        z-index: 1000;\n        \n>>>>>>> assignment3\n        \n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu .nav-fp {\n        visibility: hidden;\n        z-index: -100;\n        margin-left: auto;\n        margin-right: auto;\n      }\n      .app-menu a:hover .nav-fp  {\n        visibility: visible;\n      }\n      \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n        background-color: var(--light-blue);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n        \n      }\n      button {\n        background-color: white;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        #hamburger {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        #close {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n        .app-menu {\n          visibility: hidden;\n          display: none;\n          padding: none;\n          \n        }\n       \n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <!-- <div class=\"hover-footprints\">\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n      </div> -->\n      \n      <nav class=\"app-top-nav\">\n        <ul>\n          <li><a @click=\"", "\">Home</a></li>\n          <li><a @click=\"", "\">Shop</a></li>\n          <li><a @click=\"", "\">About Us</a></li> \n          <li><a @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      \n\n      <!-- dropdown menu -->\n      \n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n<<<<<<< HEAD\n\n      <sl-drawer class=\"app-drop-menu\" placement=\"left\">\n      <img class=\"app-side-menu-logo\" src=\"/images/logo-black.svg\">\n      <nav class=\"app-side-menu-items\">\n        <a href=\"/\" @click=\"", "\">Home</a>\n        <a href=\"/profile\" @click=\"", "\">Profile</a>\n        <a href=\"#\" @click=\"", "\">Sign Out</a>\n      </nav>  \n    </sl-drawer>\n  \n     \n=======\n      <div id=\"drop-menu\" class=\"app-menu\">\n    \n      <ul>\n        <li><a @click=\"", "\">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\" style=\"color: red;\">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n      </ul>\n      </div>\n    \n>>>>>>> assignment3\n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n      </nav>\n\n    </header>\n\n\n\n\n\n    <!--CART - styles----------------------->\n\n    <style>\n      .app-side-menu{\n        font-family: var(--base-font-family);\n      }\n      h1{\n        font-family: var(--heading-font-family);\n        padding: 0;\n        margin: 0;\n        padding-bottom: 30px;\n      }\n      sl-drawer.app-side-menu::part(panel){\n        background-color: var(--light-blue);\n        --header-spacing: 0;\n      }\n      sl-drawer.app-side-menu::part(title){\n        line-height: 0;\n        padding-top: 0;\n        padding-bottom: 0;\n      }\n      .app-side-menu .cart-product{\n          display: grid;\n          width: 70%;\n          grid-template-columns: repeat(2, auto);\n      }\n      .cart-img{\n        height: 20vh;\n        margin-bottom: 30px;\n      }\n      .product-name{\n        font-weight: bold;\n      }\n      .checkout-btn {\n        color: white;\n        background-color: var(--dark-blue);\n        text-transform: uppercase;\n        border: none;\n        font-family: var(--base-font-family);\n        cursor: pointer;\n        padding: 2% 4%;\n        border-radius: 8px;\n        font-size: 20px;\n        width: 100%;\n      }\n\n\n    </style>\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n    ", "\n    \n    </sl-drawer>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 40%;\n        cursor: pointer;\n        display: block;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu {\n        display: none;\n        position: absolute;\n        font-family: var(--heading-font-family);\n        margin-top: 14px;\n        border: none;\n        width: 100%;\n<<<<<<< HEAD\n<<<<<<< HEAD\n        z-index: 110\n=======\n        z-index: 1000;\n        \n>>>>>>> assignment3\n=======\n        z-index: 1000;\n        \n>>>>>>> assignment3\n        \n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu .nav-fp {\n        visibility: hidden;\n        z-index: -100;\n        margin-left: auto;\n        margin-right: auto;\n      }\n      .app-menu a:hover .nav-fp  {\n        visibility: visible;\n      }\n      \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n        background-color: var(--light-blue);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n        \n      }\n      button {\n        background-color: white;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        #hamburger {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        #close {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n        .app-menu {\n          visibility: hidden;\n          display: none;\n          padding: none;\n          \n        }\n       \n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <!-- <div class=\"hover-footprints\">\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n      </div> -->\n      \n      <nav class=\"app-top-nav\">\n        <ul>\n          <li><a @click=\"", "\">Home</a></li>\n          <li><a @click=\"", "\">Shop</a></li>\n          <li><a @click=\"", "\">About Us</a></li> \n          <li><a @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      \n\n      <!-- dropdown menu -->\n      \n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n      <div id=\"drop-menu\" class=\"app-menu\">\n      <ul>\n        <li><a @click=\"", "\">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\" style=\"color: red;\">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n      </ul>\n      </div>\n    \n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n      </nav>\n\n    </header>\n\n\n\n\n\n    <!--CART - styles----------------------->\n\n    <style>\n      .app-side-menu{\n        font-family: var(--base-font-family);\n      }\n      h1{\n        font-family: var(--heading-font-family);\n        padding: 0;\n        margin: 0;\n        padding-bottom: 30px;\n      }\n      sl-drawer.app-side-menu::part(panel){\n        background-color: var(--light-blue);\n        --header-spacing: 0;\n      }\n      sl-drawer.app-side-menu::part(title){\n        line-height: 0;\n        padding-top: 0;\n        padding-bottom: 0;\n      }\n      .app-side-menu .cart-product{\n          display: grid;\n          width: 70%;\n          grid-template-columns: repeat(2, auto);\n      }\n      .cart-img{\n        height: 20vh;\n        margin-bottom: 30px;\n      }\n      .product-name{\n        font-weight: bold;\n      }\n      .checkout-btn {\n        color: white;\n        background-color: var(--dark-blue);\n        text-transform: uppercase;\n        border: none;\n        font-family: var(--base-font-family);\n        cursor: pointer;\n        padding: 2% 4%;\n        border-radius: 8px;\n        font-size: 20px;\n        width: 100%;\n      }\n\n\n    </style>\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n    ", "\n    \n    </sl-drawer>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10944,7 +10958,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   }
 
   render() {
-    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, this.menuClick, this.menuClick, () => _Auth.default.signOut(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.hamburgerClick, this.products == null ? (0, _litElement.html)(_templateObject2()) : (0, _litElement.html)(_templateObject3(), this.products.map(product => (0, _litElement.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal)), _CartAPI.default.getTotal(), this.checkoutClick));
+    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.hamburgerClick, this.products == null ? (0, _litElement.html)(_templateObject2()) : (0, _litElement.html)(_templateObject3(), this.products.map(product => (0, _litElement.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal)), _CartAPI.default.getTotal(), this.checkoutClick));
   } // <div id="drop-menu" class="app-menu">
   // <ul>
   //   <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>

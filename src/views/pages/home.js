@@ -10,15 +10,18 @@ import Auth from './../../Auth'
 import TeamAPI from './../../TeamAPI'
 import Utils from './../../Utils'
 import Toast from '../../Toast'
+import ProductsAPI from './../../ProductsAPI';
 
 class HomeView {
   init(){    
     console.log('HomeView.init')
     document.title = 'Home'  
     //this.team = null 
+    this.products = null
     //this.getTeam()
-    this.render()  
-    Utils.pageIntroAnim()    
+    this.render()
+    Utils.pageIntroAnim()
+    this.getProducts();    
   }
  
   async getTeam(){
@@ -27,6 +30,17 @@ class HomeView {
       //***** */
       console.log(this.team)
       this.render()
+    }catch(err){
+      Toast.show(err, 'error')
+    }
+  }
+
+  async getProducts(){
+    try{
+      this.products = await ProductsAPI.getProducts()
+      console.log("AllProducts: ",this.products)
+      localStorage.setItem('allProducts', JSON.stringify(this.products));
+      
     }catch(err){
       Toast.show(err, 'error')
     }

@@ -290,21 +290,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       <!-- Icons made by <a href="https://www.flaticon.com/authors/xnimrodx" title="xnimrodx">xnimrodx</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
       <img @click="${this.toggle}" id="close" alt="close" width="28px" height="28px" src='/images/close.png'>
       
-<<<<<<< HEAD
-
-      <sl-drawer class="app-drop-menu" placement="left">
-      <img class="app-side-menu-logo" src="/images/logo-black.svg">
-      <nav class="app-side-menu-items">
-        <a href="/" @click="${this.menuClick}">Home</a>
-        <a href="/profile" @click="${this.menuClick}">Profile</a>
-        <a href="#" @click="${() => Auth.signOut()}">Sign Out</a>
-      </nav>  
-    </sl-drawer>
-  
-     
-=======
       <div id="drop-menu" class="app-menu">
-    
       <ul>
         <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
         <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
@@ -314,7 +300,6 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       </ul>
       </div>
     
->>>>>>> assignment3
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
