@@ -1,16 +1,8 @@
 // @polymer/lit-element is part of the lit library which helps
 // us to build template app elements in js.
 // https://lit-element.polymer-project.org/guide/templates
-import {
-  LitElement,
-  html,
-  css
-} from '@polymer/lit-element'
-
-import {
-  anchorRoute,
-  gotoRoute
-} from './../Router'
+import { LitElement, html, css } from '@polymer/lit-element'
+import { anchorRoute, gotoRoute } from './../Router'
 import Auth from './../Auth'
 import App from './../App'
 import CartAPI from './../CartAPI';
