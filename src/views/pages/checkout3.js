@@ -67,6 +67,7 @@ class Checkout3View {
       <div class="page-content checkout checkout3">        
       
       <div class='left'>
+        <h1>Review Order</h1>
         <div class='shipping-details'>
           	<h2>Shipping Details</h2>
             ${this.userData == null ? 
@@ -81,10 +82,9 @@ class Checkout3View {
               html`
               <p>${this.shipping.address}</p>
               <p>${this.shipping.address2}</p>
-              <p>${this.shipping.shippingOption}</p>`}
+              <p>${this.shipping.shippingOption}</p>`}  
             
-            
-            
+            <a @click="${() => gotoRoute('/checkout1')}">Edit</a>
         </div>
 
         <div class='payment-details'>
@@ -95,9 +95,11 @@ class Checkout3View {
               <p>**** **** **** ${this.payment.lastFourDigits}</p>
               <p>${this.payment.expMonth}</p>
               <p>20${this.payment.expYear}</p>`}
+
+              <a @click="${() => gotoRoute('/checkout2')}">Edit</a>
         </div>
 
-        <button>Place Order</button>
+        <button class='checkout-btn'>Place Order</button>
         
       </div>
         
