@@ -112,7 +112,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         margin-top: 14px;
         border: none;
         width: 100%;
-        z-index: 110
+        z-index: 1000;
         
       }
       
