@@ -16,6 +16,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     return {
       products: {
         type: Object
+      },
+      allProducts: {
+        type: Object
       }
     }
   }
