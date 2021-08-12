@@ -34,7 +34,8 @@ class HomeView {
       Toast.show(err, 'error')
     }
   }
-
+  
+  // preload products data on static home page
   async getProducts(){
     try{
       this.products = await ProductsAPI.getProducts()

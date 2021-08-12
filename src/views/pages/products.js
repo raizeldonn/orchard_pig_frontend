@@ -23,7 +23,7 @@ class ProductsView {
     }
     console.log("On Products Page:" , this.products);
     this.render()
-    localStorage.removeItem('allProducts');
+    //localStorage.removeItem('allProducts');
     
   }
 
