@@ -13,17 +13,15 @@ class OrderAPI {
 
   async createGuest(firstName, lastName, email){
     let userData = {
-      "firstName": firstName,
-      "lastName": lastName,
-      "email": email
+      "firstName": "raizel",
+        "lastName": "donnebaum",
+        "email": "raizeld@gmail.com",
+        "phoneNumber": "95324392"
     }
     const response = await fetch(`${App.apiBase}/user/guest`, {
-      method: 'POST',      
-      body: {
-        "firstName": "raizel",
-        "lastName": "donnebaum",
-        "email": "raizel@gmail.com"
-      }
+      method: 'POST',  
+      headers: {"Content-Type" : "application/json"   }, 
+      body: userData
     })
 
     // if response not ok
