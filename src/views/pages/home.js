@@ -17,10 +17,10 @@ class HomeView {
     console.log('HomeView.init')
     document.title = 'Home'  
     //this.team = null 
-    this.products = null
     //this.getTeam()
     this.render()
     Utils.pageIntroAnim()
+    this.products = null
     this.getProducts();    
   }
  

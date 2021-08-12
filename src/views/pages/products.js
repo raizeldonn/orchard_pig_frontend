@@ -15,18 +15,27 @@ class ProductsView {
     this.productDialog = null
     this.render()    
     Utils.pageIntroAnim()
-    this.getProducts()
+
+    if (localStorage.getItem('allProducts')){
+    this.products = JSON.parse(localStorage.getItem('allProducts'));
+    } else {
+      this.getProducts();
+    }
+    console.log("On Products Page:" , this.products);
+    this.render()
+    localStorage.removeItem('allProducts');
+    
   }
 
-  // async getProducts(){
-  //   try{
-  //     this.products = await ProductsAPI.getProducts()
-  //     console.log(this.products)
-  //     this.render()
-  //   }catch(err){
-  //     Toast.show(err, 'error')
-  //   }
-  // }
+  async getProducts(){
+    try{
+      this.products = await ProductsAPI.getProducts()
+      console.log(this.products)
+      this.render()
+    }catch(err){
+      Toast.show(err, 'error')
+    }
+  }
 
   hoverImage(product){
     document.getElementById(product.name).src="/images/" + product.item  + "_steps.png"
@@ -183,7 +192,7 @@ class ProductsView {
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header allProducts=${localStorage.getItem('cartProducts')} products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content products">      
         <h1>Meet Our Pigs</h1>  
         <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>
