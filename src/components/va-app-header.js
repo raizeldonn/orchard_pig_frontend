@@ -120,6 +120,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         margin-top: 11px;
         border: none;
         width: 100%;
+        z-index: 110;
+        
       }
       
       .app-menu a {
@@ -249,12 +251,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
 
       <!-- dropdown menu -->
+      
       <!-- Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
       <img @click="${this.toggle}" id="hamburger" alt="menu" width="28px" height="28px" src='/images/menu.png'>
-      <!-- Icons made by <a href="https://www.flaticon.com/authors/xnimrodx" title="xnimrodx">xnimrodx</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
-      <img @click="${this.toggle}" id="close" alt="close" width="28px" height="28px" src='/images/close.png'>
       
       <div id="drop-menu" class="app-menu">
+      <!-- Icons made by <a href="https://www.flaticon.com/authors/xnimrodx" title="xnimrodx">xnimrodx</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> -->
+      <img @click="${this.toggle}" id="close" alt="close" width="28px" height="28px" src='/images/close.png'>
       <ul>
         <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
         <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
