@@ -8022,7 +8022,138 @@ class AboutView {
 var _default = new AboutView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/checkout.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"OrderAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+var _Toast = _interopRequireDefault(require("./Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class OrderAPI {
+  constructor() {
+    this.guestUser = {};
+    this.shipping = {};
+    this.payment = {};
+  }
+
+  async createGuest(firstName, lastName, email) {
+    let userData = {
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email
+    };
+    const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
+      method: 'POST',
+      body: {
+        "firstName": "raizel",
+        "lastName": "donnebaum",
+        "email": "raizel@gmail.com"
+      }
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // show error      
+
+      _Toast.default.show("Problem getting user: ".concat(response.status)); // run fail() functon if set
+
+
+      if (typeof fail == 'function') fail();
+    } /// sign up success - show toast and redirect to sign in page
+
+
+    this.guestUser = userData;
+    console.log(guestUser);
+  }
+
+  shippingInfo(formData) {
+    let fail = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    this.shipping = formData;
+    console.log("shipping: " + JSON.stringify(this.shipping));
+  }
+
+  paymentInfo(formData) {
+    this.payment = formData;
+    console.log("payment: " + this.payment);
+  }
+
+}
+
+var _default = new OrderAPI();
+
+exports.default = _default;
+},{"./App":"App.js","./Toast":"Toast.js"}],"CartAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class CartAPI {
+  constructor() {
+    _defineProperty(this, "cartProducts", []);
+  }
+
+  async addProduct(item, name, quantity, packSize, containerVolume, price) {
+    let product = {
+      item: item,
+      name: name,
+      quantity: quantity,
+      packSize: packSize,
+      containerVolume: containerVolume,
+      price: price
+    };
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    }
+
+    this.cartProducts.push(product);
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+  }
+
+  async getProducts() {
+    return JSON.stringify(localStorage.getItem('cartProducts')); // if(localStorage.getItem('cartProducts')){
+    //     this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    //     return this.cartProducts
+    // }
+  }
+
+  getTotal() {
+    let total = 0;
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    }
+
+    this.cartProducts.forEach(product => {
+      total += parseInt(product.price.$numberDecimal);
+    });
+    return total;
+  }
+
+}
+
+var _default = new CartAPI();
+
+exports.default = _default;
+},{"./App":"App.js"}],"views/pages/checkout1.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8040,10 +8171,46 @@ var _Auth = _interopRequireDefault(require("../../Auth"));
 
 var _Utils = _interopRequireDefault(require("../../Utils"));
 
+var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
+
+var _CartAPI = _interopRequireDefault(require("../../CartAPI"));
+
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral(["\n            ", "\n        "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral(["<p>no products</p>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout\">        \n        <h2>Shipping Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"firstName\" type=\"text\" placeholder=\"First Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"lastName\" type=\"text\" placeholder=\"Last Name\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" placeholder=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" placeholder=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" placeholder=\"Address Line 2 (optional)\" required></sl-input>\n            </div>       \n            <sl-button type=\"primary\" class=\"submit-btn\" submit style=\"width: 100%;\">Sign Up</sl-button>\n          </sl-form>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8054,18 +8221,52 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-class CheckoutView {
+class Checkout1View {
   init() {
-    document.title = 'Checkout';
+    document.title = 'Checkout1';
+    this.products = null;
     this.render();
+    this.getProducts();
 
     _Utils.default.pageIntroAnim();
+  }
+
+  async shippingSubmitHandler(e) {
+    e.preventDefault();
+    const formData = e.detail.formData;
+    let firstName = formData.get('firstName');
+    let lastName = formData.get('lastName');
+    let email = formData.get('email');
+
+    try {
+      await _OrderAPI.default.createGuest(firstName, lastName, email);
+    } catch (err) {
+      console.log(err);
+    }
+
+    _OrderAPI.default.shippingInfo(formData);
+
+    (0, _Router.gotoRoute)('/checkout2');
+  }
+
+  getProducts() {
+    try {
+      this.products = localStorage.getItem('cartProducts');
+      this.products = JSON.parse(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  continueShopping() {
+    (0, _Router.gotoRoute)('/products');
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.shippingSubmitHandler); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.shippingSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8074,10 +8275,235 @@ class CheckoutView {
 
 }
 
-var _default = new CheckoutView();
+var _default = new Checkout1View();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/age_confirmation.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../CartAPI":"CartAPI.js","../../Toast":"Toast.js"}],"views/pages/checkout2.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litHtml = require("lit-html");
+
+var _App = _interopRequireDefault(require("../../App"));
+
+var _Router = require("../../Router");
+
+var _Auth = _interopRequireDefault(require("../../Auth"));
+
+var _Utils = _interopRequireDefault(require("../../Utils"));
+
+var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
+
+var _CartAPI = _interopRequireDefault(require("../../CartAPI"));
+
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral(["\n            ", "\n        "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral(["<p>no products</p>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left'>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" label=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" label=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+class Checkout2View {
+  init() {
+    document.title = 'Checkout2';
+    this.products = null;
+    this.render();
+    this.getProducts();
+
+    _Utils.default.pageIntroAnim();
+  }
+
+  getProducts() {
+    try {
+      this.products = localStorage.getItem('cartProducts');
+      this.products = JSON.parse(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  paymentSubmitHandler(e) {
+    e.preventDefault();
+    const formData = e.detail.formData;
+
+    _OrderAPI.default.paymentInfo(formData);
+
+    (0, _Router.gotoRoute)('/checkout3');
+  } // method from lit library which allows us 
+  // to render html from within js to a container
+
+
+  render() {
+    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    // which provides the html to the <div id="root"></div> element 
+    // in the index.html parent page
+
+    (0, _litHtml.render)(template, _App.default.rootEl);
+  }
+
+}
+
+var _default = new Checkout2View();
+
+exports.default = _default;
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../CartAPI":"CartAPI.js","../../Toast":"Toast.js"}],"views/pages/checkout3.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litHtml = require("lit-html");
+
+var _App = _interopRequireDefault(require("../../App"));
+
+var _Router = require("../../Router");
+
+var _Auth = _interopRequireDefault(require("../../Auth"));
+
+var _Utils = _interopRequireDefault(require("../../Utils"));
+
+var _OrderAPI = _interopRequireDefault(require("../../OrderAPI"));
+
+var _CartAPI = _interopRequireDefault(require("../../CartAPI"));
+
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral(["\n            ", "\n        "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral(["<p>no products</p>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout3\">        \n      \n      <div class='left'>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" label=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" label=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+class Checkout3View {
+  init() {
+    document.title = 'Checkout3';
+    this.products = null;
+    this.render();
+    this.getProducts();
+
+    _Utils.default.pageIntroAnim();
+  }
+
+  getProducts() {
+    try {
+      this.products = localStorage.getItem('cartProducts');
+      this.products = JSON.parse(this.products);
+      console.log(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  paymentSubmitHandler(e) {
+    e.preventDefault();
+    const formData = e.detail.formData;
+
+    _OrderAPI.default.paymentInfo(formData);
+
+    (0, _Router.gotoRoute)('/checkout3');
+  } // method from lit library which allows us 
+  // to render html from within js to a container
+
+
+  render() {
+    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    // which provides the html to the <div id="root"></div> element 
+    // in the index.html parent page
+
+    (0, _litHtml.render)(template, _App.default.rootEl);
+  }
+
+}
+
+var _default = new Checkout3View();
+
+exports.default = _default;
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../OrderAPI":"OrderAPI.js","../../CartAPI":"CartAPI.js","../../Toast":"Toast.js"}],"views/pages/age_confirmation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8293,69 +8719,6 @@ class ProductsAPI {
 var _default = new ProductsAPI();
 
 exports.default = _default;
-},{"./App":"App.js"}],"CartAPI.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("./App"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class CartAPI {
-  constructor() {
-    _defineProperty(this, "cartProducts", []);
-  }
-
-  async addProduct(item, name, quantity, packSize, containerVolume, price) {
-    let product = {
-      item: item,
-      name: name,
-      quantity: quantity,
-      packSize: packSize,
-      containerVolume: containerVolume,
-      price: price
-    };
-
-    if (localStorage.getItem('cartProducts')) {
-      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-    }
-
-    this.cartProducts.push(product);
-    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
-  }
-
-  async getProducts() {
-    return JSON.stringify(localStorage.getItem('cartProducts')); // if(localStorage.getItem('cartProducts')){
-    //     this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-    //     return this.cartProducts
-    // }
-  }
-
-  getTotal() {
-    let total = 0;
-
-    if (localStorage.getItem('cartProducts')) {
-      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-    }
-
-    this.cartProducts.forEach(product => {
-      total += parseInt(product.price.$numberDecimal);
-    });
-    return total;
-  }
-
-}
-
-var _default = new CartAPI();
-
-exports.default = _default;
 },{"./App":"App.js"}],"views/pages/products.js":[function(require,module,exports) {
 "use strict";
 
@@ -8568,7 +8931,11 @@ var _signup = _interopRequireDefault(require("./views/pages/signup"));
 
 var _about = _interopRequireDefault(require("./views/pages/about"));
 
-var _checkout = _interopRequireDefault(require("./views/pages/checkout"));
+var _checkout = _interopRequireDefault(require("./views/pages/checkout1"));
+
+var _checkout2 = _interopRequireDefault(require("./views/pages/checkout2"));
+
+var _checkout3 = _interopRequireDefault(require("./views/pages/checkout3"));
 
 var _age_confirmation = _interopRequireDefault(require("./views/pages/age_confirmation"));
 
@@ -8588,7 +8955,9 @@ const routes = {
   '/signin': _signin.default,
   '/signup': _signup.default,
   '/about': _about.default,
-  '/checkout': _checkout.default,
+  '/checkout1': _checkout.default,
+  '/checkout2': _checkout2.default,
+  '/checkout3': _checkout3.default,
   '/ageconfirm': _age_confirmation.default,
   '/contact': _contact.default,
   '/game': _game.default,
@@ -8648,7 +9017,7 @@ function anchorRoute(e) {
   const pathname = e.target.closest('a').pathname;
   AppRouter.gotoRoute(pathname);
 }
-},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/about":"views/pages/about.js","./views/pages/checkout":"views/pages/checkout.js","./views/pages/age_confirmation":"views/pages/age_confirmation.js","./views/pages/contact":"views/pages/contact.js","./views/pages/game":"views/pages/game.js","./views/pages/products":"views/pages/products.js"}],"App.js":[function(require,module,exports) {
+},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/about":"views/pages/about.js","./views/pages/checkout1":"views/pages/checkout1.js","./views/pages/checkout2":"views/pages/checkout2.js","./views/pages/checkout3":"views/pages/checkout3.js","./views/pages/age_confirmation":"views/pages/age_confirmation.js","./views/pages/contact":"views/pages/contact.js","./views/pages/game":"views/pages/game.js","./views/pages/products":"views/pages/products.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10487,7 +10856,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 40%;\n        cursor: pointer;\n        display: block;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu {\n        display: none;\n        position: absolute;\n        font-family: var(--heading-font-family);\n        margin-top: 11px;\n        border: none;\n        width: 100%;\n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu .nav-fp {\n        visibility: hidden;\n        z-index: -100;\n        margin-left: auto;\n        margin-right: auto;\n      }\n      .app-menu a:hover .nav-fp  {\n        visibility: visible;\n      }\n      \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n        \n      }\n      button {\n        background-color: white;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height-mobile);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n        .app-menu {\n          display: none;\n          padding: none;\n        }\n        #hamburger {\n          display: none;\n        }\n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <!-- <div class=\"hover-footprints\">\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n      </div> -->\n      \n      <nav class=\"app-top-nav\">\n        <ul>\n          <li><a @click=\"", "\">Home</a></li>\n          <li><a @click=\"", "\">Shop</a></li>\n          <li><a @click=\"", "\">About Us</a></li> \n          <li><a @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      \n\n      <!-- dropdown menu -->\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n\n      <sl-drawer class=\"app-side-menu\" placement=\"left\">\n      <img class=\"app-side-menu-logo\" src=\"/images/logo.svg\">\n      <nav class=\"app-side-menu-items\">\n        <a href=\"/\" @click=\"", "\">Home</a>\n        <a href=\"/profile\" @click=\"", "\">Profile</a>\n        <a href=\"#\" @click=\"", "\">Sign Out</a>\n      </nav>  \n    </sl-drawer>\n  \n     \n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n      </nav>\n\n    </header>\n\n\n\n\n\n    <!--CART - styles----------------------->\n\n    <style>\n      .app-side-menu{\n        font-family: var(--base-font-family);\n      }\n      h1{\n        font-family: var(--heading-font-family);\n        padding: 0;\n        margin: 0;\n        padding-bottom: 30px;\n      }\n      sl-drawer.app-side-menu::part(panel){\n        background-color: var(--light-blue);\n        --header-spacing: 0;\n      }\n      sl-drawer.app-side-menu::part(title){\n        line-height: 0;\n        padding-top: 0;\n        padding-bottom: 0;\n      }\n      .app-side-menu .cart-product{\n          display: grid;\n          width: 70%;\n          grid-template-columns: repeat(2, auto);\n      }\n      .cart-img{\n        height: 20vh;\n        margin-bottom: 30px;\n      }\n      .product-name{\n        font-weight: bold;\n      }\n      .checkout-btn {\n        color: white;\n        background-color: var(--dark-blue);\n        text-transform: uppercase;\n        border: none;\n        font-family: var(--base-font-family);\n        cursor: pointer;\n        padding: 2% 4%;\n        border-radius: 8px;\n        font-size: 20px;\n        width: 100%;\n      }\n\n\n    </style>\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n    ", "\n    \n    </sl-drawer>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 40%;\n        cursor: pointer;\n        display: block;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu {\n        display: none;\n        position: absolute;\n        font-family: var(--heading-font-family);\n        margin-top: 14px;\n        border: none;\n        width: 100%;\n        z-index: 110\n        \n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n\n      .app-menu .nav-fp {\n        visibility: hidden;\n        z-index: -100;\n        margin-left: auto;\n        margin-right: auto;\n      }\n      .app-menu a:hover .nav-fp  {\n        visibility: visible;\n      }\n      \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n        \n      }\n      button {\n        background-color: white;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        #hamburger {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        #close {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n        .app-menu {\n          visibility: hidden;\n          display: none;\n          padding: none;\n          \n        }\n       \n      }\n\n    </style>\n\n    <header class=\"app-header\">\n      <!-- <div class=\"hover-footprints\">\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n        <img class='nav-fp' src='/images/logo-black.png'>\n      </div> -->\n      \n      <nav class=\"app-top-nav\">\n        <ul>\n          <li><a @click=\"", "\">Home</a></li>\n          <li><a @click=\"", "\">Shop</a></li>\n          <li><a @click=\"", "\">About Us</a></li> \n          <li><a @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      \n\n      <!-- dropdown menu -->\n      \n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n<<<<<<< HEAD\n\n      <sl-drawer class=\"app-drop-menu\" placement=\"left\">\n      <img class=\"app-side-menu-logo\" src=\"/images/logo-black.svg\">\n      <nav class=\"app-side-menu-items\">\n        <a href=\"/\" @click=\"", "\">Home</a>\n        <a href=\"/profile\" @click=\"", "\">Profile</a>\n        <a href=\"#\" @click=\"", "\">Sign Out</a>\n      </nav>  \n    </sl-drawer>\n  \n     \n=======\n      <div id=\"drop-menu\" class=\"app-menu\">\n    \n      <ul>\n        <li><a @click=\"", "\">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n        <li><a @click=\"", "\" style=\"color: red;\">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>\n      </ul>\n      </div>\n    \n>>>>>>> assignment3\n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n      </nav>\n\n    </header>\n\n\n\n\n\n    <!--CART - styles----------------------->\n\n    <style>\n      .app-side-menu{\n        font-family: var(--base-font-family);\n      }\n      h1{\n        font-family: var(--heading-font-family);\n        padding: 0;\n        margin: 0;\n        padding-bottom: 30px;\n      }\n      sl-drawer.app-side-menu::part(panel){\n        background-color: var(--light-blue);\n        --header-spacing: 0;\n      }\n      sl-drawer.app-side-menu::part(title){\n        line-height: 0;\n        padding-top: 0;\n        padding-bottom: 0;\n      }\n      .app-side-menu .cart-product{\n          display: grid;\n          width: 70%;\n          grid-template-columns: repeat(2, auto);\n      }\n      .cart-img{\n        height: 20vh;\n        margin-bottom: 30px;\n      }\n      .product-name{\n        font-weight: bold;\n      }\n      .checkout-btn {\n        color: white;\n        background-color: var(--dark-blue);\n        text-transform: uppercase;\n        border: none;\n        font-family: var(--base-font-family);\n        cursor: pointer;\n        padding: 2% 4%;\n        border-radius: 8px;\n        font-size: 20px;\n        width: 100%;\n      }\n\n\n    </style>\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n    ", "\n    \n    </sl-drawer>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10535,7 +10904,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
 
   checkoutClick() {
     //initialise all the vars needed for a checkout
-    (0, _Router.gotoRoute)('/checkout');
+    (0, _Router.gotoRoute)('/checkout1');
   }
 
   toggle() {
@@ -10554,6 +10923,11 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
     }
   }
 
+  hamburgerMenuClick() {
+    const appMenu = this.shadowRoot.querySelector('.app-side-menu');
+    appMenu.show();
+  }
+
   menuClick(e) {
     e.preventDefault();
     const pathname = e.target.closest('a').pathname;
@@ -10567,7 +10941,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   }
 
   render() {
-    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, this.menuClick, this.menuClick, () => _Auth.default.signOut(), this.hamburgerClick, this.products == null ? (0, _litElement.html)(_templateObject2()) : (0, _litElement.html)(_templateObject3(), this.products.map(product => (0, _litElement.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal)), _CartAPI.default.getTotal(), this.checkoutClick));
+    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, this.menuClick, this.menuClick, () => _Auth.default.signOut(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.hamburgerClick, this.products == null ? (0, _litElement.html)(_templateObject2()) : (0, _litElement.html)(_templateObject3(), this.products.map(product => (0, _litElement.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal)), _CartAPI.default.getTotal(), this.checkoutClick));
   } // <div id="drop-menu" class="app-menu">
   // <ul>
   //   <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
@@ -10726,7 +11100,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53329" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54627" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
