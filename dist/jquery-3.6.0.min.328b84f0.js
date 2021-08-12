@@ -3877,9 +3877,13 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
 <<<<<<< HEAD
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "53329" + '/');
 =======
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "54627" + '/');
+>>>>>>> assignment3
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54845" + '/');
 >>>>>>> assignment3
 
   ws.onmessage = function (event) {

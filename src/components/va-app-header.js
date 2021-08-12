@@ -1,16 +1,8 @@
 // @polymer/lit-element is part of the lit library which helps
 // us to build template app elements in js.
 // https://lit-element.polymer-project.org/guide/templates
-import {
-  LitElement,
-  html,
-  css
-} from '@polymer/lit-element'
-
-import {
-  anchorRoute,
-  gotoRoute
-} from './../Router'
+import { LitElement, html, css } from '@polymer/lit-element'
+import { anchorRoute, gotoRoute } from './../Router'
 import Auth from './../Auth'
 import App from './../App'
 import CartAPI from './../CartAPI';
@@ -135,7 +127,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         margin-top: 14px;
         border: none;
         width: 100%;
+<<<<<<< HEAD
         z-index: 110
+=======
+        z-index: 1000;
+        
+>>>>>>> assignment3
         
       }
       
@@ -168,6 +165,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         text-align: center;
         padding-left: 0px;
         background-color: rgba(255,255,255,1.0);
+        background-color: var(--light-blue);
       }
 
       .app-menu ul {
