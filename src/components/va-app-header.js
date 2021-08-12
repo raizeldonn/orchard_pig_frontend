@@ -114,6 +114,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         width: 100%;
         z-index: 1000;
         
+        
       }
       
       .app-menu a {
@@ -145,6 +146,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         text-align: center;
         padding-left: 0px;
         background-color: rgba(255,255,255,1.0);
+        background-color: var(--light-blue);
       }
 
       .app-menu ul {

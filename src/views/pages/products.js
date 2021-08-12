@@ -183,7 +183,8 @@ class ProductsView {
         <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>
         <div class='products-grid'>
             ${this.products == null ? html `
-              <sl-spinner></sl-spinner>
+              <!-- <sl-spinner></sl-spinner> -->
+              <va-bottle-spinner></bottle-spinner>
             ` : html `
             <!--map is very similar to for each-->
               ${this.products.map(product => html`
