@@ -30,8 +30,17 @@ class Checkout2View {
   paymentSubmitHandler(e){
     e.preventDefault()    
     const formData = e.detail.formData
-    
-    OrderAPI.paymentInfo(formData)
+
+    let cardNum = formData.get('cardNumber')
+    let lastFourDigits = (cardNum.slice(cardNum.length - 4))
+    let expMonth = formData.get('expMonth')
+    let expYear = formData.get('expYear')
+    let cvvVerified = false
+    if (formData.get('cvv')){
+      cvvVerified = true
+    }
+
+    OrderAPI.makePayment(lastFourDigits, expMonth, expYear, cvvVerified)
     gotoRoute('/checkout3')
   }
 
@@ -51,16 +60,41 @@ class Checkout2View {
         
         <sl-form class="form-shipping" @sl-submit=${this.paymentSubmitHandler}>
             <div class="input-group">
-              <sl-input name="cardName" type="text" label="Name On Card" required></sl-input>
-            </div>
-            <div class="input-group">
               <sl-input name="cardNumber" type="text" label="Card Number" required></sl-input>
             </div>
             <div class="input-group">
-              <sl-input name="cardExpiry" type="text" label="Expiry Date" required></sl-input>
+              <sl-select name='expMonth' label='Select Expiry Month' required>
+                <sl-menu-item value='01'>January</sl-menu-item>
+                <sl-menu-item value='02'>February</sl-menu-item>
+                <sl-menu-item value='03'>March</sl-menu-item>
+                <sl-menu-item value='04'>April</sl-menu-item>
+                <sl-menu-item value='05'>May</sl-menu-item>
+                <sl-menu-item value='06'>June</sl-menu-item>
+                <sl-menu-item value='07'>July</sl-menu-item>
+                <sl-menu-item value='08'>August</sl-menu-item>
+                <sl-menu-item value='09'>September</sl-menu-item>
+                <sl-menu-item value='10'>October</sl-menu-item>
+                <sl-menu-item value='11'>November</sl-menu-item>
+                <sl-menu-item value='12'>December</sl-menu-item>
+              </sl-select>
             </div>
             <div class="input-group">
-              <sl-input name="cardCvv" type="text" label="CVV" required></sl-input>
+              <sl-select name='expYear' label='Select Expiry Year' required>
+                <sl-menu-item value='21'>2021</sl-menu-item>
+                <sl-menu-item value='22'>2022</sl-menu-item>
+                <sl-menu-item value='23'>2023</sl-menu-item>
+                <sl-menu-item value='24'>2024</sl-menu-item>
+                <sl-menu-item value='25'>2025</sl-menu-item>
+                <sl-menu-item value='26'>2026</sl-menu-item>
+                <sl-menu-item value='27'>2027</sl-menu-item>
+                <sl-menu-item value='28'>2028</sl-menu-item>
+                <sl-menu-item value='29'>2029</sl-menu-item>
+                <sl-menu-item value='30'>2030</sl-menu-item>
+                <sl-menu-item value='31'>2031</sl-menu-item>
+              </sl-select>
+            </div>
+            <div class="input-group">
+              <sl-input name="cvv" type="text" label="CVV" required></sl-input>
             </div>      
             <button class="checkout-btn" submit >Review Order</button>
           </sl-form>

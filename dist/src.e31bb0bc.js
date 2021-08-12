@@ -8100,23 +8100,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class OrderAPI {
   constructor() {
-    this.guestUser = {};
     this.shipping = {};
     this.payment = {};
   }
 
-  async createGuest(firstName, lastName, email) {
+  async createGuest(firstName, lastName, email, phoneNumber) {
     let userData = {
-      "firstName": "raizel",
-      "lastName": "donnebaum",
-      "email": "raizeld@gmail.com",
-      "phoneNumber": "95324392"
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email,
+      "phoneNumber": phoneNumber
     };
     const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
+      //"Authorization": `Bearer ${localStorage.accessToken}`  , "Access-Control-Allow-Origin":"*" 
       body: userData
     }); // if response not ok
 
@@ -8136,15 +8136,26 @@ class OrderAPI {
     console.log(guestUser);
   }
 
-  shippingInfo(formData) {
-    let fail = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    this.shipping = formData;
+  shippingInfo(address, address2, shipping) {
+    this.shipping = {
+      "address": address,
+      "addressLine2": address2,
+      "shippingOption": shipping
+    };
     console.log("shipping: " + JSON.stringify(this.shipping));
   }
 
   paymentInfo(formData) {
     this.payment = formData;
-    console.log("payment: " + this.payment);
+    console.log("payment: " + JSON.stringify(this.payment));
+  }
+
+  getShipping() {
+    return this.shipping;
+  }
+
+  getPayment() {
+    return this.payment;
   }
 
 }
@@ -8272,7 +8283,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping $12</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping $6</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping $12</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8299,14 +8310,19 @@ class Checkout1View {
     let firstName = formData.get('firstName');
     let lastName = formData.get('lastName');
     let email = formData.get('email');
+    let phoneNumber = formData.get('phoneNumber');
 
     try {
-      await _OrderAPI.default.createGuest(firstName, lastName, email);
+      await _OrderAPI.default.createGuest(firstName, lastName, email, phoneNumber);
     } catch (err) {
       console.log(err);
     }
 
-    _OrderAPI.default.shippingInfo(formData);
+    let address = formData.get('address');
+    let address2 = formData.get('address2');
+    let shipping = formData.get('shipping');
+
+    _OrderAPI.default.shippingInfo(address, address2, shipping);
 
     (0, _Router.gotoRoute)('/checkout2');
   }
@@ -8397,7 +8413,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left'>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardName\" type=\"text\" label=\"Name On Card\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardExpiry\" type=\"text\" label=\"Expiry Date\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cardCvv\" type=\"text\" label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left'>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expMonth' label='Select Expiry Month' required>\n                <sl-menu-item value='01'>January</sl-menu-item>\n                <sl-menu-item value='02'>February</sl-menu-item>\n                <sl-menu-item value='03'>March</sl-menu-item>\n                <sl-menu-item value='04'>April</sl-menu-item>\n                <sl-menu-item value='05'>May</sl-menu-item>\n                <sl-menu-item value='06'>June</sl-menu-item>\n                <sl-menu-item value='07'>July</sl-menu-item>\n                <sl-menu-item value='08'>August</sl-menu-item>\n                <sl-menu-item value='09'>September</sl-menu-item>\n                <sl-menu-item value='10'>October</sl-menu-item>\n                <sl-menu-item value='11'>November</sl-menu-item>\n                <sl-menu-item value='12'>December</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expYear' label='Select Expiry Year' required>\n                <sl-menu-item value='21'>2021</sl-menu-item>\n                <sl-menu-item value='22'>2022</sl-menu-item>\n                <sl-menu-item value='23'>2023</sl-menu-item>\n                <sl-menu-item value='24'>2024</sl-menu-item>\n                <sl-menu-item value='25'>2025</sl-menu-item>\n                <sl-menu-item value='26'>2026</sl-menu-item>\n                <sl-menu-item value='27'>2027</sl-menu-item>\n                <sl-menu-item value='28'>2028</sl-menu-item>\n                <sl-menu-item value='29'>2029</sl-menu-item>\n                <sl-menu-item value='30'>2030</sl-menu-item>\n                <sl-menu-item value='31'>2031</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cvv\" type=\"text\" label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8431,8 +8447,17 @@ class Checkout2View {
   paymentSubmitHandler(e) {
     e.preventDefault();
     const formData = e.detail.formData;
+    let cardNum = formData.get('cardNumber');
+    let lastFourDigits = cardNum.slice(cardNum.length - 4);
+    let expMonth = formData.get('expMonth');
+    let expYear = formData.get('expYear');
+    let cvvVerified = false;
 
-    _OrderAPI.default.paymentInfo(formData);
+    if (formData.get('cvv')) {
+      cvvVerified = true;
+    }
+
+    _OrderAPI.default.paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified);
 
     (0, _Router.gotoRoute)('/checkout3');
   } // method from lit library which allows us 
@@ -8524,8 +8549,11 @@ class Checkout3View {
   init() {
     document.title = 'Checkout3';
     this.products = null;
+    this.shipping = null;
+    this.payment = null;
     this.render();
     this.getProducts();
+    this.getOrderInfo();
 
     _Utils.default.pageIntroAnim();
   }
@@ -8535,6 +8563,18 @@ class Checkout3View {
       this.products = localStorage.getItem('cartProducts');
       this.products = JSON.parse(this.products);
       console.log(this.products);
+      this.render();
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  getOrderInfo() {
+    try {
+      this.shipping = _OrderAPI.default.getShipping();
+      this.payment = _OrderAPI.default.getPayment();
+      console.log("shipping: " + JSON.stringify(this.shipping));
+      console.log("payment: " + JSON.stringify(this.payment));
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');

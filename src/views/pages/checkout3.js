@@ -12,8 +12,11 @@ class Checkout3View {
   init(){
     document.title = 'Checkout3'   
     this.products = null 
+    this.shipping = null
+    this.payment = null
     this.render()    
     this.getProducts()  
+    this.getOrderInfo()
     Utils.pageIntroAnim()
   }
 
@@ -27,6 +30,20 @@ class Checkout3View {
       Toast.show(err, 'error')
     }
   }
+
+  getOrderInfo(){
+    try{
+      this.shipping = OrderAPI.getShipping()
+      this.payment = OrderAPI.getPayment()
+      console.log("shipping: " + JSON.stringify(this.shipping))
+      console.log("payment: " + JSON.stringify(this.payment))
+      this.render()
+    }
+    catch(err){
+      Toast.show(err, 'error')
+    }
+  }
+  
 
   paymentSubmitHandler(e){
     e.preventDefault()    

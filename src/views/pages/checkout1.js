@@ -24,16 +24,20 @@ class Checkout1View {
     let firstName = formData.get('firstName')
     let lastName = formData.get('lastName')
     let email = formData.get('email')
+    let phoneNumber = formData.get('phoneNumber')
 
     try{
-      await OrderAPI.createGuest(firstName, lastName, email)
+      await OrderAPI.createGuest(firstName, lastName, email, phoneNumber)
     }
     catch(err){
       console.log(err)
     }
     
+    let address = formData.get('address')
+    let address2 = formData.get('address2')
+    let shipping = formData.get('shipping')
 
-    OrderAPI.shippingInfo(formData)
+    OrderAPI.shippingInfo(address, address2, shipping)
     gotoRoute('/checkout2')
   }
 
@@ -83,12 +87,12 @@ class Checkout1View {
               <sl-input name="address" type="text" label="Address" required></sl-input>
             </div>
             <div class="input-group">
-              <sl-input name="address" type="text" label="Address Line 2 (optional)"></sl-input>
+              <sl-input name="address2" type="text" label="Address Line 2 (optional)"></sl-input>
             </div> 
             <div class="input-group">
               <sl-select name='shipping' label='Select a shipping option' required>
-                <sl-menu-item value='1'>Standard Shipping $6</sl-menu-item>
-                <sl-menu-item value='2'>Express Shipping $12</sl-menu-item>\
+                <sl-menu-item value='standard'>Standard Shipping $6</sl-menu-item>
+                <sl-menu-item value='express'>Express Shipping $12</sl-menu-item>\
               </sl-select>
             </div>  
             <button class="checkout-btn" submit>Payment Details</button>     

@@ -1,26 +1,28 @@
 import App from './App'
 import Toast from './Toast'
+import CartAPI from './CartAPI'
 
 
 class OrderAPI {
 
 
   constructor(){
-    this.guestUser = {}
+    this.customerId = null
+    this.orderId = null
     this.shipping = {}
     this.payment = {}
   }
 
-  async createGuest(firstName, lastName, email){
+  async createGuest(firstName, lastName, email, phoneNumber){
     let userData = {
-      "firstName": "raizel",
-        "lastName": "donnebaum",
-        "email": "raizeld@gmail.com",
-        "phoneNumber": "95324392"
+      "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "phoneNumber": phoneNumber
     }
     const response = await fetch(`${App.apiBase}/user/guest`, {
       method: 'POST',  
-      headers: {"Content-Type" : "application/json"   }, 
+      headers: { "Content-Type" : "application/json" },  //"Authorization": `Bearer ${localStorage.accessToken}`  , "Access-Control-Allow-Origin":"*" 
       body: userData
     })
 
@@ -39,15 +41,67 @@ class OrderAPI {
     console.log(guestUser)
   }
 
-  shippingInfo(formData, fail = false){
-    this.shipping = formData
+  shippingInfo(address, address2, shipping){
+    this.shipping = {
+      "address": address,
+      "addressLine2": address2,
+      "shippingOption": shipping
+    }
     console.log("shipping: " + JSON.stringify(this.shipping))
   }
 
-  paymentInfo(formData){
-    this.payment = formData
-    console.log("payment: " + this.payment)
+  async makePayment(lastFourDigits, expMonth, expYear, cvvVerified){
+    this.payment = {
+        "lastFourDigits": lastFourDigits,
+        "expMonth": expMonth,
+        "expYear": expYear,
+        "cvvVerified": cvvVerified
+    }
+    let paymentData = {
+      "customerId": customerId,
+      "orderId": orderId,
+      "status": "unverified",
+      "gateway": "stripe",
+      "paymentType": "credit",
+      "amount": CartAPI.getTotal(),
+      "card": {
+          "brand": "visa",
+          "lastFourDigits": lastFourDigits,
+          "expMonth": expMonth,
+          "expYear": expYear,
+          "cvvVerified": cvvVerified
+      }
+
+    }
+    const response = await fetch(`${App.apiBase}/payment`, {
+      method: 'POST',  
+      headers: { "Authorization": `Bearer ${localStorage.accessToken}`, "Content-Type" : "application/json" },  //  , "Access-Control-Allow-Origin":"*" 
+      body: paymentData
+    })
+
+    // if response not ok
+    if(!response.ok){      
+      // console log error
+      const err = await response.json()
+      if(err) console.log(err)
+      // show error      
+      Toast.show(`Problem getting user: ${response.status}`)   
+      // run fail() functon if set
+      if(typeof fail == 'function') fail()
+    }
+    /// sign up success - show toast and redirect to sign in page
+    this.guestUser = userData
+    console.log(guestUser)
   }
+
+  getShipping(){
+    return this.shipping
+  }
+
+  getPayment(){
+    return this.payment
+  }
+
 }
 
 export default new OrderAPI()
