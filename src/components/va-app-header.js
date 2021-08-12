@@ -16,6 +16,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     return {
       products: {
         type: Object
+      },
+      allProducts: {
+        type: Object
       }
     }
   }
@@ -128,7 +131,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         border: none;
         width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
         z-index: 110
+=======
+        z-index: 1000;
+        
+>>>>>>> assignment3
 =======
         z-index: 1000;
         
