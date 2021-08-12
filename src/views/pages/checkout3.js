@@ -12,6 +12,7 @@ class Checkout3View {
   init(){
     document.title = 'Checkout3'   
     this.products = null 
+    this.userData = null
     this.shipping = null
     this.payment = null
     this.render()    
@@ -33,6 +34,7 @@ class Checkout3View {
 
   getOrderInfo(){
     try{
+      this.userData = OrderAPI.getUserData()
       this.shipping = OrderAPI.getShipping()
       this.payment = OrderAPI.getPayment()
       console.log("shipping: " + JSON.stringify(this.shipping))
@@ -65,23 +67,38 @@ class Checkout3View {
       <div class="page-content checkout checkout3">        
       
       <div class='left'>
-        <h2>Payment Details</h2>
+        <div class='shipping-details'>
+          	<h2>Shipping Details</h2>
+            ${this.userData == null ? 
+              html`<sl-spinner></sl-spinner>` : 
+              html`
+              <p>${this.userData.firstName}</p>
+              <p>${this.userData.lastName}</p>
+              <p>${this.userData.phoneNumber}</p>`}
+            
+            ${this.shipping == null ? 
+              html`<sl-spinner></sl-spinner>` : 
+              html`
+              <p>${this.shipping.address}</p>
+              <p>${this.shipping.address2}</p>
+              <p>${this.shipping.shippingOption}</p>`}
+            
+            
+            
+        </div>
+
+        <div class='payment-details'>
+          	<h2>Payment Details</h2>
+            ${this.shipping == null ? 
+              html`<sl-spinner></sl-spinner>` : 
+              html`
+              <p>**** **** **** ${this.payment.lastFourDigits}</p>
+              <p>${this.payment.expMonth}</p>
+              <p>20${this.payment.expYear}</p>`}
+        </div>
+
+        <button>Place Order</button>
         
-        <sl-form class="form-shipping" @sl-submit=${this.paymentSubmitHandler}>
-            <div class="input-group">
-              <sl-input name="cardName" type="text" label="Name On Card" required></sl-input>
-            </div>
-            <div class="input-group">
-              <sl-input name="cardNumber" type="text" label="Card Number" required></sl-input>
-            </div>
-            <div class="input-group">
-              <sl-input name="cardExpiry" type="text" label="Expiry Date" required></sl-input>
-            </div>
-            <div class="input-group">
-              <sl-input name="cardCvv" type="text" label="CVV" required></sl-input>
-            </div>      
-            <button class="checkout-btn" submit >Review Order</button>
-          </sl-form>
       </div>
         
       <div class='right'>
@@ -99,7 +116,7 @@ class Checkout3View {
           `)}
         `}
           
-
+        <p>Shipping: &pound;${CartAPI.getShipping()}.00</p>
         <h3>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
         <button class='checkout-btn' @click="${this.continueShopping}">Continue Shopping</button>
       </div>

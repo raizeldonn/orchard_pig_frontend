@@ -9,13 +9,14 @@ class OrderAPI {
   constructor(){
     this.customerId = null
     this.orderId = null
+    this.userData = {}
     this.shipping = {}
     this.payment = {}
   }
 
   async createGuest(firstName, lastName, email, phoneNumber){
-    let userData = {
-      "firstName": firstName,
+    this.userData = {
+        "firstName": firstName,
         "lastName": lastName,
         "email": email,
         "phoneNumber": phoneNumber
@@ -23,7 +24,7 @@ class OrderAPI {
     const response = await fetch(`${App.apiBase}/user/guest`, {
       method: 'POST',  
       headers: { "Content-Type" : "application/json" },  //"Authorization": `Bearer ${localStorage.accessToken}`  , "Access-Control-Allow-Origin":"*" 
-      body: userData
+      body: this.userData
     })
 
     // if response not ok
@@ -92,6 +93,10 @@ class OrderAPI {
     /// sign up success - show toast and redirect to sign in page
     this.guestUser = userData
     console.log(guestUser)
+  }
+
+  getUserData(){
+    return this.userData
   }
 
   getShipping(){

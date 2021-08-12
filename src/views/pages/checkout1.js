@@ -38,6 +38,8 @@ class Checkout1View {
     let shipping = formData.get('shipping')
 
     OrderAPI.shippingInfo(address, address2, shipping)
+
+    CartAPI.setShipping(shipping)
     gotoRoute('/checkout2')
   }
 
@@ -91,8 +93,8 @@ class Checkout1View {
             </div> 
             <div class="input-group">
               <sl-select name='shipping' label='Select a shipping option' required>
-                <sl-menu-item value='standard'>Standard Shipping $6</sl-menu-item>
-                <sl-menu-item value='express'>Express Shipping $12</sl-menu-item>\
+                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>
+                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>\
               </sl-select>
             </div>  
             <button class="checkout-btn" submit>Payment Details</button>     

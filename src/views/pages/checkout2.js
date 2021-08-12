@@ -115,7 +115,7 @@ class Checkout2View {
           `)}
         `}
           
-
+        <p>Shipping: &pound;${CartAPI.getShipping()}.00</p>
         <h3>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
         <button class='checkout-btn' @click="${this.continueShopping}">Continue Shopping</button>
       </div>

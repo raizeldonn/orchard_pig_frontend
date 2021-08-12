@@ -3,6 +3,7 @@ import App from './App'
 class CartAPI {
 
     cartProducts = []
+    shippingFee = 0
 
     async addProduct(item, name, quantity, packSize, containerVolume, price){
         let product = {
@@ -44,7 +45,29 @@ class CartAPI {
             total += parseInt(product.price.$numberDecimal)
         })
 
+        if(localStorage.getItem('shippingFee')){
+            total += parseInt(localStorage.getItem('shippingFee'));
+        }
+
         return total
+    }
+
+    getShipping(){
+        return this.shippingFee
+    }
+
+    setShipping(shippingMethod){
+
+        if (shippingMethod == "standard")
+        {
+            this.shippingFee = 6
+        }
+        if (shippingMethod == "express")
+        {
+            this.shippingFee = 12
+        }
+
+        localStorage.setItem('shippingFee', this.shippingFee);
     }
 }
 
