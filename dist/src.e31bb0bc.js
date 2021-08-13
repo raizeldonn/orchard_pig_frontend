@@ -7733,10 +7733,7 @@ class ProductsAPI {
 
   async getProducts() {
     // fetch the json data
-    const response = await fetch("".concat(_App.default.apiBase, "/products"), {
-      headers: {
-        "Authorization": "Bearer ".concat(localStorage.accessToken)
-      }
+    const response = await fetch("".concat(_App.default.apiBase, "/products"), {//headers: { "Authorization": `Bearer ${localStorage.accessToken}`}
     }); // if response not ok
 
     if (!response.ok) {
@@ -7799,6 +7796,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class HomeView {
   init() {
     console.log('HomeView.init');
+    console.log(localStorage);
     document.title = 'Home'; //this.team = null 
     //this.getTeam()
 
@@ -8204,10 +8202,6 @@ class OrderAPI {
     };
     const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      //"Authorization": `Bearer ${localStorage.accessToken}`  , "Access-Control-Allow-Origin":"*" 
       body: this.userData
     }); // if response not ok
 
@@ -8223,8 +8217,8 @@ class OrderAPI {
     } /// sign up success - show toast and redirect to sign in page
 
 
-    this.guestUser = userData;
-    console.log(guestUser);
+    this.guestUser = this.userData;
+    console.log("Guest user: ", this.guestUser);
   }
 
   shippingInfo(address, address2, shipping) {
@@ -11334,7 +11328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50231" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60821" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

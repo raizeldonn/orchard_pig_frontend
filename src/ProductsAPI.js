@@ -14,7 +14,7 @@ class ProductsAPI {
     
     // fetch the json data
     const response = await fetch(`${App.apiBase}/products`, {
-      headers: { "Authorization": `Bearer ${localStorage.accessToken}`}
+      //headers: { "Authorization": `Bearer ${localStorage.accessToken}`}
     })
 
     // if response not ok

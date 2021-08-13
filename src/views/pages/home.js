@@ -14,14 +14,16 @@ import ProductsAPI from './../../ProductsAPI';
 
 class HomeView {
   init(){    
-    console.log('HomeView.init')
+    console.log('HomeView.init');
+    console.log(localStorage);
     document.title = 'Home'  
     //this.team = null 
     //this.getTeam()
     this.render()
     Utils.pageIntroAnim()
     this.products = null
-    this.getProducts();    
+    this.getProducts();   
+
   }
  
   async getTeam(){
