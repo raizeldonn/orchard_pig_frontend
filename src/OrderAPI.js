@@ -25,7 +25,7 @@ class OrderAPI {
 
     const response = await fetch(`${App.apiBase}/user/guest`, {
       method: 'POST',
-      headers: { "Content-Type" : "application/json" },
+      // headers: { "Content-Type" : "application/json" },
       body: this.userData
     })
 
