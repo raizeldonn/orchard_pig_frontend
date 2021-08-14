@@ -46,13 +46,8 @@ class Checkout3View {
     }
   }
   
-
-  paymentSubmitHandler(e){
-    e.preventDefault()    
-    const formData = e.detail.formData
-    
-    OrderAPI.paymentInfo(formData)
-    gotoRoute('/checkout3')
+  async placeOrder(){
+    await OrderAPI.placeOrder()
   }
 
   // method from lit library which allows us 
@@ -99,7 +94,7 @@ class Checkout3View {
               <a @click="${() => gotoRoute('/checkout2')}">Edit</a>
         </div>
 
-        <button class='checkout-btn'>Place Order</button>
+        <button class='checkout-btn' @click=${this.placeOrder}>Place Order</button>
         
       </div>
         

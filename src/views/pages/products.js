@@ -184,7 +184,7 @@ class ProductsView {
   // as it will be easier than havign to update the quantity when it is already in the cart
   addToCart(product){
     console.log("added to cart: " + product.name);
-    CartAPI.addProduct(product.item, product.name, 1, product.packSize, product.containerVolume, product.price);
+    CartAPI.addProduct(product.item, product.name, 1, product.sku, product.price);
     this.render()
   }
 

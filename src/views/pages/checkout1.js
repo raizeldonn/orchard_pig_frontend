@@ -10,7 +10,7 @@ import Toast from '../../Toast'
 
 class Checkout1View {
   init(){
-    document.title = 'Checkout1'   
+    document.title = 'Checkout1'  
     this.products = null
     this.render()  
     this.getProducts()  

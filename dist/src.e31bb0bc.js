@@ -8100,17 +8100,29 @@ class CartAPI {
   constructor() {
     _defineProperty(this, "cartProducts", []);
 
+    _defineProperty(this, "orderProducts", []);
+
     _defineProperty(this, "shippingFee", 0);
   }
 
-  async addProduct(item, name, quantity, packSize, containerVolume, price) {
+  async addProduct(item, name, quantity, sku, price) {
+    let qty = quantity.toFixed(2);
+    let totalCost = price.$numberDecimal * qty;
+    totalCost = parseFloat(totalCost.toFixed(2));
     let product = {
       item: item,
       name: name,
+      sku: sku,
       quantity: quantity,
-      packSize: packSize,
-      containerVolume: containerVolume,
-      price: price
+      price: price,
+      totalCost: totalCost
+    };
+    let orderProduct = {
+      item: item,
+      sku: sku,
+      quantity: quantity,
+      price: price,
+      totalCost: totalCost
     };
 
     if (localStorage.getItem('cartProducts')) {
@@ -8118,7 +8130,14 @@ class CartAPI {
     }
 
     this.cartProducts.push(product);
-    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts)); //second array for order products to match the data types for order
+
+    if (localStorage.getItem('orderProducts')) {
+      this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
+    }
+
+    this.orderProducts.push(orderProduct);
+    localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
     console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
   }
 
@@ -8186,12 +8205,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class OrderAPI {
   constructor() {
-    this.customerId = null;
-    this.orderId = null;
+    this.customerId = "60bf7279e6993317c2477940"; //placeholder customer id
+
+    this.orderId = "60e97bea3bc70632dca552e0"; //placeholder order id
+
     this.userData = {};
+    this.orderData = {};
     this.shipping = {};
     this.payment = {};
-  }
+  } // create a guest user
+
 
   async createGuest(firstName, lastName, email, phoneNumber) {
     this.userData = {
@@ -8202,6 +8225,9 @@ class OrderAPI {
     };
     const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: this.userData
     }); // if response not ok
 
@@ -8217,48 +8243,63 @@ class OrderAPI {
     } /// sign up success - show toast and redirect to sign in page
 
 
-    this.guestUser = this.userData;
-    console.log("Guest user: ", this.guestUser);
-  }
+    console.log("response: " + JSON.stringify(response.json())); //get the customerID via the response and save to use for the order and payment
+  } // place an order
 
-  shippingInfo(address, address2, shipping) {
-    this.shipping = {
-      "address": address,
-      "addressLine2": address2,
-      "shippingOption": shipping
-    };
-    console.log("shipping: " + JSON.stringify(this.shipping));
-  }
 
-  async makePayment(lastFourDigits, expMonth, expYear, cvvVerified) {
-    this.payment = {
-      "lastFourDigits": lastFourDigits,
-      "expMonth": expMonth,
-      "expYear": expYear,
-      "cvvVerified": cvvVerified
+  async placeOrder() {
+    let products = localStorage.getItem('cartProducts');
+    products = JSON.parse(products); // place the order
+
+    this.orderData = {
+      "currency": "BPS",
+      "customerId": this.customerId,
+      "paymentStatus": "unpaid",
+      "status": "awaitingShipment",
+      "totalCost": _CartAPI.default.getTotal(),
+      "products": products,
+      "shipping": this.shipping
     };
+    console.log(this.orderData);
+    const response = await fetch("".concat(_App.default.apiBase, "/order"), {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: this.orderData
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // show error      
+
+      _Toast.default.show("Problem getting user: ".concat(response.status)); // run fail() functon if set
+
+
+      if (typeof fail == 'function') fail();
+    } //get hold of the order ID in order to make a payment
+    // await this.makePayment()
+
+  } // post a payment
+
+
+  async makePayment() {
     let paymentData = {
-      "customerId": customerId,
-      "orderId": orderId,
+      "customerId": this.customerId,
+      "orderId": this.orderId,
       "status": "unverified",
       "gateway": "stripe",
       "paymentType": "credit",
       "amount": _CartAPI.default.getTotal(),
-      "card": {
-        "brand": "visa",
-        "lastFourDigits": lastFourDigits,
-        "expMonth": expMonth,
-        "expYear": expYear,
-        "cvvVerified": cvvVerified
-      }
+      "card": this.payment
     };
     const response = await fetch("".concat(_App.default.apiBase, "/payment"), {
       method: 'POST',
       headers: {
-        "Authorization": "Bearer ".concat(localStorage.accessToken),
-        "Content-Type": "application/json"
+        "Authorization": "Bearer ".concat(localStorage.accessToken)
       },
-      //  , "Access-Control-Allow-Origin":"*" 
+      //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
       body: paymentData
     }); // if response not ok
 
@@ -8273,9 +8314,28 @@ class OrderAPI {
       if (typeof fail == 'function') fail();
     } /// sign up success - show toast and redirect to sign in page
 
+  } // save shipping info to object for further use
 
-    this.guestUser = userData;
-    console.log(guestUser);
+
+  shippingInfo(address, address2, shipping) {
+    this.shipping = {
+      "address": address,
+      "addressLine2": address2,
+      "shippingOption": shipping
+    };
+    console.log("shipping: " + JSON.stringify(this.shipping));
+  } // save payment info to object for further use
+
+
+  paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified) {
+    this.payment = {
+      "brand": "visa",
+      "lastFourDigits": lastFourDigits,
+      "expMonth": expMonth,
+      "expYear": expYear,
+      "cvvVerified": cvvVerified
+    };
+    console.log("payment: " + JSON.stringify(this.payment));
   }
 
   getUserData() {
@@ -8528,7 +8588,7 @@ class Checkout2View {
       cvvVerified = true;
     }
 
-    _OrderAPI.default.makePayment(lastFourDigits, expMonth, expYear, cvvVerified);
+    _OrderAPI.default.paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified);
 
     (0, _Router.gotoRoute)('/checkout3');
   } // method from lit library which allows us 
@@ -8665,7 +8725,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout3\">        \n      \n      <div class='left'>\n        <h1>Review Order</h1>\n        <div class='shipping-details'>\n          \t<h2>Shipping Details</h2>\n            ", "\n            \n            ", "  \n            \n            <a @click=\"", "\">Edit</a>\n        </div>\n\n        <div class='payment-details'>\n          \t<h2>Payment Details</h2>\n            ", "\n\n              <a @click=\"", "\">Edit</a>\n        </div>\n\n        <button class='checkout-btn'>Place Order</button>\n        \n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout3\">        \n      \n      <div class='left'>\n        <h1>Review Order</h1>\n        <div class='shipping-details'>\n          \t<h2>Shipping Details</h2>\n            ", "\n            \n            ", "  \n            \n            <a @click=\"", "\">Edit</a>\n        </div>\n\n        <div class='payment-details'>\n          \t<h2>Payment Details</h2>\n            ", "\n\n              <a @click=\"", "\">Edit</a>\n        </div>\n\n        <button class='checkout-btn' @click=", ">Place Order</button>\n        \n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8714,19 +8774,14 @@ class Checkout3View {
     }
   }
 
-  paymentSubmitHandler(e) {
-    e.preventDefault();
-    const formData = e.detail.formData;
-
-    _OrderAPI.default.paymentInfo(formData);
-
-    (0, _Router.gotoRoute)('/checkout3');
+  async placeOrder() {
+    await _OrderAPI.default.placeOrder();
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.shipping == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.shipping == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.placeOrder, this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -9087,7 +9142,7 @@ class ProductsView {
   addToCart(product) {
     console.log("added to cart: " + product.name);
 
-    _CartAPI.default.addProduct(product.item, product.name, 1, product.packSize, product.containerVolume, product.price);
+    _CartAPI.default.addProduct(product.item, product.name, 1, product.sku, product.price);
 
     this.render();
   } // method from lit library which allows us 
@@ -11279,7 +11334,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -11328,7 +11383,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60821" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53043" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

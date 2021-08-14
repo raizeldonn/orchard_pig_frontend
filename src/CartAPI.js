@@ -3,16 +3,30 @@ import App from './App'
 class CartAPI {
 
     cartProducts = []
+    orderProducts = []
     shippingFee = 0
 
-    async addProduct(item, name, quantity, packSize, containerVolume, price){
+    async addProduct(item, name, quantity, sku, price){
+
+        let qty = quantity.toFixed(2)
+        let totalCost = price.$numberDecimal * qty 
+        totalCost = parseFloat(totalCost.toFixed(2))
+        
         let product = {
             item: item,
             name: name,
+            sku: sku,
             quantity: quantity,
-            packSize: packSize,
-            containerVolume: containerVolume,
-            price: price
+            price: price,
+            totalCost: totalCost
+        }
+
+        let orderProduct = {
+            item: item,
+            sku: sku,
+            quantity: quantity,
+            price: price,
+            totalCost: totalCost
         }
 
         if(localStorage.getItem('cartProducts')){
@@ -20,6 +34,13 @@ class CartAPI {
         }
         this.cartProducts.push(product);
         localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+
+        //second array for order products to match the data types for order
+        if(localStorage.getItem('orderProducts')){
+            this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
+        }
+        this.orderProducts.push(orderProduct);
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
 
         console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
     }
