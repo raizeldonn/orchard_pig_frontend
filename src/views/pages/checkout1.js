@@ -110,7 +110,8 @@ class Checkout1View {
                 <div class='cart-product-info'>
                   <p class='product-name'>${product.name}</p> 
                   <p>Quantity: ${product.quantity}</p>
-                  <p>&pound;${product.price.$numberDecimal}</p>
+                  <!-- <p>&pound;{product.price.$numberDecimal}</p> -->
+                  <p>&pound;${product.price}</p>
                 </div>
               </div>
           `)}

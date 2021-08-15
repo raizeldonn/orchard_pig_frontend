@@ -152,7 +152,8 @@ class ProductsView {
                 <p>${product.packSize} X ${product.containerVolume}</p>
               </div>
               <div class='pp-boxes'>
-                <h3>&pound;${product.price.$numberDecimal}</h3>
+                <!-- <h3>&pound;${product.price.$numberDecimal}</h3> -->
+                <h3>&pound;${product.price}</h3> 
                 <button>Add to Basket +</button>
               </div>
           </div>

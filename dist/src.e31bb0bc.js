@@ -7795,8 +7795,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 class HomeView {
   init() {
-    console.log('HomeView.init'); //console.log(localStorage);
-
+    console.log('HomeView.init');
+    console.log(localStorage);
     document.title = 'Home'; //this.team = null 
     //this.getTeam()
 
@@ -7805,6 +7805,7 @@ class HomeView {
     _Utils.default.pageIntroAnim();
 
     this.products = null;
+    localStorage.removeItem('cartProducts');
     this.getProducts();
   }
 
@@ -8156,7 +8157,8 @@ class CartAPI {
     }
 
     this.cartProducts.forEach(product => {
-      total += parseInt(product.price.$numberDecimal);
+      //total += parseInt(product.price.$numberDecimal)
+      total += parseInt(product.price);
     });
 
     if (localStorage.getItem('shippingFee')) {
@@ -8205,9 +8207,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class OrderAPI {
   constructor() {
-    this.customerId = "60bf7279e6993317c2477940"; //placeholder customer id
+    this.customerId = "611817197c96fc001680133c"; //placeholder customer id
 
-    this.orderId = "60e97bea3bc70632dca552e0"; //placeholder order id
+    this.orderId = "61183d1fff4dad9c013b2a9c"; //placeholder order id
 
     this.userData = {};
     this.orderData = {};
@@ -8258,12 +8260,10 @@ class OrderAPI {
       "products": products,
       "shipping": this.shipping
     };
-    console.log(this.orderData);
+    console.log("Order DATA : ", this.orderData);
     const response = await fetch("".concat(_App.default.apiBase, "/order"), {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
+      //headers: { "Content-Type" : "application/json" },
       body: this.orderData
     }); // if response not ok
 
@@ -8294,10 +8294,7 @@ class OrderAPI {
     };
     const response = await fetch("".concat(_App.default.apiBase, "/payment"), {
       method: 'POST',
-      headers: {
-        "Authorization": "Bearer ".concat(localStorage.accessToken)
-      },
-      //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
+      //headers: { "Authorization": `Bearer ${localStorage.accessToken}`},  //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
       body: paymentData
     }); // if response not ok
 
@@ -8380,7 +8377,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <!-- <p>&pound;{product.price.$numberDecimal}</p> -->\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -8473,7 +8470,7 @@ class Checkout1View {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.shippingSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.shippingSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price))), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8512,7 +8509,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <!-- <p>&pound;{product.price.$numberDecimal}</p> -->\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -8594,7 +8591,7 @@ class Checkout2View {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8633,7 +8630,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject10() {
-  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
+  const data = _taggedTemplateLiteral(["\n              <div class='cart-product'>\n                <img class='cart-img' src='/images/", ".png' alt='", "'>\n                <div class='cart-product-info'>\n                  <p class='product-name'>", "</p> \n                  <p>Quantity: ", "</p>\n                  <!-- <p>&pound;", "</p>-->\n                  <p>&pound;", "</p>\n                </div>\n              </div>\n          "]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -8779,7 +8776,7 @@ class Checkout3View {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.shipping == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.placeOrder, this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.shipping == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.placeOrder, this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -9068,7 +9065,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n\n        <div class='pp-left'>\n          <h2>", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          <img class='pp-img' src='/images/", ".png' alt='", "'>\n        \n        <div class='pp-button'>\n          <button>Bottles</button>\n          <button>Cans</button>\n        </div>\n        </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p>", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p>", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <h3>&pound;", "</h3>\n                <button>Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p>", "</p>\n            <img src='/images/vegan-white.png'>\n            <p>", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n\n        <div class='pp-left'>\n          <h2>", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          <img class='pp-img' src='/images/", ".png' alt='", "'>\n        \n        <div class='pp-button'>\n          <button>Bottles</button>\n          <button>Cans</button>\n        </div>\n        </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p>", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p>", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3>&pound;", "</h3> \n                <button>Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p>", "</p>\n            <img src='/images/vegan-white.png'>\n            <p>", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -9122,7 +9119,7 @@ class ProductsView {
     this.productDialog = document.createElement('sl-dialog');
     this.productDialog.className = 'product-dialog'; //add content
 
-    const dialogContent = (0, _litHtml.html)(_templateObject(), product.name, _App.default.apiBase, product.image, product.name, product.item, product.name, product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
+    const dialogContent = (0, _litHtml.html)(_templateObject(), product.name, _App.default.apiBase, product.image, product.name, product.item, product.name, product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
     (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
 
     document.body.append(this.productDialog); //show the dialog
@@ -11075,7 +11072,7 @@ var _CartAPI = _interopRequireDefault(require("./../CartAPI"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n        <div class='cart-product'>\n          <img class='cart-img' src='/images/", ".png' alt='", "'>\n          <div class='cart-product-info'>\n            <p class='product-name'>", "</p> \n            <p>Quantity: ", "</p>\n            <p>&pound;", "</p>\n          </div>\n        </div>\n      "]);
+  const data = _taggedTemplateLiteral(["\n        <div class='cart-product'>\n          <img class='cart-img' src='/images/", ".png' alt='", "'>\n          <div class='cart-product-info'>\n            <p class='product-name'>", "</p> \n            <p>Quantity: ", "</p>\n            <!-- <p>&pound;", "</p> -->\n            <p>&pound;", "</p>\n          </div>\n        </div>\n      "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -11193,7 +11190,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   }
 
   render() {
-    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.hamburgerClick, this.products == null ? (0, _litElement.html)(_templateObject2()) : (0, _litElement.html)(_templateObject3(), this.products.map(product => (0, _litElement.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal)), _CartAPI.default.getTotal(), this.checkoutClick));
+    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.hamburgerClick, this.products == null ? (0, _litElement.html)(_templateObject2()) : (0, _litElement.html)(_templateObject3(), this.products.map(product => (0, _litElement.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price)), _CartAPI.default.getTotal(), this.checkoutClick));
   } // <div id="drop-menu" class="app-menu">
   // <ul>
   //   <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>

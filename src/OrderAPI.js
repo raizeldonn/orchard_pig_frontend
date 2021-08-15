@@ -6,8 +6,8 @@ import CartAPI from './CartAPI'
 class OrderAPI {
 
   constructor(){
-    this.customerId = "60bf7279e6993317c2477940" //placeholder customer id
-    this.orderId = "60e97bea3bc70632dca552e0" //placeholder order id
+    this.customerId = "611817197c96fc001680133c" //placeholder customer id
+    this.orderId = "61183d1fff4dad9c013b2a9c" //placeholder order id
     this.userData = {}
     this.orderData = {}
     this.shipping = {}
@@ -61,11 +61,11 @@ class OrderAPI {
       "shipping": this.shipping
     }
 
-    console.log(this.orderData)
+    console.log("Order DATA : ",this.orderData)
 
     const response = await fetch(`${App.apiBase}/order`, {
       method: 'POST', 
-      headers: { "Content-Type" : "application/json" },
+      //headers: { "Content-Type" : "application/json" },
       body: this.orderData
     })
 
@@ -100,7 +100,7 @@ class OrderAPI {
     }
     const response = await fetch(`${App.apiBase}/payment`, {
       method: 'POST',  
-      headers: { "Authorization": `Bearer ${localStorage.accessToken}`},  //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
+      //headers: { "Authorization": `Bearer ${localStorage.accessToken}`},  //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
       body: paymentData
     })
 

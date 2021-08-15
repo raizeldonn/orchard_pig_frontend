@@ -63,7 +63,8 @@ class CartAPI {
         }
 
         this.cartProducts.forEach( product => {
-            total += parseInt(product.price.$numberDecimal)
+            //total += parseInt(product.price.$numberDecimal)
+            total += parseInt(product.price)
         })
 
         if(localStorage.getItem('shippingFee')){
