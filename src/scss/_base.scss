@@ -347,57 +347,55 @@ button.homepg-btn {
   }
 }
 
-.disclaimer {
-  background-color: rgb(73, 73, 73);
-  color: white;
-  margin: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  height: 20vh;
-  padding: 1.6em;
-}
 
 // Footer -------------------------------------
 footer {
-  padding: 1.5em;
+  padding: 3% 5%;
   margin: 0;
   color: white;
-  display: flex;
-  height: auto;
+  height: 90vh;
   width: 100%;
   background-color: rgb(73, 73, 73);
 
-  div {
-    width: 33%;
+  .footer-grid{
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    width: 100%;
+    div{
+      h2{
+        font-size: 22px;
+        color: white;
+      }
+      ul {
+        padding: 0;
+        list-style-type: none;
+        li{
+          margin: 4% 0;
+        }
+      }
+    
+    }
   }
 
   .footer-logo {
-    width: 60%;
+    width: 25%;
     cursor: pointer;
     margin-left: auto;
     margin-right: auto;
     display: block;
-  }
-
-  h3 {
-    font-size: 22px;
-    color: white;
-    margin-bottom: 0;
-  }
-
-  p {
-    margin-bottom: 0;
+    margin-top: 3%;
+    margin-bottom: 4%;
   }
 
   #social {
-    margin: auto;
-    width: 50%;
-    margin-top: 50px;
-
     i {
       font-size: 40px;
       margin: 8px;
     }
+  }
+
+  #disclaimer{
+    font-size: 12px;
   }
 }
 

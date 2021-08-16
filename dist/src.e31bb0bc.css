@@ -325,51 +325,45 @@ button.homepg-btn {
   position: relative;
 }
 
-.disclaimer {
-  background-color: #494949;
-  color: white;
-  margin: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  height: 20vh;
-  padding: 1.6em;
-}
-
 footer {
-  padding: 1.5em;
+  padding: 3% 5%;
   margin: 0;
   color: white;
-  display: flex;
-  height: auto;
+  height: 90vh;
   width: 100%;
   background-color: #494949;
 }
-footer div {
-  width: 33%;
+footer .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  width: 100%;
+}
+footer .footer-grid div h2 {
+  font-size: 22px;
+  color: white;
+}
+footer .footer-grid div ul {
+  padding: 0;
+  list-style-type: none;
+}
+footer .footer-grid div ul li {
+  margin: 4% 0;
 }
 footer .footer-logo {
-  width: 60%;
+  width: 25%;
   cursor: pointer;
   margin-left: auto;
   margin-right: auto;
   display: block;
-}
-footer h3 {
-  font-size: 22px;
-  color: white;
-  margin-bottom: 0;
-}
-footer p {
-  margin-bottom: 0;
-}
-footer #social {
-  margin: auto;
-  width: 50%;
-  margin-top: 50px;
+  margin-top: 3%;
+  margin-bottom: 4%;
 }
 footer #social i {
   font-size: 40px;
   margin: 8px;
+}
+footer #disclaimer {
+  font-size: 12px;
 }
 
 .products {

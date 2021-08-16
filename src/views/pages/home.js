@@ -89,10 +89,48 @@ class HomeView {
 
         </section>
 
-        
+        <footer>
+          <div class='footer-grid'>
+            <div >
+              <h2>Products</h2>
+              <ul>
+                <li>Reveller</li>
+                <li>Truffler</li>
+                <li>Hogfather</li>
+                <li>Pink</li>
+                <li>Charmer</li>
+              </ul>
+            </div>
+            <div class='help'>
+              <h2>Help</h2>
+              <ul>
+                <li>Delivery and Returns</li>
+                <li>Terms and Conditions</li>
+                <li>Privacy Policy</li>
+              </ul>
+            </div>
+            <div class='contact-us'>
+              <h2>Contact Us</h2>
+              <ul>
+                <li>275 Burnfield Road, Thornliebank</li>
+                <li>01632 960493</li>
+                <li>oink@orchardpig.co.uk</li>
+              </ul>
+            </div>
+            <div class='follow-us'>
+              <h2>Follow Us</h2>
+              <div id="social">
+              <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
+              <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
+              <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter-square"></i></a>
+            </div>
+            </div>
+          </div>
 
-        <section class='disclaimer'>
-          <p>
+          <img @click="${() => gotoRoute('/')}" class='footer-logo' src='/images/logo-white-cut.png'></a>  
+
+          <hr/>
+          <p id='disclaimer'>
             This website has been created as part of an assignment in an approved course of study for Curtin University 
             and contains copyright material not created by the author. 
             All copyright material used remains copyright of the respective owners 
@@ -100,25 +138,6 @@ class HomeView {
             No part of this work may be reproduced without consent of the original copyright owners. 
             See code comments for references.
           </p>
-        </section>
-
-        <footer>
-          <div>
-              <h3>Contact</h3>
-              <p>275 Burnfield Road, Thornliebank</p>
-              <p>01632 960493</p>
-              <p>oink@orchardpig.co.uk</p>
-          </div>
-          <div>
-            <img @click="${() => gotoRoute('/')}" class='footer-logo' src='/images/logo-white-cut.png'></a>  
-          </div>
-          <div>
-            <div id="social">
-              <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
-              <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
-              <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter-square"></i></a>
-            </div>
-          </div>
         </footer>
 
       
