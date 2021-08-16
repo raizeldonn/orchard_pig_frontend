@@ -1,7 +1,13 @@
-import {html, render } from 'lit-html'
+import {
+  html,
+  render
+} from 'lit-html'
 
 import App from '../../App'
-import {gotoRoute, anchorRoute} from '../../Router'
+import {
+  gotoRoute,
+  anchorRoute
+} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
 import Toast from '../../Toast'
@@ -9,49 +15,49 @@ import ProductsAPI from './../../ProductsAPI';
 import CartAPI from './../../CartAPI';
 
 class ProductsView {
-  init(){
-    document.title = 'Products'    
+  init() {
+    document.title = 'Products'
     this.products = null;
     this.productDialog = null
-    this.render()    
+    this.render()
     Utils.pageIntroAnim()
 
-    if (localStorage.getItem('allProducts')){
-    this.products = JSON.parse(localStorage.getItem('allProducts'));
+    if (localStorage.getItem('allProducts')) {
+      this.products = JSON.parse(localStorage.getItem('allProducts'));
     } else {
       this.getProducts();
     }
-    console.log("On Products Page:" , this.products);
+    console.log("On Products Page:", this.products);
     this.render()
     //localStorage.removeItem('allProducts');
-    
+
   }
 
-  async getProducts(){
-    try{
+  async getProducts() {
+    try {
       this.products = await ProductsAPI.getProducts()
       console.log(this.products)
       this.render()
-    }catch(err){
+    } catch (err) {
       Toast.show(err, 'error')
     }
   }
 
-  hoverImage(product){
-    document.getElementById(product.name).src="/images/" + product.item  + "_steps.png"
+  hoverImage(product) {
+    document.getElementById(product.name).src = "/images/" + product.item + "_steps.png"
   }
 
-  unhoverImage(product){
-    document.getElementById(product.name).src="/images/" + product.item  + ".png"
+  unhoverImage(product) {
+    document.getElementById(product.name).src = "/images/" + product.item + ".png"
   }
 
   //when user selects 'more info' create & show a more info dialog
-  moreInfoHandler(product){
+  moreInfoHandler(product) {
     //create cleaner dialog
     this.productDialog = document.createElement('sl-dialog')
     this.productDialog.className = 'product-dialog'
     //add content
-    const dialogContent = html`
+    const dialogContent = html `
 
       <style>
         .product-dialog{
@@ -176,43 +182,38 @@ class ProductsView {
     //show the dialog
     this.productDialog.show()
     //on hide, delete the dialog
-    this.productDialog.addEventListener('sl-after-hide', ()=>{
+    this.productDialog.addEventListener('sl-after-hide', () => {
       this.productDialog.remove()
     })
   }
 
-//select bottle info 
-  moreInfoBottleHandler(product){
+  //select bottle info 
+  moreInfoBottleHandler(product) {
     this.productDialog.remove();
+    for (var i = 0; i < this.products.length; i++) {
+      if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "12")) {
+        product = this.products[i];
+        this.moreInfoHandler(product);
+      }
+    }
+  }
 
-    for(var i = 0; i < this.products.length; i++)
-{
-  if((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "12"))
-  {
-    product = this.products[i];
-    this.moreInfoHandler(product);
-  }
-}
-  }
-  
-//select can info
-  moreInfoCanHandler(product){
+  //select can info
+  moreInfoCanHandler(product) {
     this.productDialog.remove();
-    for(var i = 0; i < this.products.length; i++)
-{
-  if((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24"))
-  {
-    product = this.products[i];
-    
-    this.moreInfoHandler(product);
-  }
-}
+    for (var i = 0; i < this.products.length; i++) {
+      if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24")) {
+        product = this.products[i];
+
+        this.moreInfoHandler(product);
+      }
+    }
   }
 
   // if the user presses 'add to cart' from product page, then qty == 1
   // else grab the qty that the user has entered
   // as it will be easier than havign to update the quantity when it is already in the cart
-  addToCart(product){
+  addToCart(product) {
     console.log("added to cart: " + product.name);
     CartAPI.addProduct(product.item, product.name, 1, product.sku, product.price);
     this.render()
@@ -220,8 +221,8 @@ class ProductsView {
 
   // method from lit library which allows us 
   // to render html from within js to a container
-  render(){
-    const template = html`
+  render() {
+    const template = html `
       <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content products">      
         <h1>Meet Our Pigs</h1>  
