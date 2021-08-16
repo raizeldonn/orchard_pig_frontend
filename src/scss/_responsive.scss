@@ -116,6 +116,26 @@
         transform: scaleX(-1) translateY(2900px) rotate(-20deg);
       }
     }
+
+    /* CONTACT PAGE */
+    .contact-page{
+      .flex{
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: auto;
+        .flex-column{
+          width: 100%;
+        }
+      }
+      .contact-us-form{
+        width: 100%;
+        margin-bottom: 5%;
+      }
+      .right, .mapouter{
+        margin-left: 0;
+      }
+    }
 }
   
   @media all and (max-width: 768px){ 

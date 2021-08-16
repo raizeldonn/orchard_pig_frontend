@@ -440,14 +440,14 @@ footer #disclaimer {
 
 .contact-page {
   background-color: var(--med-blue);
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .contact-page .pigsteps {
   position: absolute;
-  width: 80%;
+  width: 85%;
   transform: rotate(-15deg);
   bottom: 5%;
-  right: -5%;
+  right: 0;
   z-index: -1;
 }
 .contact-page h1 {
@@ -455,7 +455,7 @@ footer #disclaimer {
   text-align: center;
   width: 100%;
   color: white;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 .contact-page .flex {
   display: flex;
@@ -466,6 +466,7 @@ footer #disclaimer {
 .contact-page .flex .flex-column {
   display: flex;
   flex-direction: column;
+  width: 45%;
 }
 .contact-page .contact-us-form {
   width: 50%;
@@ -491,13 +492,16 @@ footer #disclaimer {
 .contact-page .contact-us-form .name-input .input-group:first-child {
   margin-right: 3%;
 }
+.contact-page .contact-us-form .name-input .input-group {
+  width: 48%;
+}
 .contact-page .right {
   margin-left: 5%;
   color: white;
   width: 100%;
   background-color: var(--dark-blue);
   border-radius: 5px;
-  height: 50%;
+  height: 100%;
 }
 .contact-page .right img {
   width: 30px;
@@ -528,14 +532,15 @@ footer #disclaimer {
   position: relative;
   text-align: right;
   width: 100%;
-  height: 99.5%;
+  height: 115%;
   margin-left: 5%;
+  margin-top: 5%;
 }
 .contact-page .gmap_canvas {
   overflow: hidden;
   background: none !important;
   width: 100%;
-  height: 99.5%;
+  height: 115%;
 }
 
 .about-page {
@@ -849,6 +854,24 @@ sl-dialog::part(title) {
   }
   .products .pigsteps.pigsteps5 {
     transform: scaleX(-1) translateY(2900px) rotate(-20deg);
+  }
+
+  /* CONTACT PAGE */
+  .contact-page .flex {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: auto;
+  }
+  .contact-page .flex .flex-column {
+    width: 100%;
+  }
+  .contact-page .contact-us-form {
+    width: 100%;
+    margin-bottom: 5%;
+  }
+  .contact-page .right, .contact-page .mapouter {
+    margin-left: 0;
   }
 }
 @media all and (max-width: 768px) {

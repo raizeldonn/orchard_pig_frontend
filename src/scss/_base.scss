@@ -481,14 +481,14 @@ footer {
 // Contact Page -------------------------------
 .contact-page {
   background-color: var(--med-blue);
-  overflow: hidden;
+  overflow-x: hidden;
 
   .pigsteps {
     position: absolute;
-    width: 80%;
+    width: 85%;
     transform: rotate(-15deg);
     bottom: 5%;
-    right: -5%;
+    right: 0;
     z-index: -1;
   }
   h1{
@@ -496,7 +496,7 @@ footer {
     text-align: center;
     width: 100%;
     color: white;
-    margin-top: 80px;
+    margin-top: 50px;
   }
 
   .flex {
@@ -507,6 +507,7 @@ footer {
     .flex-column{
       display: flex;
       flex-direction: column;
+      width: 45%;
     }
   }
 
@@ -532,6 +533,9 @@ footer {
       .input-group:first-child{
         margin-right: 3%;
       }
+      .input-group{
+        width: 48%;
+      }
     }
   }
 
@@ -541,7 +545,7 @@ footer {
     width: 100%;
     background-color: var(--dark-blue);
     border-radius: 5px;
-    height: 50%;
+    height: 100%;
 
     img {
       width: 30px;
@@ -578,15 +582,16 @@ footer {
     position:relative;
     text-align:right;
     width:100%;
-    height: 99.5%;
+    height: 115%;
     margin-left: 5%;
+    margin-top: 5%;
   }
 
   .gmap_canvas {
     overflow:hidden;
     background:none!important;
     width:100%;
-    height: 99.5%;
+    height: 115%;
   }
 }
 
