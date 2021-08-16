@@ -8263,7 +8263,6 @@ class OrderAPI {
     console.log("Order DATA : ", this.orderData);
     const response = await fetch("".concat(_App.default.apiBase, "/order"), {
       method: 'POST',
-      //headers: { "Content-Type" : "application/json" },
       body: this.orderData
     }); // if response not ok
 

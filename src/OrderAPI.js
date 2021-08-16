@@ -65,7 +65,6 @@ class OrderAPI {
 
     const response = await fetch(`${App.apiBase}/order`, {
       method: 'POST', 
-      //headers: { "Content-Type" : "application/json" },
       body: this.orderData
     })
 
