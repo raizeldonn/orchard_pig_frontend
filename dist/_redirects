@@ -1,1 +1,3 @@
 /* /index.html 200
+
+/api/* https//:orchard-pig-backend.herokuapp.com/:splat 200
