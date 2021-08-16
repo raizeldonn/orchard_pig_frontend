@@ -18,7 +18,8 @@ class ProductsView {
   init() {
     document.title = 'Products'
     this.products = null;
-    this.productDialog = null
+    this.productDialog = null;
+    this.canInfoDisplay = false;
     this.render()
     Utils.pageIntroAnim()
 
@@ -189,23 +190,28 @@ class ProductsView {
 
   //select bottle info 
   moreInfoBottleHandler(product) {
-    this.productDialog.remove();
-    for (var i = 0; i < this.products.length; i++) {
-      if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "12")) {
-        product = this.products[i];
-        this.moreInfoHandler(product);
+    if (this.canInfoDisplay == true) {
+      for (var i = 0; i < this.products.length; i++) {
+        if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "12")) {
+          this.productDialog.remove();
+          product = this.products[i];
+          this.canInfoDisplay = false;
+          this.moreInfoHandler(product);
+        }
       }
     }
   }
 
   //select can info
   moreInfoCanHandler(product) {
-    this.productDialog.remove();
-    for (var i = 0; i < this.products.length; i++) {
-      if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24")) {
-        product = this.products[i];
-
-        this.moreInfoHandler(product);
+    if (this.canInfoDisplay == false) {
+      for (var i = 0; i < this.products.length; i++) {
+        if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24")) {
+          this.productDialog.remove();
+          product = this.products[i];
+          this.canInfoDisplay = true;
+          this.moreInfoHandler(product);
+        }
       }
     }
   }
