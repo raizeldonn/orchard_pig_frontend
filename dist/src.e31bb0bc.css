@@ -329,7 +329,7 @@ footer {
   padding: 3% 5%;
   margin: 0;
   color: white;
-  height: 90vh;
+  height: 85vh;
   width: 100%;
   background-color: #494949;
 }
@@ -348,6 +348,7 @@ footer .footer-grid div ul {
 }
 footer .footer-grid div ul li {
   margin: 4% 0;
+  cursor: pointer;
 }
 footer .footer-logo {
   width: 25%;
@@ -462,32 +463,65 @@ footer #disclaimer {
   height: 60%;
   margin: auto;
 }
-.contact-page .left {
+.contact-page .flex .flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.contact-page .contact-us-form {
+  width: 50%;
+}
+.contact-page .contact-us-form sl-form::part(base) {
+  background-color: var(--light-blue);
+  border-radius: 5px;
+  padding: 5%;
+}
+.contact-page .contact-us-form sl-input::part(base) {
+  border: solid black 1px;
+}
+.contact-page .contact-us-form sl-select::part(base) {
+  border: solid black 1px;
+  border-radius: 5px;
+}
+.contact-page .contact-us-form sl-textarea::part(base) {
+  border: solid black 1px;
+}
+.contact-page .contact-us-form .name-input {
+  display: flex;
+}
+.contact-page .contact-us-form .name-input .input-group:first-child {
+  margin-right: 3%;
+}
+.contact-page .right {
   margin-left: 5%;
   color: white;
   width: 100%;
   background-color: var(--dark-blue);
   border-radius: 5px;
+  height: 50%;
 }
-.contact-page .left img {
-  width: 40px;
+.contact-page .right img {
+  width: 30px;
+  margin-right: 20px;
 }
-.contact-page .left .contact-info-grid {
+.contact-page .right .contact-info-grid {
   display: grid;
   padding: 10%;
   margin: auto;
   grid-row-gap: 10px;
   grid-template-columns: repeat(2, auto);
 }
-.contact-page .left .sm-icons {
+.contact-page .right .contact-info-grid p {
+  margin-top: 0;
+}
+.contact-page .right .sm-icons {
   display: flex;
   width: 70%;
   margin: auto;
 }
-.contact-page .left .sm-icons a {
+.contact-page .right .sm-icons a {
   margin: 0 10%;
 }
-.contact-page .left .sm-icons a img {
+.contact-page .right .sm-icons a img {
   cursor: pointer;
 }
 .contact-page .mapouter {
@@ -495,6 +529,7 @@ footer #disclaimer {
   text-align: right;
   width: 100%;
   height: 99.5%;
+  margin-left: 5%;
 }
 .contact-page .gmap_canvas {
   overflow: hidden;
