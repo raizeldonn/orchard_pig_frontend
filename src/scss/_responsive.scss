@@ -4,7 +4,12 @@
   /* HOME SECTION */
     .home-section.new-pig{
       .pigsteps{
-        transform: rotate(-5deg) translateY(-20px) scaleX(-1);
+        transform: rotate(-5deg) translateY(-100px) scaleX(-1);
+      }
+    }
+    .home-section.hog{
+      .pignbottles{
+        top: 15%;
       }
     }
 
@@ -15,14 +20,15 @@
     /* HOME SECTION */
     .home-section.hog{
       .pigsteps{
-        width:100%;
+        width:110%;
         transform: rotate(5deg) translateY(-20px);
+        overflow: hidden;
       }
     }
     .home-section.new-pig{
         img.pink-tilted{
-            height: 110%;
-            bottom: -5%;
+            height: 100%;
+            bottom: 0;
         }
         .pigsteps{
           transform: rotate(-5deg) translateY(20px) scaleX(-1);
@@ -76,8 +82,12 @@
         img.pink-tilted{
           left: -5%;
         }
+        div{
+          margin-left: 50%;
+          margin-top: 10%;
+        }
         .pigsteps{
-            transform: rotate(-5deg) translateY(0px) scaleX(-1);
+            transform: rotate(-5deg) translateY(-100px) scaleX(-1);
           }
     }
 
@@ -122,7 +132,7 @@
     }
     .home-section.new-pig{
         .pigsteps{
-            transform: rotate(-5deg) translateY(100px) scaleX(-1);
+            transform: rotate(-5deg) translateY(-50px) scaleX(-1);
           }
     }
 
@@ -149,8 +159,21 @@
       }
     }
     .home-section.new-pig{
+      img.pink-tilted{
+        left: -15%;
+        z-index: 0;
+      }
+      h3{
+        z-index: 100;
+        position: relative;
+      }
+      div{
+          margin-left: 50%;
+          margin-top: 20%;
+        }
         .pigsteps{
-            transform: rotate(-5deg) translateY(200px) scaleX(-1);
+            transform: rotate(-5deg) translateY(-80px) scaleX(-1);
+            width: 105%;
           }
     }
 

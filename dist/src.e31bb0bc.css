@@ -5,6 +5,7 @@
   --heading-color: rgb(0, 0, 0);
   --base-font-family: "Lato", sans-serif;
   --heading-font-family: "RockwellBold", sans-serif;
+  --thin-heading-font-family: "Rockwell", sans-serif;
   --body-bg: #fff;
   --light-blue: #D4E7F8;
   --med-blue: #4186B7;
@@ -233,38 +234,6 @@ a {
   box-shadow: 0 0 20px 8px rgba(255, 180, 176, 0.9);
 }
 
-.home-section.hog {
-  background-color: var(--brown);
-  color: white;
-}
-.home-section.hog .pigsteps {
-  width: 90%;
-  transform: rotate(5deg) translateY(-100px);
-  z-index: -1;
-}
-.home-section.hog h1 {
-  text-align: center;
-  margin: 40px auto;
-  width: 70%;
-  font-size: max(4.4vw, 28px);
-  color: White;
-}
-.home-section.hog #social {
-  width: 50%;
-  margin: 60px auto;
-  text-align: center;
-}
-.home-section.hog #social i {
-  font-size: 50px;
-  margin: 14px;
-}
-.home-section.hog p {
-  text-align: center;
-  font-family: var(--heading-font-family);
-  font-size: 26px;
-  margin-top: 80px;
-}
-
 .home-section.new-pig {
   background-color: var(--sand);
   padding-right: 30px;
@@ -272,49 +241,87 @@ a {
 }
 .home-section.new-pig img.pink-tilted {
   position: absolute;
-  height: 120%;
-  bottom: -10%;
+  height: 108%;
+  bottom: -4%;
   left: 0;
 }
 .home-section.new-pig h1 {
-  text-align: right;
-  margin-bottom: 0;
-  margin-top: 20px;
   position: relative;
-  font-size: 5vw;
+  font-size: max(5.3vw, 25px);
   color: #21272C;
+  margin-top: 5vh;
 }
 .home-section.new-pig h3 {
-  text-align: right;
   text-transform: initial;
-  font-size: 4vw;
+  font-size: max(3.5vw, 16px);
   color: #21272C;
+  margin-bottom: 10vh;
 }
 .home-section.new-pig div {
   margin-left: auto;
   display: block;
   width: 50%;
-  margin-left: 50%;
-  margin-top: 10%;
+  margin-left: 40%;
+  text-align: center;
 }
 .home-section.new-pig p {
   color: #21272C;
-  font-family: var(--heading-font-family);
+  font-family: var(--thin-heading-font-family);
   font-size: 3.7vw;
   text-align: center;
-}
-.home-section.new-pig button {
-  background-color: #21272C;
-  font-size: 2vw;
-  padding: 1% 2.5%;
-  display: block;
-  margin: 0 auto;
+  font-weight: normal;
   z-index: 5;
   position: relative;
 }
 .home-section.new-pig .pigsteps {
   width: 95%;
-  transform: rotate(-5deg) translateY(-50px) scaleX(-1);
+  transform: rotate(-5deg) translateY(-200px) scaleX(-1);
+  z-index: 0;
+}
+
+button.homepg-btn {
+  background-color: #21272C;
+  font-size: 2vw;
+  padding: 1% 2.5%;
+  display: block;
+  margin: 0 auto;
+  z-index: 100;
+  position: relative;
+}
+
+.home-section.hog {
+  background-color: var(--brown);
+  color: white;
+  position: relative;
+}
+.home-section.hog .left {
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.home-section.hog .left p {
+  width: 80%;
+  font-family: var(--thin-heading-font-family);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 22px;
+  margin-bottom: 10%;
+}
+.home-section.hog .pignbottles {
+  height: 38vw;
+  margin-left: 40%;
+  position: absolute;
+  top: 8%;
+  left: 3%;
+  z-index: 50;
+}
+.home-section.hog .pigsteps {
+  width: 90%;
+  transform: translateY(300px);
+  z-index: 0;
+  position: relative;
 }
 
 .disclaimer {
@@ -727,19 +734,24 @@ sl-dialog::part(title) {
 @media all and (max-width: 1125px) {
   /* HOME SECTION */
   .home-section.new-pig .pigsteps {
-    transform: rotate(-5deg) translateY(-20px) scaleX(-1);
+    transform: rotate(-5deg) translateY(-100px) scaleX(-1);
+  }
+
+  .home-section.hog .pignbottles {
+    top: 15%;
   }
 }
 @media all and (max-width: 1000px) {
   /* HOME SECTION */
   .home-section.hog .pigsteps {
-    width: 100%;
+    width: 110%;
     transform: rotate(5deg) translateY(-20px);
+    overflow: hidden;
   }
 
   .home-section.new-pig img.pink-tilted {
-    height: 110%;
-    bottom: -5%;
+    height: 100%;
+    bottom: 0;
   }
   .home-section.new-pig .pigsteps {
     transform: rotate(-5deg) translateY(20px) scaleX(-1);
@@ -779,8 +791,12 @@ sl-dialog::part(title) {
   .home-section.new-pig img.pink-tilted {
     left: -5%;
   }
+  .home-section.new-pig div {
+    margin-left: 50%;
+    margin-top: 10%;
+  }
   .home-section.new-pig .pigsteps {
-    transform: rotate(-5deg) translateY(0px) scaleX(-1);
+    transform: rotate(-5deg) translateY(-100px) scaleX(-1);
   }
 
   /* PRODUCTS PAGE */
@@ -819,7 +835,7 @@ sl-dialog::part(title) {
   }
 
   .home-section.new-pig .pigsteps {
-    transform: rotate(-5deg) translateY(100px) scaleX(-1);
+    transform: rotate(-5deg) translateY(-50px) scaleX(-1);
   }
 
   .sm-100 {
@@ -838,8 +854,21 @@ sl-dialog::part(title) {
     transform: rotate(5deg) translateY(-30px);
   }
 
+  .home-section.new-pig img.pink-tilted {
+    left: -15%;
+    z-index: 0;
+  }
+  .home-section.new-pig h3 {
+    z-index: 100;
+    position: relative;
+  }
+  .home-section.new-pig div {
+    margin-left: 50%;
+    margin-top: 20%;
+  }
   .home-section.new-pig .pigsteps {
-    transform: rotate(-5deg) translateY(200px) scaleX(-1);
+    transform: rotate(-5deg) translateY(-80px) scaleX(-1);
+    width: 105%;
   }
 
   /* PRODUCTS PAGE */

@@ -66,33 +66,30 @@ class HomeView {
           <button  @click=${() => gotoRoute('/game')}>Find the pig to win!</button>
         </section>
 
-        <section class='home-section hog' >
-        
-          <h1>The cider you won't be able to help but hog</h1>
-          <div id="social">
-            <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
-            <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
-            <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter"></i></a>
-          </div>
-          <p>This little pig went to our socials, will you?</p>
-          <img class='pigsteps' src='/images/pigsteps.png'>
-          
-          <!-- <sl-icon name='facebook'></sl-icon>
-          <sl-icon name='instagram'></sl-icon>
-          <sl-icon name='twitter'></sl-icon> -->
-        </section>
-
         <section class='home-section new-pig'>
           <img class='pink-tilted' src='/images/home-pinks.png'>
-          <h1>There's a new pig in town</h1>
-          <h3>and its....delicious!</h3>
           <div>
+            <h1>There's a new pig in town</h1>
+            <h3>and its....delicious!</h3>
             <p>Wanna try it?</p>
-            <button @click=${() => gotoRoute('/products')}>Click Here</button>
+            <button class='homepg-btn' @click=${() => gotoRoute('/products')}>Click Here</button>
           </div>
           <img class='pigsteps' src='/images/pigsteps.png'>
           
         </section>
+
+        <section class='home-section hog' >
+          <div class='left'>
+            <p>It all started in the noughties, just outside Glastonbury.</p>
+            <p>When our founder started dabbling with cider making in his garden shed.</p>
+            <button class='homepg-btn' @click=${() => gotoRoute('/about')}>Learn More</button>
+          </div>
+          <img class='pignbottles' src='/images/pig_n_bottles.png'>
+          <img class='pigsteps' src='/images/pigsteps.png'>
+
+        </section>
+
+        
 
         <section class='disclaimer'>
           <p>
