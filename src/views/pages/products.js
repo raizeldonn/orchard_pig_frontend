@@ -20,6 +20,9 @@ class ProductsView {
     this.products = null;
     this.productDialog = null;
     this.canInfoDisplay = false;
+    this.cans = false;
+
+
     this.render()
     Utils.pageIntroAnim()
 
@@ -52,11 +55,19 @@ class ProductsView {
     document.getElementById(product.name).src = "/images/" + product.item + ".png"
   }
 
+
   //when user selects 'more info' create & show a more info dialog
   moreInfoHandler(product) {
     //create cleaner dialog
     this.productDialog = document.createElement('sl-dialog')
     this.productDialog.className = 'product-dialog'
+    // check if the product has cans
+    this.cans = false;
+    for (var i = 0; i < this.products.length; i++) {
+      if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24")) {
+        this.cans = true;
+      }
+    }
     //add content
     const dialogContent = html `
 
@@ -138,16 +149,18 @@ class ProductsView {
         }
       </style>
 
+      
+        
         <div class='pp-left'>
+          ${this.cans ? html ` <div class='pp-button'>
+          <button id="bottle-btn" @click=${() => this.moreInfoBottleHandler(product)}>Bottles</button>
+          <button id="can-btn" @click=${() => this.moreInfoCanHandler(product)}>Cans</button>
+          </div> ` : html ``}
+          
           <h2>${product.name}</h2>
           <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
           <!-- pull images from frontend  -->
           <img class='pp-img' src='/images/${product.item}.png' alt='${product.name}'>
-        
-        <div class='pp-button'>
-          <button id="bottle-btn" @click=${() => this.moreInfoBottleHandler(product)}>Bottles</button>
-          <button id="can-btn" @click=${() => this.moreInfoCanHandler(product)}>Cans</button>
-        </div>
         </div>
 
         <div class='pp-right'>
@@ -161,7 +174,7 @@ class ProductsView {
               <div class='pp-boxes'>
                 <!-- <h3>&pound;${product.price.$numberDecimal}</h3> -->
                 <h3>&pound;${product.price}</h3> 
-                <button>Add to Basket +</button>
+                <button @click=${() => this.addToCart(product)}>Add to Basket +</button>
               </div>
           </div>
           <p id='desc'>${product.description}</p>
@@ -250,7 +263,7 @@ class ProductsView {
                   <img id='${product.name}' @click=${() => this.moreInfoHandler(product)} @mouseover=${() => this.hoverImage(product)}  @mouseout=${() => this.unhoverImage(product)}
                       src='/images/${product.item}.png' alt='${product.name}'>
                   <h2>${product.shortName}</h2>
-                  <button @click=${() => this.addToCart(product)}>Buy Now</button>
+                  <!--<button @click=${() => this.addToCart(product)}>Buy Now</button>-->
                 </div>
                 ` : html ``}
                 
