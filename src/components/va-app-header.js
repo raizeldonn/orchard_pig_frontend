@@ -112,10 +112,14 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         cursor: pointer;
         display: block;
       }
+
+      .app-top-nav{
+        width: 40%;
+      }
       
       .app-top-nav a {
         display: inline-block;
-        padding: .8em;
+        padding: .8em .6em;
         text-decoration: none;
         color: black;
         font-family: var(--heading-font-family);
@@ -281,6 +285,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       </nav>
       
       <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
+
+      <nav class="basket right">
+        <!-- change to apples2 or apples to see other options -->
+        <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
+      </nav>
       
 
       <!-- dropdown menu -->
@@ -300,10 +309,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       </ul>
       </div>
     
-      <nav class="basket right">
-        <!-- change to apples2 or apples to see other options -->
-        <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
-      </nav>
+      
 
     </header>
 
