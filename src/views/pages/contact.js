@@ -87,8 +87,10 @@ class ContactView {
           </div>
         </div>
         
+        <va-app-footer margin="true"></va-app-footer> 
         
-      </div>      
+      </div> 
+          
     `
     // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 

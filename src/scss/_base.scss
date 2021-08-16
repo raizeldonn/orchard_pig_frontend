@@ -347,59 +347,6 @@ button.homepg-btn {
   }
 }
 
-
-// Footer -------------------------------------
-footer {
-  padding: 3% 5%;
-  margin: 0;
-  color: white;
-  height: 85vh;
-  width: 100%;
-  background-color: rgb(73, 73, 73);
-
-  .footer-grid{
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    width: 100%;
-    div{
-      h2{
-        font-size: 22px;
-        color: white;
-      }
-      ul {
-        padding: 0;
-        list-style-type: none;
-        li{
-          margin: 4% 0;
-          cursor: pointer;
-        }
-      }
-    
-    }
-  }
-
-  .footer-logo {
-    width: 25%;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    margin-top: 3%;
-    margin-bottom: 4%;
-  }
-
-  #social {
-    i {
-      font-size: 40px;
-      margin: 8px;
-    }
-  }
-
-  #disclaimer{
-    font-size: 12px;
-  }
-}
-
 // Products Page ------------------------------
 .products {
   background-color: var(--med-blue);
@@ -482,7 +429,6 @@ footer {
 .contact-page {
   background-color: var(--med-blue);
   overflow-x: hidden;
-
   .pigsteps {
     position: absolute;
     width: 85%;
@@ -503,6 +449,7 @@ footer {
     display: flex;
     width: 70%;
     height: 60%;
+    margin-bottom: 200px;
     margin: auto;
     .flex-column{
       display: flex;

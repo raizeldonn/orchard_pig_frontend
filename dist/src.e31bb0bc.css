@@ -325,48 +325,6 @@ button.homepg-btn {
   position: relative;
 }
 
-footer {
-  padding: 3% 5%;
-  margin: 0;
-  color: white;
-  height: 85vh;
-  width: 100%;
-  background-color: #494949;
-}
-footer .footer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  width: 100%;
-}
-footer .footer-grid div h2 {
-  font-size: 22px;
-  color: white;
-}
-footer .footer-grid div ul {
-  padding: 0;
-  list-style-type: none;
-}
-footer .footer-grid div ul li {
-  margin: 4% 0;
-  cursor: pointer;
-}
-footer .footer-logo {
-  width: 25%;
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  margin-top: 3%;
-  margin-bottom: 4%;
-}
-footer #social i {
-  font-size: 40px;
-  margin: 8px;
-}
-footer #disclaimer {
-  font-size: 12px;
-}
-
 .products {
   background-color: var(--med-blue);
   padding: 5%;
@@ -461,6 +419,7 @@ footer #disclaimer {
   display: flex;
   width: 70%;
   height: 60%;
+  margin-bottom: 200px;
   margin: auto;
 }
 .contact-page .flex .flex-column {
