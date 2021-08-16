@@ -138,8 +138,8 @@ class ProductsView {
           <img class='pp-img' src='/images/${product.item}.png' alt='${product.name}'>
         
         <div class='pp-button'>
-          <button>Bottles</button>
-          <button>Cans</button>
+          <button id="bottle-btn" @click=${() => this.moreInfoBottleHandler(product)}>Bottles</button>
+          <button id="can-btn" @click=${() => this.moreInfoCanHandler(product)}>Cans</button>
         </div>
         </div>
 
@@ -169,6 +169,7 @@ class ProductsView {
           ${product.allergen? html` <p>allergen: ${product.allergen}</p>` : html``}
         </div>
     `
+
     render(dialogContent, this.productDialog)
     //append to document.body
     document.body.append(this.productDialog)
@@ -178,6 +179,34 @@ class ProductsView {
     this.productDialog.addEventListener('sl-after-hide', ()=>{
       this.productDialog.remove()
     })
+  }
+
+//select bottle info 
+  moreInfoBottleHandler(product){
+    this.productDialog.remove();
+
+    for(var i = 0; i < this.products.length; i++)
+{
+  if((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "12"))
+  {
+    product = this.products[i];
+    this.moreInfoHandler(product);
+  }
+}
+  }
+  
+//select can info
+  moreInfoCanHandler(product){
+    this.productDialog.remove();
+    for(var i = 0; i < this.products.length; i++)
+{
+  if((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24"))
+  {
+    product = this.products[i];
+    
+    this.moreInfoHandler(product);
+  }
+}
   }
 
   // if the user presses 'add to cart' from product page, then qty == 1

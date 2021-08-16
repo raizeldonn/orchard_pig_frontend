@@ -9064,7 +9064,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n\n        <div class='pp-left'>\n          <h2>", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          <img class='pp-img' src='/images/", ".png' alt='", "'>\n        \n        <div class='pp-button'>\n          <button>Bottles</button>\n          <button>Cans</button>\n        </div>\n        </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p>", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p>", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3>&pound;", "</h3> \n                <button>Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p>", "</p>\n            <img src='/images/vegan-white.png'>\n            <p>", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n\n        <div class='pp-left'>\n          <h2>", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          <img class='pp-img' src='/images/", ".png' alt='", "'>\n        \n        <div class='pp-button'>\n          <button id=\"bottle-btn\" @click=", ">Bottles</button>\n          <button id=\"can-btn\" @click=", ">Cans</button>\n        </div>\n        </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p>", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p>", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3>&pound;", "</h3> \n                <button>Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p>", "</p>\n            <img src='/images/vegan-white.png'>\n            <p>", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -9118,7 +9118,7 @@ class ProductsView {
     this.productDialog = document.createElement('sl-dialog');
     this.productDialog.className = 'product-dialog'; //add content
 
-    const dialogContent = (0, _litHtml.html)(_templateObject(), product.name, _App.default.apiBase, product.image, product.name, product.item, product.name, product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
+    const dialogContent = (0, _litHtml.html)(_templateObject(), product.name, _App.default.apiBase, product.image, product.name, product.item, product.name, () => this.moreInfoBottleHandler(product), () => this.moreInfoCanHandler(product), product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject2(), product.allergen) : (0, _litHtml.html)(_templateObject3()));
     (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
 
     document.body.append(this.productDialog); //show the dialog
@@ -9128,6 +9128,30 @@ class ProductsView {
     this.productDialog.addEventListener('sl-after-hide', () => {
       this.productDialog.remove();
     });
+  } //select bottle info 
+
+
+  moreInfoBottleHandler(product) {
+    this.productDialog.remove();
+
+    for (var i = 0; i < this.products.length; i++) {
+      if (this.products[i].shortName == product.shortName && this.products[i].packSize == "12") {
+        product = this.products[i];
+        this.moreInfoHandler(product);
+      }
+    }
+  } //select can info
+
+
+  moreInfoCanHandler(product) {
+    this.productDialog.remove();
+
+    for (var i = 0; i < this.products.length; i++) {
+      if (this.products[i].shortName == product.shortName && this.products[i].packSize == "24") {
+        product = this.products[i];
+        this.moreInfoHandler(product);
+      }
+    }
   } // if the user presses 'add to cart' from product page, then qty == 1
   // else grab the qty that the user has entered
   // as it will be easier than havign to update the quantity when it is already in the cart
@@ -11377,7 +11401,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64865" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53529" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
