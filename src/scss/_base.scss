@@ -316,31 +316,32 @@ button.homepg-btn {
   .left{
     width: 40%;
     position: absolute;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
+    margin-right: 5%;
     p{
-      width: 80%;
+      width: 60%;
       font-family: var(--thin-heading-font-family);
       text-align: center;
       margin-left: auto;
       margin-right: auto;
-      font-size: 22px;
+      font-size: 20px;
       margin-bottom: 10%;
     }
   }
 
   .pignbottles{
-    height: 38vw;
+    width: 55vw;
     margin-left: 40%;
     position: absolute;
     top: 8%;
-    left: 3%;
+    left: 0;
     z-index: 50;
   }
 
   .pigsteps {
     width: 90%;
-    transform: translateY(300px);
+    transform: translateY(350px);
     z-index: 0;
     position: relative;
   }
