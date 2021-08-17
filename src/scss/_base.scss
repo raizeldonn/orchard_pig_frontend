@@ -677,16 +677,19 @@ button.homepg-btn {
     width: 30%;
     padding: 30px;
   }
+  .input-group{
+    width: 100%;
+  }
   .left{
     padding: 30px;
     width: 70%;
     .name-input{
       display: flex;
-      sl-input::part(form-control){
-        width: 100%;
+      .input-group:first-child{
+        margin-right: 3%;
       }
-      sl-input#right::part(form-control){
-        margin-left: 20%;
+      .input-group{
+        width: 48%;
       }
     }
   }
