@@ -109,37 +109,38 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         min-width: 70px;
         position: absolute;
         left: 42%;
-        center: center;
         cursor: pointer;
         display: block;
       }
+
       .nav-logo:hover{
         animation-name: spin;
         animation-duration: 2s;
         animation-iteration-count: infinite;
       }
-      @keyframes spin {ç
+      @keyframes spin {
         from {transform: rotate(0deg);}
         to {transform : rotate(360deg);}
       }
       
-
       .nav-logo2{
         width: 9%;
         min-width: 70px;
         position: absolute;
         left: 42%;
-        center: center;
         cursor: pointer;
         display: block;
       }
       .app-top-nav{
         width: 40%;
+        display: flex;
       }
       
       .app-top-nav a {
         display: inline-block;
-        padding: .8em .6em;
+        padding: .6em;
+        padding-bottom: .8em;
+        padding-top: 0;
         text-decoration: none;
         color: black;
         font-family: var(--heading-font-family);
@@ -150,7 +151,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         background-image: url('/images/navbar-pigstep.png');
         background-repeat: no-repeat;
         background-position: center top;
-        background-size: 40px;
+        background-size: 30px;
+      }
+      .app-top-nav li{
+        text-align: center;
       }
 
       .app-menu {
