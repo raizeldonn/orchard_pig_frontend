@@ -14,12 +14,12 @@ customElements.define('va-bottle-spinner', class AppSpinner extends LitElement {
     
     <style>
     #spinner {
-      animation-name: example;
+      animation-name: spin;
       animation-duration: 2s;
       animation-iteration-count: infinite;
     
     }
-    @keyframes example {
+    @keyframes spin {
       from {transform: rotate(0deg);}
       to {transform : rotate(360deg);}
     }

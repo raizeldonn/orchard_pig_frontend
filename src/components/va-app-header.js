@@ -114,7 +114,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         display: block;
       }
       .nav-logo:hover{
-        background-color: var(--med-blue);
+        animation-name: spin;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+      }
+      @keyframes spin {ç
+        from {transform: rotate(0deg);}
+        to {transform : rotate(360deg);}
       }
 
       .app-top-nav{
