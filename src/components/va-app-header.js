@@ -123,6 +123,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         to {transform : rotate(360deg);}
       }
 
+      .nav-logo2{
+        width: 9%;
+        min-width: 70px;
+        position: absolute;
+        left: 42%;
+        center: center;
+        cursor: pointer;
+        display: block;
+      }
       .app-top-nav{
         width: 40%;
       }
@@ -283,7 +292,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       </nav>
       
       <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
-
+      <video @click="${() => gotoRoute('/')}" class='nav-logo2' width="70" height="50" autoplay loop>
+        <source src="/images/logo-run.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
