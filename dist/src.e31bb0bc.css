@@ -618,6 +618,9 @@ button.homepg-btn {
   width: 30%;
   padding: 30px;
 }
+.checkout .input-group {
+  width: 100%;
+}
 .checkout .left {
   padding: 30px;
   width: 70%;
@@ -625,11 +628,11 @@ button.homepg-btn {
 .checkout .left .name-input {
   display: flex;
 }
-.checkout .left .name-input sl-input::part(form-control) {
-  width: 100%;
+.checkout .left .name-input .input-group:first-child {
+  margin-right: 3%;
 }
-.checkout .left .name-input sl-input#right::part(form-control) {
-  margin-left: 20%;
+.checkout .left .name-input .input-group {
+  width: 48%;
 }
 .checkout h1 {
   padding: 0;
@@ -760,6 +763,14 @@ sl-dialog::part(title) {
   /* PRODUCTS PAGE */
   .products .products-grid h2, .products .products-grid button {
     transform: translateY(-450px) translateX(250px);
+  }
+
+  /*CHECKOUT*/
+  .checkout .left {
+    width: 60%;
+  }
+  .checkout .right {
+    width: 40%;
   }
 }
 @media all and (max-width: 900px) {
