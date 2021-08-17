@@ -249,7 +249,7 @@ class ProductsView {
   addToCart(product) {
     console.log("added to cart: " + product.name);
     CartAPI.addProduct(product.item, product.name, 1, product.sku, product.price);
-    Toast.show('Product added to your Cart')
+    Toast.show(product.name + ' added to your Cart')
     this.render()
   }
 

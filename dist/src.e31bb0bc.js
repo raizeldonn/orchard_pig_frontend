@@ -9198,7 +9198,7 @@ class ProductsView {
 
     _CartAPI.default.addProduct(product.item, product.name, 1, product.sku, product.price);
 
-    _Toast.default.show('Product added to your Cart');
+    _Toast.default.show(product.name + ' added to your Cart');
 
     this.render();
   } // method from lit library which allows us 
