@@ -151,7 +151,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         background-image: url('/images/navbar-pigstep.png');
         background-repeat: no-repeat;
         background-position: center top;
-        background-size: 40px;
+        background-size: 30px;
       }
       .app-top-nav li{
         text-align: center;
