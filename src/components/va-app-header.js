@@ -114,7 +114,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         display: block;
       }
       .nav-logo:hover{
-        background-color: var(--light-blue);
+        background-color: var(--med-blue);
       }
 
       .app-top-nav{
