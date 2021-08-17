@@ -126,6 +126,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         text-transform: uppercase;
         cursor: pointer;
       }
+      .app-top-nav li:hover {
+        background-image: url('/images/navbar-pigstep.png');
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 40px;
+      }
 
       .app-menu {
         display: none;
@@ -134,17 +140,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         margin-top: 14px;
         border: none;
         width: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        z-index: 110
-=======
         z-index: 1000;
-        
->>>>>>> assignment3
-=======
-        z-index: 1000;
-        
->>>>>>> assignment3
         
       }
       
@@ -158,21 +154,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         text-transform: uppercase;
         cursor: pointer;
       }
-
-      .app-menu .nav-fp {
-        visibility: hidden;
-        z-index: -100;
-        margin-left: auto;
-        margin-right: auto;
+      .app-menu li:hover {
+        background-image: url('/images/navbar-pigstep.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50px;
       }
-      .app-menu a:hover .nav-fp  {
-        visibility: visible;
-      }
-      
+   
 
       .app-menu li {
         list-style-type: none;
         border: 0px;
+        min-height: 70px;
         margin-bottom: 0px;
         text-align: center;
         padding-left: 0px;
@@ -255,6 +248,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           float: left;
           width: 20%;
         }
+      
+
         .app-menu {
           visibility: hidden;
           display: none;
@@ -268,7 +263,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
     <header class="app-header">
       <!-- <div class="hover-footprints">
-        <img class='nav-fp' src='/images/logo-black.png'>
+        <img class='nav-trotter' src='/images/logo-black.png'>
         <img class='nav-fp' src='/images/logo-black.png'>
         <img class='nav-fp' src='/images/logo-black.png'>
         <img class='nav-fp' src='/images/logo-black.png'>
@@ -277,10 +272,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       <nav class="app-top-nav">
         <ul>
-          <li><a @click="${() => gotoRoute('/')}">Home</a></li>
-          <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
-          <li><a @click="${() => gotoRoute('/about')}">About Us</a></li> 
-          <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
+          <li class="nav-trotter" ><a  @click="${() => gotoRoute('/')}">Home</a></li>
+          <li class="nav-trotter" ><a @click="${() => gotoRoute('/products')}">Shop</a></li>
+          <li class="nav-trotter" ><a @click="${() => gotoRoute('/about')}">About</a></li> 
+          <li class="nav-trotter" ><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
         </ul>
       </nav>
       
@@ -301,11 +296,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       <div id="drop-menu" class="app-menu">
       <ul>
-        <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/about')}">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/contact')}">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-        <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
+        <li><a @click="${() => gotoRoute('/')}">Home</a></li>
+        <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
+        <li><a @click="${() => gotoRoute('/about')}">About</a></li>
+        <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>
+        <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!</a></li>
       </ul>
       </div>
     
