@@ -108,9 +108,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         width: 9%;
         min-width: 70px;
         position: absolute;
-        left: 40%;
+        left: 42%;
+        center: center;
         cursor: pointer;
         display: block;
+      }
+      .nav-logo:hover{
+        background-color: var(--light-blue);
       }
 
       .app-top-nav{
@@ -262,14 +266,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     </style>
 
     <header class="app-header">
-      <!-- <div class="hover-footprints">
-        <img class='nav-trotter' src='/images/logo-black.png'>
-        <img class='nav-fp' src='/images/logo-black.png'>
-        <img class='nav-fp' src='/images/logo-black.png'>
-        <img class='nav-fp' src='/images/logo-black.png'>
-        <img class='nav-fp' src='/images/logo-black.png'>
-      </div> -->
-      
+
       <nav class="app-top-nav">
         <ul>
           <li class="nav-trotter" ><a  @click="${() => gotoRoute('/')}">Home</a></li>
