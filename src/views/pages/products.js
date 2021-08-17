@@ -100,6 +100,21 @@ class ProductsView {
           color: black;
           font-family: var(--base-font-family);
         }
+        .pp-left button{
+          color: white;
+          background-color: var(--med-blue);
+          font-family: var(--base-font-family);
+        }
+        .pp-left button:hover {
+          color: black;
+          background-color: var(--light-blue);
+        }
+        .pp-left button:active {
+          color: black;
+          background-color: var(--light-blue);
+
+        }
+        
         .pp-right h3{
           font-size: 32px;
           font-family :var(--base-font-family);
@@ -148,14 +163,12 @@ class ProductsView {
           font-weight: 300;
         }
       </style>
-
-      
         
         <div class='pp-left'>
           ${this.cans ? html ` <div class='pp-button'>
           <button id="bottle-btn" @click=${() => this.moreInfoBottleHandler(product)}>Bottles</button>
           <button id="can-btn" @click=${() => this.moreInfoCanHandler(product)}>Cans</button>
-          </div> ` : html ``}
+          </div><p></p> ` : html ``}
           
           <h2>${product.name}</h2>
           <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
