@@ -172,7 +172,7 @@ class ProductsView {
           <h2>${product.name}</h2>
           <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
           <!-- pull images from frontend  -->
-          <img class='pp-img' src='/images/${product.item}.png' alt='${product.name}'>
+          <img class='pp-img' src='/images/${product.image}' alt='${product.name}'>
         </div>
 
         <div class='pp-right'>

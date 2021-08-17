@@ -406,15 +406,5 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     `
   }
 
-  // <div id="drop-menu" class="app-menu">
-  // <ul>
-  //   <li><a @click="${() => gotoRoute('/')}">Home<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-  //   <li><a @click="${() => gotoRoute('/products')}">Shop<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-  //   <li><a @click="${() => gotoRoute('/about')}">About<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-  //   <li><a @click="${() => gotoRoute('/contact')}">Contact<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-  //   <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!<img class='nav-fp' src='/images/navbar-pigstep.png'></a></li>
-  // </ul>
-  // </div>
-
 
 })
