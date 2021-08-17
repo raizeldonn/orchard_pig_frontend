@@ -218,7 +218,7 @@ class ProductsView {
   moreInfoBottleHandler(product) {
     if (this.canInfoDisplay == true) {
       for (var i = 0; i < this.products.length; i++) {
-        if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "12")) {
+        if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "12")) {
           this.productDialog.remove();
           product = this.products[i];
           this.canInfoDisplay = false;
@@ -232,7 +232,7 @@ class ProductsView {
   moreInfoCanHandler(product) {
     if (this.canInfoDisplay == false) {
       for (var i = 0; i < this.products.length; i++) {
-        if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24")) {
+        if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "24")) {
           this.productDialog.remove();
           product = this.products[i];
           this.canInfoDisplay = true;

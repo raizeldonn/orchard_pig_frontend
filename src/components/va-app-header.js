@@ -297,7 +297,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       </nav>
       
       
-      <video allow="autoplay" @click="${() => gotoRoute('/')}" class='nav-logo2' width="70" height="50" autoplay onmouseover="this.play()" onmouseout="this.pause();">
+      <video allow="autoplay" @click="${() => gotoRoute('/')}" class='nav-logo2' width="70" height="50" autoplay playsinline onmouseover="this.play()" onmouseout="this.pause();">
         <source src="/images/logo-run.mp4" type="video/mp4">
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       </video>
