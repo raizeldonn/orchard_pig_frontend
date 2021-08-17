@@ -1,13 +1,6 @@
-import {
-  html,
-  render
-} from 'lit-html'
-
+import { html, render} from 'lit-html'
 import App from '../../App'
-import {
-  gotoRoute,
-  anchorRoute
-} from '../../Router'
+import { gotoRoute, anchorRoute } from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
 import Toast from '../../Toast'
@@ -68,6 +61,7 @@ class ProductsView {
         this.cans = true;
       }
     }
+    
     //add content
     const dialogContent = html `
 
@@ -151,6 +145,11 @@ class ProductsView {
           transform: translateX(30%);
           width: 60%;
         }
+        .pp-boxes button:hover{
+          color: black;
+          background-color: var(--white);
+          border: 1px solid var(--med-blue);
+        }
         .pp-right-bottom{
           display: grid;
           grid-template-columns: repeat(2, auto);
@@ -210,6 +209,7 @@ class ProductsView {
     this.productDialog.show()
     //on hide, delete the dialog
     this.productDialog.addEventListener('sl-after-hide', () => {
+      this.canInfoDisplay = false;
       this.productDialog.remove()
     })
   }
@@ -237,6 +237,7 @@ class ProductsView {
           product = this.products[i];
           this.canInfoDisplay = true;
           this.moreInfoHandler(product);
+          
         }
       }
     }
@@ -248,6 +249,7 @@ class ProductsView {
   addToCart(product) {
     console.log("added to cart: " + product.name);
     CartAPI.addProduct(product.item, product.name, 1, product.sku, product.price);
+    Toast.show('Product added to your Cart')
     this.render()
   }
 
