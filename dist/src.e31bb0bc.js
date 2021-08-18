@@ -8049,7 +8049,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About Us\" products=", "></va-app-header>\n      <div class=\"page-content about-page\">  \n      <!-- <img class='prints' src='/images/steps-transparent.png'>   -->\n        \n        <div class='about-carousel'> \n          <img class='carousel-img' src='/images/image1.jpeg'>  \n        </div>\n        <h4>Crack a cold one n' let us tell you a story</h4>\n\n        <div class='about-us-flex'>\n          <div class='info info-left '>\n            <h2>It all started</h2>\n            <p>just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>\n            Orchard Pig was born out of a shared passion for great food and Old Spots, <br>\n            the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>\n          </div>\n          <img  class='img-right' src='/images/op-founder.png'> \n        </div>\n        <div class='about-us-flex'>\n          <img class='img-left' src='/images/op-sail.png'> \n          <div class='info info-right'>\n            <h2>'Stay rooted'</h2>\n            <p>\u2018Stay rooted\u2019 is what we say to the modern world. <br><br>\n            Appreciating simplicity (and cider), <br><br>\n            We like to poke fun at the world and ourselves\u2026 and each other. \n            </p>\n          </div>\n        </div>\n        <div class='about-us-flex'>\n          <div class='info info-left'>\n            <h2>Orchard Pig's</h2>\n            <p>home in West Bradley Orchards is well and truly rooted in Somerset\u2019s cider-making history, dating back to the 1850s and W.T. Allen\u2019s, award winning Somerset cider.</p>\n          </div>\n          <img class='img-right' src='/images/op-pub.png'> \n        </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About Us\" products=", "></va-app-header>\n      <div class=\"page-content about-page\">  \n      <!-- <img class='prints' src='/images/steps-transparent.png'>   -->\n        \n         <!-- Swiper -->\n    <div class=\"swiper-container mySwiper\">\n      <div class=\"swiper-wrapper\">\n        <div class=\"swiper-slide slide1\"><img src='/images/carousel1.jpg'></div>\n        <div class=\"swiper-slide slide2\"><img src='/images/carousel2.jpg'></div>\n        <div class=\"swiper-slide slide3\"><img src='/images/carousel3.jpg'></div>\n        <div class=\"swiper-slide slide4\"><img src='/images/carousel4.jpg'></div>\n        <div class=\"swiper-slide slide5\"><img src='/images/carousel5.jpg'></div>\n        <div class=\"swiper-slide slide5\"><img src='/images/carousel6.jpg'></div>\n      </div>\n      <!-- If we need pagination -->\n      <div class=\"swiper-pagination\"></div>\n      <!-- navigation buttons -->\n      <div class=\"swiper-button-prev\"></div>\n      <div class=\"swiper-button-next\"></div>\n    </div>\n\n        <h4>Crack a cold one n' let us tell you a story</h4>\n\n        <div class='about-us-flex'>\n          <div class='info info-left '>\n            <h2>It all started</h2>\n            <p>just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>\n            Orchard Pig was born out of a shared passion for great food and Old Spots, <br>\n            the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>\n          </div>\n          <img  class='img-right' src='/images/op-founder.png'> \n        </div>\n        <div class='about-us-flex'>\n          <img class='img-left' src='/images/op-sail.png'> \n          <div class='info info-right'>\n            <h2>'Stay rooted'</h2>\n            <p>\u2018Stay rooted\u2019 is what we say to the modern world. <br><br>\n            Appreciating simplicity (and cider), <br><br>\n            We like to poke fun at the world and ourselves\u2026 and each other. \n            </p>\n          </div>\n        </div>\n        <div class='about-us-flex'>\n          <div class='info info-left'>\n            <h2>Orchard Pig's</h2>\n            <p>home in West Bradley Orchards is well and truly rooted in Somerset\u2019s cider-making history, dating back to the 1850s and W.T. Allen\u2019s, award winning Somerset cider.</p>\n          </div>\n          <img class='img-right' src='/images/op-pub.png'> \n        </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8064,8 +8064,26 @@ class AboutView {
   init() {
     document.title = 'About';
     this.render();
+    this.swiperInit();
 
     _Utils.default.pageIntroAnim();
+  }
+
+  swiperInit() {
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      slidesPerView: 'auto',
+      loopedSlides: 5,
+      pagination: {
+        el: '.swiper-pagination'
+      },
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+    this.render();
   } // method from lit library which allows us 
   // to render html from within js to a container
 
@@ -11449,7 +11467,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -11498,7 +11516,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65497" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62942" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

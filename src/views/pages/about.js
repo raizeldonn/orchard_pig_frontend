@@ -15,7 +15,26 @@ class AboutView {
   init() {
     document.title = 'About'
     this.render()
+    this.swiperInit()
     Utils.pageIntroAnim()
+  }
+
+  swiperInit(){
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      slidesPerView: 'auto',
+      loopedSlides: 5,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      
+    });
+    this.render()
   }
 
   // method from lit library which allows us 
@@ -26,9 +45,23 @@ class AboutView {
       <div class="page-content about-page">  
       <!-- <img class='prints' src='/images/steps-transparent.png'>   -->
         
-        <div class='about-carousel'> 
-          <img class='carousel-img' src='/images/image1.jpeg'>  
-        </div>
+         <!-- Swiper -->
+    <div class="swiper-container mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide slide1"><img src='/images/carousel1.jpg'></div>
+        <div class="swiper-slide slide2"><img src='/images/carousel2.jpg'></div>
+        <div class="swiper-slide slide3"><img src='/images/carousel3.jpg'></div>
+        <div class="swiper-slide slide4"><img src='/images/carousel4.jpg'></div>
+        <div class="swiper-slide slide5"><img src='/images/carousel5.jpg'></div>
+        <div class="swiper-slide slide5"><img src='/images/carousel6.jpg'></div>
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
         <h4>Crack a cold one n' let us tell you a story</h4>
 
         <div class='about-us-flex'>
