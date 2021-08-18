@@ -7804,8 +7804,8 @@ class HomeView {
 
     _Utils.default.pageIntroAnim();
 
-    this.products = null;
-    localStorage.removeItem('cartProducts');
+    this.products = null; //localStorage.removeItem('cartProducts');
+
     this.getProducts();
   }
 

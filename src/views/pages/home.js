@@ -22,7 +22,7 @@ class HomeView {
     this.render()
     Utils.pageIntroAnim()
     this.products = null;
-    localStorage.removeItem('cartProducts');
+    //localStorage.removeItem('cartProducts');
     this.getProducts();   
 
   }
