@@ -230,6 +230,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         right: 2%;
         top: 6px;
       }
+      .header-cart-qty{
+        color: var(--med-blue);
+        position: absolute;
+        right: 1%;
+        top: 6px;
+
+      }
       #hamburger {
         margin: 8px 5px 0px 10px;
       }
@@ -328,9 +335,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         `:``}
         <slot></slot>
       </div>
+    
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
+        <div class="header-cart-qty">
+        ${this.products ? html`
+          <h4 style="color=var(--med-blue)">${this.products.length}</h4>
+        `:``}
+        <slot></slot>
+      </div>
+     
+      
       </nav>
       
 
