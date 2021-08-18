@@ -9001,8 +9001,28 @@ var _CartAPI = _interopRequireDefault(require("./../../CartAPI"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject11() {
+function _templateObject13() {
   const data = _taggedTemplateLiteral([""]);
+
+  _templateObject13 = function _templateObject13() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject12() {
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <!--<button @click=", ">Buy Now</button>-->\n                </div>\n                "]);
+
+  _templateObject12 = function _templateObject12() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject11() {
+  const data = _taggedTemplateLiteral(["\n                ", "\n                \n              "]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -9012,7 +9032,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <!--<button @click=", ">Buy Now</button>-->\n                </div>\n                "]);
+  const data = _taggedTemplateLiteral(["\n            <!--map is very similar to for each-->\n              ", "\n            "]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -9022,7 +9042,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  const data = _taggedTemplateLiteral(["\n                ", "\n                \n              "]);
+  const data = _taggedTemplateLiteral(["\n              <!-- <sl-spinner></sl-spinner> -->\n              <va-bottle-spinner></bottle-spinner>\n            "]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -9032,7 +9052,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  const data = _taggedTemplateLiteral(["\n            <!--map is very similar to for each-->\n              ", "\n            "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Shop\" products=", "></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -9042,7 +9062,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  const data = _taggedTemplateLiteral(["\n              <!-- <sl-spinner></sl-spinner> -->\n              <va-bottle-spinner></bottle-spinner>\n            "]);
+  const data = _taggedTemplateLiteral([""]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -9052,7 +9072,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Shop\" products=", "></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral([" <p id=\"allergen\" >allergen: ", "</p>"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -9072,7 +9092,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral([" <p>allergen: ", "</p>"]);
+  const data = _taggedTemplateLiteral(["<img class='pp-img' src='/images/", " alt='", "'> "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -9102,7 +9122,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-left button{\n          color: white;\n          background-color: var(--med-blue);\n          font-family: var(--base-font-family);\n        }\n        .pp-left button:hover {\n          color: black;\n          background-color: var(--light-blue);\n        }\n        .pp-left button:active {\n          color: black;\n          background-color: var(--light-blue);\n\n        }\n        \n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-boxes button:hover{\n          color: black;\n          background-color: var(--white);\n          border: 1px solid var(--med-blue);\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n        \n        <div class='pp-left'>\n          ", "\n          \n          <h2>", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          <img class='pp-img' src='/images/", "' alt='", "'>\n        </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p>", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p>", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3>&pound;", "</h3> \n                <button @click=", ">Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p>", "</p>\n            <img src='/images/vegan-white.png'>\n            <p>", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-left button{\n          color: white;\n          background-color: var(--med-blue);\n          font-family: var(--base-font-family);\n        }\n        .pp-left button:hover {\n          color: black;\n          background-color: var(--light-blue);\n        }\n        .pp-left button:active {\n          color: black;\n          background-color: var(--light-blue);\n\n        }\n        \n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 2/3;\n          margin-left: 20%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-boxes button:hover{\n          color: black;\n          background-color: var(--white);\n          border: 1px solid var(--med-blue);\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n        \n        <div class='pp-left'>\n          ", "\n          \n          <h2 id=\"productName\">", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          <img id=\"image\" class='pp-img' src='/images/", "' alt='", "'>\n          <!--", "-->\n \n          </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p id=\"abv\" >", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p id=\"packSizeVolume\">", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3 id=\"price\" >&pound;", "</h3> \n                <button @click=", ">Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p id=\"flavour\" >", "</p>\n            <img src='/images/vegan-white.png'>\n            <p id=\"dietary\" >", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -9120,6 +9140,8 @@ class ProductsView {
     this.productDialog = null;
     this.canInfoDisplay = false;
     this.cans = false;
+    this.x;
+    this.canImage;
     this.render();
 
     _Utils.default.pageIntroAnim();
@@ -9163,11 +9185,12 @@ class ProductsView {
     for (var i = 0; i < this.products.length; i++) {
       if (this.products[i].shortName == product.shortName && this.products[i].packSize == "24") {
         this.cans = true;
+        this.canImage = this.products[i].image;
       }
     } //add content
 
 
-    const dialogContent = (0, _litHtml.html)(_templateObject(), this.cans ? (0, _litHtml.html)(_templateObject2(), () => this.moreInfoBottleHandler(product), () => this.moreInfoCanHandler(product)) : (0, _litHtml.html)(_templateObject3()), product.name, _App.default.apiBase, product.image, product.name, product.image, product.name, product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, () => this.addToCart(product), product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject4(), product.allergen) : (0, _litHtml.html)(_templateObject5()));
+    const dialogContent = (0, _litHtml.html)(_templateObject(), this.cans ? (0, _litHtml.html)(_templateObject2(), () => this.moreInfoBottleHandler(product), () => this.moreInfoCanHandler(product)) : (0, _litHtml.html)(_templateObject3()), product.name, _App.default.apiBase, product.image, product.name, product.image, product.name, this.canImage ? (0, _litHtml.html)(_templateObject4(), this.canImage, product.name) : (0, _litHtml.html)(_templateObject5()), product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, () => this.addToCart(product), product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject6(), product.allergen) : (0, _litHtml.html)(_templateObject7()));
     (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
 
     document.body.append(this.productDialog); //show the dialog
@@ -9178,6 +9201,18 @@ class ProductsView {
       this.canInfoDisplay = false;
       this.productDialog.remove();
     });
+  } //substitute can/bottle info
+
+
+  changeCanBottleInfo(product) {
+    document.getElementById("productName").innerHTML = product.name;
+    document.getElementById("abv").innerHTML = product.abv;
+    document.getElementById("packSizeVolume").innerHTML = product.packSize + " X " + product.containerVolume;
+    document.getElementById("price").innerHTML = "&pound;" + product.price;
+    document.getElementById("desc").innerHTML = product.description;
+    document.getElementById("flavour").innerHTML = product.flavour;
+    document.getElementById("dietary").innerHTML = product.dietary;
+    document.getElementById("allergen") ? document.getElementById("allergen").innerHTML = product.allergen : this.x = 1; //document.getElementById("image").src = product.image;
   } //select bottle info 
 
 
@@ -9185,10 +9220,10 @@ class ProductsView {
     if (this.canInfoDisplay == true) {
       for (var i = 0; i < this.products.length; i++) {
         if (this.products[i].shortName === product.shortName && this.products[i].packSize === "12") {
-          this.productDialog.remove();
+          // this.productDialog.remove();
           product = this.products[i];
           this.canInfoDisplay = false;
-          this.moreInfoHandler(product);
+          this.changeCanBottleInfo(product); //this.moreInfoHandler(product);
         }
       }
     }
@@ -9199,10 +9234,10 @@ class ProductsView {
     if (this.canInfoDisplay == false) {
       for (var i = 0; i < this.products.length; i++) {
         if (this.products[i].shortName === product.shortName && this.products[i].packSize === "24") {
-          this.productDialog.remove();
+          // this.productDialog.remove();
           product = this.products[i];
           this.canInfoDisplay = true;
-          this.moreInfoHandler(product);
+          this.changeCanBottleInfo(product); //this.moreInfoHandler(product);
         }
       }
     }
@@ -9224,7 +9259,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject6(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject7()) : (0, _litHtml.html)(_templateObject8(), this.products.map(product => (0, _litHtml.html)(_templateObject9(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject10(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject11()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject8(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject9()) : (0, _litHtml.html)(_templateObject10(), this.products.map(product => (0, _litHtml.html)(_templateObject11(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject12(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject13()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -11516,7 +11551,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65497" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58607" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

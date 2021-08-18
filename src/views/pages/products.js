@@ -14,7 +14,8 @@ class ProductsView {
     this.productDialog = null;
     this.canInfoDisplay = false;
     this.cans = false;
-
+    this.x;
+    this.canImage;
 
     this.render()
     Utils.pageIntroAnim()
@@ -59,6 +60,7 @@ class ProductsView {
     for (var i = 0; i < this.products.length; i++) {
       if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24")) {
         this.cans = true;
+        this.canImage = this.products[i].image;
       }
     }
     
@@ -169,36 +171,38 @@ class ProductsView {
           <button id="can-btn" @click=${() => this.moreInfoCanHandler(product)}>Cans</button>
           </div><p></p> ` : html ``}
           
-          <h2>${product.name}</h2>
+          <h2 id="productName">${product.name}</h2>
           <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
           <!-- pull images from frontend  -->
-          <img class='pp-img' src='/images/${product.image}' alt='${product.name}'>
-        </div>
+          <img id="image" class='pp-img' src='/images/${product.image}' alt='${product.name}'>
+          <!--${this.canImage ? html `<img class='pp-img' src='/images/${this.canImage} alt='${product.name}'> `: html``}-->
+ 
+          </div>
 
         <div class='pp-right'>
           <div class='pp-right-top'>
               <div class='pp-boxes'>
                 <img src='/images/alcohol-black.png'>
-                <p>${product.abv} ABV</p>
+                <p id="abv" >${product.abv} ABV</p>
                 <img src='/images/bottle-black.png'>
-                <p>${product.packSize} X ${product.containerVolume}</p>
+                <p id="packSizeVolume">${product.packSize} X ${product.containerVolume}</p>
               </div>
               <div class='pp-boxes'>
                 <!-- <h3>&pound;${product.price.$numberDecimal}</h3> -->
-                <h3>&pound;${product.price}</h3> 
+                <h3 id="price" >&pound;${product.price}</h3> 
                 <button @click=${() => this.addToCart(product)}>Add to Basket +</button>
               </div>
           </div>
           <p id='desc'>${product.description}</p>
           <div class='pp-right-bottom'> 
             <img src='/images/tongue-white.png'>
-            <p>${product.flavour}</p>
+            <p id="flavour" >${product.flavour}</p>
             <img src='/images/vegan-white.png'>
-            <p>${product.dietary}</p>
+            <p id="dietary" >${product.dietary}</p>
             <img src='/images/allergies-white.png'>
             <p>Contains Sulfur Dioxide/Sulphites</p>
           </div>
-          ${product.allergen? html` <p>allergen: ${product.allergen}</p>` : html``}
+          ${product.allergen? html` <p id="allergen" >allergen: ${product.allergen}</p>` : html``}
         </div>
     `
 
@@ -214,15 +218,29 @@ class ProductsView {
     })
   }
 
+  //substitute can/bottle info
+  changeCanBottleInfo(product){
+    document.getElementById("productName").innerHTML = product.name;
+    document.getElementById("abv").innerHTML = product.abv;
+    document.getElementById("packSizeVolume").innerHTML = product.packSize +" X "+ product.containerVolume;
+    document.getElementById("price").innerHTML = "&pound;"+product.price;
+    document.getElementById("desc").innerHTML = product.description;
+    document.getElementById("flavour").innerHTML = product.flavour;
+    document.getElementById("dietary").innerHTML = product.dietary;
+    document.getElementById("allergen") ? document.getElementById("allergen").innerHTML = product.allergen : this.x=1 ;
+    //document.getElementById("image").src = product.image;
+  }
+
   //select bottle info 
   moreInfoBottleHandler(product) {
     if (this.canInfoDisplay == true) {
       for (var i = 0; i < this.products.length; i++) {
         if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "12")) {
-          this.productDialog.remove();
+          // this.productDialog.remove();
           product = this.products[i];
           this.canInfoDisplay = false;
-          this.moreInfoHandler(product);
+          this.changeCanBottleInfo(product);
+          //this.moreInfoHandler(product);
         }
       }
     }
@@ -233,10 +251,11 @@ class ProductsView {
     if (this.canInfoDisplay == false) {
       for (var i = 0; i < this.products.length; i++) {
         if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "24")) {
-          this.productDialog.remove();
+          // this.productDialog.remove();
           product = this.products[i];
           this.canInfoDisplay = true;
-          this.moreInfoHandler(product);
+          this.changeCanBottleInfo(product);
+          //this.moreInfoHandler(product);
           
         }
       }
