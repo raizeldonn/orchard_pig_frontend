@@ -11132,8 +11132,28 @@ var _CartAPI = _interopRequireDefault(require("./../CartAPI"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject6() {
+function _templateObject8() {
   const data = _taggedTemplateLiteral(["\n        <div class='cart-product'>\n          <img class='cart-img' src='/images/", ".png' alt='", "'>\n          <div class='cart-product-info'>\n            <p class='product-name'>", "</p> \n            <p>Quantity: ", "</p>\n            <!-- <p>&pound;", "</p> -->\n            <p>&pound;", "</p>\n          </div>\n        </div>\n      "]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  const data = _taggedTemplateLiteral(["\n\n    <h1>Your Basket</h1>\n      ", "\n\n      <h3>Subtotal: &pound;", ".00</h3>\n      <button class='checkout-btn' @click=\"", "\">Checkout</button>\n    "]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  const data = _taggedTemplateLiteral(["\n\n      <p>your basket is empty</p>\n\n    "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -11143,7 +11163,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  const data = _taggedTemplateLiteral(["\n\n    <h1>Your Basket</h1>\n      ", "\n\n      <h3>Subtotal: &pound;", ".00</h3>\n      <button class='checkout-btn' @click=\"", "\">Checkout</button>\n    "]);
+  const data = _taggedTemplateLiteral(["<h4>0</h4>"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -11153,7 +11173,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n\n      <p>your basket is empty</p>\n\n    "]);
+  const data = _taggedTemplateLiteral(["\n          <h4>", "</h4>\n        "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -11163,7 +11183,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  const data = _taggedTemplateLiteral(["\n          <h4 style=\"color=var(--med-blue)\">", "</h4>\n        "]);
+  const data = _taggedTemplateLiteral([""]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -11274,7 +11294,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   }
 
   render() {
-    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/'), this.title ? (0, _litElement.html)(_templateObject2(), this.title) : "", this.hamburgerClick, this.products ? (0, _litElement.html)(_templateObject3(), this.products.length) : "", this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.products == null ? (0, _litElement.html)(_templateObject4()) : (0, _litElement.html)(_templateObject5(), this.products.map(product => (0, _litElement.html)(_templateObject6(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price)), _CartAPI.default.getTotal(), this.checkoutClick));
+    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/'), this.title ? (0, _litElement.html)(_templateObject2(), this.title) : (0, _litElement.html)(_templateObject3()), this.hamburgerClick, this.products ? (0, _litElement.html)(_templateObject4(), this.products.length) : (0, _litElement.html)(_templateObject5()), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.products == null ? (0, _litElement.html)(_templateObject6()) : (0, _litElement.html)(_templateObject7(), this.products.map(product => (0, _litElement.html)(_templateObject8(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price)), _CartAPI.default.getTotal(), this.checkoutClick));
   }
 
 });

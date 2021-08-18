@@ -332,7 +332,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       <div class="header-title">
         ${this.title ? html`
           <h2 style="color= var(--med-blue) class="page-title">${this.title}</h1>
-        `:``}
+        `: html``}
         <slot></slot>
       </div>
     
@@ -341,8 +341,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
         <div class="header-cart-qty">
         ${this.products ? html`
-          <h4 style="color=var(--med-blue)">${this.products.length}</h4>
-        `:``}
+          <h4>${this.products.length}</h4>
+        `: html`<h4>0</h4>`}
         <slot></slot>
       </div>
      
