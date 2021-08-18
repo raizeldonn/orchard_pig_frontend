@@ -341,8 +341,8 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>
         <div class="header-cart-qty">
         ${this.products ? html`
-          <h4>${this.products.length}</h4>
-        `: html`<h4>0</h4>`}
+          <h5>${this.products.length}</h5>
+        `: html`<h5>0</h5>`}
         <slot></slot>
       </div>
      
