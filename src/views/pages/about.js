@@ -95,6 +95,8 @@ class AboutView {
           <img class='img-right' src='/images/op-pub.png'> 
         </div>
         
+        <va-app-footer margin="true"></va-app-footer>
+        
       </div>      
     `
     // this assigns the template html container to App.rootEl
