@@ -510,9 +510,50 @@ button.homepg-btn {
   height: 100%;
 }
 
+.swiper-container {
+  background: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 98%;
+}
+
+.swiper-slide {
+  text-align: center;
+  background: #fff;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: white;
+}
+
+.swiper-pagination-bullet {
+  background-color: white;
+  opacity: 100%;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: red;
+}
+
 .about-page {
   background: linear-gradient(180deg, #386586 0%, #4186b7 100%);
   color: white;
+  overflow-x: hidden;
 }
 .about-page .prints {
   position: absolute;
@@ -523,49 +564,23 @@ button.homepg-btn {
   height: 100%;
   z-index: -100;
 }
-.about-page .about-carousel {
-  width: 50%;
-  display: flex;
-  margin: auto;
-  margin-top: 5%;
-}
-.about-page .about-carousel img {
-  width: 100%;
-}
 .about-page h4 {
   font-family: var(--heading-font-family);
-  font-size: 24px;
+  font-size: max(3vw, 18px);
   text-align: center;
   margin: 70px;
-}
-.about-page .about-us-grid {
-  display: grid;
-  grid-gap: 60px;
-  grid-template-columns: repeat(2, auto);
-  margin: auto;
-  width: 80%;
-}
-.about-page .about-us-grid img {
-  width: 100%;
-}
-.about-page .about-us-grid h2 {
-  text-transform: initial;
-  color: white;
-  font-weight: 300;
-  font-size: 60px;
-}
-.about-page .about-us-grid .info {
-  width: 80%;
 }
 .about-page .about-us-flex {
   display: flex;
   margin: auto;
   width: 100%;
+  overflow: hidden;
 }
 .about-page .about-us-flex img {
   width: 50%;
-  height: auto;
+  height: 50%;
   margin: 5%;
+  position: relative;
 }
 .about-page .about-us-flex .img-right {
   margin-left: 0;
@@ -576,11 +591,12 @@ button.homepg-btn {
 .about-page .about-us-flex h2 {
   text-transform: initial;
   color: white;
-  font-weight: 300;
-  font-size: 80px;
+  font-family: var(--thin-heading-font-family);
+  font-weight: 200;
+  font-size: 4vw;
 }
 .about-page .about-us-flex p {
-  font-size: 20px;
+  font-size: max(1.5vw, 15px);
   width: 70%;
 }
 .about-page .about-us-flex .info {
@@ -590,6 +606,21 @@ button.homepg-btn {
 }
 .about-page .about-us-flex .info-left {
   padding-right: 0;
+  padding-left: 10%;
+}
+.about-page .pigsteps {
+  width: 95%;
+  z-index: 0;
+  position: absolute;
+}
+.about-page .ps1 {
+  transform: rotate(-6deg) scaleX(-1);
+}
+.about-page .ps2 {
+  transform: rotate(-20deg) translateY(700px) translateX(-300px);
+}
+.about-page .ps3 {
+  transform: rotate(-5deg) translateY(1750px) translateX(-100px) scaleX(-1);
 }
 
 .checkout-header {
