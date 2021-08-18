@@ -327,7 +327,6 @@ button.homepg-btn {
 
 .products {
   background-color: var(--med-blue);
-  padding: 5%;
   overflow-x: hidden;
 }
 .products h1 {
