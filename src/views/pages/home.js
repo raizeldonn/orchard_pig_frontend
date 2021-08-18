@@ -55,7 +55,7 @@ class HomeView {
   render(){
     const template = html`
 
-      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header title="Home" products=${localStorage.getItem('cartProducts')}></va-app-header>
 
       <div class="page-content">
       

@@ -257,7 +257,7 @@ class ProductsView {
   // to render html from within js to a container
   render() {
     const template = html `
-      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header title="Shop" products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content products">      
         <h1>Meet Our Pigs</h1>  
         <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>

@@ -19,6 +19,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       },
       allProducts: {
         type: Object
+      },
+      title: {
+        type: String
       }
     }
   }
@@ -149,12 +152,27 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       }
       .app-top-nav li:hover {
         background-image: url('/images/navbar-pigstep.png');
+        color: red;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 30px;
+      }
+      .app-top-nav li a:visited{
+        color: red;
+        background-image: url('/images/navbar-pigstep.png');
         background-repeat: no-repeat;
         background-position: center top;
         background-size: 30px;
       }
       .app-top-nav li{
         text-align: center;
+      }
+
+      .header-title {
+        color: var(--med-blue);
+        font-family: Rockwell, serif;
+        position: absolute;
+        right: 20%;
       }
 
       .app-menu {
@@ -246,6 +264,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           display: block;
           width: 100%;
         }
+        .header-title {
+          display: none;
+        }
       }
 
       @media all and (min-width: 769px){       
@@ -301,6 +322,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         <source src="/images/logo-run.mp4" type="video/mp4">
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       </video>
+      <div class="header-title">
+        ${this.title ? html`
+          <h2 style="color= var(--med-blue) class="page-title">${this.title}</h1>
+        `:``}
+        <slot></slot>
+      </div>
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
         <img @click="${this.hamburgerClick}" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>

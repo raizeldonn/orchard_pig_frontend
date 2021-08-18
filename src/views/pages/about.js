@@ -22,7 +22,7 @@ class AboutView {
   // to render html from within js to a container
   render() {
     const template = html `
-      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header title="About Us" products=${localStorage.getItem('cartProducts')}></va-app-header>
       <div class="page-content about-page">  
       <!-- <img class='prints' src='/images/steps-transparent.png'>   -->
         

@@ -17,7 +17,7 @@ class ContactView {
   // to render html from within js to a container
   render(){
     const template = html`
-      <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header title="Contact Us" products=${localStorage.getItem('cartProducts')}></va-app-header>
 
       <div class="page-content contact-page">   
 
