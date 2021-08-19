@@ -88,12 +88,7 @@ class HomeView {
           <img class='pigsteps' src='/images/pigsteps.png'>
 
         </section>
-        <div id="social" style="color: green; background-color: pink;">
-        <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
-        <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
-        <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter-square"></i></a>
-        <br>
-      </div>
+  
     	  <va-app-footer margin="false"></va-app-footer>
 
       
