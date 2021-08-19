@@ -2,12 +2,12 @@
 // us to build template app elements in js.
 // https://lit-element.polymer-project.org/guide/templates
 import { LitElement, html, css } from '@polymer/lit-element'
+import { anchorRoute, gotoRoute } from './../Router'
 
 customElements.define('va-app-footer', class AppFooter extends LitElement {
   constructor(){
     super()    
   }
-
   static get properties() {
     return {
       margin: {
@@ -84,7 +84,7 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
 
       a { color: inherit; text-decoration: none;} 
 
-      i{
+      i {
           font-size: 40px;
           margin: 8px;
           color: white;
@@ -93,13 +93,14 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
       #disclaimer{
         font-size: 12px;
       }
+    
 
     </style>
 <footer>
           <div class='footer-grid'>
             <div >
               <h2>Products</h2>
-              <ul>
+              <ul @click="${() => gotoRoute('/products')}">
                 <li>Reveller</li>
                 <li>Truffler</li>
                 <li>Hogfather</li>
@@ -126,9 +127,10 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
             <div class='follow-us'>
               <h2>Follow Us</h2>
               <div id="social">
-                <a href='https://www.facebook.com/OrchardPig'><i class="fab fa-facebook-square" ></i></a>
-                <a href='https://www.instagram.com/theorchardpig/'><i class="fab fa-instagram"></i></a>
-                <a href='https://twitter.com/Orchardpig'><i class="fab fa-twitter-square"></i></a>
+                <a href='https://www.facebook.com/OrchardPig' target="_blank"><i class="fab fa-facebook-square" ></i></a>
+                <a href='https://www.instagram.com/theorchardpig/' target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href='https://twitter.com/Orchardpig' target="_blank"><i class="fab fa-twitter-square"></i></a>
+                
               </div>
             </div>
           </div>

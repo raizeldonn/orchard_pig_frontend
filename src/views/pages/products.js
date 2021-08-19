@@ -15,7 +15,7 @@ class ProductsView {
     this.canInfoDisplay = false;
     this.cans = false;
     this.x;
-    this.canImage;
+    this.canImage = null;
 
     this.render()
     Utils.pageIntroAnim()
@@ -57,6 +57,7 @@ class ProductsView {
     this.productDialog.className = 'product-dialog'
     // check if the product has cans
     this.cans = false;
+    
     for (var i = 0; i < this.products.length; i++) {
       if ((this.products[i].shortName == product.shortName) && (this.products[i].packSize == "24")) {
         this.cans = true;
@@ -73,7 +74,8 @@ class ProductsView {
           
         }
         img.pp-img{
-          height: 60vh;
+          max-height: 60vh;
+          //max-width: 40%;
         }
         .product-dialog::part(panel){
           background-color: var(--dark-blue);
@@ -88,6 +90,11 @@ class ProductsView {
           color: white;
           font-size: 40px;
         }
+       
+        .pp-img:hover {
+          cursor: pointer;
+        }
+
         .pp-left h2{
           font-size: 36px;
           color: white;
@@ -110,6 +117,9 @@ class ProductsView {
           background-color: var(--light-blue);
 
         }
+        .pp-left{
+          grid-column: 1/2;
+        }
         
         .pp-right h3{
           font-size: 32px;
@@ -117,8 +127,9 @@ class ProductsView {
           font-weight: bold;
         }
         .pp-right{
-          grid-column: 2/3;
-          margin-left: 20%;
+          grid-column: 3/3;
+          //margin-left: 20%;
+          margin-left: 10%;
         }
         .pp-right-top{
           background-color: var(--light-blue);
@@ -174,9 +185,10 @@ class ProductsView {
           <h2 id="productName">${product.name}</h2>
           <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
           <!-- pull images from frontend  -->
-          <img id="image" class='pp-img' src='/images/${product.image}' alt='${product.name}'>
-          <!--${this.canImage ? html `<img class='pp-img' src='/images/${this.canImage} alt='${product.name}'> `: html``}-->
- 
+          <div>
+          <img id="image-bottle" @click=${() => this.moreInfoBottleHandler(product)} class='pp-img' src='/images/${product.image}' alt='${product.name}'>
+          ${this.canImage ? html `<img id="image-can" @click=${() => this.moreInfoCanHandler(product)} class='pp-img' src='/images/${this.canImage}' alt='${product.name}'>`:html`` }
+          </div>
           </div>
 
         <div class='pp-right'>
@@ -211,9 +223,12 @@ class ProductsView {
     document.body.append(this.productDialog)
     //show the dialog
     this.productDialog.show()
+    
     //on hide, delete the dialog
     this.productDialog.addEventListener('sl-after-hide', () => {
       this.canInfoDisplay = false;
+      this.cans = false;
+      this.canImage = null;
       this.productDialog.remove()
     })
   }
