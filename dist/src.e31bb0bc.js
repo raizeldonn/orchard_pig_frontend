@@ -9301,7 +9301,7 @@ class ProductsView {
 
     _CartAPI.default.addProduct(product.item, product.name, 1, product.sku, product.price);
 
-    _Toast.default.show(product.name + ' added to your Cart');
+    _Toast.default.show(product.name + ' added to your Cart!');
 
     this.render();
   } // method from lit library which allows us 
@@ -9446,9 +9446,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class App {
   constructor() {
     this.name = "Orchard-Pig";
-    this.version = "1.0.0"; //this.apiBase = 'http://localhost:3000'
+    this.version = "1.0.0";
+    this.apiBase = 'http://localhost:3000'; //this.apiBase = 'https://orchard-pig-backend.herokuapp.com'
 
-    this.apiBase = 'https://orchard-pig-backend.herokuapp.com';
     this.rootEl = document.getElementById("root");
     this.version = "1.0.0";
   }
