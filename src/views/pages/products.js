@@ -73,9 +73,35 @@ class ProductsView {
           --width: 80vw;
           
         }
+        #image-bottle {
+          position: absolute;
+          left: 0px;
+          top: 170px;
+        }
+        #image-can {
+          position: absolute;
+          right: 0px;
+          top: 170px;
+        }
         img.pp-img{
+          //max-height: 60vh;
+          width: 50%;
+          max-width 100%;
+          z-index: 99;
+          transition: width 1s;
+          
+        }
+        .pp-img:hover {
+          cursor: pointer;
+          transition: width 1s;
           max-height: 60vh;
-          //max-width: 40%;
+          z-index: 100;
+          width: 100%;
+          
+        }
+
+        img.pp-img-single{
+          max-height: 60vh;
         }
         .product-dialog::part(panel){
           background-color: var(--dark-blue);
@@ -90,10 +116,7 @@ class ProductsView {
           color: white;
           font-size: 40px;
         }
-       
-        .pp-img:hover {
-          cursor: pointer;
-        }
+      
 
         .pp-left h2{
           font-size: 36px;
@@ -119,6 +142,7 @@ class ProductsView {
         }
         .pp-left{
           grid-column: 1/2;
+          position: relative;
         }
         
         .pp-right h3{
@@ -185,10 +209,11 @@ class ProductsView {
           <h2 id="productName">${product.name}</h2>
           <!-- <img class='pp-img' src='${App.apiBase}/${product.image}' alt='${product.name}'> -->
           <!-- pull images from frontend  -->
-          <div>
-          <img id="image-bottle" @click=${() => this.moreInfoBottleHandler(product)} class='pp-img' src='/images/${product.image}' alt='${product.name}'>
+          
+          ${!this.canImage ? html `<img id="image-bottle" @click=${() => this.moreInfoBottleHandler(product)} class='pp-img-single' src='/images/${product.image}' alt='${product.name}'>`:html``}
+          ${this.canImage ? html `<img id="image-bottle" @click=${() => this.moreInfoBottleHandler(product)} class='pp-img' src='/images/${product.image}' alt='${product.name}'>`:html``}
           ${this.canImage ? html `<img id="image-can" @click=${() => this.moreInfoCanHandler(product)} class='pp-img' src='/images/${this.canImage}' alt='${product.name}'>`:html`` }
-          </div>
+          
           </div>
 
         <div class='pp-right'>
@@ -246,6 +271,9 @@ class ProductsView {
     //document.getElementById("image").src = product.image;
   }
 
+  toggleImageSize(){
+
+  }
   //select bottle info 
   moreInfoBottleHandler(product) {
     if (this.canInfoDisplay == true) {

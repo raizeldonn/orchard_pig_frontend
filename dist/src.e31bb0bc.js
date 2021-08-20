@@ -9001,8 +9001,48 @@ var _CartAPI = _interopRequireDefault(require("./../../CartAPI"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject13() {
+function _templateObject17() {
   const data = _taggedTemplateLiteral([""]);
+
+  _templateObject17 = function _templateObject17() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject16() {
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <!--<button @click=", ">Buy Now</button>-->\n                </div>\n                "]);
+
+  _templateObject16 = function _templateObject16() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject15() {
+  const data = _taggedTemplateLiteral(["\n                ", "\n                \n              "]);
+
+  _templateObject15 = function _templateObject15() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject14() {
+  const data = _taggedTemplateLiteral(["\n            <!--map is very similar to for each-->\n              ", "\n            "]);
+
+  _templateObject14 = function _templateObject14() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject13() {
+  const data = _taggedTemplateLiteral(["\n              <!-- <sl-spinner></sl-spinner> -->\n              <va-bottle-spinner></bottle-spinner>\n            "]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -9012,7 +9052,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <!--<button @click=", ">Buy Now</button>-->\n                </div>\n                "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Shop\" products=", "></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n\n          <va-app-footer margin=\"true\"></va-app-footer> \n        \n      </div>      \n    "]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -9022,7 +9062,7 @@ function _templateObject12() {
 }
 
 function _templateObject11() {
-  const data = _taggedTemplateLiteral(["\n                ", "\n                \n              "]);
+  const data = _taggedTemplateLiteral([""]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -9032,7 +9072,7 @@ function _templateObject11() {
 }
 
 function _templateObject10() {
-  const data = _taggedTemplateLiteral(["\n            <!--map is very similar to for each-->\n              ", "\n            "]);
+  const data = _taggedTemplateLiteral([" <p id=\"allergen\" >allergen: ", "</p>"]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -9042,7 +9082,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  const data = _taggedTemplateLiteral(["\n              <!-- <sl-spinner></sl-spinner> -->\n              <va-bottle-spinner></bottle-spinner>\n            "]);
+  const data = _taggedTemplateLiteral([""]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -9052,7 +9092,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Shop\" products=", "></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n\n          <va-app-footer margin=\"true\"></va-app-footer> \n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["<img id=\"image-can\" @click=", " class='pp-img' src='/images/", "' alt='", "'>"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -9072,7 +9112,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  const data = _taggedTemplateLiteral([" <p id=\"allergen\" >allergen: ", "</p>"]);
+  const data = _taggedTemplateLiteral(["<img id=\"image-bottle\" @click=", " class='pp-img' src='/images/", "' alt='", "'>"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -9092,7 +9132,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["<img id=\"image-can\" @click=", " class='pp-img' src='/images/", "' alt='", "'>"]);
+  const data = _taggedTemplateLiteral(["<img id=\"image-bottle\" @click=", " class='pp-img-single' src='/images/", "' alt='", "'>"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -9122,7 +9162,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        img.pp-img{\n          max-height: 60vh;\n          //max-width: 40%;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n       \n        .pp-img:hover {\n          cursor: pointer;\n        }\n\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-left button{\n          color: white;\n          background-color: var(--med-blue);\n          font-family: var(--base-font-family);\n        }\n        .pp-left button:hover {\n          color: black;\n          background-color: var(--light-blue);\n        }\n        .pp-left button:active {\n          color: black;\n          background-color: var(--light-blue);\n\n        }\n        .pp-left{\n          grid-column: 1/2;\n        }\n        \n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 3/3;\n          //margin-left: 20%;\n          margin-left: 10%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-boxes button:hover{\n          color: black;\n          background-color: var(--white);\n          border: 1px solid var(--med-blue);\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n        \n        <div class='pp-left'>\n          ", "\n          \n          <h2 id=\"productName\">", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          <div>\n          <img id=\"image-bottle\" @click=", " class='pp-img' src='/images/", "' alt='", "'>\n          ", "\n          </div>\n          </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p id=\"abv\" >", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p id=\"packSizeVolume\">", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3 id=\"price\" >&pound;", "</h3> \n                <button @click=", ">Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p id=\"flavour\" >", "</p>\n            <img src='/images/vegan-white.png'>\n            <p id=\"dietary\" >", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        #image-bottle {\n          position: absolute;\n          left: 0px;\n          top: 170px;\n        }\n        #image-can {\n          position: absolute;\n          right: 0px;\n          top: 170px;\n        }\n        img.pp-img{\n          //max-height: 60vh;\n          width: 50%;\n          max-width 100%;\n          z-index: 99;\n          transition: width 1s;\n          \n        }\n        .pp-img:hover {\n          cursor: pointer;\n          transition: width 1s;\n          max-height: 60vh;\n          z-index: 100;\n          width: 100%;\n          \n        }\n\n        img.pp-img-single{\n          max-height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n      \n\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-left button{\n          color: white;\n          background-color: var(--med-blue);\n          font-family: var(--base-font-family);\n        }\n        .pp-left button:hover {\n          color: black;\n          background-color: var(--light-blue);\n        }\n        .pp-left button:active {\n          color: black;\n          background-color: var(--light-blue);\n\n        }\n        .pp-left{\n          grid-column: 1/2;\n          position: relative;\n        }\n        \n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 3/3;\n          //margin-left: 20%;\n          margin-left: 10%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-boxes button:hover{\n          color: black;\n          background-color: var(--white);\n          border: 1px solid var(--med-blue);\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n        \n        <div class='pp-left'>\n          ", "\n          \n          <h2 id=\"productName\">", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          \n          ", "\n          ", "\n          ", "\n          \n          </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p id=\"abv\" >", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p id=\"packSizeVolume\">", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3 id=\"price\" >&pound;", "</h3> \n                <button @click=", ">Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p id=\"flavour\" >", "</p>\n            <img src='/images/vegan-white.png'>\n            <p id=\"dietary\" >", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -9190,7 +9230,7 @@ class ProductsView {
     } //add content
 
 
-    const dialogContent = (0, _litHtml.html)(_templateObject(), this.cans ? (0, _litHtml.html)(_templateObject2(), () => this.moreInfoBottleHandler(product), () => this.moreInfoCanHandler(product)) : (0, _litHtml.html)(_templateObject3()), product.name, _App.default.apiBase, product.image, product.name, () => this.moreInfoBottleHandler(product), product.image, product.name, this.canImage ? (0, _litHtml.html)(_templateObject4(), () => this.moreInfoCanHandler(product), this.canImage, product.name) : (0, _litHtml.html)(_templateObject5()), product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, () => this.addToCart(product), product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject6(), product.allergen) : (0, _litHtml.html)(_templateObject7()));
+    const dialogContent = (0, _litHtml.html)(_templateObject(), this.cans ? (0, _litHtml.html)(_templateObject2(), () => this.moreInfoBottleHandler(product), () => this.moreInfoCanHandler(product)) : (0, _litHtml.html)(_templateObject3()), product.name, _App.default.apiBase, product.image, product.name, !this.canImage ? (0, _litHtml.html)(_templateObject4(), () => this.moreInfoBottleHandler(product), product.image, product.name) : (0, _litHtml.html)(_templateObject5()), this.canImage ? (0, _litHtml.html)(_templateObject6(), () => this.moreInfoBottleHandler(product), product.image, product.name) : (0, _litHtml.html)(_templateObject7()), this.canImage ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoCanHandler(product), this.canImage, product.name) : (0, _litHtml.html)(_templateObject9()), product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, () => this.addToCart(product), product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject10(), product.allergen) : (0, _litHtml.html)(_templateObject11()));
     (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
 
     document.body.append(this.productDialog); //show the dialog
@@ -9215,7 +9255,9 @@ class ProductsView {
     document.getElementById("flavour").innerHTML = product.flavour;
     document.getElementById("dietary").innerHTML = product.dietary;
     document.getElementById("allergen") ? document.getElementById("allergen").innerHTML = product.allergen : this.x = 1; //document.getElementById("image").src = product.image;
-  } //select bottle info 
+  }
+
+  toggleImageSize() {} //select bottle info 
 
 
   moreInfoBottleHandler(product) {
@@ -9261,7 +9303,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject8(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject9()) : (0, _litHtml.html)(_templateObject10(), this.products.map(product => (0, _litHtml.html)(_templateObject11(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject12(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject13()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject12(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject13()) : (0, _litHtml.html)(_templateObject14(), this.products.map(product => (0, _litHtml.html)(_templateObject15(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject16(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject17()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -11361,7 +11403,7 @@ var _litElement = require("@polymer/lit-element");
 var _Router = require("./../Router");
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .margin{\n        margin-top: 200px;\n      }\n      footer {\n        padding: 3% 5%;\n        margin: 0;\n        color: white;\n        height: 90vh;\n        width: 100%;\n        background-color: rgb(73, 73, 73);\n      }\n\n      .footer-grid{\n        display: grid;\n        grid-template-columns: repeat(4, auto);\n        width: 100%;\n      }\n      .footer-grid div h2{\n        font-size: 24px;\n        color: white;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n      }\n      ul {\n        padding: 0;\n        list-style-type: none;\n      }\n      li{\n        margin: 4% 0;\n        cursor: pointer;\n      }\n\n\n      .footer-logo {\n        width: 25%;\n        cursor: pointer;\n        margin-left: auto;\n        margin-right: auto;\n        display: block;\n        margin-top: 3%;\n        margin-bottom: 4%;\n      }\n\n      a { color: inherit; text-decoration: none;} \n\n      i {\n          font-size: 40px;\n          margin: 8px;\n          color: white;\n      }\n\n      #disclaimer{\n        font-size: 12px;\n      }\n    \n\n    </style>\n<footer>\n          <div class='footer-grid'>\n            <div >\n              <h2>Products</h2>\n              <ul @click=\"", "\">\n                <li>Reveller</li>\n                <li>Truffler</li>\n                <li>Hogfather</li>\n                <li>Pink</li>\n                <li>Charmer</li>\n              </ul>\n            </div>\n            <div class='help'>\n              <h2>Help</h2>\n              <ul>\n                <li>Delivery and Returns</li>\n                <li>Terms and Conditions</li>\n                <li>Privacy Policy</li>\n              </ul>\n            </div>\n            <div class='contact-us'>\n              <h2>Contact Us</h2>\n              <ul>\n                <li>275 Burnfield Road, Thornliebank</li>\n                <li>01632 960493</li>\n                <li>oink@orchardpig.co.uk</li>\n              </ul>\n            </div>\n            <div class='follow-us'>\n              <h2>Follow Us</h2>\n              <div id=\"social\">\n                <a href='https://www.facebook.com/OrchardPig' target=\"_blank\"><i class=\"fab fa-facebook-square\" ></i></a>\n                <a href='https://www.instagram.com/theorchardpig/' target=\"_blank\"><i class=\"fab fa-instagram\"></i></a>\n                <a href='https://twitter.com/Orchardpig' target=\"_blank\"><i class=\"fab fa-twitter-square\"></i></a>\n                \n              </div>\n            </div>\n          </div>\n\n          <img @click=\"", "\" class='footer-logo' src='/images/logo-white-cut.png'></a>  \n\n          <hr/>\n          <p id='disclaimer'>\n            This website has been created as part of an assignment in an approved course of study for Curtin University \n            and contains copyright material not created by the author. \n            All copyright material used remains copyright of the respective owners \n            and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). \n            No part of this work may be reproduced without consent of the original copyright owners. \n            See code comments for references.\n          </p>\n          </footer>\n    "]);
+  const data = _taggedTemplateLiteral(["\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .margin{\n        margin-top: 200px;\n      }\n      footer {\n        padding: 3% 5%;\n        margin: 0;\n        color: white;\n        height: 90vh;\n        width: 100%;\n        background-color: rgb(73, 73, 73);\n      }\n\n      .footer-grid{\n        display: grid;\n        grid-template-columns: repeat(4, auto);\n        width: 100%;\n      }\n      .footer-grid div h2{\n        font-size: 24px;\n        color: white;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n      }\n      ul {\n        padding: 0;\n        list-style-type: none;\n      }\n      li{\n        margin: 4% 0;\n        cursor: pointer;\n      }\n\n\n      .footer-logo {\n        width: 25%;\n        cursor: pointer;\n        margin-left: auto;\n        margin-right: auto;\n        display: block;\n        margin-top: 3%;\n        margin-bottom: 4%;\n      }\n\n      a { color: inherit; text-decoration: none;} \n\n      i {\n          font-size: 40px;\n          margin: 8px;\n          color: white;\n      }\n\n      #disclaimer{\n        font-size: 12px;\n      }\n    \n\n    </style>\n<footer>\n          <div class='footer-grid'>\n            <div >\n              <h2>Products</h2>\n              <ul @click=\"", "\">\n                <li>Reveller</li>\n                <li>Truffler</li>\n                <li>Hogfather</li>\n                <li>Pink</li>\n                <li>Charmer</li>\n              </ul>\n            </div>\n            <div class='help'>\n              <h2>Help</h2>\n              <ul>\n                <li>Delivery and Returns</li>\n                <li>Terms and Conditions</li>\n                <li>Privacy Policy</li>\n              </ul>\n            </div>\n            <div class='contact-us'>\n              <h2>Contact Us</h2>\n              <ul>\n                <li>275 Burnfield Road, Thornliebank</li>\n                <li>01632 960493</li>\n                <li>oink@orchardpig.co.uk</li>\n              </ul>\n            </div>\n            <div class='follow-us'>\n              <h2>Follow Us</h2>\n              <div id=\"social\">\n                <a href='https://www.facebook.com/OrchardPig' target=\"_blank\"><i class=\"fab fa-facebook-square\" ></i></a>\n                <a href='https://www.instagram.com/theorchardpig/' target=\"_blank\"><i class=\"fab fa-instagram\"></i></a>\n                <a href='https://twitter.com/Orchardpig' target=\"_blank\"><i class=\"fab fa-twitter-square\"></i></a>\n              </div>\n            </div>\n          </div>\n\n          <img @click=\"", "\" class='footer-logo' src='/images/logo-white-cut.png'></a>  \n\n          <hr/>\n          <p id='disclaimer'>\n            This website has been created as part of an assignment in an approved course of study for Curtin University \n            and contains copyright material not created by the author. \n            All copyright material used remains copyright of the respective owners \n            and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). \n            No part of this work may be reproduced without consent of the original copyright owners. \n            See code comments for references.\n          </p>\n          </footer>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
