@@ -130,7 +130,6 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
                 <a href='https://www.facebook.com/OrchardPig' target="_blank"><i class="fab fa-facebook-square" ></i></a>
                 <a href='https://www.instagram.com/theorchardpig/' target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href='https://twitter.com/Orchardpig' target="_blank"><i class="fab fa-twitter-square"></i></a>
-                
               </div>
             </div>
           </div>
