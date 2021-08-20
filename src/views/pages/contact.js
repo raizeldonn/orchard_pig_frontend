@@ -4,6 +4,7 @@ import App from '../../App'
 import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import Toast from '../../Toast'
 
 class ContactView {
   init(){
@@ -13,6 +14,9 @@ class ContactView {
   }
 
 
+  contactSubmitHandler(){
+    Toast.show("Thanks for reaching out! We will respond as soon as we can.");
+  }
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
@@ -56,7 +60,7 @@ class ContactView {
               <div class='input-group'>
                 <sl-textarea label="Message" placeholder="Type your message here"></sl-textarea>
               </div>
-              <button class="submit-btn" submit>Submit</button>     
+              <button class="submit-btn" submit >Submit</button>     
             </sl-form>
           </div>
 

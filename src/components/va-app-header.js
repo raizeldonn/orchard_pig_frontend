@@ -170,6 +170,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .header-title {
         color: var(--med-blue);
+        color: #AACOCF;
         font-family: Rockwell, serif;
         position: absolute;
         right: 20%;
@@ -331,7 +332,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       </video>
       <div class="header-title">
         ${this.title ? html`
-          <h2 style="color= var(--med-blue) class="page-title">${this.title}</h1>
+          <h2>${this.title}</h2>
         `: html``}
         <slot></slot>
       </div>
