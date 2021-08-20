@@ -84,9 +84,10 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
 
       a { color: inherit; text-decoration: none;} 
 
-      i {
-          font-size: 40px;
-          margin: 8px;
+      #social img {
+          width: 70px;
+          height: 70px;
+          margin: 0px;
           color: white;
       }
 
@@ -127,9 +128,12 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
             <div class='follow-us'>
               <h2>Follow Us</h2>
               <div id="social">
-                <a href='https://www.facebook.com/OrchardPig' target="_blank"><i class="fab fa-facebook-square" ></i></a>
-                <a href='https://www.instagram.com/theorchardpig/' target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href='https://twitter.com/Orchardpig' target="_blank"><i class="fab fa-twitter-square"></i></a>
+                <!--<a href='https://www.facebook.com/OrchardPig' target="_blank"><i class="fab fa-facebook-square" ></i></a>-->
+                <!--<a href='https://www.instagram.com/theorchardpig/' target="_blank"><i class="fab fa-instagram"></i></a>-->
+                <!--<a href='https://twitter.com/Orchardpig' target="_blank"><i class="fab fa-twitter-square"></i></a>-->
+                <a href='https://www.facebook.com/OrchardPig' target="_blank"><img src="/images/facebook-white2.png"></a>
+                <a href='https://www.instagram.com/theorchardpig/' target="_blank"><img src="/images/instagram-white2.png"></a>
+                <a href='https://twitter.com/Orchardpig' target="_blank"><img src="/images/twitter-white2.png"</a>
               </div>
             </div>
           </div>

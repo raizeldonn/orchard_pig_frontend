@@ -76,14 +76,15 @@ class ProductsView {
         #image-bottle {
           position: absolute;
           left: 0px;
-          top: 170px;
+          top: 150px;
         }
         #image-can {
           position: absolute;
           right: 0px;
-          top: 170px;
+          top: 150px;
         }
         img.pp-img{
+          object-fit: cover;
           //max-height: 60vh;
           width: 50%;
           max-width 100%;
@@ -281,6 +282,7 @@ class ProductsView {
         if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "12")) {
           // this.productDialog.remove();
           product = this.products[i];
+          Toast.show("Yummy... Bottled Cider!");
           this.canInfoDisplay = false;
           this.changeCanBottleInfo(product);
           //this.moreInfoHandler(product);
@@ -296,6 +298,7 @@ class ProductsView {
         if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "24")) {
           // this.productDialog.remove();
           product = this.products[i];
+          Toast.show("Delicious... Cider Cans!");
           this.canInfoDisplay = true;
           this.changeCanBottleInfo(product);
           //this.moreInfoHandler(product);
