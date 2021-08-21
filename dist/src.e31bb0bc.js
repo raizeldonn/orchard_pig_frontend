@@ -8865,7 +8865,68 @@ class AgeConfirmView {
 var _default = new AgeConfirmView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/contact.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"ContactAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+var _Toast = _interopRequireDefault(require("./Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class ContactAPI {
+  constructor() {//this.contactData = {}
+  } // create a guest user
+
+
+  async postMessage(contactData) {
+    //   this.contactData = {
+    //      firstName: firstName,
+    //      lastName: lastName,
+    //      email: email,
+    //      phoneNumber: phoneNumber,
+    //      subject : subject,
+    //      message : message
+    //  }
+    console.log("Message data : ", contactData);
+    const response = await fetch("".concat(_App.default.apiBase, "/message"), {
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer ".concat(localStorage.accessToken)
+      },
+      body: contactData
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // show error      
+
+      _Toast.default.show("Problem Posting Message: ".concat(response.status)); // run fail() functon if set
+
+
+      if (typeof fail == 'function') fail();
+    } /// sign up success - show toast and redirect to sign in page
+
+
+    console.log("response: " + JSON.stringify(response)); //get the customerID via the response and save to use for the order and payment
+  }
+
+  getContactData() {
+    return this.contactData;
+  }
+
+}
+
+var _default = new ContactAPI();
+
+exports.default = _default;
+},{"./App":"App.js","./Toast":"Toast.js"}],"views/pages/contact.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8885,10 +8946,12 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 
 var _Toast = _interopRequireDefault(require("../../Toast"));
 
+var _ContactAPI = _interopRequireDefault(require("../../ContactAPI"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Contact Us\" products=", "></va-app-header>\n\n      <div class=\"page-content contact-page\">   \n\n        <img class='pigsteps' src='/images/pigsteps.png'>\n        <h1>Get In Touch</h1> \n\n        <div class='flex'>\n\n          <div class='contact-us-form'>\n            <sl-form class=\"contact-shipping\" @sl-submit=", ">\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n                </div>\n              </div>\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone\" required></sl-input>\n                </div> \n              </div>\n              <div class=\"input-group\">\n                <sl-select name='Subject' label='Subject' required>\n                  <sl-menu-item value='order'>My Order</sl-menu-item>\n                  <sl-menu-item value='shipping'>Shipping</sl-menu-item>\n                  <sl-menu-item value='returns'>Returns</sl-menu-item>\n                  <sl-menu-item value='drinks'>Drinks</sl-menu-item>\n                  <sl-menu-item value='corp'>Corporate Events</sl-menu-item>\n                </sl-select>\n              </div>\n              <div class='input-group'>\n                <sl-textarea label=\"Message\" placeholder=\"Type your message here\"></sl-textarea>\n              </div>\n              <button class=\"submit-btn\" submit >Submit</button>     \n            </sl-form>\n          </div>\n\n          <div class='flex-column'>\n\n            <div class='right'>\n              <div class='contact-info-grid'> \n                <img src='/images/pin-white.png'>\n                <p>275 Burnfield Road, Thornliebank</p>\n                <img src='/images/phone-white.png'>\n                <p>01632 960493</p>\n                <img src='/images/email-white.png'>\n                <p>oink@orchardpig.co.uk</p>\n              </div>\n              <!-- <div class='sm-icons'> \n              <a href='https://www.facebook.com/OrchardPig'><img src='/images/facebook-white.png'></a>\n              <a href='https://www.instagram.com/theorchardpig/'><img src='/images/instagram-white.png'></a>\n              <a href='https://twitter.com/Orchardpig'><img src='/images/twitter-white.png'></a>\n              </div> -->\n            </div>\n            \n            <div class=\"mapouter\">\n              <div class=\"gmap_canvas\">\n                <iframe style=\"height:100%;width:100%;\" id=\"gmap_canvas\" src=\"https://maps.google.com/maps?q=275%20Burnfield%20Road,%20Thornliebank&t=&z=7&ie=UTF8&iwloc=&output=embed\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>\n              </div>\n            </div>\n\n          </div>\n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer> \n        \n      </div> \n          \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Contact Us\" products=", "></va-app-header>\n\n      <div class=\"page-content contact-page\">   \n\n        <img class='pigsteps' src='/images/pigsteps.png'>\n        <h1>Get In Touch</h1> \n\n        <div class='flex'>\n\n          <div class='contact-us-form'>\n            <sl-form class=\"contact-shipping\" @sl-submit=", ">\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n                </div>\n              </div>\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone\" required></sl-input>\n                </div> \n              </div>\n              <div class=\"input-group\">\n                <sl-select name='subject' label='Subject' required>\n                  <sl-menu-item value='order'>My Order</sl-menu-item>\n                  <sl-menu-item value='shipping'>Shipping</sl-menu-item>\n                  <sl-menu-item value='returns'>Returns</sl-menu-item>\n                  <sl-menu-item value='drinks'>Drinks</sl-menu-item>\n                  <sl-menu-item value='corp'>Corporate Events</sl-menu-item>\n                </sl-select>\n              </div>\n              <div class='input-group'>\n                <sl-textarea name=\"message\" label=\"Message\" placeholder=\"Type your message here\"></sl-textarea>\n              </div>\n              <button class=\"submit-btn\" submit >Submit</button>     \n            </sl-form>\n          </div>\n\n          <div class='flex-column'>\n\n            <div class='right'>\n              <div class='contact-info-grid'> \n                <img src='/images/pin-white.png'>\n                <p>275 Burnfield Road, Thornliebank</p>\n                <img src='/images/phone-white.png'>\n                <p>01632 960493</p>\n                <img src='/images/email-white.png'>\n                <p>oink@orchardpig.co.uk</p>\n              </div>\n              <!-- <div class='sm-icons'> \n              <a href='https://www.facebook.com/OrchardPig'><img src='/images/facebook-white.png'></a>\n              <a href='https://www.instagram.com/theorchardpig/'><img src='/images/instagram-white.png'></a>\n              <a href='https://twitter.com/Orchardpig'><img src='/images/twitter-white.png'></a>\n              </div> -->\n            </div>\n            \n            <div class=\"mapouter\">\n              <div class=\"gmap_canvas\">\n                <iframe style=\"height:100%;width:100%;\" id=\"gmap_canvas\" src=\"https://maps.google.com/maps?q=275%20Burnfield%20Road,%20Thornliebank&t=&z=7&ie=UTF8&iwloc=&output=embed\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>\n              </div>\n            </div>\n\n          </div>\n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer> \n        \n      </div> \n          \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8902,13 +8965,26 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class ContactView {
   init() {
     document.title = 'Contact';
-    this.render();
 
     _Utils.default.pageIntroAnim();
+
+    this.contactSubmitHandler;
+    this.render();
   }
 
-  contactSubmitHandler() {
+  contactSubmitHandler(e) {
     _Toast.default.show("Thanks for reaching out! We will respond as soon as we can.");
+
+    e.preventDefault();
+    const formData = e.detail.formData; // let firstName = formData.get('firstName')
+    // let lastName = formData.get('lastName')
+    // let email = formData.get('email')
+    // let phoneNumber = formData.get('phoneNumber')
+    // let subject = formData.get('subject')
+    // let message = formData.get('message')
+    // ContactAPI.postMessage(firstName, lastName, email, phoneNumber, subject, message)
+
+    _ContactAPI.default.postMessage(formData);
   } // method from lit library which allows us 
   // to render html from within js to a container
 
@@ -8926,7 +9002,7 @@ class ContactView {
 var _default = new ContactView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js"}],"views/pages/game.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js","../../ContactAPI":"ContactAPI.js"}],"views/pages/game.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11609,7 +11685,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50744" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51277" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
