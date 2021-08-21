@@ -40,7 +40,7 @@ class Checkout2View {
       cvvVerified = true
     }
 
-    OrderAPI.paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified)
+    OrderAPI.paymentInfo(formData)
     gotoRoute('/checkout3')
   }
 

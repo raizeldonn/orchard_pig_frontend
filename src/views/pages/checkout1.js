@@ -21,23 +21,23 @@ class Checkout1View {
     e.preventDefault()    
     const formData = e.detail.formData
     
-    let firstName = formData.get('firstName')
-    let lastName = formData.get('lastName')
-    let email = formData.get('email')
-    let phoneNumber = formData.get('phoneNumber')
+    // let firstName = formData.get('firstName')
+    // let lastName = formData.get('lastName')
+    // let email = formData.get('email')
+    // let phoneNumber = formData.get('phoneNumber')
 
     try{
-      await OrderAPI.createGuest(firstName, lastName, email, phoneNumber)
+      await OrderAPI.createGuest(formData)
     }
     catch(err){
       console.log(err)
     }
     
-    let address = formData.get('address')
-    let address2 = formData.get('address2')
+    // let address = formData.get('address')
+    // let address2 = formData.get('address2')
     let shipping = formData.get('shipping')
 
-    OrderAPI.shippingInfo(address, address2, shipping)
+    // OrderAPI.shippingInfo(address, address2, shipping)
 
     CartAPI.setShipping(shipping)
     gotoRoute('/checkout2')
@@ -85,6 +85,8 @@ class Checkout1View {
             <div class="input-group">
               <sl-input name="phoneNumber" type="text" label="Phone Number" required></sl-input>
             </div>    
+
+
             <div class="input-group">
               <sl-input name="address" type="text" label="Address" required></sl-input>
             </div>

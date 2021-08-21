@@ -37,8 +37,9 @@ class Checkout3View {
       this.userData = OrderAPI.getUserData()
       this.shipping = OrderAPI.getShipping()
       this.payment = OrderAPI.getPayment()
-      console.log("shipping: " + JSON.stringify(this.shipping))
-      console.log("payment: " + JSON.stringify(this.payment))
+      console.log("userdata checkout: " + JSON.stringify(this.userData))
+      console.log("shipping checkout: " + JSON.stringify(this.shipping))
+      console.log("payment checkout: " + JSON.stringify(this.payment))
       this.render()
     }
     catch(err){
@@ -84,7 +85,7 @@ class Checkout3View {
 
         <div class='payment-details'>
           	<h2>Payment Details</h2>
-            ${this.shipping == null ? 
+            ${this.payment == null ? 
               html`<sl-spinner></sl-spinner>` : 
               html`
               <p>**** **** **** ${this.payment.lastFourDigits}</p>

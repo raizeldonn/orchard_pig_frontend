@@ -8225,7 +8225,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class OrderAPI {
   constructor() {
-    this.customerId = "611817197c96fc001680133c"; //placeholder customer id
+    this.customerId = null; //= "" //"611817197c96fc001680133c" //placeholder customer id
 
     this.orderId = "61183d1fff4dad9c013b2a9c"; //placeholder order id
 
@@ -8236,17 +8236,30 @@ class OrderAPI {
   } // create a guest user
 
 
-  async createGuest(firstName, lastName, email, phoneNumber) {
+  async createGuest(guest) {
+    //need to convert 'guest' formData object to a JSON object
+    var object = {};
+    guest.forEach((value, key) => object[key] = value);
+    this.usershippingData = object;
+    console.log("formData convert to userData", this.usershippingData); //create user object
+
     this.userData = {
-      "firstName": firstName,
-      "lastName": lastName,
-      "email": email,
-      "phoneNumber": phoneNumber
+      "firstName": this.usershippingData.firstName,
+      "lastName": this.usershippingData.lastName,
+      "email": this.usershippingData.email,
+      "phoneNumber": this.usershippingData.phoneNumber
     };
+    console.log("GUEST USER : ", this.userData); //create shipping object
+
+    this.shipping = {
+      "address": this.usershippingData.address,
+      "address2": this.usershippingData.address2,
+      "shipping": this.usershippingData.shipping
+    };
+    console.log("SHIPPING : ", this.shipping);
     const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
       method: 'POST',
-      // headers: { "Content-Type" : "application/json" },
-      body: this.userData
+      body: guest
     }); // if response not ok
 
     if (!response.ok) {
@@ -8258,30 +8271,59 @@ class OrderAPI {
 
 
       if (typeof fail == 'function') fail();
-    } /// sign up success - show toast and redirect to sign in page
+    }
 
-
-    console.log("response: " + JSON.stringify(response.json())); //get the customerID via the response and save to use for the order and payment
+    const data = await response.json();
+    this.customerId = data._id;
+    console.log("Response customerId: ", this.customerId);
+    this.userEmail = guest.get('email');
+    console.log("userEmail", this.userEmail);
+    console.log("retreivedUserData: ", data);
   } // place an order
 
 
   async placeOrder() {
     let products = localStorage.getItem('cartProducts');
-    products = JSON.parse(products); // place the order
+    products = JSON.parse(products);
+
+    const totalCost = _CartAPI.default.getTotal();
+
+    var shippingFormData = new FormData();
+
+    for (var key in this.shipping) {
+      shippingFormData.append(key, this.shipping[key]);
+    }
+
+    var productsFormData = new FormData();
+
+    for (var key in products) {
+      productsFormData.append(key, products[key]);
+    } // place the order
+
 
     this.orderData = {
       "currency": "BPS",
       "customerId": this.customerId,
       "paymentStatus": "unpaid",
       "status": "awaitingShipment",
-      "totalCost": _CartAPI.default.getTotal(),
-      "products": products,
+      "totalCost": totalCost,
+      // "products": products,
+      // "shipping": this.shipping
+      "products": productsFormData,
       "shipping": this.shipping
-    };
+    }; //convert to a FormData object
+
+    var orderFormData = new FormData();
+
+    for (var key in this.orderData) {
+      orderFormData.append(key, this.orderData[key]);
+    }
+
     console.log("Order DATA : ", this.orderData);
     const response = await fetch("".concat(_App.default.apiBase, "/order"), {
       method: 'POST',
-      body: this.orderData
+      // body: this.orderData
+      body: orderFormData
     }); // if response not ok
 
     if (!response.ok) {
@@ -8289,13 +8331,16 @@ class OrderAPI {
       const err = await response.json();
       if (err) console.log(err); // show error      
 
-      _Toast.default.show("Problem getting user: ".concat(response.status)); // run fail() functon if set
+      _Toast.default.show("Problem submitting Order: ".concat(response.status)); // run fail() functon if set
 
 
       if (typeof fail == 'function') fail();
     } //get hold of the order ID in order to make a payment
-    // await this.makePayment()
 
+
+    const data = response.json();
+    this.orderId = data._id;
+    console.log("OrderId : ", this.orderId); // await this.makePayment()
   } // post a payment
 
 
@@ -8336,18 +8381,23 @@ class OrderAPI {
       "shippingOption": shipping
     };
     console.log("shipping: " + JSON.stringify(this.shipping));
+    console.log("shipping: " + this.shipping);
   } // save payment info to object for further use
 
 
-  paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified) {
-    this.payment = {
-      "brand": "visa",
-      "lastFourDigits": lastFourDigits,
-      "expMonth": expMonth,
-      "expYear": expYear,
-      "cvvVerified": cvvVerified
-    };
-    console.log("payment: " + JSON.stringify(this.payment));
+  paymentInfo(paymentFormData) {
+    //need to convert 'payment' formData object to a JSON object
+    var object = {};
+    paymentFormData.forEach((value, key) => object[key] = value);
+    this.payment = object; //   this.payment = {
+    //     "brand": "visa",
+    //     "lastFourDigits": lastFourDigits,
+    //     "expMonth": expMonth,
+    //     "expYear": expYear,
+    //     "cvvVerified": cvvVerified
+    // }
+
+    console.log("payment: " + this.payment);
   }
 
   getUserData() {
@@ -8424,7 +8474,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n\n\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n\n\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8447,23 +8497,20 @@ class Checkout1View {
 
   async shippingSubmitHandler(e) {
     e.preventDefault();
-    const formData = e.detail.formData;
-    let firstName = formData.get('firstName');
-    let lastName = formData.get('lastName');
-    let email = formData.get('email');
-    let phoneNumber = formData.get('phoneNumber');
+    const formData = e.detail.formData; // let firstName = formData.get('firstName')
+    // let lastName = formData.get('lastName')
+    // let email = formData.get('email')
+    // let phoneNumber = formData.get('phoneNumber')
 
     try {
-      await _OrderAPI.default.createGuest(firstName, lastName, email, phoneNumber);
+      await _OrderAPI.default.createGuest(formData);
     } catch (err) {
       console.log(err);
-    }
+    } // let address = formData.get('address')
+    // let address2 = formData.get('address2')
 
-    let address = formData.get('address');
-    let address2 = formData.get('address2');
-    let shipping = formData.get('shipping');
 
-    _OrderAPI.default.shippingInfo(address, address2, shipping);
+    let shipping = formData.get('shipping'); // OrderAPI.shippingInfo(address, address2, shipping)
 
     _CartAPI.default.setShipping(shipping);
 
@@ -8600,7 +8647,7 @@ class Checkout2View {
       cvvVerified = true;
     }
 
-    _OrderAPI.default.paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified);
+    _OrderAPI.default.paymentInfo(formData);
 
     (0, _Router.gotoRoute)('/checkout3');
   } // method from lit library which allows us 
@@ -8778,8 +8825,9 @@ class Checkout3View {
       this.userData = _OrderAPI.default.getUserData();
       this.shipping = _OrderAPI.default.getShipping();
       this.payment = _OrderAPI.default.getPayment();
-      console.log("shipping: " + JSON.stringify(this.shipping));
-      console.log("payment: " + JSON.stringify(this.payment));
+      console.log("userdata checkout: " + JSON.stringify(this.userData));
+      console.log("shipping checkout: " + JSON.stringify(this.shipping));
+      console.log("payment checkout: " + JSON.stringify(this.payment));
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -8793,7 +8841,7 @@ class Checkout3View {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.shipping == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.placeOrder, this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.payment == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.placeOrder, this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
