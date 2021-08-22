@@ -8125,8 +8125,9 @@ class CartAPI {
   }
 
   async addProduct(item, name, quantity, sku, price) {
-    let qty = quantity.toFixed(2);
-    let totalCost = price.$numberDecimal * qty;
+    let qty = quantity.toFixed(2); // let totalCost = price.$numberDecimal * qty 
+
+    let totalCost = price * qty;
     totalCost = parseFloat(totalCost.toFixed(2));
     let product = {
       item: item,
@@ -8225,14 +8226,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class OrderAPI {
   constructor() {
-    this.customerId = null; //= "" //"611817197c96fc001680133c" //placeholder customer id
-
-    this.orderId = "61183d1fff4dad9c013b2a9c"; //placeholder order id
-
+    this.customerId = null;
+    this.orderId = null;
     this.userData = {};
     this.orderData = {};
     this.shipping = {};
     this.payment = {};
+    this.cardNum;
   } // create a guest user
 
 
@@ -8307,9 +8307,7 @@ class OrderAPI {
       "paymentStatus": "unpaid",
       "status": "awaitingShipment",
       "totalCost": totalCost,
-      // "products": products,
-      // "shipping": this.shipping
-      "products": productsFormData,
+      //"products": products,
       "shipping": this.shipping
     }; //convert to a FormData object
 
@@ -8338,9 +8336,11 @@ class OrderAPI {
     } //get hold of the order ID in order to make a payment
 
 
-    const data = response.json();
+    const data = await response.json();
+    console.log("Order Response : ", data);
     this.orderId = data._id;
-    console.log("OrderId : ", this.orderId); // await this.makePayment()
+    console.log("OrderId : ", this.orderId);
+    await this.makePayment();
   } // post a payment
 
 
@@ -8353,11 +8353,19 @@ class OrderAPI {
       "paymentType": "credit",
       "amount": _CartAPI.default.getTotal(),
       "card": this.payment
-    };
+    }; //convert to a FormData object
+
+    var paymentFormData = new FormData();
+
+    for (var key in paymentData) {
+      paymentFormData.append(key, paymentData[key]);
+    }
+
+    console.log("paymentFORMDATA: ", paymentFormData);
+    console.log("paymentDATA: ", paymentData);
     const response = await fetch("".concat(_App.default.apiBase, "/payment"), {
       method: 'POST',
-      //headers: { "Authorization": `Bearer ${localStorage.accessToken}`},  //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
-      body: paymentData
+      body: paymentFormData
     }); // if response not ok
 
     if (!response.ok) {
@@ -8386,17 +8394,24 @@ class OrderAPI {
 
 
   paymentInfo(paymentFormData) {
-    //need to convert 'payment' formData object to a JSON object
-    var object = {};
-    paymentFormData.forEach((value, key) => object[key] = value);
-    this.payment = object; //   this.payment = {
-    //     "brand": "visa",
-    //     "lastFourDigits": lastFourDigits,
-    //     "expMonth": expMonth,
-    //     "expYear": expYear,
-    //     "cvvVerified": cvvVerified
-    // }
+    let cardNum = paymentFormData.get('cardNumber');
+    let lastFourDigits = cardNum.slice(cardNum.length - 4);
+    paymentFormData.set('cardNumber', lastFourDigits);
+    let expMonth = paymentFormData.get('expMonth');
+    let expYear = paymentFormData.get('expYear');
+    let cvvVerified = true; //need to convert 'payment' formData object to a JSON object
+    // var object = {}
+    // paymentFormData.forEach((value, key) => object[key] = value);
+    // this.payment = object;
 
+    this.payment = JSON.stringify(this.payment);
+    this.payment = {
+      "brand": "visa",
+      "lastFourDigits": lastFourDigits,
+      "expMonth": expMonth,
+      "expYear": expYear,
+      "cvvVerified": cvvVerified
+    };
     console.log("payment: " + this.payment);
   }
 
@@ -8835,7 +8850,13 @@ class Checkout3View {
   }
 
   async placeOrder() {
-    await _OrderAPI.default.placeOrder();
+    try {
+      await _OrderAPI.default.placeOrder();
+
+      _Toast.default.show('Your order has been submitted. A receipt will be sent to you email');
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
   } // method from lit library which allows us 
   // to render html from within js to a container
 

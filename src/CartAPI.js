@@ -9,7 +9,8 @@ class CartAPI {
     async addProduct(item, name, quantity, sku, price){
 
         let qty = quantity.toFixed(2)
-        let totalCost = price.$numberDecimal * qty 
+        // let totalCost = price.$numberDecimal * qty 
+        let totalCost = price * qty 
         totalCost = parseFloat(totalCost.toFixed(2))
         
         let product = {

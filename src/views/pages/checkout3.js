@@ -48,7 +48,13 @@ class Checkout3View {
   }
   
   async placeOrder(){
-    await OrderAPI.placeOrder()
+    try{
+      await OrderAPI.placeOrder()
+      Toast.show('Your order has been submitted. A receipt will be sent to you email')
+    }
+    catch(err){
+      Toast.show(err, 'error')
+  }
   }
 
   // method from lit library which allows us 

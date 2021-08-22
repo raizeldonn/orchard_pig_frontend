@@ -6,12 +6,13 @@ import CartAPI from './CartAPI'
 class OrderAPI {
 
   constructor() {
-    this.customerId = null //= "" //"611817197c96fc001680133c" //placeholder customer id
-    this.orderId = "61183d1fff4dad9c013b2a9c" //placeholder order id
+    this.customerId = null
+    this.orderId = null
     this.userData = {}
     this.orderData = {}
     this.shipping = {}
     this.payment = {}
+    this.cardNum;
   }
 
   // create a guest user
@@ -72,6 +73,7 @@ class OrderAPI {
     products = JSON.parse(products)
     const totalCost = CartAPI.getTotal();
 
+
     var shippingFormData = new FormData();
     for (var key in this.shipping) {
       shippingFormData.append(key, this.shipping[key]);
@@ -89,10 +91,9 @@ class OrderAPI {
       "paymentStatus": "unpaid",
       "status": "awaitingShipment",
       "totalCost": totalCost,
-      // "products": products,
-      // "shipping": this.shipping
-      "products": productsFormData,
+      //"products": products,
       "shipping": this.shipping
+   
     }
 
     //convert to a FormData object
@@ -124,11 +125,12 @@ class OrderAPI {
     }
 
     //get hold of the order ID in order to make a payment
-    const data = response.json();
+    const data = await response.json();
+    console.log("Order Response : ", data);
     this.orderId = data._id;
     console.log("OrderId : ", this.orderId);
 
-    // await this.makePayment()
+    await this.makePayment()
   }
 
   // post a payment
@@ -144,10 +146,20 @@ class OrderAPI {
       "card": this.payment
 
     }
-    const response = await fetch(`${App.apiBase}/payment`, {
+
+    //convert to a FormData object
+
+    var paymentFormData = new FormData();
+    for (var key in paymentData) {
+      paymentFormData.append(key, paymentData[key]);
+    }
+   console.log("paymentFORMDATA: ",paymentFormData);
+   console.log("paymentDATA: ",paymentData);
+
+
+   const response = await fetch(`${App.apiBase}/payment`, {
       method: 'POST',
-      //headers: { "Authorization": `Bearer ${localStorage.accessToken}`},  //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
-      body: paymentData
+      body: paymentFormData
     })
 
     // if response not ok
@@ -177,18 +189,27 @@ class OrderAPI {
   // save payment info to object for further use
   paymentInfo(paymentFormData) {
 
-    //need to convert 'payment' formData object to a JSON object
-    var object = {}
-    paymentFormData.forEach((value, key) => object[key] = value);
-    this.payment = object;
+    let cardNum = paymentFormData.get('cardNumber')
+    let lastFourDigits = (cardNum.slice(cardNum.length - 4))
+    paymentFormData.set('cardNumber', lastFourDigits);
+    let expMonth = paymentFormData.get('expMonth');
+    let expYear = paymentFormData.get('expYear');
+    let cvvVerified = true;
 
-    //   this.payment = {
-    //     "brand": "visa",
-    //     "lastFourDigits": lastFourDigits,
-    //     "expMonth": expMonth,
-    //     "expYear": expYear,
-    //     "cvvVerified": cvvVerified
-    // }
+    //need to convert 'payment' formData object to a JSON object
+    // var object = {}
+    // paymentFormData.forEach((value, key) => object[key] = value);
+    // this.payment = object;
+    this.payment = JSON.stringify(this.payment);
+
+   
+      this.payment = {
+        "brand": "visa",
+        "lastFourDigits": lastFourDigits,
+        "expMonth": expMonth,
+        "expYear": expYear,
+        "cvvVerified": cvvVerified
+    }
 
     console.log("payment: " + this.payment)
   }
