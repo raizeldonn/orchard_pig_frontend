@@ -349,9 +349,9 @@ class ProductsView {
                 
               `)}
             `}
+
           </div>
 
-          <va-app-footer margin="true"></va-app-footer> 
         
       </div>      
     `

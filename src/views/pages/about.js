@@ -46,7 +46,7 @@ class AboutView {
       <div class="page-content about-page">  
         
         <!-- Swiper -->
-        <div class="swiper-container mySwiper">
+        <div id="top" class="swiper-container mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide slide1"><img src='/images/carousel1.jpg'></div>
             <div class="swiper-slide slide2"><img src='/images/carousel2.jpg'></div>
@@ -94,10 +94,11 @@ class AboutView {
             <p>Orchard Pig's home in West Bradley Orchards is well and truly rooted in Somerset’s cider-making history, dating back to the 1850s and W.T. Allen’s, award winning Somerset cider.</p>
           </div>
           <img class='img-right' src='/images/op-pub.png'> 
+
         </div>
         
         <va-app-footer margin="true"></va-app-footer>
-        
+
       </div>      
     `
     // this assigns the template html container to App.rootEl
