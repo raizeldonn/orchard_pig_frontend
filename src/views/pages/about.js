@@ -69,7 +69,7 @@ class AboutView {
         <h4>Crack a cold one n' let us tell you a story</h4>
 
         <div class='about-us-flex'>
-          <div class='info info-left '>
+          <div class='info info-left thebeg'>
             <h2>The Beginning</h2>
             <p>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>
             Orchard Pig was born out of a shared passion for great food and Old Spots, <br>
@@ -89,7 +89,7 @@ class AboutView {
           </div>
         </div>
         <div class='about-us-flex'>
-          <div class='info info-left'>
+          <div class='info info-left ourhome'>
             <h2>Our Home</h2>
             <p>Orchard Pig's home in West Bradley Orchards is well and truly rooted in Somerset’s cider-making history, dating back to the 1850s and W.T. Allen’s, award winning Somerset cider.</p>
           </div>

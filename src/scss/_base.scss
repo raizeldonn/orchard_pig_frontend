@@ -669,6 +669,25 @@ button.homepg-btn {
       padding-right: 0;
       padding-left: 10%;
     }
+
+    .thebeg{
+      background-image: url(../../static/images/stroke-the-beginning.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 0px 30px;
+    }
+    .info-right{
+      background-image: url(../../static/images/stroke-beliefs.png);
+      background-repeat: no-repeat;
+      background-size: 70% 50%;
+      background-position: 0px 30px;
+    }
+    .ourhome{
+      background-image: url(../../static/images/stroke-our-home.png);
+      background-repeat: no-repeat;
+      background-size: 80% 50%;
+      background-position: 30px 30px;
+    }
   }
 
   .pigsteps {

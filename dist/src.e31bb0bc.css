@@ -614,6 +614,24 @@ button.homepg-btn {
   padding-right: 0;
   padding-left: 10%;
 }
+.about-page .about-us-flex .thebeg {
+  background-image: url(/stroke-the-beginning.c59e919e.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 0px 30px;
+}
+.about-page .about-us-flex .info-right {
+  background-image: url(/stroke-beliefs.3148c938.png);
+  background-repeat: no-repeat;
+  background-size: 70% 50%;
+  background-position: 0px 30px;
+}
+.about-page .about-us-flex .ourhome {
+  background-image: url(/stroke-our-home.9ecfb41d.png);
+  background-repeat: no-repeat;
+  background-size: 80% 50%;
+  background-position: 30px 30px;
+}
 .about-page .pigsteps {
   width: 95%;
   z-index: 0;
