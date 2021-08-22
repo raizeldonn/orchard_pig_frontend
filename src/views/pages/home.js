@@ -3,6 +3,9 @@
 // https://lit-element.polymer-project.org/guide/templates
 // https://lit-html.polymer-project.org/guide/styling-templates
 import {html, render } from 'lit-html'
+import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 import App from './../../App'
 import {gotoRoute, anchorRoute } from './../../Router'
@@ -21,10 +24,30 @@ class HomeView {
     //this.getTeam()
     this.render()
     Utils.pageIntroAnim()
+    this.homePageAnim()
+    this.pinkAnim()
     this.products = null;
     //localStorage.removeItem('cartProducts');
     this.getProducts();   
 
+  }
+
+  homePageAnim(){
+    // gsap.fromTo(pageContent, {opacity: 0, y: -12}, {opacity: 1, y: 0, ease: 'power2.out', duration: 0.3})
+
+    const homeTl = gsap.timeline({scrollTrigger: {trigger: ".page-content", start: "top center"}})
+    .from('.rooted h1', {y:50, opacity: 0, duration: 1})
+    .from('.rooted p', {y:50, opacity: 0, duration: 1},"-=0.5")
+    .from('.rooted button', {x:50, opacity: 0,  ease:"Back.easeOut", duration: 0.5}, "+=0.5");
+  }
+
+  pinkAnim(){
+    console.log("pinkanim")
+    const newPig = document.querySelector('.new-pig')
+
+    gsap.timeline({scrollTrigger: {trigger: '.new-pig h1', markers:true}})
+    .from('.new-pig .pink-tilted', {x:50, transform: "rotate(15deg)", opacity: 0, duration: 1})
+    .from('.new-pig .homepg-btn', {y:50, opacity: 0, duration: 1},"-=0.5");
   }
  
   async getTeam(){
