@@ -25,7 +25,6 @@ class HomeView {
     this.render()
     Utils.pageIntroAnim()
     this.homePageAnim()
-    this.pinkAnim()
     this.products = null;
     //localStorage.removeItem('cartProducts');
     this.getProducts();   
@@ -39,16 +38,16 @@ class HomeView {
     .from('.rooted h1', {y:50, opacity: 0, duration: 1})
     .from('.rooted p', {y:50, opacity: 0, duration: 1},"-=0.5")
     .from('.rooted button', {x:50, opacity: 0,  ease:"Back.easeOut", duration: 0.5}, "+=0.5");
-  }
 
-  pinkAnim(){
-    console.log("pinkanim")
-    const newPig = document.querySelector('.new-pig')
-
-    gsap.timeline({scrollTrigger: {trigger: '.new-pig h1', markers:true}})
-    .from('.new-pig .pink-tilted', {x:50, transform: "rotate(15deg)", opacity: 0, duration: 1})
+    gsap.timeline({scrollTrigger: {trigger: '.page-content .new-pig h1', start: "center center", scroller: '.page-content'}})
+    .from('.new-pig .pink-tilted', {x:-200, transform: "rotate(50deg)", ease:"Back.easeOut", opacity: 0, duration: 1})
     .from('.new-pig .homepg-btn', {y:50, opacity: 0, duration: 1},"-=0.5");
+
+    gsap.timeline({scrollTrigger: {trigger: '.hog', start: "center bottom", scroller: '.page-content'}})
+    .from('.pignbottles', {x:200, ease:"Back.easeOut", opacity: 0, duration: 1})
+    .from('.hog .homepg-btn', {y:50, opacity: 0, duration: 1},"-=0.5");
   }
+
  
   async getTeam(){
     try {

@@ -9487,7 +9487,6 @@ class HomeView {
     _Utils.default.pageIntroAnim();
 
     this.homePageAnim();
-    this.pinkAnim();
     this.products = null; //localStorage.removeItem('cartProducts');
 
     this.getProducts();
@@ -9514,23 +9513,37 @@ class HomeView {
       ease: "Back.easeOut",
       duration: 0.5
     }, "+=0.5");
-  }
-
-  pinkAnim() {
-    console.log("pinkanim");
-    const newPig = document.querySelector('.new-pig');
 
     _gsap.default.timeline({
       scrollTrigger: {
-        trigger: '.new-pig h1',
-        markers: true
+        trigger: '.page-content .new-pig h1',
+        start: "center center",
+        scroller: '.page-content'
       }
     }).from('.new-pig .pink-tilted', {
-      x: 50,
-      transform: "rotate(15deg)",
+      x: -200,
+      transform: "rotate(50deg)",
+      ease: "Back.easeOut",
       opacity: 0,
       duration: 1
     }).from('.new-pig .homepg-btn', {
+      y: 50,
+      opacity: 0,
+      duration: 1
+    }, "-=0.5");
+
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '.hog',
+        start: "center bottom",
+        scroller: '.page-content'
+      }
+    }).from('.pignbottles', {
+      x: 200,
+      ease: "Back.easeOut",
+      opacity: 0,
+      duration: 1
+    }).from('.hog .homepg-btn', {
       y: 50,
       opacity: 0,
       duration: 1
@@ -13477,7 +13490,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64834" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57656" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

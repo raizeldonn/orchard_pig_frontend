@@ -203,6 +203,7 @@ a {
 .home-section {
   height: 95vh;
   padding: 1em;
+  overflow-x: hidden;
 }
 
 .home-section.rooted {
