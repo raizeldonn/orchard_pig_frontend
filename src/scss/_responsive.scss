@@ -229,6 +229,12 @@
         margin-left: 0;
       }
     }
+    /*ABOUT PAGE*/
+    .about-page{
+      .ps4{
+        transform: rotate(-10deg) translateY(1800px) translateX(-300px);
+      }
+    }
 }
   
   @media all and (max-width: 768px){ 
@@ -248,15 +254,18 @@
     }
 
     /*ABOUT PAGE*/
+    .swiper-container {
+      height: 80%;
+    }
     .about-page{
       .about-us-flex{
         p{
           width: 100%;
-          margin-left: 0;
+          margin-left: 5%;
         }
         p.beg{
           width: 100%;
-          margin-left: 0;
+          margin-left: 5%;
         }
         .thebeg, .info-right, .ourhome{
           background-size: 100% 100%;
@@ -322,6 +331,12 @@
         h2, button{
           transform: translateY(-370px) translateX(160px);
         }
+      }
+    }
+    /*ABUT PAGE*/
+    .about-page{
+      .ps4{
+        transform: rotate(-10deg) translateY(1500px) translateX(-300px);
       }
     }
     

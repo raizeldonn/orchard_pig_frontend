@@ -987,6 +987,11 @@ sl-dialog::part(title) {
   .contact-page .right, .contact-page .mapouter {
     margin-left: 0;
   }
+
+  /*ABOUT PAGE*/
+  .about-page .ps4 {
+    transform: rotate(-10deg) translateY(1800px) translateX(-300px);
+  }
 }
 @media all and (max-width: 768px) {
   .signinup-box {
@@ -1003,13 +1008,17 @@ sl-dialog::part(title) {
   }
 
   /*ABOUT PAGE*/
+  .swiper-container {
+    height: 80%;
+  }
+
   .about-page .about-us-flex p {
     width: 100%;
-    margin-left: 0;
+    margin-left: 5%;
   }
   .about-page .about-us-flex p.beg {
     width: 100%;
-    margin-left: 0;
+    margin-left: 5%;
   }
   .about-page .about-us-flex .thebeg, .about-page .about-us-flex .info-right, .about-page .about-us-flex .ourhome {
     background-size: 100% 100%;
@@ -1062,6 +1071,11 @@ sl-dialog::part(title) {
   }
   .products .products-grid h2, .products .products-grid button {
     transform: translateY(-370px) translateX(160px);
+  }
+
+  /*ABUT PAGE*/
+  .about-page .ps4 {
+    transform: rotate(-10deg) translateY(1500px) translateX(-300px);
   }
 }
 
