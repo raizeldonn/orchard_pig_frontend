@@ -94,6 +94,16 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
       #disclaimer{
         font-size: 12px;
       }
+
+      @media all and (max-width: 640px){
+        .footer-grid{
+          display: grid;
+          grid-template-columns: auto auto;
+          width: 100%;
+        }
+
+      }
+
     
 
     </style>
