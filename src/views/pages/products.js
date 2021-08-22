@@ -153,7 +153,6 @@ class ProductsView {
         }
         .pp-right{
           grid-column: 3/3;
-          //margin-left: 20%;
           margin-left: 10%;
         }
         .pp-right-top{
@@ -199,6 +198,19 @@ class ProductsView {
         #desc{
           font-weight: 300;
         }
+
+      
+        @media all and (max-width: 768px){ 
+          .pp-left {
+            display : flex;
+            width: 100%;
+          }
+
+          .pp-right {
+            display : block;
+            width : 100%;
+        }
+
       </style>
         
         <div class='pp-left'>
@@ -215,7 +227,7 @@ class ProductsView {
           ${this.canImage ? html `<img id="image-bottle" @click=${() => this.moreInfoBottleHandler(product)} class='pp-img' src='/images/${product.image}' alt='${product.name}'>`:html``}
           ${this.canImage ? html `<img id="image-can" @click=${() => this.moreInfoCanHandler(product)} class='pp-img' src='/images/${this.canImage}' alt='${product.name}'>`:html`` }
           
-          </div>
+        </div>
 
         <div class='pp-right'>
           <div class='pp-right-top'>

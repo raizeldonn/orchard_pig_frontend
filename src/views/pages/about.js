@@ -46,7 +46,7 @@ class AboutView {
       <div class="page-content about-page">  
         
         <!-- Swiper -->
-        <div id="top" class="swiper-container mySwiper">
+        <div class="swiper-container mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide slide1"><img src='/images/carousel1.jpg'></div>
             <div class="swiper-slide slide2"><img src='/images/carousel2.jpg'></div>
