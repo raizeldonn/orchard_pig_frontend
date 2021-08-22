@@ -87,7 +87,7 @@ class ProductsView {
           object-fit: cover;
           //max-height: 60vh;
           width: 50%;
-          max-width 100%;
+          max-width: 100%;
           z-index: 99;
           transition: width 1s;
           
@@ -111,6 +111,7 @@ class ProductsView {
         .product-dialog::part(body){
           display: grid;
           padding: 50px;
+          padding-top: 0;
           /*background-color: var(--dark-blue);*/
         }
         .product-dialog::part(close-button){
@@ -122,6 +123,7 @@ class ProductsView {
         .pp-left h2{
           font-size: 36px;
           color: white;
+          padding-bottom: 0;
         }
         .pp-left button {
           color: black;
@@ -191,6 +193,7 @@ class ProductsView {
           display: grid;
           grid-template-columns: repeat(2, auto);
           grid-row-gap: 10px;
+          grid-column-gap: 20px
         }
         .pp-right-bottom img{
           height: 50px;

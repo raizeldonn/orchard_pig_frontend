@@ -3,6 +3,9 @@
 // https://lit-element.polymer-project.org/guide/templates
 // https://lit-html.polymer-project.org/guide/styling-templates
 import {html, render } from 'lit-html'
+import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 import App from './../../App'
 import {gotoRoute, anchorRoute } from './../../Router'
@@ -21,11 +24,30 @@ class HomeView {
     //this.getTeam()
     this.render()
     Utils.pageIntroAnim()
+    this.homePageAnim()
     this.products = null;
     //localStorage.removeItem('cartProducts');
     this.getProducts();   
 
   }
+
+  homePageAnim(){
+    // gsap.fromTo(pageContent, {opacity: 0, y: -12}, {opacity: 1, y: 0, ease: 'power2.out', duration: 0.3})
+
+    const homeTl = gsap.timeline({scrollTrigger: {trigger: ".page-content", start: "top center"}})
+    .from('.rooted h1', {y:50, opacity: 0, duration: 1})
+    .from('.rooted p', {y:50, opacity: 0, duration: 1},"-=0.5")
+    .from('.rooted button', {x:50, opacity: 0,  ease:"Back.easeOut", duration: 0.5}, "+=0.5");
+
+    gsap.timeline({scrollTrigger: {trigger: '.page-content .new-pig h1', start: "center center", scroller: '.page-content'}})
+    .from('.new-pig .pink-tilted', {x:-200, transform: "rotate(50deg)", ease:"Back.easeOut", opacity: 0, duration: 1})
+    .from('.new-pig .homepg-btn', {y:50, opacity: 0, duration: 1},"-=0.5");
+
+    gsap.timeline({scrollTrigger: {trigger: '.hog', start: "center bottom", scroller: '.page-content'}})
+    .from('.pignbottles', {x:200, ease:"Back.easeOut", opacity: 0, duration: 1})
+    .from('.hog .homepg-btn', {y:50, opacity: 0, duration: 1},"-=0.5");
+  }
+
  
   async getTeam(){
     try {

@@ -3,6 +3,11 @@ import {
   render
 } from 'lit-html'
 
+import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+
 import App from '../../App'
 import {
   gotoRoute,
@@ -17,6 +22,7 @@ class AboutView {
     this.render()
     this.swiperInit()
     Utils.pageIntroAnim()
+    this.aboutPageAnim()
   }
 
   swiperInit(){
@@ -35,7 +41,21 @@ class AboutView {
       },
       
     });
+    
     this.render()
+  }
+
+  aboutPageAnim(){
+
+    gsap.timeline({scrollTrigger: {trigger: '#flex-beg', start: "top bottom", scroller: '.page-content', scrub: true}})
+    .from('#flex-beg-img', {x:150, y: 50, ease:"easeInOut", opacity: 0, duration: 0.5})
+
+    gsap.timeline({scrollTrigger: {trigger: '#flex-belief', start: "top bottom", scroller: '.page-content', scrub: true}})
+    .from('#flex-belief-img', {x:-150, y: 50, ease:"easeInOut", opacity: 0, duration: 0.5})
+
+    gsap.timeline({scrollTrigger: {trigger: '#flex-home', start: "top bottom", scroller: '.page-content', scrub: true}})
+    .from('#flex-home-img', {x:150, y: 50, ease:"easeInOut", opacity: 0, duration: 0.5})
+
   }
 
   // method from lit library which allows us 
@@ -71,18 +91,18 @@ class AboutView {
 
         <div class='about-us-flex'>
           <div class='info info-left thebeg'>
-            <h2>The Beginning</h2>
+            <h2 id='flex-beg'>The Beginning</h2>
             <p class='beg'>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>
             Orchard Pig was born out of a shared passion for great food and Old Spots, <br>
             the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>
           </div>
-          <img  class='img-right' src='/images/op-founder.png'> 
+          <img data-aos="fade-left"  class='img-right' id='flex-beg-img' src='/images/op-founder.png'> 
         </div>
         
         <div class='about-us-flex'>
-          <img class='img-left' src='/images/op-sail.png'> 
+          <img class='img-left' id='flex-belief-img' src='/images/op-sail.png'> 
           <div class='info info-right'>
-            <h2>Our Beliefs</h2>
+            <h2 id='flex-belief'>Our Beliefs</h2>
             <p>‘Stay rooted’ is what we say to the modern world. <br><br>
             Appreciating simplicity (and cider), <br><br>
             We like to poke fun at the world and ourselves… and each other. 
@@ -91,10 +111,10 @@ class AboutView {
         </div>
         <div class='about-us-flex'>
           <div class='info info-left ourhome'>
-            <h2>Our Home</h2>
+            <h2 id='flex-home'>Our Home</h2>
             <p>Orchard Pig's home in West Bradley Orchards is well and truly rooted in Somerset’s cider-making history, dating back to the 1850s and W.T. Allen’s, award winning Somerset cider.</p>
           </div>
-          <img class='img-right' src='/images/op-pub.png'> 
+          <img class='img-right' id='flex-home-img' src='/images/op-pub.png'> 
 
         </div>
         
