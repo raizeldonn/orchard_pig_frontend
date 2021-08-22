@@ -55,11 +55,11 @@ class HomeView {
   render(){
     const template = html`
 
-      <va-app-header title="Home" products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header  title="Home" products=${localStorage.getItem('cartProducts')}></va-app-header>
 
-      <div class="page-content">
+      <div class="page-content" >
       
-        <section class='home-section rooted'>
+        <section id="top" class='home-section rooted'>
         <!--<img class="splash" src="images/home-splash-2.png">-->
           <h1>Rooted In Somerset</h1>
           <p>Want to earn a discount for your next order?</p>
@@ -88,15 +88,9 @@ class HomeView {
           <img class='pigsteps' src='/images/pigsteps.png'>
 
         </section>
-  
+
     	  <va-app-footer margin="false"></va-app-footer>
-
-      
       </div>
-
-      
-      
-     
     `
     render(template, App.rootEl)
   }
@@ -104,18 +98,11 @@ class HomeView {
 
 export default new HomeView()
 
-/*<div class="page-content">
-<h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
-<h1>Team-Linen:</h1>
-<h2>${this.team[0].first_name}${this.team[0].last_name}${this.team[0].role}</h2>
-<h2>${this.team[1].first_name}${this.team[1].last_name}${this.team[1].role}</h2>
-<h2>${this.team[2].first_name}${this.team[2].last_name}${this.team[2].role}</h2>
-<h2>${this.team[3].first_name}${this.team[3].last_name}${this.team[3].role}</h2>
-<h2>${this.team[4].first_name}${this.team[4].last_name}${this.team[4].role}</h2>
-<h3>Button example:</h3>
-<sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
-<p>&nbsp;</p>
-<h3>Link example</h3>
-<a href="/profile" @click=${anchorRoute}>View Profile</a>
 
-</div>*/
+/*  
+          <div class="linktop" style="width:80px; height:80px; z-index:200; position:absolute; right: 10px; bottom: 50px;">
+          <!-- this anchor brings the user back to the top of page -->
+          <a href="#top" title="Return to Top" target="_top"><img src="/images/arrow.png" width="70px" height="70px"/></a>
+          </div>
+
+*/
