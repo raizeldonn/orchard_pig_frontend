@@ -818,6 +818,37 @@ sl-dialog::part(title) {
   .products .products-grid h2, .products .products-grid button {
     transform: translateY(-450px) translateX(210px);
   }
+
+  /*ABOUT PAGE*/
+  .about-page .about-us-flex .info {
+    width: 60%;
+    margin: auto;
+    padding: 0;
+    margin-top: 10%;
+  }
+  .about-page .about-us-flex h2 {
+    text-align: center;
+  }
+  .about-page .about-us-flex p {
+    width: 100%;
+  }
+  .about-page .about-us-flex img {
+    width: 60%;
+  }
+  .about-page .about-us-flex .img-right, .about-page .about-us-flex .img-left {
+    margin: auto;
+    margin-top: 5%;
+  }
+  .about-page .about-us-flex .info-left {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .about-page .about-us-flex:nth-of-type(2), .about-page .about-us-flex:nth-of-type(4) {
+    flex-direction: column;
+  }
+  .about-page .about-us-flex:nth-of-type(3) {
+    flex-direction: column-reverse;
+  }
 }
 @media all and (max-width: 800px) {
   /* HOME SECTION */
