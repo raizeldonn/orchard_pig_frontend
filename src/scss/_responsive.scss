@@ -66,6 +66,42 @@
         }
       }
     }
+    /*ABOUT PAGE*/
+    .about-page{
+
+      .about-us-flex{
+        .info{
+          width: 60%;
+          margin:auto;
+          padding: 0;
+          margin-top: 10%;
+        }
+        h2 {
+          text-align: center;
+        }
+        p{
+          width: 100%;
+        }
+        img {
+          width: 60%;
+        }
+        .img-right, .img-left{
+          margin: auto;
+          margin-top: 5%;
+        }
+        .info-left{
+          padding-right: 0;
+          padding-left: 0;
+        }
+      }
+      .about-us-flex:nth-of-type(2), .about-us-flex:nth-of-type(4){
+        flex-direction: column;
+      }
+      .about-us-flex:nth-of-type(3){
+        flex-direction: column-reverse;
+      }
+
+    }
   }
   
   @media all and (max-width: 800px){ 
