@@ -22,8 +22,9 @@ class AboutView {
   swiperInit(){
     var swiper = new Swiper(".mySwiper", {
       loop: true,
-      slidesPerView: 'auto',
-      loopedSlides: 5,
+      slidesPerView: 1,
+      autoplay: { delay: 3000 },
+      spaceBetween: 50,
       pagination: {
         el: '.swiper-pagination',
       },
