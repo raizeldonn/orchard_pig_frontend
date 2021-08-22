@@ -9771,6 +9771,10 @@ exports.default = void 0;
 
 var _litHtml = require("lit-html");
 
+var _gsap = _interopRequireDefault(require("gsap"));
+
+var _ScrollTrigger = require("gsap/ScrollTrigger");
+
 var _App = _interopRequireDefault(require("../../App"));
 
 var _Router = require("../../Router");
@@ -9782,7 +9786,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About Us\" products=", "></va-app-header>\n      <div class=\"page-content about-page\">  \n        \n        <!-- Swiper -->\n        <div id=\"top\" class=\"swiper-container mySwiper\">\n          <div class=\"swiper-wrapper\">\n            <div class=\"swiper-slide slide1\"><img src='/images/carousel1.jpg'></div>\n            <div class=\"swiper-slide slide2\"><img src='/images/carousel2.jpg'></div>\n            <div class=\"swiper-slide slide3\"><img src='/images/carousel3.jpg'></div>\n            <div class=\"swiper-slide slide4\"><img src='/images/carousel4.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel5.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel6.jpg'></div>\n          </div>\n          <!-- If we need pagination -->\n          <div class=\"swiper-pagination\"></div>\n          <!-- navigation buttons -->\n          <div class=\"swiper-button-prev\"></div>\n          <div class=\"swiper-button-next\"></div>\n        </div>\n\n        <img class='pigsteps ps1' src='/images/pigsteps.png'>\n        <img class='pigsteps ps2' src='/images/pigsteps.png'>\n        <img class='pigsteps ps3' src='/images/pigsteps.png'>\n        <img class='pigsteps ps4' src='/images/pigsteps.png'>\n\n        <h4>Crack a cold one n' let us tell you a story</h4>\n\n        <div class='about-us-flex'>\n          <div class='info info-left thebeg'>\n            <h2>The Beginning</h2>\n            <p class='beg'>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>\n            Orchard Pig was born out of a shared passion for great food and Old Spots, <br>\n            the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>\n          </div>\n          <img  class='img-right' src='/images/op-founder.png'> \n        </div>\n        \n        <div class='about-us-flex'>\n          <img class='img-left' src='/images/op-sail.png'> \n          <div class='info info-right'>\n            <h2>Our Beliefs</h2>\n            <p>\u2018Stay rooted\u2019 is what we say to the modern world. <br><br>\n            Appreciating simplicity (and cider), <br><br>\n            We like to poke fun at the world and ourselves\u2026 and each other. \n            </p>\n          </div>\n        </div>\n        <div class='about-us-flex'>\n          <div class='info info-left ourhome'>\n            <h2>Our Home</h2>\n            <p>Orchard Pig's home in West Bradley Orchards is well and truly rooted in Somerset\u2019s cider-making history, dating back to the 1850s and W.T. Allen\u2019s, award winning Somerset cider.</p>\n          </div>\n          <img class='img-right' src='/images/op-pub.png'> \n\n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer>\n\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About Us\" products=", "></va-app-header>\n      <div class=\"page-content about-page\">  \n        \n        <!-- Swiper -->\n        <div id=\"top\" class=\"swiper-container mySwiper\">\n          <div class=\"swiper-wrapper\">\n            <div class=\"swiper-slide slide1\"><img src='/images/carousel1.jpg'></div>\n            <div class=\"swiper-slide slide2\"><img src='/images/carousel2.jpg'></div>\n            <div class=\"swiper-slide slide3\"><img src='/images/carousel3.jpg'></div>\n            <div class=\"swiper-slide slide4\"><img src='/images/carousel4.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel5.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel6.jpg'></div>\n          </div>\n          <!-- If we need pagination -->\n          <div class=\"swiper-pagination\"></div>\n          <!-- navigation buttons -->\n          <div class=\"swiper-button-prev\"></div>\n          <div class=\"swiper-button-next\"></div>\n        </div>\n\n        <img class='pigsteps ps1' src='/images/pigsteps.png'>\n        <img class='pigsteps ps2' src='/images/pigsteps.png'>\n        <img class='pigsteps ps3' src='/images/pigsteps.png'>\n        <img class='pigsteps ps4' src='/images/pigsteps.png'>\n\n        <h4>Crack a cold one n' let us tell you a story</h4>\n\n        <div class='about-us-flex'>\n          <div class='info info-left thebeg'>\n            <h2 id='flex-beg'>The Beginning</h2>\n            <p class='beg'>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>\n            Orchard Pig was born out of a shared passion for great food and Old Spots, <br>\n            the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>\n          </div>\n          <img data-aos=\"fade-left\"  class='img-right' id='flex-beg-img' src='/images/op-founder.png'> \n        </div>\n        \n        <div class='about-us-flex'>\n          <img class='img-left' id='flex-belief-img' src='/images/op-sail.png'> \n          <div class='info info-right'>\n            <h2 id='flex-belief'>Our Beliefs</h2>\n            <p>\u2018Stay rooted\u2019 is what we say to the modern world. <br><br>\n            Appreciating simplicity (and cider), <br><br>\n            We like to poke fun at the world and ourselves\u2026 and each other. \n            </p>\n          </div>\n        </div>\n        <div class='about-us-flex'>\n          <div class='info info-left ourhome'>\n            <h2 id='flex-home'>Our Home</h2>\n            <p>Orchard Pig's home in West Bradley Orchards is well and truly rooted in Somerset\u2019s cider-making history, dating back to the 1850s and W.T. Allen\u2019s, award winning Somerset cider.</p>\n          </div>\n          <img class='img-right' id='flex-home-img' src='/images/op-pub.png'> \n\n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -9793,6 +9797,8 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+_gsap.default.registerPlugin(_ScrollTrigger.ScrollTrigger);
+
 class AboutView {
   init() {
     document.title = 'About';
@@ -9800,6 +9806,8 @@ class AboutView {
     this.swiperInit();
 
     _Utils.default.pageIntroAnim();
+
+    this.aboutPageAnim();
   }
 
   swiperInit() {
@@ -9820,6 +9828,53 @@ class AboutView {
       }
     });
     this.render();
+  }
+
+  aboutPageAnim() {
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '#flex-beg',
+        start: "top bottom",
+        scroller: '.page-content',
+        scrub: true
+      }
+    }).from('#flex-beg-img', {
+      x: 150,
+      y: 50,
+      ease: "easeInOut",
+      opacity: 0,
+      duration: 0.5
+    });
+
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '#flex-belief',
+        start: "top bottom",
+        scroller: '.page-content',
+        scrub: true
+      }
+    }).from('#flex-belief-img', {
+      x: -150,
+      y: 50,
+      ease: "easeInOut",
+      opacity: 0,
+      duration: 0.5
+    });
+
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '#flex-home',
+        start: "top bottom",
+        scroller: '.page-content',
+        scrub: true
+      }
+    }).from('#flex-home-img', {
+      x: 150,
+      y: 50,
+      ease: "easeInOut",
+      opacity: 0,
+      duration: 0.5
+    });
   } // method from lit library which allows us 
   // to render html from within js to a container
 
@@ -9837,7 +9892,7 @@ class AboutView {
 var _default = new AboutView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"CartAPI.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","gsap":"../node_modules/gsap/index.js","gsap/ScrollTrigger":"../node_modules/gsap/ScrollTrigger.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"CartAPI.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13490,7 +13545,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57656" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53972" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
