@@ -651,11 +651,11 @@ button.homepg-btn {
       color: white;
       font-family: var(--thin-heading-font-family);
       font-weight: 200;
-      font-size: 4vw;
+      font-size: max(4vw, 25px);
     }
 
     p {
-      font-size: max(1.5vw, 15px);
+      font-size: max(1.5vw, 16px);
       width: 70%;
     }
 
@@ -673,14 +673,15 @@ button.homepg-btn {
     .thebeg{
       background-image: url(../../static/images/stroke-the-beginning.png);
       background-repeat: no-repeat;
-      background-size: contain;
-      background-position: 0px 30px;
+      background-size: 90% 60%;
+      background-position: 20px 30px;
     }
     .info-right{
       background-image: url(../../static/images/stroke-beliefs.png);
       background-repeat: no-repeat;
       background-size: 70% 50%;
       background-position: 0px 30px;
+      margin-left: 5%;
     }
     .ourhome{
       background-image: url(../../static/images/stroke-our-home.png);
@@ -706,6 +707,9 @@ button.homepg-btn {
 
   .ps3{
     transform: rotate(-5deg) translateY(1750px) translateX(-100px) scaleX(-1);
+  }
+  .ps4{
+    visibility: hidden;
   }
 
 }

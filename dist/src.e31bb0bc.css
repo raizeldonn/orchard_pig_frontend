@@ -599,10 +599,10 @@ button.homepg-btn {
   color: white;
   font-family: var(--thin-heading-font-family);
   font-weight: 200;
-  font-size: 4vw;
+  font-size: max(4vw, 25px);
 }
 .about-page .about-us-flex p {
-  font-size: max(1.5vw, 15px);
+  font-size: max(1.5vw, 16px);
   width: 70%;
 }
 .about-page .about-us-flex .info {
@@ -617,14 +617,15 @@ button.homepg-btn {
 .about-page .about-us-flex .thebeg {
   background-image: url(/stroke-the-beginning.c59e919e.png);
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: 0px 30px;
+  background-size: 90% 60%;
+  background-position: 20px 30px;
 }
 .about-page .about-us-flex .info-right {
   background-image: url(/stroke-beliefs.3148c938.png);
   background-repeat: no-repeat;
   background-size: 70% 50%;
   background-position: 0px 30px;
+  margin-left: 5%;
 }
 .about-page .about-us-flex .ourhome {
   background-image: url(/stroke-our-home.9ecfb41d.png);
@@ -645,6 +646,9 @@ button.homepg-btn {
 }
 .about-page .ps3 {
   transform: rotate(-5deg) translateY(1750px) translateX(-100px) scaleX(-1);
+}
+.about-page .ps4 {
+  visibility: hidden;
 }
 
 .checkout-header {
@@ -800,6 +804,14 @@ sl-dialog::part(title) {
   .home-section.hog .pignbottles {
     top: 15%;
   }
+
+  /*ABOUT SECTION*/
+  .about-page .ps2 {
+    transform: rotate(-20deg) translateY(600px) translateX(-300px);
+  }
+  .about-page .ps3 {
+    transform: rotate(-5deg) translateY(1500px) translateX(-100px) scaleX(-1);
+  }
 }
 @media all and (max-width: 1000px) {
   /* HOME SECTION */
@@ -827,6 +839,14 @@ sl-dialog::part(title) {
   .checkout .right {
     width: 40%;
   }
+
+  /*ABOUT SECTION*/
+  .about-page .about-us-flex p {
+    width: 80%;
+  }
+  .about-page .ps3 {
+    transform: rotate(-5deg) translateY(1300px) translateX(-100px) scaleX(-1);
+  }
 }
 @media all and (max-width: 900px) {
   /* PRODUCTS PAGE */
@@ -838,6 +858,23 @@ sl-dialog::part(title) {
   }
 
   /*ABOUT PAGE*/
+  .about-page .ps2 {
+    transform: rotate(-10deg) translateY(450px) translateX(-100px);
+  }
+  .about-page .ps3 {
+    transform: rotate(-5deg) translateY(1200px) translateX(-100px) scaleX(-1);
+  }
+  .about-page .ps4 {
+    visibility: visible;
+    transform: rotate(-10deg) translateY(2000px) translateX(-300px);
+  }
+  .about-page h4 {
+    font-size: max(4vw, 20px);
+    width: 60%;
+    text-align: center;
+    margin: auto;
+    margin-top: 70px;
+  }
   .about-page .about-us-flex .info {
     width: 60%;
     margin: auto;
@@ -848,7 +885,12 @@ sl-dialog::part(title) {
     text-align: center;
   }
   .about-page .about-us-flex p {
-    width: 100%;
+    width: 80%;
+    margin-left: 15%;
+  }
+  .about-page .about-us-flex p.beg {
+    width: 85%;
+    margin-left: 10%;
   }
   .about-page .about-us-flex img {
     width: 60%;
@@ -860,6 +902,10 @@ sl-dialog::part(title) {
   .about-page .about-us-flex .info-left {
     padding-right: 0;
     padding-left: 0;
+  }
+  .about-page .about-us-flex .thebeg, .about-page .about-us-flex .info-right, .about-page .about-us-flex .ourhome {
+    background-size: 90% 100%;
+    background-position: top center;
   }
   .about-page .about-us-flex:nth-of-type(2), .about-page .about-us-flex:nth-of-type(4) {
     flex-direction: column;
@@ -950,6 +996,19 @@ sl-dialog::part(title) {
 
   .sm-100 {
     width: 100%;
+  }
+
+  /*ABOUT PAGE*/
+  .about-page .about-us-flex p {
+    width: 100%;
+    margin-left: 0;
+  }
+  .about-page .about-us-flex p.beg {
+    width: 100%;
+    margin-left: 0;
+  }
+  .about-page .about-us-flex .thebeg, .about-page .about-us-flex .info-right, .about-page .about-us-flex .ourhome {
+    background-size: 100% 100%;
   }
 }
 @media all and (max-width: 640px) {

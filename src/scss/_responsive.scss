@@ -12,6 +12,15 @@
         top: 15%;
       }
     }
+  /*ABOUT SECTION*/
+  .about-page{
+    .ps2{
+      transform: rotate(-20deg) translateY(600px) translateX(-300px);
+    }
+    .ps3{
+      transform: rotate(-5deg) translateY(1500px) translateX(-100px) scaleX(-1);
+    }
+  }
 
 }
   
@@ -51,6 +60,19 @@
         width: 40%;
       }
     }
+
+      /*ABOUT SECTION*/
+    .about-page{
+      .about-us-flex{
+        p{
+          width: 80%;
+        }
+      }
+
+      .ps3{
+      transform: rotate(-5deg) translateY(1300px) translateX(-100px) scaleX(-1);
+    }
+  }
     
   }
 
@@ -68,7 +90,23 @@
     }
     /*ABOUT PAGE*/
     .about-page{
-
+      .ps2{
+        transform: rotate(-10deg) translateY(450px) translateX(-100px);
+      }
+      .ps3{
+        transform: rotate(-5deg) translateY(1200px) translateX(-100px) scaleX(-1);
+      }
+      .ps4{
+        visibility: visible;
+        transform: rotate(-10deg) translateY(2000px) translateX(-300px);
+      }
+      h4{
+        font-size: max(4vw, 20px);
+        width: 60%;
+        text-align: center;
+        margin: auto;
+        margin-top: 70px;
+      }
       .about-us-flex{
         .info{
           width: 60%;
@@ -80,7 +118,12 @@
           text-align: center;
         }
         p{
-          width: 100%;
+          width: 80%;
+          margin-left: 15%;
+        }
+        p.beg{
+          width: 85%;
+          margin-left: 10%;
         }
         img {
           width: 60%;
@@ -92,6 +135,10 @@
         .info-left{
           padding-right: 0;
           padding-left: 0;
+        }
+        .thebeg, .info-right, .ourhome{
+          background-size: 90% 100%;
+          background-position: top center;
         }
       }
       .about-us-flex:nth-of-type(2), .about-us-flex:nth-of-type(4){
@@ -198,6 +245,23 @@
 
     .sm-100 {
       width: 100%
+    }
+
+    /*ABOUT PAGE*/
+    .about-page{
+      .about-us-flex{
+        p{
+          width: 100%;
+          margin-left: 0;
+        }
+        p.beg{
+          width: 100%;
+          margin-left: 0;
+        }
+        .thebeg, .info-right, .ourhome{
+          background-size: 100% 100%;
+        }
+      }
     }
 
      

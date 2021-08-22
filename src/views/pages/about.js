@@ -65,13 +65,14 @@ class AboutView {
         <img class='pigsteps ps1' src='/images/pigsteps.png'>
         <img class='pigsteps ps2' src='/images/pigsteps.png'>
         <img class='pigsteps ps3' src='/images/pigsteps.png'>
+        <img class='pigsteps ps4' src='/images/pigsteps.png'>
 
         <h4>Crack a cold one n' let us tell you a story</h4>
 
         <div class='about-us-flex'>
           <div class='info info-left thebeg'>
             <h2>The Beginning</h2>
-            <p>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>
+            <p class='beg'>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>
             Orchard Pig was born out of a shared passion for great food and Old Spots, <br>
             the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>
           </div>
