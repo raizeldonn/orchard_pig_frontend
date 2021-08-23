@@ -321,6 +321,20 @@
         position: static;
         margin-top: 10%;
       }
+      img.pp-img{
+      object-fit: cover;
+      width: 30%;
+      max-width: 100%;
+      z-index: 100;
+      transition: width 1s;
+    }
+      .pp-img:hover {
+      cursor: pointer;
+      transition: width 1s;
+      max-height: 60%;
+      z-index: 100;
+      width: 35%;
+    }
       #image-bottle{
         position: static;
       }
