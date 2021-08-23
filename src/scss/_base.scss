@@ -536,6 +536,149 @@ button.homepg-btn {
 
 // Product Dialog  ------------------------------
 
+.product-dialog::part(panel){
+  background-color: var(--dark-blue);
+  color:white;
+}
+
+.product-dialog::part(body){
+  display: grid;
+  padding: 50px;
+  padding-top: 0;
+  overflow: hidden;
+  /*background-color: var(--dark-blue);*/
+}
+
+.product-dialog::part(close-button){
+  color: white;
+  font-size: 40px;
+}
+
+.product-dialog{
+    --width: 80vw;
+    overflow: hidden;
+  #image-bottle {
+    position: absolute;
+    left: 0px;
+    top: 150px;
+  }
+  #image-can {
+    position: absolute;
+    right: 0px;
+    top: 150px;
+  }
+  img.pp-img{
+    object-fit: cover;
+    //max-height: 60vh;
+    width: 50%;
+    max-width: 100%;
+    z-index: 99;
+    transition: width 1s;
+  }
+  .pp-img:hover {
+    cursor: pointer;
+    transition: width 1s;
+    max-height: 60vh;
+    z-index: 100;
+    width: 100%;
+  }
+
+  img.pp-img-single{
+    max-height: 60vh;
+  }
+
+  .pp-left{
+    grid-column: 1/2;
+    position: relative;
+
+    h2{
+      font-size: 36px;
+      color: white;
+      padding-bottom: 0;
+    }
+    button {
+      color: black;
+      font-family: var(--base-font-family);
+    }
+    button{
+      color: white;
+      background-color: var(--med-blue);
+      font-family: var(--base-font-family);
+    }
+    button:hover {
+      color: black;
+      background-color: var(--light-blue);
+    }
+    button:active {
+      color: black;
+      background-color: var(--light-blue);
+
+    }
+  }
+  
+  .pp-right{
+    grid-column: 3/3;
+    margin-left: 10%;
+    h3{
+      font-size: 32px;
+      font-family :var(--base-font-family);
+      font-weight: bold;
+    }
+  }
+
+  .pp-right-top{
+    background-color: var(--light-blue);
+    border-radius: 5px;
+    color: black;
+    padding: 15px;
+  }
+
+  .pp-boxes{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    font-weight: bold;
+
+    img{
+      width: 40px;
+      height: 40px;
+      transform: translateY(50%);
+    }
+    p{
+      width: 50%;
+      padding: 1em;
+    }
+
+    //button styles in animation.scss
+    //due to bubbles button animation
+
+    // button{
+    //   background-color: var(--med-blue);
+    //   box-shadow: none;
+    //   transform: translateX(30%);
+    //   width: 60%;
+    // }
+    // button:hover{
+    //   color: black;
+    //   background-color: var(--white);
+    //   border: 1px solid var(--med-blue);
+    // }
+  }
+
+  .pp-right-bottom{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    img{
+      height: 50px;
+    }
+  }
+  #desc{
+    font-weight: 300;
+  }
+}
+
 // Contact Page -------------------------------
 .contact-page {
   background-color: var(--med-blue);

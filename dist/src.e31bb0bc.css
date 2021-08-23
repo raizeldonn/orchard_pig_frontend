@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,300;0,500;1,100;1,200;1,500&display=swap");
 @import url("https://use.typekit.net/hld5ccx.css%22");
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900");
 :root {
   --base-txt-color: rgb(0, 0, 0);
   --heading-color: rgb(0, 0, 0);
@@ -481,6 +482,124 @@ button.homepg-btn {
   transform: translateY(-450px) translateX(300px);
   z-index: 100;
   position: relative;
+}
+
+.product-dialog::part(panel) {
+  background-color: var(--dark-blue);
+  color: white;
+}
+
+.product-dialog::part(body) {
+  display: grid;
+  padding: 50px;
+  padding-top: 0;
+  overflow: hidden;
+  /*background-color: var(--dark-blue);*/
+}
+
+.product-dialog::part(close-button) {
+  color: white;
+  font-size: 40px;
+}
+
+.product-dialog {
+  --width: 80vw;
+  overflow: hidden;
+}
+.product-dialog #image-bottle {
+  position: absolute;
+  left: 0px;
+  top: 150px;
+}
+.product-dialog #image-can {
+  position: absolute;
+  right: 0px;
+  top: 150px;
+}
+.product-dialog img.pp-img {
+  object-fit: cover;
+  width: 50%;
+  max-width: 100%;
+  z-index: 99;
+  transition: width 1s;
+}
+.product-dialog .pp-img:hover {
+  cursor: pointer;
+  transition: width 1s;
+  max-height: 60vh;
+  z-index: 100;
+  width: 100%;
+}
+.product-dialog img.pp-img-single {
+  max-height: 60vh;
+}
+.product-dialog .pp-left {
+  grid-column: 1/2;
+  position: relative;
+}
+.product-dialog .pp-left h2 {
+  font-size: 36px;
+  color: white;
+  padding-bottom: 0;
+}
+.product-dialog .pp-left button {
+  color: black;
+  font-family: var(--base-font-family);
+}
+.product-dialog .pp-left button {
+  color: white;
+  background-color: var(--med-blue);
+  font-family: var(--base-font-family);
+}
+.product-dialog .pp-left button:hover {
+  color: black;
+  background-color: var(--light-blue);
+}
+.product-dialog .pp-left button:active {
+  color: black;
+  background-color: var(--light-blue);
+}
+.product-dialog .pp-right {
+  grid-column: 3/3;
+  margin-left: 10%;
+}
+.product-dialog .pp-right h3 {
+  font-size: 32px;
+  font-family: var(--base-font-family);
+  font-weight: bold;
+}
+.product-dialog .pp-right-top {
+  background-color: var(--light-blue);
+  border-radius: 5px;
+  color: black;
+  padding: 15px;
+}
+.product-dialog .pp-boxes {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  font-weight: bold;
+}
+.product-dialog .pp-boxes img {
+  width: 40px;
+  height: 40px;
+  transform: translateY(50%);
+}
+.product-dialog .pp-boxes p {
+  width: 50%;
+  padding: 1em;
+}
+.product-dialog .pp-right-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-row-gap: 10px;
+  grid-column-gap: 20px;
+}
+.product-dialog .pp-right-bottom img {
+  height: 50px;
+}
+.product-dialog #desc {
+  font-weight: 300;
 }
 
 .contact-page {
@@ -1105,6 +1224,16 @@ sl-dialog::part(title) {
   .about-page .about-us-flex .thebeg, .about-page .about-us-flex .info-right, .about-page .about-us-flex .ourhome {
     background-size: 100% 100%;
   }
+
+  /*PRODUCTS DIALOG*/
+  .product-dialog .pp-left {
+    display: flex;
+    width: 100%;
+  }
+  .product-dialog .pp-right {
+    display: block;
+    width: 100%;
+  }
 }
 @media all and (max-width: 640px) {
   .home-section.hog {
@@ -1158,6 +1287,109 @@ sl-dialog::part(title) {
   /*ABUT PAGE*/
   .about-page .ps4 {
     transform: rotate(-10deg) translateY(1500px) translateX(-300px);
+  }
+}
+:root {
+  --text-color: hsla(210, 50%, 85%, 1);
+  --shadow-color: hsla(210, 40%, 52%, .4);
+  --btn-color: var(--med-blue);
+  --bg-color: #141218;
+}
+
+.bubble-button {
+  position: relative;
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Source Code Pro";
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 30px;
+  color: var(--text-color);
+  background-color: var(--btn-color);
+  box-shadow: var(--shadow-color) 2px 2px 22px;
+  border-radius: 4px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bubble-button:focus {
+  outline-color: transparent;
+  box-shadow: var(--btn-color) 2px 2px 22px;
+}
+
+.right::after, .bubble-button::after {
+  content: var(--content);
+  display: block;
+  position: absolute;
+  white-space: nowrap;
+  padding: 40px 40px;
+  pointer-events: none;
+}
+
+.bubble-button::after {
+  font-weight: 200;
+  top: -30px;
+  left: -20px;
+}
+
+.right, .left {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.right {
+  left: 66%;
+}
+
+.left {
+  right: 66%;
+}
+
+.right::after {
+  top: -30px;
+  left: calc(-66% - 20px);
+  background-color: var(--bg-color);
+  color: transparent;
+  transition: transform 0.4s ease-out;
+  transform: translate(0, -90%) rotate(0deg);
+}
+
+.bubble-button:hover .right::after {
+  transform: translate(0, -47%) rotate(0deg);
+}
+
+.bubble-button .right:hover::after {
+  transform: translate(0, -50%) rotate(-7deg);
+}
+
+.bubble-button .left:hover ~ .right::after {
+  transform: translate(0, -50%) rotate(7deg);
+}
+
+/* bubbles */
+.bubble-button::before {
+  content: "";
+  pointer-events: none;
+  opacity: 0.6;
+  background: radial-gradient(circle at 20% 35%, transparent 0, transparent 2px, var(--text-color) 3px, var(--text-color) 4px, transparent 4px), radial-gradient(circle at 75% 44%, transparent 0, transparent 2px, var(--text-color) 3px, var(--text-color) 4px, transparent 4px), radial-gradient(circle at 46% 52%, transparent 0, transparent 4px, var(--text-color) 5px, var(--text-color) 6px, transparent 6px);
+  width: 100%;
+  height: 300%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation: bubbles 5s linear infinite both;
+}
+
+@keyframes bubbles {
+  from {
+    transform: translate();
+  }
+  to {
+    transform: translate(0, -66.666%);
   }
 }
 

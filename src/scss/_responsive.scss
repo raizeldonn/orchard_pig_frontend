@@ -273,9 +273,18 @@
       }
     }
 
-     
-
-
+     /*PRODUCTS DIALOG*/
+     .product-dialog{
+      .pp-left {
+        display : flex;
+        width: 100%;
+      }
+  
+      .pp-right {
+        display : block;
+        width : 100%;
+      }
+     }
 }
   
   @media all and (max-width: 640px){ 

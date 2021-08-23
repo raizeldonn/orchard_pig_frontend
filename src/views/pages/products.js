@@ -67,154 +67,7 @@ class ProductsView {
     
     //add content
     const dialogContent = html `
-
-      <style>
-        .product-dialog{
-          --width: 80vw;
-          
-        }
-        #image-bottle {
-          position: absolute;
-          left: 0px;
-          top: 150px;
-        }
-        #image-can {
-          position: absolute;
-          right: 0px;
-          top: 150px;
-        }
-        img.pp-img{
-          object-fit: cover;
-          //max-height: 60vh;
-          width: 50%;
-          max-width: 100%;
-          z-index: 99;
-          transition: width 1s;
-          
-        }
-        .pp-img:hover {
-          cursor: pointer;
-          transition: width 1s;
-          max-height: 60vh;
-          z-index: 100;
-          width: 100%;
-          
-        }
-
-        img.pp-img-single{
-          max-height: 60vh;
-        }
-        .product-dialog::part(panel){
-          background-color: var(--dark-blue);
-          color:white;
-        }
-        .product-dialog::part(body){
-          display: grid;
-          padding: 50px;
-          padding-top: 0;
-          /*background-color: var(--dark-blue);*/
-        }
-        .product-dialog::part(close-button){
-          color: white;
-          font-size: 40px;
-        }
-      
-
-        .pp-left h2{
-          font-size: 36px;
-          color: white;
-          padding-bottom: 0;
-        }
-        .pp-left button {
-          color: black;
-          font-family: var(--base-font-family);
-        }
-        .pp-left button{
-          color: white;
-          background-color: var(--med-blue);
-          font-family: var(--base-font-family);
-        }
-        .pp-left button:hover {
-          color: black;
-          background-color: var(--light-blue);
-        }
-        .pp-left button:active {
-          color: black;
-          background-color: var(--light-blue);
-
-        }
-        .pp-left{
-          grid-column: 1/2;
-          position: relative;
-        }
-        
-        .pp-right h3{
-          font-size: 32px;
-          font-family :var(--base-font-family);
-          font-weight: bold;
-        }
-        .pp-right{
-          grid-column: 3/3;
-          margin-left: 10%;
-        }
-        .pp-right-top{
-          background-color: var(--light-blue);
-          border-radius: 5px;
-          color: black;
-          padding: 15px;
-        }
-        .pp-boxes{
-          display: flex;
-          width: 80%;
-          margin: auto;
-          font-weight: bold;
-        }
-        .pp-boxes img{
-          width: 40px;
-          height: 40px;
-          transform: translateY(50%);
-        }
-        .pp-boxes p{
-          width: 50%;
-          padding: 1em;
-        }
-        .pp-boxes button{
-          background-color: var(--med-blue);
-          box-shadow: none;
-          transform: translateX(30%);
-          width: 60%;
-        }
-        .pp-boxes button:hover{
-          color: black;
-          background-color: var(--white);
-          border: 1px solid var(--med-blue);
-        }
-        .pp-right-bottom{
-          display: grid;
-          grid-template-columns: repeat(2, auto);
-          grid-row-gap: 10px;
-          grid-column-gap: 20px
-        }
-        .pp-right-bottom img{
-          height: 50px;
-        }
-        #desc{
-          font-weight: 300;
-        }
-
-      
-        @media all and (max-width: 768px){ 
-          .pp-left {
-            display : flex;
-            width: 100%;
-          }
-
-          .pp-right {
-            display : block;
-            width : 100%;
-        }
-
-      </style>
+    
         
         <div class='pp-left'>
           ${this.cans ? html ` <div class='pp-button'>
@@ -242,8 +95,12 @@ class ProductsView {
               </div>
               <div class='pp-boxes'>
                 <!-- <h3>&pound;${product.price.$numberDecimal}</h3> -->
-                <h3 id="price" >&pound;${product.price}</h3> 
-                <button @click=${() => this.addToCart(product)}>Add to Basket +</button>
+                <!-- <h3 id="price" >&pound;${product.price}</h3>  -->
+                <button class='bubble-button' @click=${() => this.addToCart(product)} style="--content: 'Add to Basket';">
+                  <div class="left"></div>
+                    Add to Basket
+                  <div class="right"></div>
+                </button>
               </div>
           </div>
           <p id='desc'>${product.description}</p>
@@ -255,7 +112,7 @@ class ProductsView {
             <img src='/images/allergies-white.png'>
             <p>Contains Sulfur Dioxide/Sulphites</p>
           </div>
-          ${product.allergen? html` <p id="allergen" >allergen: ${product.allergen}</p>` : html``}
+          ${product.allergen ? html` <p id="allergen" >allergen: ${product.allergen}</p>` : html``}
         </div>
     `
 
