@@ -312,7 +312,8 @@
         grid-column: 1/2;
         grid-row: 2/3;
         display : block;
-        width : 100%;
+        width : 80%;
+        margin: auto;
       }
       img.pp-img-single{
         display: block;
@@ -396,6 +397,12 @@
         }
       }
     }
+    /*PRODUCT DIALOG*/
+    .product-dialog{
+      .pp-right{
+        width:90%;
+      }
+    }
     /*ABUT PAGE*/
     .about-page{
       .ps4{
@@ -403,4 +410,19 @@
       }
     }
     
+  }
+
+  @media all and (max-width: 500px){ 
+    /*PRODUCT DIALOG*/
+    .product-dialog{
+      .pp-right{
+        width:100%;
+      }
+    }
+    .product-dialog::part(body) {
+      padding: 50px 20px;
+    }
+    .bubble-button{
+      font-size: 25px;
+    }
   }
