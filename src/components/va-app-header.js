@@ -30,17 +30,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
   firstUpdated() {
     super.firstUpdated()
     this.navActiveLinks()
+    this.updateQty()
   }
 
   navActiveLinks() {
     const currentPath = window.location.pathname
     const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a')
-    console.log(navLinks)
     navLinks.forEach(navLink => {
-      console.log("pathname: " + navLink.pathname)
       if (navLink.href.slice(-1) == '#') return
       if (navLink.pathname === currentPath) {
-        console.log("adding class")
         navLink.classList.add('active')
       }
     })
@@ -89,6 +87,27 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     e.preventDefault()
     const pathname = e.target.closest('a').pathname
     gotoRoute(pathname)
+  }
+
+  updateQty(){
+    const qtyInputs = this.shadowRoot.querySelectorAll('sl-input.qty-input');
+    qtyInputs.forEach(qty =>{
+      qty.addEventListener('sl-blur', event => {
+        let product = CartAPI.updateQty(event.target.name, event.target.value)
+        let totalCosts = this.shadowRoot.querySelectorAll('.total-cost')
+        totalCosts.forEach( totalCost => {
+          if (totalCost.id == event.target.name)
+          {
+            totalCost.innerHTML = '&pound;' + product.totalCost
+          }
+        })
+        this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + CartAPI.getTotal() + ".00"
+      });
+    })
+  }
+
+  remove(){
+
   }
 
   render() {
@@ -476,18 +495,18 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
             <div class='qty'> 
               <p>Quantity:</p>
               <div class="input-group">
-                <sl-input size='small' type='number' value='${product.quantity}'></sl-input>
+                <sl-input class='qty-input' name='${product.name}' min='1' size='small' type='number' value='${product.quantity}'></sl-input>
               </div>
             </div>
             
             <!-- <p>Quantity: ${product.quantity}</p> -->
             <!-- <p>&pound;${product.price.$numberDecimal}</p> -->
-            <p>&pound;${product.price}</p>
+            <p class='total-cost' id='${product.name}'>&pound;${product.totalCost}</p>
           </div>
         </div>
       `)}
 
-      <h3>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
+      <h3 class='total'>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
       <button class='empty-cart-btn' @click="${this.emptyCart}">Empty Cart</button>
       <button class='checkout-btn' @click="${this.checkoutClick}">Checkout</button>
     `}

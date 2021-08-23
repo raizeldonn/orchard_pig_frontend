@@ -9979,14 +9979,14 @@ class CartAPI {
 
     this.cartProducts.forEach(product => {
       if (product.name == name) {
+        console.log("product already in cart");
         productExists = true;
+        product.quantity += quantity;
+        product.totalCost = product.price * quantity;
       }
     });
 
-    if (productExists == true) {
-      console.log("already in cart!");
-      product.quantity += quantity;
-    } else {
+    if (productExists != true) {
       console.log("product not in cart");
       this.cartProducts.push(product);
       this.orderProducts.push(orderProduct);
@@ -9996,6 +9996,33 @@ class CartAPI {
     localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
     console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
   }
+
+  updateQty(name, qty) {
+    let updatedProduct;
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    } //second array for order products to match the data types for order
+
+
+    if (localStorage.getItem('orderProducts')) {
+      this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
+    }
+
+    this.cartProducts.forEach(product => {
+      if (product.name == name) {
+        updatedProduct = product;
+        product.quantity = qty;
+        product.totalCost = product.price * qty;
+        localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+      }
+    });
+    return updatedProduct;
+  }
+
+  removeFromCart(name) {}
 
   async getProducts() {
     return JSON.stringify(localStorage.getItem('cartProducts')); // if(localStorage.getItem('cartProducts')){
@@ -10013,7 +10040,7 @@ class CartAPI {
 
     this.cartProducts.forEach(product => {
       //total += parseInt(product.price.$numberDecimal)
-      total += parseInt(product.price);
+      total += parseInt(product.totalCost);
     });
 
     if (localStorage.getItem('shippingFee')) {
@@ -11296,7 +11323,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject12(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject13()) : (0, _litHtml.html)(_templateObject14(), this.products.map(product => (0, _litHtml.html)(_templateObject15(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject16(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject17()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject12(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject13()) : (0, _litHtml.html)(_templateObject14(), this.products.map(product => (0, _litHtml.html)(_templateObject15(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject16(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.moreInfoHandler(product)) : (0, _litHtml.html)(_templateObject17()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -13228,7 +13255,7 @@ var _aos = require("aos");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject8() {
-  const data = _taggedTemplateLiteral(["\n        <div class='cart-product'>\n          <img class='cart-img' src='/images/", ".png' alt='", "'>\n          <div class='cart-product-info'>\n            <p class='product-name'>", "</p> \n\n            <div class='qty'> \n              <p>Quantity:</p>\n              <div class=\"input-group\">\n                <sl-input size='small' type='number' value='", "'></sl-input>\n              </div>\n            </div>\n            \n            <!-- <p>Quantity: ", "</p> -->\n            <!-- <p>&pound;", "</p> -->\n            <p>&pound;", "</p>\n          </div>\n        </div>\n      "]);
+  const data = _taggedTemplateLiteral(["\n        <div class='cart-product'>\n          <img class='cart-img' src='/images/", ".png' alt='", "'>\n          <div class='cart-product-info'>\n            <p class='product-name'>", "</p> \n\n            <div class='qty'> \n              <p>Quantity:</p>\n              <div class=\"input-group\">\n                <sl-input class='qty-input' name='", "' min='1' size='small' type='number' value='", "'></sl-input>\n              </div>\n            </div>\n            \n            <!-- <p>Quantity: ", "</p> -->\n            <!-- <p>&pound;", "</p> -->\n            <p class='total-cost' id='", "'>&pound;", "</p>\n          </div>\n        </div>\n      "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -13238,7 +13265,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  const data = _taggedTemplateLiteral(["\n\n    <h1>Your Basket</h1>\n      ", "\n\n      <h3>Subtotal: &pound;", ".00</h3>\n      <button class='empty-cart-btn' @click=\"", "\">Empty Cart</button>\n      <button class='checkout-btn' @click=\"", "\">Checkout</button>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n    <h1>Your Basket</h1>\n      ", "\n\n      <h3 class='total'>Subtotal: &pound;", ".00</h3>\n      <button class='empty-cart-btn' @click=\"", "\">Empty Cart</button>\n      <button class='checkout-btn' @click=\"", "\">Checkout</button>\n    "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -13331,18 +13358,16 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   firstUpdated() {
     super.firstUpdated();
     this.navActiveLinks();
+    this.updateQty();
   }
 
   navActiveLinks() {
     const currentPath = window.location.pathname;
     const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a');
-    console.log(navLinks);
     navLinks.forEach(navLink => {
-      console.log("pathname: " + navLink.pathname);
       if (navLink.href.slice(-1) == '#') return;
 
       if (navLink.pathname === currentPath) {
-        console.log("adding class");
         navLink.classList.add('active');
       }
     });
@@ -13391,8 +13416,27 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
     (0, _Router.gotoRoute)(pathname);
   }
 
+  updateQty() {
+    const qtyInputs = this.shadowRoot.querySelectorAll('sl-input.qty-input');
+    qtyInputs.forEach(qty => {
+      qty.addEventListener('sl-blur', event => {
+        let product = _CartAPI.default.updateQty(event.target.name, event.target.value);
+
+        let totalCosts = this.shadowRoot.querySelectorAll('.total-cost');
+        totalCosts.forEach(totalCost => {
+          if (totalCost.id == event.target.name) {
+            totalCost.innerHTML = '&pound;' + product.totalCost;
+          }
+        });
+        this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + _CartAPI.default.getTotal() + ".00";
+      });
+    });
+  }
+
+  remove() {}
+
   render() {
-    return (0, _litElement.html)(_templateObject(), this.menuClick, this.menuClick, this.menuClick, this.menuClick, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/'), this.title ? (0, _litElement.html)(_templateObject2(), this.title) : (0, _litElement.html)(_templateObject3()), this.hamburgerClick, this.products ? (0, _litElement.html)(_templateObject4(), this.products.length) : (0, _litElement.html)(_templateObject5()), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.products == null ? (0, _litElement.html)(_templateObject6()) : (0, _litElement.html)(_templateObject7(), this.products.map(product => (0, _litElement.html)(_templateObject8(), product.item, product.name, product.name, product.quantity, product.quantity, product.price.$numberDecimal, product.price)), _CartAPI.default.getTotal(), this.emptyCart, this.checkoutClick));
+    return (0, _litElement.html)(_templateObject(), this.menuClick, this.menuClick, this.menuClick, this.menuClick, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/'), this.title ? (0, _litElement.html)(_templateObject2(), this.title) : (0, _litElement.html)(_templateObject3()), this.hamburgerClick, this.products ? (0, _litElement.html)(_templateObject4(), this.products.length) : (0, _litElement.html)(_templateObject5()), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.products == null ? (0, _litElement.html)(_templateObject6()) : (0, _litElement.html)(_templateObject7(), this.products.map(product => (0, _litElement.html)(_templateObject8(), product.item, product.name, product.name, product.name, product.quantity, product.quantity, product.price.$numberDecimal, product.name, product.totalCost)), _CartAPI.default.getTotal(), this.emptyCart, this.checkoutClick));
   }
 
 });

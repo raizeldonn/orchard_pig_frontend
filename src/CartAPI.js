@@ -55,15 +55,14 @@ class CartAPI {
         // and if yes, update the quantity (instead of adding a new product)
         this.cartProducts.forEach(product => {
             if (product.name == name){
-                productExists = true
+                console.log("product already in cart")
+                productExists = true;
+                product.quantity += quantity;
+                product.totalCost = (product.price * quantity);
             }
         })
 
-        if (productExists == true){
-            console.log("already in cart!")
-            product.quantity += quantity
-        }
-        else{
+        if (productExists != true){
             console.log("product not in cart")
             this.cartProducts.push(product);
             this.orderProducts.push(orderProduct);
@@ -72,6 +71,34 @@ class CartAPI {
         localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
         localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
         console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+    }
+
+    updateQty(name, qty){
+        let updatedProduct
+        if(localStorage.getItem('cartProducts')){
+            this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+        }
+        //second array for order products to match the data types for order
+        if(localStorage.getItem('orderProducts')){
+            this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
+        }
+
+        this.cartProducts.forEach(product => {
+            if (product.name == name){
+                updatedProduct = product
+                product.quantity = qty;
+                product.totalCost = (product.price * qty);
+                localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+                localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+                console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+            }
+        })
+        return updatedProduct
+
+    }
+
+    removeFromCart(name){
+
     }
 
     async getProducts()
@@ -93,7 +120,7 @@ class CartAPI {
 
         this.cartProducts.forEach( product => {
             //total += parseInt(product.price.$numberDecimal)
-            total += parseInt(product.price)
+            total += parseInt(product.totalCost)
         })
 
         if(localStorage.getItem('shippingFee')){
