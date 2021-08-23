@@ -25,6 +25,7 @@ class HomeView {
     this.render()
     Utils.pageIntroAnim()
     this.homePageAnim()
+    this.animateButton()
     this.products = null;
     //localStorage.removeItem('cartProducts');
     this.getProducts();   
@@ -71,9 +72,26 @@ class HomeView {
       Toast.show(err, 'error')
     }
   }
+
+  //bubbly button animation
+  //code from https://codepen.io/nourabusoud/pen/ypZzMM
+  animateButton = (e) => {
+
+    e.preventDefault;
+    //reset animation
+    e.target.classList.remove('animate');
+
+    e.target.classList.add('animate');
+    setTimeout(function(){
+      e.target.classList.remove('animate');
+      gotoRoute('/game')
+    },700);
+
+  };
+
   
   // method from lit library which allows us 
-  // to render html from within js to a container
+  // to render html from within js to a container //@click=${() => gotoRoute('/game')
   render(){
     const template = html`
 
@@ -85,7 +103,7 @@ class HomeView {
         <!--<img class="splash" src="images/home-splash-2.png">-->
           <h1>Rooted In Somerset</h1>
           <p>Want to earn a discount for your next order?</p>
-          <button  @click=${() => gotoRoute('/game')}>Find the pig to win!</button>
+          <button  @click=${this.animateButton}>Find the pig to win!</button> 
         </section>
 
         <section class='home-section new-pig'>

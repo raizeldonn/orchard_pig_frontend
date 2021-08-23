@@ -9462,7 +9462,7 @@ var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header  title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\" >\n      \n        <section id=\"top\" class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button>\n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n\n        </section>\n\n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header  title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\" >\n      \n        <section id=\"top\" class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button> \n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n\n        </section>\n\n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -9473,9 +9473,24 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 _gsap.default.registerPlugin(_ScrollTrigger.ScrollTrigger);
 
 class HomeView {
+  constructor() {
+    _defineProperty(this, "animateButton", e => {
+      e.preventDefault; //reset animation
+
+      e.target.classList.remove('animate');
+      e.target.classList.add('animate');
+      setTimeout(function () {
+        e.target.classList.remove('animate');
+        (0, _Router.gotoRoute)('/game');
+      }, 700);
+    });
+  }
+
   init() {
     console.log('HomeView.init');
     console.log(localStorage);
@@ -9487,6 +9502,7 @@ class HomeView {
     _Utils.default.pageIntroAnim();
 
     this.homePageAnim();
+    this.animateButton();
     this.products = null; //localStorage.removeItem('cartProducts');
 
     this.getProducts();
@@ -9570,12 +9586,14 @@ class HomeView {
     } catch (err) {
       _Toast.default.show(err, 'error');
     }
-  } // method from lit library which allows us 
-  // to render html from within js to a container
+  } //bubbly button animation
+  //code from https://codepen.io/nourabusoud/pen/ypZzMM
 
 
+  // method from lit library which allows us 
+  // to render html from within js to a container //@click=${() => gotoRoute('/game')
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), () => (0, _Router.gotoRoute)('/game'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'));
+    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), this.animateButton, () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'));
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -13496,7 +13514,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./../../static/images/stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./../../static/images/stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./../../static/images/stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./..\\..\\static\\images\\stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./..\\..\\static\\images\\stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./..\\..\\static\\images\\stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -13545,7 +13563,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49578" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59615" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
