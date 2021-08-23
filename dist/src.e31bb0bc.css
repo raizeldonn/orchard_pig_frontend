@@ -664,7 +664,7 @@ button.homepg-btn {
   padding: 0.8em;
   margin-top: 0.5em;
 }
-.contact-page .right {
+.contact-page .contact-right {
   margin-left: 5%;
   color: white;
   width: 100%;
@@ -672,29 +672,29 @@ button.homepg-btn {
   border-radius: 5px;
   height: 100%;
 }
-.contact-page .right img {
+.contact-page .contact-right img {
   width: 30px;
   margin-right: 20px;
 }
-.contact-page .right .contact-info-grid {
+.contact-page .contact-right .contact-info-grid {
   display: grid;
   padding: 10%;
   margin: auto;
   grid-row-gap: 10px;
   grid-template-columns: repeat(2, auto);
 }
-.contact-page .right .contact-info-grid p {
+.contact-page .contact-right .contact-info-grid p {
   margin-top: 0;
 }
-.contact-page .right .sm-icons {
+.contact-page .contact-right .sm-icons {
   display: flex;
   width: 70%;
   margin: auto;
 }
-.contact-page .right .sm-icons a {
+.contact-page .contact-right .sm-icons a {
   margin: 0 10%;
 }
-.contact-page .right .sm-icons a img {
+.contact-page .contact-right .sm-icons a img {
   cursor: pointer;
 }
 .contact-page .mapouter {
@@ -1181,7 +1181,7 @@ sl-dialog::part(title) {
     width: 100%;
     margin-bottom: 5%;
   }
-  .contact-page .right, .contact-page .mapouter {
+  .contact-page .contact-right, .contact-page .mapouter {
     margin-left: 0;
   }
 
@@ -1315,7 +1315,7 @@ sl-dialog::part(title) {
   box-shadow: var(--btn-color) 2px 2px 22px;
 }
 
-.bubble-button.right::after, .bubble-button::after {
+.right::after, .bubble-button::after {
   content: var(--content);
   display: block;
   position: absolute;
@@ -1330,22 +1330,22 @@ sl-dialog::part(title) {
   left: -20px;
 }
 
-.bubble-button.right, .bubble-button.left {
+.right, .left {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
 }
 
-.bubble-button.right {
+.right {
   left: 66%;
 }
 
-.bubble-button.left {
+.left {
   right: 66%;
 }
 
-.bubble-button.right::after {
+.right::after {
   top: -30px;
   left: calc(-66% - 20px);
   background-color: var(--bg-color);
@@ -1354,15 +1354,15 @@ sl-dialog::part(title) {
   transform: translate(0, -90%) rotate(0deg);
 }
 
-.bubble-button:hover .bubble-button.right::after {
+.bubble-button:hover .right::after {
   transform: translate(0, -47%) rotate(0deg);
 }
 
-.bubble-button .bubble-button.right:hover::after {
+.bubble-button .right:hover::after {
   transform: translate(0, -50%) rotate(-7deg);
 }
 
-.bubble-button .bubble-button.left:hover ~ .bubble-button.right::after {
+.bubble-button .left:hover ~ .right::after {
   transform: translate(0, -50%) rotate(7deg);
 }
 

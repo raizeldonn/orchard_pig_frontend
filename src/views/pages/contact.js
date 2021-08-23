@@ -80,7 +80,7 @@ class ContactView {
 
           <div class='flex-column'>
 
-            <div class='right'>
+            <div class='contact-right'>
               <div class='contact-info-grid'> 
                 <img src='/images/pin-white.png'>
                 <p>275 Burnfield Road, Thornliebank</p>
