@@ -92,6 +92,19 @@ class ProductsView {
                 <p id="abv" >${product.abv} ABV</p>
                 <img src='/images/bottle-black.png'>
                 <p id="packSizeVolume">${product.packSize} X ${product.containerVolume}</p>
+                <p>QTY:</p>
+                <sl-form>
+                  <div class="input-group">
+                    <sl-select>
+                        <sl-menu-item value="option-1">1</sl-menu-item>
+                        <sl-menu-item value="option-2">2</sl-menu-item>
+                        <sl-menu-item value="option-3">3</sl-menu-item>
+                        <sl-menu-item value="option-4">4</sl-menu-item>
+                        <sl-menu-item value="option-5">5</sl-menu-item>
+                        <sl-menu-item value="option-6">6</sl-menu-item>
+                    </sl-select>
+                  </div>
+                </sl-form>
               </div>
               <div class='pp-boxes'>
                 <!-- <h3>&pound;${product.price.$numberDecimal}</h3> -->
@@ -216,11 +229,10 @@ class ProductsView {
                       src='/images/${product.item}.png' alt='${product.name}'>
                   <h2>${product.shortName}</h2>
                   <button class='bubble-button' @click=${() => this.addToCart(product)} style="--content: 'Buy Now';">
-                  <div class="left"></div>
-                    Buy Now
-                  <div class="right"></div>
-                </button>
-                  <!--<button @click=${() => this.addToCart(product)}>Buy Now</button>-->
+                    <div class="left"></div>
+                      Buy Now
+                    <div class="right"></div>
+                  </button>
                 </div>
                 ` : html ``}
                 

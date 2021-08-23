@@ -521,7 +521,6 @@ button.homepg-btn {
       position: relative;
     }
     button{
-
       transform: translateY(-450px) translateX(300px);
       z-index: 100;
       position: relative;
@@ -582,12 +581,13 @@ button.homepg-btn {
 
   img.pp-img-single{
     max-height: 60vh;
+    transform: translateY(-10%);
   }
 
   .pp-left{
     grid-column: 1/2;
+    width: 30%;
     position: relative;
-
     h2{
       font-size: 36px;
       color: white;
@@ -614,7 +614,7 @@ button.homepg-btn {
   }
   
   .pp-right{
-    grid-column: 3/3;
+    grid-column: 2/5;
     margin-left: 10%;
     h3{
       font-size: 32px;
