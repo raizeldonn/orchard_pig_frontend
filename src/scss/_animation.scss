@@ -30,6 +30,11 @@
     overflow: hidden;   
   }
   
+  .bubble-button-modal{
+    display: flex;
+    margin: auto;
+  }
+  
   .bubble-button:focus {
     outline-color: transparent;
     box-shadow: var(--btn-color) 2px 2px 22px;

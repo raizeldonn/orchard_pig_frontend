@@ -88,28 +88,18 @@ class ProductsView {
         <div class='pp-right'>
           <div class='pp-right-top'>
               <div class='pp-boxes'>
+              <h3 id="price" >&pound;${product.price}.00</h3>
+              </div>
+              <div class='pp-boxes'>
                 <img src='/images/alcohol-black.png'>
                 <p id="abv" >${product.abv} ABV</p>
                 <img src='/images/bottle-black.png'>
                 <p id="packSizeVolume">${product.packSize} X ${product.containerVolume}</p>
-                <p>QTY:</p>
-                <sl-form>
-                  <div class="input-group">
-                    <sl-select>
-                        <sl-menu-item value="option-1">1</sl-menu-item>
-                        <sl-menu-item value="option-2">2</sl-menu-item>
-                        <sl-menu-item value="option-3">3</sl-menu-item>
-                        <sl-menu-item value="option-4">4</sl-menu-item>
-                        <sl-menu-item value="option-5">5</sl-menu-item>
-                        <sl-menu-item value="option-6">6</sl-menu-item>
-                    </sl-select>
-                  </div>
-                </sl-form>
               </div>
               <div class='pp-boxes'>
                 <!-- <h3>&pound;${product.price.$numberDecimal}</h3> -->
                 <!-- <h3 id="price" >&pound;${product.price}</h3>  -->
-                <button class='bubble-button' @click=${() => this.addToCart(product)} style="--content: 'Add to Basket';">
+                <button class='bubble-button bubble-button-modal' @click=${() => this.addToCart(product)} style="--content: 'Add to Basket';">
                   <div class="left"></div>
                     Add to Basket
                   <div class="right"></div>

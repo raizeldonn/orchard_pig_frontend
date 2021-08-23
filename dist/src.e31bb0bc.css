@@ -530,7 +530,7 @@ button.homepg-btn {
 }
 .product-dialog .pp-left {
   grid-column: 1/2;
-  width: 30%;
+  width: 100%;
   position: relative;
 }
 .product-dialog .pp-left h2 {
@@ -575,6 +575,10 @@ button.homepg-btn {
   width: 80%;
   margin: auto;
   font-weight: bold;
+  text-align: center;
+}
+.product-dialog .pp-boxes h3 {
+  margin: auto;
 }
 .product-dialog .pp-boxes img {
   width: 40px;
@@ -960,7 +964,7 @@ sl-dialog::part(title) {
   padding: 0;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 860px) {
   sl-dialog::part(panel) {
     width: 100%;
     height: 100%;
@@ -1012,6 +1016,16 @@ sl-dialog::part(title) {
   }
   .about-page .ps3 {
     transform: rotate(-5deg) translateY(1500px) translateX(-100px) scaleX(-1);
+  }
+
+  /*PRODUCT DIALOG*/
+  .product-dialog .pp-boxes p {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .product-dialog .pp-right-top {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 @media all and (max-width: 1000px) {
@@ -1113,6 +1127,11 @@ sl-dialog::part(title) {
   }
   .about-page .about-us-flex:nth-of-type(3) {
     flex-direction: column-reverse;
+  }
+
+  /*PRODUCT DIALOG*/
+  .product-dialog .pp-right {
+    margin-left: 0;
   }
 }
 @media all and (max-width: 800px) {
@@ -1222,13 +1241,34 @@ sl-dialog::part(title) {
   }
 
   /*PRODUCTS DIALOG*/
+  .product-dialog::part(body) {
+    overflow: auto;
+  }
+
   .product-dialog .pp-left {
-    display: flex;
+    grid-column: span;
+    grid-row: 1/2;
+    height: 60vh;
     width: 100%;
   }
+  .product-dialog .pp-left h2 {
+    text-align: center;
+  }
   .product-dialog .pp-right {
+    grid-column: 1/2;
+    grid-row: 2/3;
     display: block;
     width: 100%;
+  }
+  .product-dialog img.pp-img-single {
+    display: block;
+    margin: 0 auto;
+    height: 70%;
+    position: static;
+    margin-top: 10%;
+  }
+  .product-dialog #image-bottle {
+    position: static;
   }
 }
 @media all and (max-width: 640px) {
@@ -1308,6 +1348,11 @@ sl-dialog::part(title) {
   border-radius: 4px;
   z-index: 0;
   overflow: hidden;
+}
+
+.bubble-button-modal {
+  display: flex;
+  margin: auto;
 }
 
 .bubble-button:focus {
