@@ -1284,10 +1284,10 @@ sl-dialog::part(title) {
   }
 }
 :root {
-  --text-color: hsla(210, 50%, 85%, 1);
+  --text-color: black;
   --shadow-color: hsla(210, 40%, 52%, .4);
-  --btn-color: var(--med-blue);
-  --bg-color: #141218;
+  --btn-color: #f0cd31;
+  --bg-color: white;
 }
 
 .bubble-button {
