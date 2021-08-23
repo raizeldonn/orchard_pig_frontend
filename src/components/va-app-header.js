@@ -34,10 +34,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
   navActiveLinks() {
     const currentPath = window.location.pathname
-    const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a, .app-side-menu-items a')
+    const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a')
+    console.log(navLinks)
     navLinks.forEach(navLink => {
+      console.log("pathname: " + navLink.pathname)
       if (navLink.href.slice(-1) == '#') return
       if (navLink.pathname === currentPath) {
+        console.log("adding class")
         navLink.classList.add('active')
       }
     })
@@ -85,13 +88,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
   menuClick(e){
     e.preventDefault()
     const pathname = e.target.closest('a').pathname
-    const appSideMenu = this.shadowRoot.querySelector('.app-side-menu')
-    // hide appMenu
-    appSideMenu.hide()
-    appSideMenu.addEventListener('sl-after-hide', () => {
-      // goto route after menu is hidden
-      gotoRoute(pathname)
-    })
+    gotoRoute(pathname)
   }
 
   render() {
@@ -263,7 +260,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       /* active nav links */
       .app-top-nav a.active {
-        font-weight: bold;
+        background-image: url('/images/navbar-pigstep.png');
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 30px;
       }
 
       /* RESPONSIVE - MOBILE ------------------- */
@@ -328,10 +328,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       <nav class="app-top-nav">
         <ul>
-          <li class="nav-trotter" ><a  @click="${() => gotoRoute('/')}">Home</a></li>
-          <li class="nav-trotter" ><a @click="${() => gotoRoute('/products')}">Shop</a></li>
-          <li class="nav-trotter" ><a @click="${() => gotoRoute('/about')}">About</a></li> 
-          <li class="nav-trotter" ><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
+          <li class="nav-trotter" ><a href="/" @click="${this.menuClick}">Home</a></li>
+          <li class="nav-trotter" ><a href="/products" @click="${this.menuClick}">Shop</a></li>
+          <li class="nav-trotter" ><a href="/about" @click="${this.menuClick}">About</a></li> 
+          <li class="nav-trotter" ><a href="/contact" @click="${this.menuClick}">Contact</a></li>  
         </ul>
       </nav>
       
@@ -340,12 +340,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         <source src="/images/logo-run.mp4" type="video/mp4">
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       </video>
-      <div class="header-title">
+      <!-- <div class="header-title">
         ${this.title ? html`
           <h2>${this.title}</h2>
         `: html``}
         <slot></slot>
-      </div>
+      </div> -->
     
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
@@ -370,11 +370,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       <div id="drop-menu" class="app-menu">
       <ul>
-        <li><a @click="${() => gotoRoute('/')}">Home</a></li>
-        <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
-        <li><a @click="${() => gotoRoute('/about')}">About</a></li>
-        <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>
-        <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!</a></li>
+        <li><a href="/" @click="${() => gotoRoute('/')}">Home</a></li>
+        <li><a href="/products" @click="${() => gotoRoute('/products')}">Shop</a></li>
+        <li><a href="/about" @click="${() => gotoRoute('/about')}">About</a></li>
+        <li><a href="/contact" @click="${() => gotoRoute('/contact')}">Contact</a></li>
+        <li><a href="/game" @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!</a></li>
       </ul>
       </div>
     
