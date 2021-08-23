@@ -6,6 +6,7 @@ import { anchorRoute, gotoRoute } from './../Router'
 import Auth from './../Auth'
 import App from './../App'
 import CartAPI from './../CartAPI';
+import { refresh } from 'aos';
 
 customElements.define('va-app-header', class AppHeader extends LitElement {
   constructor() {
@@ -51,6 +52,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     //initialise all the vars needed for a checkout
     gotoRoute('/checkout1')
   }
+
+  // emptyCart() {
+  //   this.products = null;
+  //   localStorage.removeItem('cartProducts');
+  //   localStorage.removeItem('orderProducts');
+  //   gotoRoute('/products');
+    
+  // }
+
   toggle() {
     const dropdownMenu = this.shadowRoot.querySelector('.app-menu');
     const hamburger = this.shadowRoot.querySelector('#hamburger');
@@ -422,6 +432,22 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         width: 100%;
       }
 
+      .empty-cart-btn {
+        position: relative;
+        float: right;
+        margin-bottom: 20px;
+        color: white;
+        background-color: #F4372D;
+        text-transform: uppercase;
+        border: none;
+        font-family: var(--base-font-family);
+        cursor: pointer;
+        padding: 2% 4%;
+        border-radius: 8px;
+        font-size: 10px;
+        width: 30%;
+      }
+
 
     </style>
 
@@ -447,6 +473,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       `)}
 
       <h3>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
+      <button class='empty-cart-btn' @click="${this.emptyCart}">Empty Cart</button>
       <button class='checkout-btn' @click="${this.checkoutClick}">Checkout</button>
     `}
     
