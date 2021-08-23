@@ -1258,7 +1258,8 @@ sl-dialog::part(title) {
     grid-column: 1/2;
     grid-row: 2/3;
     display: block;
-    width: 100%;
+    width: 80%;
+    margin: auto;
   }
   .product-dialog img.pp-img-single {
     display: block;
@@ -1320,9 +1321,28 @@ sl-dialog::part(title) {
     transform: translateY(-370px) translateX(160px);
   }
 
+  /*PRODUCT DIALOG*/
+  .product-dialog .pp-right {
+    width: 90%;
+  }
+
   /*ABUT PAGE*/
   .about-page .ps4 {
     transform: rotate(-10deg) translateY(1500px) translateX(-300px);
+  }
+}
+@media all and (max-width: 500px) {
+  /*PRODUCT DIALOG*/
+  .product-dialog .pp-right {
+    width: 100%;
+  }
+
+  .product-dialog::part(body) {
+    padding: 50px 20px;
+  }
+
+  .bubble-button {
+    font-size: 25px;
   }
 }
 :root {
@@ -1355,6 +1375,11 @@ sl-dialog::part(title) {
   margin: auto;
 }
 
+@media all and (max-width: 500px) {
+  .bubble-button {
+    font-size: 25px;
+  }
+}
 .bubble-button:focus {
   outline-color: transparent;
   box-shadow: var(--btn-color) 2px 2px 22px;
