@@ -180,7 +180,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .header-title {
         color: var(--med-blue);
-        color: #AACOCF;
+        /* color: #AACOCF; */
         font-family: Rockwell, serif;
         position: absolute;
         right: 20%;
@@ -431,6 +431,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         font-size: 20px;
         width: 100%;
       }
+      .qty{
+        display: flex;
+      }
+      .input-group{
+          width: 30%;
+          margin-left: 5%;
+      }
 
       .empty-cart-btn {
         position: relative;
@@ -465,7 +472,15 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           <img class='cart-img' src='/images/${product.item}.png' alt='${product.name}'>
           <div class='cart-product-info'>
             <p class='product-name'>${product.name}</p> 
-            <p>Quantity: ${product.quantity}</p>
+
+            <div class='qty'> 
+              <p>Quantity:</p>
+              <div class="input-group">
+                <sl-input size='small' type='number' value='${product.quantity}'></sl-input>
+              </div>
+            </div>
+            
+            <!-- <p>Quantity: ${product.quantity}</p> -->
             <!-- <p>&pound;${product.price.$numberDecimal}</p> -->
             <p>&pound;${product.price}</p>
           </div>
