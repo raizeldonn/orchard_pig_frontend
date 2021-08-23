@@ -474,11 +474,6 @@ button.homepg-btn {
   position: relative;
 }
 .products .products-grid button {
-  padding: 2% 0%;
-  width: 150px;
-  background-color: #142838;
-  font-size: max(1.5vw, 16px);
-  border-radius: 8px;
   transform: translateY(-450px) translateX(300px);
   z-index: 100;
   position: relative;
@@ -504,7 +499,6 @@ button.homepg-btn {
 
 .product-dialog {
   --width: 80vw;
-  overflow: hidden;
 }
 .product-dialog #image-bottle {
   position: absolute;

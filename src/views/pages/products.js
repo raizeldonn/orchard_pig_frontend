@@ -215,6 +215,11 @@ class ProductsView {
                   <img id='${product.name}' @click=${() => this.moreInfoHandler(product)} @mouseover=${() => this.hoverImage(product)}  @mouseout=${() => this.unhoverImage(product)}
                       src='/images/${product.item}.png' alt='${product.name}'>
                   <h2>${product.shortName}</h2>
+                  <button class='bubble-button' @click=${() => this.addToCart(product)} style="--content: 'Buy Now';">
+                  <div class="left"></div>
+                    Buy Now
+                  <div class="right"></div>
+                </button>
                   <!--<button @click=${() => this.addToCart(product)}>Buy Now</button>-->
                 </div>
                 ` : html ``}

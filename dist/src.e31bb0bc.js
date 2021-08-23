@@ -10972,7 +10972,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <!--<button @click=", ">Buy Now</button>-->\n                </div>\n                "]);
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <button class='bubble-button' @click=", " style=\"--content: 'Buy Now';\">\n                  <div class=\"left\"></div>\n                    Buy Now\n                  <div class=\"right\"></div>\n                </button>\n                  <!--<button @click=", ">Buy Now</button>-->\n                </div>\n                "]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -11269,7 +11269,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject12(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject13()) : (0, _litHtml.html)(_templateObject14(), this.products.map(product => (0, _litHtml.html)(_templateObject15(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject16(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject17()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject12(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject13()) : (0, _litHtml.html)(_templateObject14(), this.products.map(product => (0, _litHtml.html)(_templateObject15(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject16(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product), () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject17()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 

@@ -521,11 +521,7 @@ button.homepg-btn {
       position: relative;
     }
     button{
-      padding: 2% 0%;
-      width: 150px;
-      background-color: #142838;
-      font-size: max(1.5vw, 16px);
-      border-radius: 8px;
+
       transform: translateY(-450px) translateX(300px);
       z-index: 100;
       position: relative;
@@ -556,7 +552,7 @@ button.homepg-btn {
 
 .product-dialog{
     --width: 80vw;
-    overflow: hidden;
+
   #image-bottle {
     position: absolute;
     left: 0px;
@@ -567,6 +563,7 @@ button.homepg-btn {
     right: 0px;
     top: 150px;
   }
+
   img.pp-img{
     object-fit: cover;
     //max-height: 60vh;
