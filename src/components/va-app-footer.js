@@ -102,6 +102,10 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
           width: 100%;
         }
 
+        footer{
+          height: 100vh;
+        }
+
       }
 
     

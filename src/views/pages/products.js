@@ -230,8 +230,8 @@ class ProductsView {
             `}
 
           </div>
-
-        
+        <div id="footer-buffer" style="height: 150px;"></div>
+          <va-app-footer margin="false"></va-app-footer>
       </div>      
     `
     // this assigns the template html container to App.rootEl
