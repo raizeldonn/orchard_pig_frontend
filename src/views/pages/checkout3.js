@@ -68,7 +68,7 @@ class Checkout3View {
 
       <div class="page-content checkout checkout3">        
       
-      <div class='left'>
+      <div class='left-checkout'>
         <h1>Review Order</h1>
         <div class='shipping-details'>
           	<h2>Shipping Details</h2>
@@ -105,7 +105,7 @@ class Checkout3View {
         
       </div>
         
-      <div class='right'>
+      <div class='right-checkout'>
         <h1>Your Basket</h1>
           ${this.products == null ? html`<p>no products</p>`: html `
             ${this.products.map(product => html`

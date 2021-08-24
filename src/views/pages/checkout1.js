@@ -68,7 +68,7 @@ class Checkout1View {
 
       <div class="page-content checkout checkout1"> 
         
-      <div class='left'>
+      <div class='left-checkout'>
         <h2>Shipping Details</h2>
         <sl-form class="form-shipping" @sl-submit=${this.shippingSubmitHandler}>
             <div class='name-input'>
@@ -103,7 +103,7 @@ class Checkout1View {
           </sl-form>
       </div>
 
-      <div class='right'>
+      <div class='right-checkout'>
         <h1>Your Basket</h1>
           ${this.products == null ? html`<p>no products</p>`: html `
             ${this.products.map(product => html`

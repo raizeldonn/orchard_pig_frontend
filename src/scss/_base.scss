@@ -988,14 +988,14 @@ button.homepg-btn {
 .checkout{
   background-color: var(--light-blue);
   display: flex;
-  .right{
+  .right-checkout{
     width: 30%;
     padding: 30px;
   }
   .input-group{
     width: 100%;
   }
-  .left{
+  .left-checkout{
     padding: 30px;
     width: 70%;
     .name-input{
