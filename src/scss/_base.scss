@@ -177,14 +177,13 @@ a {
 
     .orchard-img {
       width: 100vw;
-      filter: brightness(150%);
     }
 
     .logo {
       position: absolute;
-      bottom: -15%;
-      left: 30%;
-      width: 40%;
+      top: 15%;
+      left: 35%;
+      width: 30%;
     }
   }
 
@@ -196,8 +195,9 @@ a {
   }
 
   .center-btn {
-    width: 15%;
+    display: flex;
     margin: auto;
+    padding: 2%;
   }
 
   button {
@@ -206,6 +206,7 @@ a {
     font-size: 20px;
     box-shadow: -2px 2px 3px rgb(0 0 0 / 90%);
     transition: transform .2s;
+    margin: auto;
   }
 }
 

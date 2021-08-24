@@ -175,13 +175,12 @@ a {
 }
 .age-confirm .img-cont .orchard-img {
   width: 100vw;
-  filter: brightness(150%);
 }
 .age-confirm .img-cont .logo {
   position: absolute;
-  bottom: -15%;
-  left: 30%;
-  width: 40%;
+  top: 15%;
+  left: 35%;
+  width: 30%;
 }
 .age-confirm h1,
 .age-confirm p {
@@ -190,8 +189,9 @@ a {
   font-weight: bold;
 }
 .age-confirm .center-btn {
-  width: 15%;
+  display: flex;
   margin: auto;
+  padding: 2%;
 }
 .age-confirm button {
   background-color: var(--dark-blue);
@@ -199,6 +199,7 @@ a {
   font-size: 20px;
   box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.9);
   transition: transform 0.2s;
+  margin: auto;
 }
 
 .home-section {

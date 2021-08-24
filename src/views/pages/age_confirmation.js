@@ -25,7 +25,7 @@ class AgeConfirmView {
       <div class="age-confirm">   
         <div class="img-cont">
           <img class='orchard-img' src="images/age-check.png">
-          <img class='logo' src='images/logo-black.png'>
+          <img class='logo' src='images/logo-shape.png'>
         </div>   
         <h1> Rooted in Somerset</h1>
         <p>You must be over 18 to enter this site</p>
