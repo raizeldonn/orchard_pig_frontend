@@ -990,6 +990,16 @@ button.homepg-btn {
 .checkout{
   background-color: var(--light-blue);
   display: flex;
+  .go-back{
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 0;
+    display: inline-block;
+    &:hover{
+      color: var(--med-blue);
+    }
+  }
   .right-checkout{
     width: 30%;
     padding: 30px;

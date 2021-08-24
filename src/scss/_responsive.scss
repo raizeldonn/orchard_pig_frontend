@@ -66,6 +66,9 @@
 
     /*CHECKOUT*/
     .checkout{
+      sl-form.form-shipping::part(base) {
+        width: 90%;
+        }
       .left-checkout{
         width: 60%;
       }
@@ -168,6 +171,12 @@
         margin-left: 0;
       }
     }
+    /*CHECKOUT*/
+    .checkout{
+      sl-form.form-shipping::part(base) {
+      width: 100%;
+      }
+    }
   }
   
   @media all and (max-width: 800px){ 
@@ -252,6 +261,14 @@
     .about-page{
       .ps4{
         transform: rotate(-10deg) translateY(1800px) translateX(-300px);
+      }
+    }
+    /*CHECKOUT*/
+    .checkout{
+      flex-direction: column;
+      .left-checkout, .right-checkout{
+        width: 80%;
+        margin: auto;
       }
     }
 }
@@ -409,6 +426,13 @@
         transform: rotate(-10deg) translateY(1500px) translateX(-300px);
       }
     }
+
+    /*CHECKOUT*/
+    .checkout{
+      .left-checkout, .right-checkout{
+        width: 90%;
+      }
+    }
     
   }
 
@@ -424,5 +448,12 @@
     }
     .bubble-button{
       font-size: 25px;
+    }
+
+    /*CHECKOUT*/
+    .checkout{
+      .left-checkout, .right-checkout{
+        width: 100%;
+      }
     }
   }

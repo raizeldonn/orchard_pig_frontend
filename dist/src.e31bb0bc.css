@@ -880,6 +880,16 @@ button.homepg-btn {
   background-color: var(--light-blue);
   display: flex;
 }
+.checkout .go-back {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 0;
+  display: inline-block;
+}
+.checkout .go-back:hover {
+  color: var(--med-blue);
+}
 .checkout .right-checkout {
   width: 30%;
   padding: 30px;
@@ -1050,6 +1060,9 @@ sl-dialog::part(title) {
   }
 
   /*CHECKOUT*/
+  .checkout sl-form.form-shipping::part(base) {
+    width: 90%;
+  }
   .checkout .left-checkout {
     width: 60%;
   }
@@ -1135,6 +1148,11 @@ sl-dialog::part(title) {
   .product-dialog .pp-right {
     margin-left: 0;
   }
+
+  /*CHECKOUT*/
+  .checkout sl-form.form-shipping::part(base) {
+    width: 100%;
+  }
 }
 @media all and (max-width: 800px) {
   /* HOME SECTION */
@@ -1209,6 +1227,15 @@ sl-dialog::part(title) {
   /*ABOUT PAGE*/
   .about-page .ps4 {
     transform: rotate(-10deg) translateY(1800px) translateX(-300px);
+  }
+
+  /*CHECKOUT*/
+  .checkout {
+    flex-direction: column;
+  }
+  .checkout .left-checkout, .checkout .right-checkout {
+    width: 80%;
+    margin: auto;
   }
 }
 @media all and (max-width: 768px) {
@@ -1346,6 +1373,11 @@ sl-dialog::part(title) {
   .about-page .ps4 {
     transform: rotate(-10deg) translateY(1500px) translateX(-300px);
   }
+
+  /*CHECKOUT*/
+  .checkout .left-checkout, .checkout .right-checkout {
+    width: 90%;
+  }
 }
 @media all and (max-width: 500px) {
   /*PRODUCT DIALOG*/
@@ -1359,6 +1391,11 @@ sl-dialog::part(title) {
 
   .bubble-button {
     font-size: 25px;
+  }
+
+  /*CHECKOUT*/
+  .checkout .left-checkout, .checkout .right-checkout {
+    width: 100%;
   }
 }
 :root {

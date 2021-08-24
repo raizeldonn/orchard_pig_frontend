@@ -67,7 +67,6 @@ class Checkout1View {
       </div>
 
       <div class="page-content checkout checkout1"> 
-        
       <div class='left-checkout'>
         <h2>Shipping Details</h2>
         <sl-form class="form-shipping" @sl-submit=${this.shippingSubmitHandler}>
@@ -83,7 +82,7 @@ class Checkout1View {
               <sl-input name="email" type="email" label="Email" required></sl-input>
             </div>
             <div class="input-group">
-              <sl-input name="phoneNumber" type="text" label="Phone Number" required></sl-input>
+              <sl-input name="phoneNumber" type="number" label="Phone Number" required></sl-input>
             </div>    
 
 

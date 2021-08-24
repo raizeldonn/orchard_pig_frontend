@@ -44,6 +44,10 @@ class Checkout2View {
     gotoRoute('/checkout3')
   }
 
+  continueShopping(){
+    gotoRoute('/products')
+  }
+
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
@@ -56,11 +60,12 @@ class Checkout2View {
       <div class="page-content checkout checkout2">        
       
       <div class='left-checkout'>
+      <p class='go-back' @click=${() => gotoRoute('/checkout1')}> < Back</p>
         <h2>Payment Details</h2>
         
         <sl-form class="form-shipping" @sl-submit=${this.paymentSubmitHandler}>
             <div class="input-group">
-              <sl-input name="cardNumber" type="text" label="Card Number" required></sl-input>
+              <sl-input name="cardNumber" type="number" min=7 max=16 label="Card Number" required></sl-input>
             </div>
             <div class="input-group">
               <sl-select name='expMonth' label='Select Expiry Month' required>
@@ -94,7 +99,7 @@ class Checkout2View {
               </sl-select>
             </div>
             <div class="input-group">
-              <sl-input name="cvv" type="text" label="CVV" required></sl-input>
+              <sl-input name="cvv" type="number" min=3 max=4 label="CVV" required></sl-input>
             </div>      
             <button class="checkout-btn" submit >Review Order</button>
           </sl-form>

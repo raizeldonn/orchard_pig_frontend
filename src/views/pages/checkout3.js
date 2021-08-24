@@ -57,6 +57,10 @@ class Checkout3View {
   }
   }
 
+  continueShopping(){
+    gotoRoute('/products')
+  }
+
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
@@ -69,6 +73,7 @@ class Checkout3View {
       <div class="page-content checkout checkout3">        
       
       <div class='left-checkout'>
+      <p class='go-back' @click=${() => gotoRoute('/checkout2')}> < Back</p>
         <h1>Review Order</h1>
         <div class='shipping-details'>
           	<h2>Shipping Details</h2>
