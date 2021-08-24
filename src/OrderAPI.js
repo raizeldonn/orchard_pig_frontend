@@ -97,7 +97,9 @@ class OrderAPI {
       "status": "awaitingShipment",
       "totalCost": totalCost,
       //"products": products,
-      "shipping": this.shipping
+      "address" : this.shipping.address,
+      "address2" : this.shipping.address2,
+      "shipping": this.shipping.shippingOption
    
     }
 
