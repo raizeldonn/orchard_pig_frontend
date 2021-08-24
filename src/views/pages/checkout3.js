@@ -37,8 +37,9 @@ class Checkout3View {
       this.userData = OrderAPI.getUserData()
       this.shipping = OrderAPI.getShipping()
       this.payment = OrderAPI.getPayment()
-      console.log("shipping: " + JSON.stringify(this.shipping))
-      console.log("payment: " + JSON.stringify(this.payment))
+      console.log("userdata checkout: " + JSON.stringify(this.userData))
+      console.log("shipping checkout: " + JSON.stringify(this.shipping))
+      console.log("payment checkout: " + JSON.stringify(this.payment))
       this.render()
     }
     catch(err){
@@ -47,7 +48,17 @@ class Checkout3View {
   }
   
   async placeOrder(){
-    await OrderAPI.placeOrder()
+    try{
+      await OrderAPI.placeOrder()
+      Toast.show('Your order has been submitted. A receipt will be sent to you email')
+    }
+    catch(err){
+      Toast.show(err, 'error')
+  }
+  }
+
+  continueShopping(){
+    gotoRoute('/products')
   }
 
   // method from lit library which allows us 
@@ -61,44 +72,45 @@ class Checkout3View {
 
       <div class="page-content checkout checkout3">        
       
-      <div class='left'>
+      <div class='left-checkout'>
+      <p class='go-back' @click=${() => gotoRoute('/checkout2')}> < Back</p>
         <h1>Review Order</h1>
         <div class='shipping-details'>
           	<h2>Shipping Details</h2>
             ${this.userData == null ? 
               html`<sl-spinner></sl-spinner>` : 
               html`
-              <p>${this.userData.firstName}</p>
-              <p>${this.userData.lastName}</p>
-              <p>${this.userData.phoneNumber}</p>`}
+              <p><b>First Name :</b> ${this.userData.firstName}</p>
+              <p><b>Last Name :</b> ${this.userData.lastName}</p>
+              <p><b>Phone : </b>${this.userData.phoneNumber}</p>`}
             
             ${this.shipping == null ? 
               html`<sl-spinner></sl-spinner>` : 
               html`
-              <p>${this.shipping.address}</p>
-              <p>${this.shipping.address2}</p>
-              <p>${this.shipping.shippingOption}</p>`}  
+              <p><b>Address Line 1 :</b> ${this.shipping.address}</p>
+              <p><b>Address Line 2 :</b> ${this.shipping.address2}</p>
+              <p><b>Shipping Option :</b> ${this.shipping.shippingOption}</p>`}  
             
-            <a @click="${() => gotoRoute('/checkout1')}">Edit</a>
+            <a style="color:red; cursor:pointer;" @click="${() => gotoRoute('/checkout1')}">Edit</a>
         </div>
 
         <div class='payment-details'>
           	<h2>Payment Details</h2>
-            ${this.shipping == null ? 
+            ${this.payment == null ? 
               html`<sl-spinner></sl-spinner>` : 
               html`
-              <p>**** **** **** ${this.payment.lastFourDigits}</p>
-              <p>${this.payment.expMonth}</p>
-              <p>20${this.payment.expYear}</p>`}
+              <p><b>Credit Card :</b> **** **** **** ${this.payment.lastFourDigits}</p>
+              <p><b>Expires :</b> ${this.payment.expMonth}/20${this.payment.expYear}</p>`}
+      
 
-              <a @click="${() => gotoRoute('/checkout2')}">Edit</a>
+              <a style="color:red; cursor:pointer;" @click="${() => gotoRoute('/checkout2')}">Edit</a>
         </div>
 
         <button class='checkout-btn' @click=${this.placeOrder}>Place Order</button>
         
       </div>
         
-      <div class='right'>
+      <div class='right-checkout'>
         <h1>Your Basket</h1>
           ${this.products == null ? html`<p>no products</p>`: html `
             ${this.products.map(product => html`

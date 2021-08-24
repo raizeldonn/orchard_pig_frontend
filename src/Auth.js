@@ -62,7 +62,7 @@ class Auth {
     Router.init()
     gotoRoute('/')
   }
-
+  
 
   async check(success){
     // show splash screen while loading ...   

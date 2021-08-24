@@ -3,6 +3,9 @@
 // https://lit-element.polymer-project.org/guide/templates
 // https://lit-html.polymer-project.org/guide/styling-templates
 import {html, render } from 'lit-html'
+import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 import App from './../../App'
 import {gotoRoute, anchorRoute } from './../../Router'
@@ -21,11 +24,31 @@ class HomeView {
     //this.getTeam()
     this.render()
     Utils.pageIntroAnim()
+    this.homePageAnim()
+    this.animateButton()
     this.products = null;
     //localStorage.removeItem('cartProducts');
     this.getProducts();   
 
   }
+
+  homePageAnim(){
+    // gsap.fromTo(pageContent, {opacity: 0, y: -12}, {opacity: 1, y: 0, ease: 'power2.out', duration: 0.3})
+
+    const homeTl = gsap.timeline({scrollTrigger: {trigger: ".page-content", start: "top center"}})
+    .from('.rooted h1', {y:50, opacity: 0, duration: 1})
+    .from('.rooted p', {y:50, opacity: 0, duration: 1},"-=0.5")
+    .from('.rooted button', {x:50, opacity: 0,  ease:"Back.easeOut", duration: 0.5}, "+=0.5");
+
+    gsap.timeline({scrollTrigger: {trigger: '.page-content .new-pig h1', start: "center center", scroller: '.page-content'}})
+    .from('.new-pig .pink-tilted', {x:-200, transform: "rotate(50deg)", ease:"Back.easeOut", opacity: 0, duration: 1})
+    .from('.new-pig .homepg-btn', {y:50, opacity: 0, duration: 1},"-=0.5");
+
+    gsap.timeline({scrollTrigger: {trigger: '.hog', start: "center bottom", scroller: '.page-content'}})
+    .from('.pignbottles', {x:200, ease:"Back.easeOut", opacity: 0, duration: 1})
+    .from('.hog .homepg-btn', {y:50, opacity: 0, duration: 1},"-=0.5");
+  }
+
  
   async getTeam(){
     try {
@@ -49,21 +72,38 @@ class HomeView {
       Toast.show(err, 'error')
     }
   }
+
+  //bubbly button animation
+  //code from https://codepen.io/nourabusoud/pen/ypZzMM
+  animateButton = (e) => {
+
+    e.preventDefault;
+    //reset animation
+    e.target.classList.remove('animate');
+
+    e.target.classList.add('animate');
+    setTimeout(function(){
+      e.target.classList.remove('animate');
+      gotoRoute('/game')
+    },700);
+
+  };
+
   
   // method from lit library which allows us 
-  // to render html from within js to a container
+  // to render html from within js to a container //@click=${() => gotoRoute('/game')
   render(){
     const template = html`
 
-      <va-app-header title="Home" products=${localStorage.getItem('cartProducts')}></va-app-header>
+      <va-app-header  title="Home" products=${localStorage.getItem('cartProducts')}></va-app-header>
 
-      <div class="page-content">
+      <div class="page-content" >
       
-        <section class='home-section rooted'>
+        <section id="top" class='home-section rooted'>
         <!--<img class="splash" src="images/home-splash-2.png">-->
           <h1>Rooted In Somerset</h1>
           <p>Want to earn a discount for your next order?</p>
-          <button  @click=${() => gotoRoute('/game')}>Find the pig to win!</button>
+          <button  @click=${this.animateButton}>Find the pig to win!</button> 
         </section>
 
         <section class='home-section new-pig'>
@@ -88,15 +128,9 @@ class HomeView {
           <img class='pigsteps' src='/images/pigsteps.png'>
 
         </section>
-  
+
     	  <va-app-footer margin="false"></va-app-footer>
-
-      
       </div>
-
-      
-      
-     
     `
     render(template, App.rootEl)
   }
@@ -104,18 +138,11 @@ class HomeView {
 
 export default new HomeView()
 
-/*<div class="page-content">
-<h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
-<h1>Team-Linen:</h1>
-<h2>${this.team[0].first_name}${this.team[0].last_name}${this.team[0].role}</h2>
-<h2>${this.team[1].first_name}${this.team[1].last_name}${this.team[1].role}</h2>
-<h2>${this.team[2].first_name}${this.team[2].last_name}${this.team[2].role}</h2>
-<h2>${this.team[3].first_name}${this.team[3].last_name}${this.team[3].role}</h2>
-<h2>${this.team[4].first_name}${this.team[4].last_name}${this.team[4].role}</h2>
-<h3>Button example:</h3>
-<sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
-<p>&nbsp;</p>
-<h3>Link example</h3>
-<a href="/profile" @click=${anchorRoute}>View Profile</a>
 
-</div>*/
+/*  
+          <div class="linktop" style="width:80px; height:80px; z-index:200; position:absolute; right: 10px; bottom: 50px;">
+          <!-- this anchor brings the user back to the top of page -->
+          <a href="#top" title="Return to Top" target="_top"><img src="/images/arrow.png" width="70px" height="70px"/></a>
+          </div>
+
+*/

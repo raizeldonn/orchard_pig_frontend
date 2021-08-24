@@ -4,15 +4,33 @@ import App from '../../App'
 import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import Toast from '../../Toast'
+import ContactAPI from '../../ContactAPI'
 
 class ContactView {
   init(){
     document.title = 'Contact'    
-    this.render()    
-    Utils.pageIntroAnim()
+    Utils.pageIntroAnim();
+    this.contactSubmitHandler;
+    this.render();
   }
 
 
+  contactSubmitHandler(e){
+      Toast.show("Thanks for reaching out! We will respond as soon as we can.");
+      e.preventDefault()    
+      const formData = e.detail.formData
+  
+      // let firstName = formData.get('firstName')
+      // let lastName = formData.get('lastName')
+      // let email = formData.get('email')
+      // let phoneNumber = formData.get('phoneNumber')
+      // let subject = formData.get('subject')
+      // let message = formData.get('message')
+      
+      // ContactAPI.postMessage(firstName, lastName, email, phoneNumber, subject, message)
+      ContactAPI.postMessage(formData);
+  }
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
@@ -45,7 +63,7 @@ class ContactView {
                 </div> 
               </div>
               <div class="input-group">
-                <sl-select name='Subject' label='Subject' required>
+                <sl-select name='subject' label='Subject' required>
                   <sl-menu-item value='order'>My Order</sl-menu-item>
                   <sl-menu-item value='shipping'>Shipping</sl-menu-item>
                   <sl-menu-item value='returns'>Returns</sl-menu-item>
@@ -54,15 +72,15 @@ class ContactView {
                 </sl-select>
               </div>
               <div class='input-group'>
-                <sl-textarea label="Message" placeholder="Type your message here"></sl-textarea>
+                <sl-textarea name="message" label="Message" placeholder="Type your message here"></sl-textarea>
               </div>
-              <button class="submit-btn" submit>Submit</button>     
+              <button class="submit-btn" submit >Submit</button>     
             </sl-form>
           </div>
 
           <div class='flex-column'>
 
-            <div class='right'>
+            <div class='contact-right'>
               <div class='contact-info-grid'> 
                 <img src='/images/pin-white.png'>
                 <p>275 Burnfield Road, Thornliebank</p>

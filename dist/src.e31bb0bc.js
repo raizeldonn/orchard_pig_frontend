@@ -1913,32 +1913,7 @@ exports.html = html;
 const svg = (strings, ...values) => new _templateResult.SVGTemplateResult(strings, values, 'svg', _defaultTemplateProcessor.defaultTemplateProcessor);
 
 exports.svg = svg;
-},{"./lib/default-template-processor.js":"../node_modules/lit-html/lib/default-template-processor.js","./lib/template-result.js":"../node_modules/lit-html/lib/template-result.js","./lib/directive.js":"../node_modules/lit-html/lib/directive.js","./lib/dom.js":"../node_modules/lit-html/lib/dom.js","./lib/part.js":"../node_modules/lit-html/lib/part.js","./lib/parts.js":"../node_modules/lit-html/lib/parts.js","./lib/render.js":"../node_modules/lit-html/lib/render.js","./lib/template-factory.js":"../node_modules/lit-html/lib/template-factory.js","./lib/template-instance.js":"../node_modules/lit-html/lib/template-instance.js","./lib/template.js":"../node_modules/lit-html/lib/template.js"}],"views/partials/splash.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litHtml = require("lit-html");
-
-function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n  <div class=\"app-splash\">\n    <div class=\"inner\">\n      <img class=\"app-logo\" src=\"/images/OP_logo_2012_medium.png\" />\n      <sl-spinner style=\"font-size: 2em;\"></sl-spinner>\n    </div>\n  </div>\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-const splash = (0, _litHtml.html)(_templateObject());
-var _default = splash;
-exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js"}],"../node_modules/gsap/gsap-core.js":[function(require,module,exports) {
+},{"./lib/default-template-processor.js":"../node_modules/lit-html/lib/default-template-processor.js","./lib/template-result.js":"../node_modules/lit-html/lib/template-result.js","./lib/directive.js":"../node_modules/lit-html/lib/directive.js","./lib/dom.js":"../node_modules/lit-html/lib/dom.js","./lib/part.js":"../node_modules/lit-html/lib/part.js","./lib/parts.js":"../node_modules/lit-html/lib/parts.js","./lib/render.js":"../node_modules/lit-html/lib/render.js","./lib/template-factory.js":"../node_modules/lit-html/lib/template-factory.js","./lib/template-instance.js":"../node_modules/lit-html/lib/template-instance.js","./lib/template.js":"../node_modules/lit-html/lib/template.js"}],"../node_modules/gsap/gsap-core.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7403,7 +7378,1708 @@ TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
 exports.TweenMax = TweenMaxWithCSS;
 exports.default = exports.gsap = gsapWithCSS;
-},{"./gsap-core.js":"../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../node_modules/gsap/CSSPlugin.js"}],"Toast.js":[function(require,module,exports) {
+},{"./gsap-core.js":"../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../node_modules/gsap/CSSPlugin.js"}],"../node_modules/gsap/ScrollTrigger.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.ScrollTrigger = void 0;
+
+/*!
+ * ScrollTrigger 3.6.0
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/* eslint-disable */
+var gsap,
+    _coreInitted,
+    _win,
+    _doc,
+    _docEl,
+    _body,
+    _root,
+    _resizeDelay,
+    _raf,
+    _request,
+    _toArray,
+    _clamp,
+    _time2,
+    _syncInterval,
+    _refreshing,
+    _pointerIsDown,
+    _transformProp,
+    _i,
+    _prevWidth,
+    _prevHeight,
+    _autoRefresh,
+    _sort,
+    _suppressOverwrites,
+    _ignoreResize,
+    _limitCallbacks,
+    // if true, we'll only trigger callbacks if the active state toggles, so if you scroll immediately past both the start and end positions of a ScrollTrigger (thus inactive to inactive), neither its onEnter nor onLeave will be called. This is useful during startup.
+_startup = 1,
+    _proxies = [],
+    _scrollers = [],
+    _getTime = Date.now,
+    _time1 = _getTime(),
+    _lastScrollTime = 0,
+    _enabled = 1,
+    _passThrough = function _passThrough(v) {
+  return v;
+},
+    _windowExists = function _windowExists() {
+  return typeof window !== "undefined";
+},
+    _getGSAP = function _getGSAP() {
+  return gsap || _windowExists() && (gsap = window.gsap) && gsap.registerPlugin && gsap;
+},
+    _isViewport = function _isViewport(e) {
+  return !!~_root.indexOf(e);
+},
+    _getProxyProp = function _getProxyProp(element, property) {
+  return ~_proxies.indexOf(element) && _proxies[_proxies.indexOf(element) + 1][property];
+},
+    _getScrollFunc = function _getScrollFunc(element, _ref) {
+  var s = _ref.s,
+      sc = _ref.sc;
+
+  var i = _scrollers.indexOf(element),
+      offset = sc === _vertical.sc ? 1 : 2;
+
+  !~i && (i = _scrollers.push(element) - 1);
+  return _scrollers[i + offset] || (_scrollers[i + offset] = _getProxyProp(element, s) || (_isViewport(element) ? sc : function (value) {
+    return arguments.length ? element[s] = value : element[s];
+  }));
+},
+    _getBoundsFunc = function _getBoundsFunc(element) {
+  return _getProxyProp(element, "getBoundingClientRect") || (_isViewport(element) ? function () {
+    _winOffsets.width = _win.innerWidth;
+    _winOffsets.height = _win.innerHeight;
+    return _winOffsets;
+  } : function () {
+    return _getBounds(element);
+  });
+},
+    _getSizeFunc = function _getSizeFunc(scroller, isViewport, _ref2) {
+  var d = _ref2.d,
+      d2 = _ref2.d2,
+      a = _ref2.a;
+  return (a = _getProxyProp(scroller, "getBoundingClientRect")) ? function () {
+    return a()[d];
+  } : function () {
+    return (isViewport ? _win["inner" + d2] : scroller["client" + d2]) || 0;
+  };
+},
+    _getOffsetsFunc = function _getOffsetsFunc(element, isViewport) {
+  return !isViewport || ~_proxies.indexOf(element) ? _getBoundsFunc(element) : function () {
+    return _winOffsets;
+  };
+},
+    _maxScroll = function _maxScroll(element, _ref3) {
+  var s = _ref3.s,
+      d2 = _ref3.d2,
+      d = _ref3.d,
+      a = _ref3.a;
+  return (s = "scroll" + d2) && (a = _getProxyProp(element, s)) ? a() - _getBoundsFunc(element)()[d] : _isViewport(element) ? Math.max(_docEl[s], _body[s]) - (_win["inner" + d2] || _docEl["client" + d2] || _body["client" + d2]) : element[s] - element["offset" + d2];
+},
+    _iterateAutoRefresh = function _iterateAutoRefresh(func, events) {
+  for (var i = 0; i < _autoRefresh.length; i += 3) {
+    (!events || ~events.indexOf(_autoRefresh[i + 1])) && func(_autoRefresh[i], _autoRefresh[i + 1], _autoRefresh[i + 2]);
+  }
+},
+    _isString = function _isString(value) {
+  return typeof value === "string";
+},
+    _isFunction = function _isFunction(value) {
+  return typeof value === "function";
+},
+    _isNumber = function _isNumber(value) {
+  return typeof value === "number";
+},
+    _isObject = function _isObject(value) {
+  return typeof value === "object";
+},
+    _callIfFunc = function _callIfFunc(value) {
+  return _isFunction(value) && value();
+},
+    _combineFunc = function _combineFunc(f1, f2) {
+  return function () {
+    var result1 = _callIfFunc(f1),
+        result2 = _callIfFunc(f2);
+
+    return function () {
+      _callIfFunc(result1);
+
+      _callIfFunc(result2);
+    };
+  };
+},
+    _abs = Math.abs,
+    _scrollLeft = "scrollLeft",
+    _scrollTop = "scrollTop",
+    _left = "left",
+    _top = "top",
+    _right = "right",
+    _bottom = "bottom",
+    _width = "width",
+    _height = "height",
+    _Right = "Right",
+    _Left = "Left",
+    _Top = "Top",
+    _Bottom = "Bottom",
+    _padding = "padding",
+    _margin = "margin",
+    _Width = "Width",
+    _Height = "Height",
+    _px = "px",
+    _horizontal = {
+  s: _scrollLeft,
+  p: _left,
+  p2: _Left,
+  os: _right,
+  os2: _Right,
+  d: _width,
+  d2: _Width,
+  a: "x",
+  sc: function sc(value) {
+    return arguments.length ? _win.scrollTo(value, _vertical.sc()) : _win.pageXOffset || _doc[_scrollLeft] || _docEl[_scrollLeft] || _body[_scrollLeft] || 0;
+  }
+},
+    _vertical = {
+  s: _scrollTop,
+  p: _top,
+  p2: _Top,
+  os: _bottom,
+  os2: _Bottom,
+  d: _height,
+  d2: _Height,
+  a: "y",
+  op: _horizontal,
+  sc: function sc(value) {
+    return arguments.length ? _win.scrollTo(_horizontal.sc(), value) : _win.pageYOffset || _doc[_scrollTop] || _docEl[_scrollTop] || _body[_scrollTop] || 0;
+  }
+},
+    _getComputedStyle = function _getComputedStyle(element) {
+  return _win.getComputedStyle(element);
+},
+    _makePositionable = function _makePositionable(element) {
+  return element.style.position = _getComputedStyle(element).position === "absolute" ? "absolute" : "relative";
+},
+    // if the element already has position: absolute, leave that, otherwise make it position: relative
+_setDefaults = function _setDefaults(obj, defaults) {
+  for (var p in defaults) {
+    p in obj || (obj[p] = defaults[p]);
+  }
+
+  return obj;
+},
+    //_isInViewport = element => (element = _getBounds(element)) && !(element.top > (_win.innerHeight || _docEl.clientHeight) || element.bottom < 0 || element.left > (_win.innerWidth || _docEl.clientWidth) || element.right < 0) && element,
+_getBounds = function _getBounds(element, withoutTransforms) {
+  var tween = withoutTransforms && _getComputedStyle(element)[_transformProp] !== "matrix(1, 0, 0, 1, 0, 0)" && gsap.to(element, {
+    x: 0,
+    y: 0,
+    xPercent: 0,
+    yPercent: 0,
+    rotation: 0,
+    rotationX: 0,
+    rotationY: 0,
+    scale: 1,
+    skewX: 0,
+    skewY: 0
+  }).progress(1),
+      bounds = element.getBoundingClientRect();
+  tween && tween.progress(0).kill();
+  return bounds;
+},
+    _getSize = function _getSize(element, _ref4) {
+  var d2 = _ref4.d2;
+  return element["offset" + d2] || element["client" + d2] || 0;
+},
+    _getLabelRatioArray = function _getLabelRatioArray(timeline) {
+  var a = [],
+      labels = timeline.labels,
+      duration = timeline.duration(),
+      p;
+
+  for (p in labels) {
+    a.push(labels[p] / duration);
+  }
+
+  return a;
+},
+    _getClosestLabel = function _getClosestLabel(animation) {
+  return function (value) {
+    return gsap.utils.snap(_getLabelRatioArray(animation), value);
+  };
+},
+    _getLabelAtDirection = function _getLabelAtDirection(timeline) {
+  return function (value, st) {
+    var a = _getLabelRatioArray(timeline),
+        i;
+
+    a.sort(function (a, b) {
+      return a - b;
+    });
+
+    if (st.direction > 0) {
+      for (i = 0; i < a.length; i++) {
+        if (a[i] >= value) {
+          return a[i];
+        }
+      }
+
+      return a.pop();
+    } else {
+      i = a.length;
+
+      while (i--) {
+        if (a[i] <= value) {
+          return a[i];
+        }
+      }
+    }
+
+    return a[0];
+  };
+},
+    _multiListener = function _multiListener(func, element, types, callback) {
+  return types.split(",").forEach(function (type) {
+    return func(element, type, callback);
+  });
+},
+    _addListener = function _addListener(element, type, func) {
+  return element.addEventListener(type, func, {
+    passive: true
+  });
+},
+    _removeListener = function _removeListener(element, type, func) {
+  return element.removeEventListener(type, func);
+},
+    _markerDefaults = {
+  startColor: "green",
+  endColor: "red",
+  indent: 0,
+  fontSize: "16px",
+  fontWeight: "normal"
+},
+    _defaults = {
+  toggleActions: "play",
+  anticipatePin: 0
+},
+    _keywords = {
+  top: 0,
+  left: 0,
+  center: 0.5,
+  bottom: 1,
+  right: 1
+},
+    _offsetToPx = function _offsetToPx(value, size) {
+  if (_isString(value)) {
+    var eqIndex = value.indexOf("="),
+        relative = ~eqIndex ? +(value.charAt(eqIndex - 1) + 1) * parseFloat(value.substr(eqIndex + 1)) : 0;
+
+    if (~eqIndex) {
+      value.indexOf("%") > eqIndex && (relative *= size / 100);
+      value = value.substr(0, eqIndex - 1);
+    }
+
+    value = relative + (value in _keywords ? _keywords[value] * size : ~value.indexOf("%") ? parseFloat(value) * size / 100 : parseFloat(value) || 0);
+  }
+
+  return value;
+},
+    _createMarker = function _createMarker(type, name, container, direction, _ref5, offset, matchWidthEl) {
+  var startColor = _ref5.startColor,
+      endColor = _ref5.endColor,
+      fontSize = _ref5.fontSize,
+      indent = _ref5.indent,
+      fontWeight = _ref5.fontWeight;
+
+  var e = _doc.createElement("div"),
+      useFixedPosition = _isViewport(container) || _getProxyProp(container, "pinType") === "fixed",
+      isScroller = type.indexOf("scroller") !== -1,
+      parent = useFixedPosition ? _body : container,
+      isStart = type.indexOf("start") !== -1,
+      color = isStart ? startColor : endColor,
+      css = "border-color:" + color + ";font-size:" + fontSize + ";color:" + color + ";font-weight:" + fontWeight + ";pointer-events:none;white-space:nowrap;font-family:sans-serif,Arial;z-index:1000;padding:4px 8px;border-width:0;border-style:solid;";
+
+  css += "position:" + (isScroller && useFixedPosition ? "fixed;" : "absolute;");
+  (isScroller || !useFixedPosition) && (css += (direction === _vertical ? _right : _bottom) + ":" + (offset + parseFloat(indent)) + "px;");
+  matchWidthEl && (css += "box-sizing:border-box;text-align:left;width:" + matchWidthEl.offsetWidth + "px;");
+  e._isStart = isStart;
+  e.setAttribute("class", "gsap-marker-" + type);
+  e.style.cssText = css;
+  e.innerText = name || name === 0 ? type + "-" + name : type;
+  parent.children[0] ? parent.insertBefore(e, parent.children[0]) : parent.appendChild(e);
+  e._offset = e["offset" + direction.op.d2];
+
+  _positionMarker(e, 0, direction, isStart);
+
+  return e;
+},
+    _positionMarker = function _positionMarker(marker, start, direction, flipped) {
+  var vars = {
+    display: "block"
+  },
+      side = direction[flipped ? "os2" : "p2"],
+      oppositeSide = direction[flipped ? "p2" : "os2"];
+  marker._isFlipped = flipped;
+  vars[direction.a + "Percent"] = flipped ? -100 : 0;
+  vars[direction.a] = flipped ? "1px" : 0;
+  vars["border" + side + _Width] = 1;
+  vars["border" + oppositeSide + _Width] = 0;
+  vars[direction.p] = start + "px";
+  gsap.set(marker, vars);
+},
+    _triggers = [],
+    _ids = {},
+    _sync = function _sync() {
+  return _request || (_request = _raf(_updateAll));
+},
+    _onScroll = function _onScroll() {
+  if (!_request) {
+    _request = _raf(_updateAll);
+    _lastScrollTime || _dispatch("scrollStart");
+    _lastScrollTime = _getTime();
+  }
+},
+    _onResize = function _onResize() {
+  return !_refreshing && !_ignoreResize && !_doc.fullscreenElement && _resizeDelay.restart(true);
+},
+    // ignore resizes triggered by refresh()
+_listeners = {},
+    _emptyArray = [],
+    _media = [],
+    _creatingMedia,
+    // when ScrollTrigger.matchMedia() is called, we record the current media key here (like "(min-width: 800px)") so that we can assign it to everything that's created during that call. Then we can revert just those when necessary. In the ScrollTrigger's init() call, the _creatingMedia is recorded as a "media" property on the instance.
+_lastMediaTick,
+    _onMediaChange = function _onMediaChange(e) {
+  var tick = gsap.ticker.frame,
+      matches = [],
+      i = 0,
+      index;
+
+  if (_lastMediaTick !== tick || _startup) {
+    _revertAll();
+
+    for (; i < _media.length; i += 4) {
+      index = _win.matchMedia(_media[i]).matches;
+
+      if (index !== _media[i + 3]) {
+        // note: some browsers fire the matchMedia event multiple times, like when going full screen, so we shouldn't call the function multiple times. Check to see if it's already matched.
+        _media[i + 3] = index;
+        index ? matches.push(i) : _revertAll(1, _media[i]) || _isFunction(_media[i + 2]) && _media[i + 2](); // Firefox doesn't update the "matches" property of the MediaQueryList object correctly - it only does so as it calls its change handler - so we must re-create a media query here to ensure it's accurate.
+      }
+    }
+
+    _revertRecorded(); // in case killing/reverting any of the animations actually added inline styles back.
+
+
+    for (i = 0; i < matches.length; i++) {
+      index = matches[i];
+      _creatingMedia = _media[index];
+      _media[index + 2] = _media[index + 1](e);
+    }
+
+    _creatingMedia = 0;
+    _coreInitted && _refreshAll(0, 1);
+    _lastMediaTick = tick;
+
+    _dispatch("matchMedia");
+  }
+},
+    _softRefresh = function _softRefresh() {
+  return _removeListener(ScrollTrigger, "scrollEnd", _softRefresh) || _refreshAll(true);
+},
+    _dispatch = function _dispatch(type) {
+  return _listeners[type] && _listeners[type].map(function (f) {
+    return f();
+  }) || _emptyArray;
+},
+    _savedStyles = [],
+    // when ScrollTrigger.saveStyles() is called, the inline styles are recorded in this Array in a sequential format like [element, cssText, gsCache, media]. This keeps it very memory-efficient and fast to iterate through.
+_revertRecorded = function _revertRecorded(media) {
+  for (var i = 0; i < _savedStyles.length; i += 4) {
+    if (!media || _savedStyles[i + 3] === media) {
+      _savedStyles[i].style.cssText = _savedStyles[i + 1];
+      _savedStyles[i + 2].uncache = 1;
+    }
+  }
+},
+    _revertAll = function _revertAll(kill, media) {
+  var trigger;
+
+  for (_i = 0; _i < _triggers.length; _i++) {
+    trigger = _triggers[_i];
+
+    if (!media || trigger.media === media) {
+      if (kill) {
+        trigger.kill(1);
+      } else {
+        trigger.scroll.rec || (trigger.scroll.rec = trigger.scroll()); // record the scroll positions so that in each refresh() we can ensure that it doesn't shift. Remember, pinning can make things change around, especially if the same element is pinned multiple times. If one was already recorded, don't re-record because unpinning may have occurred and made it shorter.
+
+        trigger.revert();
+      }
+    }
+  }
+
+  _revertRecorded(media);
+
+  media || _dispatch("revert");
+},
+    _refreshAll = function _refreshAll(force, skipRevert) {
+  if (_lastScrollTime && !force) {
+    _addListener(ScrollTrigger, "scrollEnd", _softRefresh);
+
+    return;
+  }
+
+  var refreshInits = _dispatch("refreshInit");
+
+  _sort && ScrollTrigger.sort();
+  skipRevert || _revertAll();
+
+  for (_i = 0; _i < _triggers.length; _i++) {
+    _triggers[_i].refresh();
+  }
+
+  refreshInits.forEach(function (result) {
+    return result && result.render && result.render(-1);
+  }); // if the onRefreshInit() returns an animation (typically a gsap.set()), revert it. This makes it easy to put things in a certain spot before refreshing for measurement purposes, and then put things back.
+
+  _i = _triggers.length;
+
+  while (_i--) {
+    _triggers[_i].scroll.rec = 0;
+  }
+
+  _resizeDelay.pause();
+
+  _dispatch("refresh");
+},
+    _lastScroll = 0,
+    _direction = 1,
+    _updateAll = function _updateAll() {
+  var l = _triggers.length,
+      time = _getTime(),
+      recordVelocity = time - _time1 >= 50,
+      scroll = l && _triggers[0].scroll();
+
+  _direction = _lastScroll > scroll ? -1 : 1;
+  _lastScroll = scroll;
+
+  if (recordVelocity) {
+    if (_lastScrollTime && !_pointerIsDown && time - _lastScrollTime > 200) {
+      _lastScrollTime = 0;
+
+      _dispatch("scrollEnd");
+    }
+
+    _time2 = _time1;
+    _time1 = time;
+  }
+
+  if (_direction < 0) {
+    _i = l;
+
+    while (_i--) {
+      _triggers[_i] && _triggers[_i].update(0, recordVelocity);
+    }
+
+    _direction = 1;
+  } else {
+    for (_i = 0; _i < l; _i++) {
+      _triggers[_i] && _triggers[_i].update(0, recordVelocity);
+    }
+  }
+
+  _request = 0;
+},
+    _propNamesToCopy = [_left, _top, _bottom, _right, _margin + _Bottom, _margin + _Right, _margin + _Top, _margin + _Left, "display", "flexShrink", "float", "zIndex"],
+    _stateProps = _propNamesToCopy.concat([_width, _height, "boxSizing", "max" + _Width, "max" + _Height, "position", _margin, _padding, _padding + _Top, _padding + _Right, _padding + _Bottom, _padding + _Left]),
+    _swapPinOut = function _swapPinOut(pin, spacer, state) {
+  _setState(state);
+
+  if (pin.parentNode === spacer) {
+    var parent = spacer.parentNode;
+
+    if (parent) {
+      parent.insertBefore(pin, spacer);
+      parent.removeChild(spacer);
+    }
+  }
+},
+    _swapPinIn = function _swapPinIn(pin, spacer, cs, spacerState) {
+  if (pin.parentNode !== spacer) {
+    var i = _propNamesToCopy.length,
+        spacerStyle = spacer.style,
+        pinStyle = pin.style,
+        p;
+
+    while (i--) {
+      p = _propNamesToCopy[i];
+      spacerStyle[p] = cs[p];
+    }
+
+    spacerStyle.position = cs.position === "absolute" ? "absolute" : "relative";
+    cs.display === "inline" && (spacerStyle.display = "inline-block");
+    pinStyle[_bottom] = pinStyle[_right] = "auto";
+    spacerStyle.overflow = "visible";
+    spacerStyle.boxSizing = "border-box";
+    spacerStyle[_width] = _getSize(pin, _horizontal) + _px;
+    spacerStyle[_height] = _getSize(pin, _vertical) + _px;
+    spacerStyle[_padding] = pinStyle[_margin] = pinStyle[_top] = pinStyle[_left] = "0";
+
+    _setState(spacerState);
+
+    pinStyle[_width] = pinStyle["max" + _Width] = cs[_width];
+    pinStyle[_height] = pinStyle["max" + _Height] = cs[_height];
+    pinStyle[_padding] = cs[_padding];
+    pin.parentNode.insertBefore(spacer, pin);
+    spacer.appendChild(pin);
+  }
+},
+    _capsExp = /([A-Z])/g,
+    _setState = function _setState(state) {
+  if (state) {
+    var style = state.t.style,
+        l = state.length,
+        i = 0,
+        p,
+        value;
+    (state.t._gsap || gsap.core.getCache(state.t)).uncache = 1; // otherwise transforms may be off
+
+    for (; i < l; i += 2) {
+      value = state[i + 1];
+      p = state[i];
+
+      if (value) {
+        style[p] = value;
+      } else if (style[p]) {
+        style.removeProperty(p.replace(_capsExp, "-$1").toLowerCase());
+      }
+    }
+  }
+},
+    _getState = function _getState(element) {
+  // returns an Array with alternating values like [property, value, property, value] and a "t" property pointing to the target (element). Makes it fast and cheap.
+  var l = _stateProps.length,
+      style = element.style,
+      state = [],
+      i = 0;
+
+  for (; i < l; i++) {
+    state.push(_stateProps[i], style[_stateProps[i]]);
+  }
+
+  state.t = element;
+  return state;
+},
+    _copyState = function _copyState(state, override, omitOffsets) {
+  var result = [],
+      l = state.length,
+      i = omitOffsets ? 8 : 0,
+      // skip top, left, right, bottom if omitOffsets is true
+  p;
+
+  for (; i < l; i += 2) {
+    p = state[i];
+    result.push(p, p in override ? override[p] : state[i + 1]);
+  }
+
+  result.t = state.t;
+  return result;
+},
+    _winOffsets = {
+  left: 0,
+  top: 0
+},
+    _parsePosition = function _parsePosition(value, trigger, scrollerSize, direction, scroll, marker, markerScroller, self, scrollerBounds, borderWidth, useFixedPosition, scrollerMax) {
+  _isFunction(value) && (value = value(self));
+
+  if (_isString(value) && value.substr(0, 3) === "max") {
+    value = scrollerMax + (value.charAt(4) === "=" ? _offsetToPx("0" + value.substr(3), scrollerSize) : 0);
+  }
+
+  if (!_isNumber(value)) {
+    _isFunction(trigger) && (trigger = trigger(self));
+
+    var element = _toArray(trigger)[0] || _body,
+        bounds = _getBounds(element) || {},
+        offsets = value.split(" "),
+        localOffset,
+        globalOffset,
+        display;
+
+    if ((!bounds || !bounds.left && !bounds.top) && _getComputedStyle(element).display === "none") {
+      // if display is "none", it won't report getBoundingClientRect() properly
+      display = element.style.display;
+      element.style.display = "block";
+      bounds = _getBounds(element);
+      display ? element.style.display = display : element.style.removeProperty("display");
+    }
+
+    localOffset = _offsetToPx(offsets[0], bounds[direction.d]);
+    globalOffset = _offsetToPx(offsets[1] || "0", scrollerSize);
+    value = bounds[direction.p] - scrollerBounds[direction.p] - borderWidth + localOffset + scroll - globalOffset;
+    markerScroller && _positionMarker(markerScroller, globalOffset, direction, scrollerSize - globalOffset < 20 || markerScroller._isStart && globalOffset > 20);
+    scrollerSize -= scrollerSize - globalOffset; // adjust for the marker
+  } else if (markerScroller) {
+    _positionMarker(markerScroller, scrollerSize, direction, true);
+  }
+
+  if (marker) {
+    var position = value + scrollerSize,
+        isStart = marker._isStart;
+    scrollerMax = "scroll" + direction.d2;
+
+    _positionMarker(marker, position, direction, isStart && position > 20 || !isStart && (useFixedPosition ? Math.max(_body[scrollerMax], _docEl[scrollerMax]) : marker.parentNode[scrollerMax]) <= position + 1);
+
+    if (useFixedPosition) {
+      scrollerBounds = _getBounds(markerScroller);
+      useFixedPosition && (marker.style[direction.op.p] = scrollerBounds[direction.op.p] - direction.op.m - marker._offset + _px);
+    }
+  }
+
+  return Math.round(value);
+},
+    _prefixExp = /(?:webkit|moz|length|cssText|inset)/i,
+    _reparent = function _reparent(element, parent, top, left) {
+  if (element.parentNode !== parent) {
+    var style = element.style,
+        p,
+        cs;
+
+    if (parent === _body) {
+      element._stOrig = style.cssText; // record original inline styles so we can revert them later
+
+      cs = _getComputedStyle(element);
+
+      for (p in cs) {
+        // must copy all relevant styles to ensure that nothing changes visually when we reparent to the <body>. Skip the vendor prefixed ones.
+        if (!+p && !_prefixExp.test(p) && cs[p] && typeof style[p] === "string" && p !== "0") {
+          style[p] = cs[p];
+        }
+      }
+
+      style.top = top;
+      style.left = left;
+    } else {
+      style.cssText = element._stOrig;
+    }
+
+    gsap.core.getCache(element).uncache = 1;
+    parent.appendChild(element);
+  }
+},
+    // returns a function that can be used to tween the scroll position in the direction provided, and when doing so it'll add a .tween property to the FUNCTION itself, and remove it when the tween completes or gets killed. This gives us a way to have multiple ScrollTriggers use a central function for any given scroller and see if there's a scroll tween running (which would affect if/how things get updated)
+_getTweenCreator = function _getTweenCreator(scroller, direction) {
+  var getScroll = _getScrollFunc(scroller, direction),
+      prop = "_scroll" + direction.p2,
+      // add a tweenable property to the scroller that's a getter/setter function, like _scrollTop or _scrollLeft. This way, if someone does gsap.killTweensOf(scroller) it'll kill the scroll tween.
+  lastScroll1,
+      lastScroll2,
+      getTween = function getTween(scrollTo, vars, initialValue, change1, change2) {
+    var tween = getTween.tween,
+        onComplete = vars.onComplete,
+        modifiers = {};
+    tween && tween.kill();
+    lastScroll1 = Math.round(initialValue);
+    vars[prop] = scrollTo;
+    vars.modifiers = modifiers;
+
+    modifiers[prop] = function (value) {
+      value = Math.round(getScroll()); // round because in some [very uncommon] Windows environments, it can get reported with decimals even though it was set without.
+
+      if (value !== lastScroll1 && value !== lastScroll2 && Math.abs(value - lastScroll1) > 2) {
+        // if the user scrolls, kill the tween. iOS Safari intermittently misreports the scroll position, it may be the most recently-set one or the one before that! When Safari is zoomed (CMD-+), it often misreports as 1 pixel off too! So if we set the scroll position to 125, for example, it'll actually report it as 124.
+        tween.kill();
+        getTween.tween = 0;
+      } else {
+        value = initialValue + change1 * tween.ratio + change2 * tween.ratio * tween.ratio;
+      }
+
+      lastScroll2 = lastScroll1;
+      return lastScroll1 = Math.round(value);
+    };
+
+    vars.onComplete = function () {
+      getTween.tween = 0;
+      onComplete && onComplete.call(tween);
+    };
+
+    tween = getTween.tween = gsap.to(scroller, vars);
+    return tween;
+  };
+
+  scroller[prop] = getScroll;
+  scroller.addEventListener("mousewheel", function () {
+    return getTween.tween && getTween.tween.kill() && (getTween.tween = 0);
+  }); // Windows machines handle mousewheel scrolling in chunks (like "3 lines per scroll") meaning the typical strategy for cancelling the scroll isn't as sensitive. It's much more likely to match one of the previous 2 scroll event positions. So we kill any snapping as soon as there's a mousewheel event.
+
+  return getTween;
+};
+
+_horizontal.op = _vertical;
+
+var ScrollTrigger = /*#__PURE__*/function () {
+  function ScrollTrigger(vars, animation) {
+    _coreInitted || ScrollTrigger.register(gsap) || console.warn("Please gsap.registerPlugin(ScrollTrigger)");
+    this.init(vars, animation);
+  }
+
+  var _proto = ScrollTrigger.prototype;
+
+  _proto.init = function init(vars, animation) {
+    this.progress = this.start = 0;
+    this.vars && this.kill(1); // in case it's being initted again
+
+    if (!_enabled) {
+      this.update = this.refresh = this.kill = _passThrough;
+      return;
+    }
+
+    vars = _setDefaults(_isString(vars) || _isNumber(vars) || vars.nodeType ? {
+      trigger: vars
+    } : vars, _defaults);
+
+    var direction = vars.horizontal ? _horizontal : _vertical,
+        _vars = vars,
+        onUpdate = _vars.onUpdate,
+        toggleClass = _vars.toggleClass,
+        id = _vars.id,
+        onToggle = _vars.onToggle,
+        onRefresh = _vars.onRefresh,
+        scrub = _vars.scrub,
+        trigger = _vars.trigger,
+        pin = _vars.pin,
+        pinSpacing = _vars.pinSpacing,
+        invalidateOnRefresh = _vars.invalidateOnRefresh,
+        anticipatePin = _vars.anticipatePin,
+        onScrubComplete = _vars.onScrubComplete,
+        onSnapComplete = _vars.onSnapComplete,
+        once = _vars.once,
+        snap = _vars.snap,
+        pinReparent = _vars.pinReparent,
+        isToggle = !scrub && scrub !== 0,
+        scroller = _toArray(vars.scroller || _win)[0],
+        scrollerCache = gsap.core.getCache(scroller),
+        isViewport = _isViewport(scroller),
+        useFixedPosition = "pinType" in vars ? vars.pinType === "fixed" : isViewport || _getProxyProp(scroller, "pinType") === "fixed",
+        callbacks = [vars.onEnter, vars.onLeave, vars.onEnterBack, vars.onLeaveBack],
+        toggleActions = isToggle && vars.toggleActions.split(" "),
+        markers = "markers" in vars ? vars.markers : _defaults.markers,
+        borderWidth = isViewport ? 0 : parseFloat(_getComputedStyle(scroller)["border" + direction.p2 + _Width]) || 0,
+        self = this,
+        onRefreshInit = vars.onRefreshInit && function () {
+      return vars.onRefreshInit(self);
+    },
+        getScrollerSize = _getSizeFunc(scroller, isViewport, direction),
+        getScrollerOffsets = _getOffsetsFunc(scroller, isViewport),
+        tweenTo,
+        pinCache,
+        snapFunc,
+        isReverted,
+        scroll1,
+        scroll2,
+        start,
+        end,
+        markerStart,
+        markerEnd,
+        markerStartTrigger,
+        markerEndTrigger,
+        markerVars,
+        change,
+        pinOriginalState,
+        pinActiveState,
+        pinState,
+        spacer,
+        offset,
+        pinGetter,
+        pinSetter,
+        pinStart,
+        pinChange,
+        spacingStart,
+        spacerState,
+        markerStartSetter,
+        markerEndSetter,
+        cs,
+        snap1,
+        snap2,
+        scrubTween,
+        scrubSmooth,
+        snapDurClamp,
+        snapDelayedCall,
+        prevProgress,
+        prevScroll,
+        prevAnimProgress;
+
+    self.media = _creatingMedia;
+    anticipatePin *= 45;
+
+    _triggers.push(self);
+
+    self.scroller = scroller;
+    self.scroll = _getScrollFunc(scroller, direction);
+    scroll1 = self.scroll();
+    self.vars = vars;
+    animation = animation || vars.animation;
+    "refreshPriority" in vars && (_sort = 1);
+    scrollerCache.tweenScroll = scrollerCache.tweenScroll || {
+      top: _getTweenCreator(scroller, _vertical),
+      left: _getTweenCreator(scroller, _horizontal)
+    };
+    self.tweenTo = tweenTo = scrollerCache.tweenScroll[direction.p];
+
+    if (animation) {
+      animation.vars.lazy = false;
+      animation._initted || animation.vars.immediateRender !== false && vars.immediateRender !== false && animation.render(0, true, true);
+      self.animation = animation.pause();
+      animation.scrollTrigger = self;
+      scrubSmooth = _isNumber(scrub) && scrub;
+      scrubSmooth && (scrubTween = gsap.to(animation, {
+        ease: "power3",
+        duration: scrubSmooth,
+        onComplete: function onComplete() {
+          return onScrubComplete && onScrubComplete(self);
+        }
+      }));
+      snap1 = 0;
+      id || (id = animation.vars.id);
+    }
+
+    if (snap) {
+      _isObject(snap) || (snap = {
+        snapTo: snap
+      });
+      "scrollBehavior" in _body.style && gsap.set(isViewport ? [_body, _docEl] : scroller, {
+        scrollBehavior: "auto"
+      }); // smooth scrolling doesn't work with snap.
+
+      snapFunc = _isFunction(snap.snapTo) ? snap.snapTo : snap.snapTo === "labels" ? _getClosestLabel(animation) : snap.snapTo === "labelsDirectional" ? _getLabelAtDirection(animation) : gsap.utils.snap(snap.snapTo);
+      snapDurClamp = snap.duration || {
+        min: 0.1,
+        max: 2
+      };
+      snapDurClamp = _isObject(snapDurClamp) ? _clamp(snapDurClamp.min, snapDurClamp.max) : _clamp(snapDurClamp, snapDurClamp);
+      snapDelayedCall = gsap.delayedCall(snap.delay || scrubSmooth / 2 || 0.1, function () {
+        if (Math.abs(self.getVelocity()) < 10 && !_pointerIsDown) {
+          var totalProgress = animation && !isToggle ? animation.totalProgress() : self.progress,
+              velocity = (totalProgress - snap2) / (_getTime() - _time2) * 1000 || 0,
+              change1 = _abs(velocity / 2) * velocity / 0.185,
+              naturalEnd = totalProgress + change1,
+              endValue = _clamp(0, 1, snapFunc(naturalEnd, self)),
+              scroll = self.scroll(),
+              endScroll = Math.round(start + endValue * change),
+              tween = tweenTo.tween;
+
+          if (scroll <= end && scroll >= start && endScroll !== scroll) {
+            if (tween && !tween._initted && tween.data <= Math.abs(endScroll - scroll)) {
+              // there's an overlapping snap! So we must figure out which one is closer and let that tween live.
+              return;
+            }
+
+            tweenTo(endScroll, {
+              duration: snapDurClamp(_abs(Math.max(_abs(naturalEnd - totalProgress), _abs(endValue - totalProgress)) * 0.185 / velocity / 0.05 || 0)),
+              ease: snap.ease || "power3",
+              data: Math.abs(endScroll - scroll),
+              // record the distance so that if another snap tween occurs (conflict) we can prioritize the closest snap.
+              onComplete: function onComplete() {
+                snap1 = snap2 = animation && !isToggle ? animation.totalProgress() : self.progress;
+                onSnapComplete && onSnapComplete(self);
+              }
+            }, scroll, change1 * change, endScroll - scroll - change1 * change);
+          }
+        } else if (self.isActive) {
+          snapDelayedCall.restart(true);
+        }
+      }).pause();
+    }
+
+    id && (_ids[id] = self);
+    trigger = self.trigger = _toArray(trigger || pin)[0];
+    pin = pin === true ? trigger : _toArray(pin)[0];
+    _isString(toggleClass) && (toggleClass = {
+      targets: trigger,
+      className: toggleClass
+    });
+
+    if (pin) {
+      pinSpacing === false || pinSpacing === _margin || (pinSpacing = !pinSpacing && _getComputedStyle(pin.parentNode).display === "flex" ? false : _padding); // if the parent is display: flex, don't apply pinSpacing by default.
+
+      self.pin = pin;
+      vars.force3D !== false && gsap.set(pin, {
+        force3D: true
+      });
+      pinCache = gsap.core.getCache(pin);
+
+      if (!pinCache.spacer) {
+        // record the spacer and pinOriginalState on the cache in case someone tries pinning the same element with MULTIPLE ScrollTriggers - we don't want to have multiple spacers or record the "original" pin state after it has already been affected by another ScrollTrigger.
+        pinCache.spacer = spacer = _doc.createElement("div");
+        spacer.setAttribute("class", "pin-spacer" + (id ? " pin-spacer-" + id : ""));
+        pinCache.pinState = pinOriginalState = _getState(pin);
+      } else {
+        pinOriginalState = pinCache.pinState;
+      }
+
+      self.spacer = spacer = pinCache.spacer;
+      cs = _getComputedStyle(pin);
+      spacingStart = cs[pinSpacing + direction.os2];
+      pinGetter = gsap.getProperty(pin);
+      pinSetter = gsap.quickSetter(pin, direction.a, _px); // pin.firstChild && !_maxScroll(pin, direction) && (pin.style.overflow = "hidden"); // protects from collapsing margins, but can have unintended consequences as demonstrated here: https://codepen.io/GreenSock/pen/1e42c7a73bfa409d2cf1e184e7a4248d so it was removed in favor of just telling people to set up their CSS to avoid the collapsing margins (overflow: hidden | auto is just one option. Another is border-top: 1px solid transparent).
+
+      _swapPinIn(pin, spacer, cs);
+
+      pinState = _getState(pin);
+    }
+
+    if (markers) {
+      markerVars = _isObject(markers) ? _setDefaults(markers, _markerDefaults) : _markerDefaults;
+      markerStartTrigger = _createMarker("scroller-start", id, scroller, direction, markerVars, 0);
+      markerEndTrigger = _createMarker("scroller-end", id, scroller, direction, markerVars, 0, markerStartTrigger);
+      offset = markerStartTrigger["offset" + direction.op.d2];
+      markerStart = _createMarker("start", id, scroller, direction, markerVars, offset);
+      markerEnd = _createMarker("end", id, scroller, direction, markerVars, offset);
+
+      if (!useFixedPosition) {
+        _makePositionable(isViewport ? _body : scroller);
+
+        gsap.set([markerStartTrigger, markerEndTrigger], {
+          force3D: true
+        });
+        markerStartSetter = gsap.quickSetter(markerStartTrigger, direction.a, _px);
+        markerEndSetter = gsap.quickSetter(markerEndTrigger, direction.a, _px);
+      }
+    }
+
+    self.revert = function (revert) {
+      var r = revert !== false || !self.enabled,
+          prevRefreshing = _refreshing;
+
+      if (r !== isReverted) {
+        if (r) {
+          prevScroll = Math.max(self.scroll(), self.scroll.rec || 0); // record the scroll so we can revert later (repositioning/pinning things can affect scroll position). In the static refresh() method, we first record all the scroll positions as a reference.
+
+          prevProgress = self.progress;
+          prevAnimProgress = animation && animation.progress();
+        }
+
+        markerStart && [markerStart, markerEnd, markerStartTrigger, markerEndTrigger].forEach(function (m) {
+          return m.style.display = r ? "none" : "block";
+        });
+        r && (_refreshing = 1);
+        self.update(r); // make sure the pin is back in its original position so that all the measurements are correct.
+
+        _refreshing = prevRefreshing;
+        pin && (r ? _swapPinOut(pin, spacer, pinOriginalState) : (!pinReparent || !self.isActive) && _swapPinIn(pin, spacer, _getComputedStyle(pin), spacerState));
+        isReverted = r;
+      }
+    };
+
+    self.refresh = function (soft) {
+      if (_refreshing || !self.enabled) {
+        return;
+      }
+
+      if (pin && soft && _lastScrollTime) {
+        _addListener(ScrollTrigger, "scrollEnd", _softRefresh);
+
+        return;
+      }
+
+      _refreshing = 1;
+      scrubTween && scrubTween.pause();
+      invalidateOnRefresh && animation && animation.progress(0).invalidate();
+      isReverted || self.revert();
+
+      var size = getScrollerSize(),
+          scrollerBounds = getScrollerOffsets(),
+          max = _maxScroll(scroller, direction),
+          offset = 0,
+          otherPinOffset = 0,
+          parsedEnd = vars.end,
+          parsedEndTrigger = vars.endTrigger || trigger,
+          parsedStart = vars.start || (vars.start === 0 || !trigger ? 0 : pin ? "0 0" : "0 100%"),
+          triggerIndex = trigger && Math.max(0, _triggers.indexOf(self)) || 0,
+          i = triggerIndex,
+          cs,
+          bounds,
+          scroll,
+          isVertical,
+          override,
+          curTrigger,
+          curPin,
+          oppositeScroll,
+          initted;
+
+      while (i--) {
+        // user might try to pin the same element more than once, so we must find any prior triggers with the same pin, revert them, and determine how long they're pinning so that we can offset things appropriately. Make sure we revert from last to first so that things "rewind" properly.
+        curPin = _triggers[i].pin;
+        curPin && (curPin === trigger || curPin === pin) && _triggers[i].revert();
+      }
+
+      start = _parsePosition(parsedStart, trigger, size, direction, self.scroll(), markerStart, markerStartTrigger, self, scrollerBounds, borderWidth, useFixedPosition, max) || (pin ? -0.001 : 0);
+      _isFunction(parsedEnd) && (parsedEnd = parsedEnd(self));
+
+      if (_isString(parsedEnd) && !parsedEnd.indexOf("+=")) {
+        if (~parsedEnd.indexOf(" ")) {
+          parsedEnd = (_isString(parsedStart) ? parsedStart.split(" ")[0] : "") + parsedEnd;
+        } else {
+          offset = _offsetToPx(parsedEnd.substr(2), size);
+          parsedEnd = _isString(parsedStart) ? parsedStart : start + offset; // _parsePosition won't factor in the offset if the start is a number, so do it here.
+
+          parsedEndTrigger = trigger;
+        }
+      }
+
+      end = Math.max(start, _parsePosition(parsedEnd || (parsedEndTrigger ? "100% 0" : max), parsedEndTrigger, size, direction, self.scroll() + offset, markerEnd, markerEndTrigger, self, scrollerBounds, borderWidth, useFixedPosition, max)) || -0.001;
+      change = end - start || (start -= 0.01) && 0.001;
+      offset = 0;
+      i = triggerIndex;
+
+      while (i--) {
+        curTrigger = _triggers[i];
+        curPin = curTrigger.pin;
+
+        if (curPin && curTrigger.start - curTrigger._pinPush < start) {
+          cs = curTrigger.end - curTrigger.start;
+          curPin === trigger && (offset += cs);
+          curPin === pin && (otherPinOffset += cs);
+        }
+      }
+
+      start += offset;
+      end += offset;
+      self._pinPush = otherPinOffset;
+
+      if (markerStart && offset) {
+        // offset the markers if necessary
+        cs = {};
+        cs[direction.a] = "+=" + offset;
+        gsap.set([markerStart, markerEnd], cs);
+      }
+
+      if (pin) {
+        cs = _getComputedStyle(pin);
+        isVertical = direction === _vertical;
+        scroll = self.scroll(); // recalculate because the triggers can affect the scroll
+
+        pinStart = parseFloat(pinGetter(direction.a)) + otherPinOffset;
+        !max && end > 1 && ((isViewport ? _body : scroller).style["overflow-" + direction.a] = "scroll"); // makes sure the scroller has a scrollbar, otherwise if something has width: 100%, for example, it would be too big (exclude the scrollbar). See https://greensock.com/forums/topic/25182-scrolltrigger-width-of-page-increase-where-markers-are-set-to-false/
+
+        _swapPinIn(pin, spacer, cs);
+
+        pinState = _getState(pin); // transforms will interfere with the top/left/right/bottom placement, so remove them temporarily. getBoundingClientRect() factors in transforms.
+
+        bounds = _getBounds(pin, true);
+        oppositeScroll = useFixedPosition && _getScrollFunc(scroller, isVertical ? _horizontal : _vertical)();
+
+        if (pinSpacing) {
+          spacerState = [pinSpacing + direction.os2, change + otherPinOffset + _px];
+          spacerState.t = spacer;
+          i = pinSpacing === _padding ? _getSize(pin, direction) + change + otherPinOffset : 0;
+          i && spacerState.push(direction.d, i + _px); // for box-sizing: border-box (must include padding).
+
+          _setState(spacerState);
+
+          useFixedPosition && self.scroll(prevScroll);
+        }
+
+        if (useFixedPosition) {
+          override = {
+            top: bounds.top + (isVertical ? scroll - start : oppositeScroll) + _px,
+            left: bounds.left + (isVertical ? oppositeScroll : scroll - start) + _px,
+            boxSizing: "border-box",
+            position: "fixed"
+          };
+          override[_width] = override["max" + _Width] = Math.ceil(bounds.width) + _px;
+          override[_height] = override["max" + _Height] = Math.ceil(bounds.height) + _px;
+          override[_margin] = override[_margin + _Top] = override[_margin + _Right] = override[_margin + _Bottom] = override[_margin + _Left] = "0";
+          override[_padding] = cs[_padding];
+          override[_padding + _Top] = cs[_padding + _Top];
+          override[_padding + _Right] = cs[_padding + _Right];
+          override[_padding + _Bottom] = cs[_padding + _Bottom];
+          override[_padding + _Left] = cs[_padding + _Left];
+          pinActiveState = _copyState(pinOriginalState, override, pinReparent);
+        }
+
+        if (animation) {
+          // the animation might be affecting the transform, so we must jump to the end, check the value, and compensate accordingly. Otherwise, when it becomes unpinned, the pinSetter() will get set to a value that doesn't include whatever the animation did.
+          initted = animation._initted; // if not, we must invalidate() after this step, otherwise it could lock in starting values prematurely.
+
+          _suppressOverwrites(1);
+
+          animation.progress(1, true);
+          pinChange = pinGetter(direction.a) - pinStart + change + otherPinOffset;
+          change !== pinChange && pinActiveState.splice(pinActiveState.length - 2, 2); // transform is the last property/value set in the state Array. Since the animation is controlling that, we should omit it.
+
+          animation.progress(0, true);
+          initted || animation.invalidate();
+
+          _suppressOverwrites(0);
+        } else {
+          pinChange = change;
+        }
+      } else if (trigger && self.scroll()) {
+        // it may be INSIDE a pinned element, so walk up the tree and look for any elements with _pinOffset to compensate because anything with pinSpacing that's already scrolled would throw off the measurements in getBoundingClientRect()
+        bounds = trigger.parentNode;
+
+        while (bounds && bounds !== _body) {
+          if (bounds._pinOffset) {
+            start -= bounds._pinOffset;
+            end -= bounds._pinOffset;
+          }
+
+          bounds = bounds.parentNode;
+        }
+      }
+
+      for (i = 0; i < triggerIndex; i++) {
+        // make sure we revert from first to last to make sure things reach their end state properly
+        curTrigger = _triggers[i].pin;
+        curTrigger && (curTrigger === trigger || curTrigger === pin) && _triggers[i].revert(false);
+      }
+
+      self.start = start;
+      self.end = end;
+      scroll1 = scroll2 = self.scroll(); // reset velocity
+
+      scroll1 < prevScroll && self.scroll(prevScroll);
+      self.revert(false);
+      _refreshing = 0;
+      animation && isToggle && animation._initted && animation.progress(prevAnimProgress, true).render(animation.time(), true, true); // must force a re-render because if saveStyles() was used on the target(s), the styles could have been wiped out during the refresh().
+
+      if (prevProgress !== self.progress) {
+        // ensures that the direction is set properly (when refreshing, progress is set back to 0 initially, then back again to wherever it needs to be) and that callbacks are triggered.
+        scrubTween && animation.totalProgress(prevProgress, true); // to avoid issues where animation callbacks like onStart aren't triggered.
+
+        self.progress = prevProgress;
+        self.update();
+      }
+
+      pin && pinSpacing && (spacer._pinOffset = Math.round(self.progress * pinChange));
+      onRefresh && onRefresh(self);
+    };
+
+    self.getVelocity = function () {
+      return (self.scroll() - scroll2) / (_getTime() - _time2) * 1000 || 0;
+    };
+
+    self.update = function (reset, recordVelocity) {
+      var scroll = self.scroll(),
+          p = reset ? 0 : (scroll - start) / change,
+          clipped = p < 0 ? 0 : p > 1 ? 1 : p || 0,
+          prevProgress = self.progress,
+          isActive,
+          wasActive,
+          toggleState,
+          action,
+          stateChanged,
+          toggled;
+
+      if (recordVelocity) {
+        scroll2 = scroll1;
+        scroll1 = scroll;
+
+        if (snap) {
+          snap2 = snap1;
+          snap1 = animation && !isToggle ? animation.totalProgress() : clipped;
+        }
+      } // anticipate the pinning a few ticks ahead of time based on velocity to avoid a visual glitch due to the fact that most browsers do scrolling on a separate thread (not synced with requestAnimationFrame).
+
+
+      anticipatePin && !clipped && pin && !_refreshing && !_startup && _lastScrollTime && start < scroll + (scroll - scroll2) / (_getTime() - _time2) * anticipatePin && (clipped = 0.0001);
+
+      if (clipped !== prevProgress && self.enabled) {
+        isActive = self.isActive = !!clipped && clipped < 1;
+        wasActive = !!prevProgress && prevProgress < 1;
+        toggled = isActive !== wasActive;
+        stateChanged = toggled || !!clipped !== !!prevProgress; // could go from start all the way to end, thus it didn't toggle but it did change state in a sense (may need to fire a callback)
+
+        self.direction = clipped > prevProgress ? 1 : -1;
+        self.progress = clipped;
+
+        if (!isToggle) {
+          if (scrubTween && !_refreshing && !_startup) {
+            scrubTween.vars.totalProgress = clipped;
+            scrubTween.invalidate().restart();
+          } else if (animation) {
+            animation.totalProgress(clipped, !!_refreshing);
+          }
+        }
+
+        if (pin) {
+          reset && pinSpacing && (spacer.style[pinSpacing + direction.os2] = spacingStart);
+
+          if (!useFixedPosition) {
+            pinSetter(pinStart + pinChange * clipped);
+          } else if (stateChanged) {
+            action = !reset && clipped > prevProgress && end + 1 > scroll && scroll + 1 >= _maxScroll(scroller, direction); // if it's at the VERY end of the page, don't switch away from position: fixed because it's pointless and it could cause a brief flash when the user scrolls back up (when it gets pinned again)
+
+            if (pinReparent) {
+              if (!reset && (isActive || action)) {
+                var bounds = _getBounds(pin, true),
+                    _offset = scroll - start;
+
+                _reparent(pin, _body, bounds.top + (direction === _vertical ? _offset : 0) + _px, bounds.left + (direction === _vertical ? 0 : _offset) + _px);
+              } else {
+                _reparent(pin, spacer);
+              }
+            }
+
+            _setState(isActive || action ? pinActiveState : pinState);
+
+            pinChange !== change && clipped < 1 && isActive || pinSetter(pinStart + (clipped === 1 && !action ? pinChange : 0));
+          }
+        }
+
+        snap && !tweenTo.tween && !_refreshing && !_startup && snapDelayedCall.restart(true);
+        toggleClass && (toggled || once && clipped && (clipped < 1 || !_limitCallbacks)) && _toArray(toggleClass.targets).forEach(function (el) {
+          return el.classList[isActive || once ? "add" : "remove"](toggleClass.className);
+        }); // classes could affect positioning, so do it even if reset or refreshing is true.
+
+        onUpdate && !isToggle && !reset && onUpdate(self);
+
+        if (stateChanged && !_refreshing) {
+          toggleState = clipped && !prevProgress ? 0 : clipped === 1 ? 1 : prevProgress === 1 ? 2 : 3; // 0 = enter, 1 = leave, 2 = enterBack, 3 = leaveBack (we prioritize the FIRST encounter, thus if you scroll really fast past the onEnter and onLeave in one tick, it'd prioritize onEnter.
+
+          if (isToggle) {
+            action = !toggled && toggleActions[toggleState + 1] !== "none" && toggleActions[toggleState + 1] || toggleActions[toggleState]; // if it didn't toggle, that means it shot right past and since we prioritize the "enter" action, we should switch to the "leave" in this case (but only if one is defined)
+
+            if (animation && (action === "complete" || action === "reset" || action in animation)) {
+              if (action === "complete") {
+                animation.pause().totalProgress(1);
+              } else if (action === "reset") {
+                animation.restart(true).pause();
+              } else {
+                animation[action]();
+              }
+            }
+
+            onUpdate && onUpdate(self);
+          }
+
+          if (toggled || !_limitCallbacks) {
+            // on startup, the page could be scrolled and we don't want to fire callbacks that didn't toggle. For example onEnter shouldn't fire if the ScrollTrigger isn't actually entered.
+            onToggle && toggled && onToggle(self);
+            callbacks[toggleState] && callbacks[toggleState](self);
+            once && (clipped === 1 ? self.kill(false, 1) : callbacks[toggleState] = 0); // a callback shouldn't be called again if once is true.
+
+            if (!toggled) {
+              // it's possible to go completely past, like from before the start to after the end (or vice-versa) in which case BOTH callbacks should be fired in that order
+              toggleState = clipped === 1 ? 1 : 3;
+              callbacks[toggleState] && callbacks[toggleState](self);
+            }
+          }
+        } else if (isToggle && onUpdate && !_refreshing) {
+          onUpdate(self);
+        }
+      } // update absolutely-positioned markers (only if the scroller isn't the viewport)
+
+
+      if (markerEndSetter) {
+        markerStartSetter(scroll + (markerStartTrigger._isFlipped ? 1 : 0));
+        markerEndSetter(scroll);
+      }
+    };
+
+    self.enable = function () {
+      if (!self.enabled) {
+        self.enabled = true;
+
+        _addListener(scroller, "resize", _onResize);
+
+        _addListener(scroller, "scroll", _onScroll);
+
+        onRefreshInit && _addListener(ScrollTrigger, "refreshInit", onRefreshInit);
+        !animation || !animation.add ? self.refresh() : gsap.delayedCall(0.01, function () {
+          return start || end || self.refresh();
+        }) && (change = 0.01) && (start = end = 0); // if the animation is a timeline, it may not have been populated yet, so it wouldn't render at the proper place on the first refresh(), thus we should schedule one for the next tick.
+      }
+    };
+
+    self.disable = function (reset, allowAnimation) {
+      if (self.enabled) {
+        reset !== false && self.revert();
+        self.enabled = self.isActive = false;
+        allowAnimation || scrubTween && scrubTween.pause();
+        prevScroll = 0;
+        pinCache && (pinCache.uncache = 1);
+        onRefreshInit && _removeListener(ScrollTrigger, "refreshInit", onRefreshInit);
+
+        if (snapDelayedCall) {
+          snapDelayedCall.pause();
+          tweenTo.tween && tweenTo.tween.kill() && (tweenTo.tween = 0);
+        }
+
+        if (!isViewport) {
+          var i = _triggers.length;
+
+          while (i--) {
+            if (_triggers[i].scroller === scroller && _triggers[i] !== self) {
+              return; //don't remove the listeners if there are still other triggers referencing it.
+            }
+          }
+
+          _removeListener(scroller, "resize", _onResize);
+
+          _removeListener(scroller, "scroll", _onScroll);
+        }
+      }
+    };
+
+    self.kill = function (revert, allowAnimation) {
+      self.disable(revert, allowAnimation);
+      id && delete _ids[id];
+
+      var i = _triggers.indexOf(self);
+
+      _triggers.splice(i, 1);
+
+      i === _i && _direction > 0 && _i--; // if we're in the middle of a refresh() or update(), splicing would cause skips in the index, so adjust...
+
+      if (animation) {
+        animation.scrollTrigger = null;
+        revert && animation.render(-1);
+        allowAnimation || animation.kill();
+      }
+
+      markerStart && [markerStart, markerEnd, markerStartTrigger, markerEndTrigger].forEach(function (m) {
+        return m.parentNode.removeChild(m);
+      });
+
+      if (pin) {
+        pinCache && (pinCache.uncache = 1);
+        i = 0;
+
+        _triggers.forEach(function (t) {
+          return t.pin === pin && i++;
+        });
+
+        i || (pinCache.spacer = 0); // if there aren't any more ScrollTriggers with the same pin, remove the spacer, otherwise it could be contaminated with old/stale values if the user re-creates a ScrollTrigger for the same element.
+      }
+    };
+
+    self.enable();
+  };
+
+  ScrollTrigger.register = function register(core) {
+    if (!_coreInitted) {
+      gsap = core || _getGSAP();
+
+      if (_windowExists() && window.document) {
+        _win = window;
+        _doc = document;
+        _docEl = _doc.documentElement;
+        _body = _doc.body;
+      }
+
+      if (gsap) {
+        _toArray = gsap.utils.toArray;
+        _clamp = gsap.utils.clamp;
+        _suppressOverwrites = gsap.core.suppressOverwrites || _passThrough;
+        gsap.core.globals("ScrollTrigger", ScrollTrigger); // must register the global manually because in Internet Explorer, functions (classes) don't have a "name" property.
+
+        if (_body) {
+          _raf = _win.requestAnimationFrame || function (f) {
+            return setTimeout(f, 16);
+          };
+
+          _addListener(_win, "mousewheel", _onScroll);
+
+          _root = [_win, _doc, _docEl, _body];
+
+          _addListener(_doc, "scroll", _onScroll); // some browsers (like Chrome), the window stops dispatching scroll events on the window if you scroll really fast, but it's consistent on the document!
+
+
+          var bodyStyle = _body.style,
+              border = bodyStyle.borderTop,
+              bounds;
+          bodyStyle.borderTop = "1px solid #000"; // works around an issue where a margin of a child element could throw off the bounds of the _body, making it seem like there's a margin when there actually isn't. The border ensures that the bounds are accurate.
+
+          bounds = _getBounds(_body);
+          _vertical.m = Math.round(bounds.top + _vertical.sc()) || 0; // accommodate the offset of the <body> caused by margins and/or padding
+
+          _horizontal.m = Math.round(bounds.left + _horizontal.sc()) || 0;
+          border ? bodyStyle.borderTop = border : bodyStyle.removeProperty("border-top");
+          _syncInterval = setInterval(_sync, 200);
+          gsap.delayedCall(0.5, function () {
+            return _startup = 0;
+          });
+
+          _addListener(_doc, "touchcancel", _passThrough); // some older Android devices intermittently stop dispatching "touchmove" events if we don't listen for "touchcancel" on the document.
+
+
+          _addListener(_body, "touchstart", _passThrough); //works around Safari bug: https://greensock.com/forums/topic/21450-draggable-in-iframe-on-mobile-is-buggy/
+
+
+          _multiListener(_addListener, _doc, "pointerdown,touchstart,mousedown", function () {
+            return _pointerIsDown = 1;
+          });
+
+          _multiListener(_addListener, _doc, "pointerup,touchend,mouseup", function () {
+            return _pointerIsDown = 0;
+          });
+
+          _transformProp = gsap.utils.checkPrefix("transform");
+
+          _stateProps.push(_transformProp);
+
+          _coreInitted = _getTime();
+          _resizeDelay = gsap.delayedCall(0.2, _refreshAll).pause();
+          _autoRefresh = [_doc, "visibilitychange", function () {
+            var w = _win.innerWidth,
+                h = _win.innerHeight;
+
+            if (_doc.hidden) {
+              _prevWidth = w;
+              _prevHeight = h;
+            } else if (_prevWidth !== w || _prevHeight !== h) {
+              _onResize();
+            }
+          }, _doc, "DOMContentLoaded", _refreshAll, _win, "load", function () {
+            return _lastScrollTime || _refreshAll();
+          }, _win, "resize", _onResize];
+
+          _iterateAutoRefresh(_addListener);
+        }
+      }
+    }
+
+    return _coreInitted;
+  };
+
+  ScrollTrigger.defaults = function defaults(config) {
+    for (var p in config) {
+      _defaults[p] = config[p];
+    }
+  };
+
+  ScrollTrigger.kill = function kill() {
+    _enabled = 0;
+
+    _triggers.slice(0).forEach(function (trigger) {
+      return trigger.kill(1);
+    });
+  };
+
+  ScrollTrigger.config = function config(vars) {
+    "limitCallbacks" in vars && (_limitCallbacks = !!vars.limitCallbacks);
+    var ms = vars.syncInterval;
+    ms && clearInterval(_syncInterval) || (_syncInterval = ms) && setInterval(_sync, ms);
+
+    if ("autoRefreshEvents" in vars) {
+      _iterateAutoRefresh(_removeListener) || _iterateAutoRefresh(_addListener, vars.autoRefreshEvents || "none");
+      _ignoreResize = (vars.autoRefreshEvents + "").indexOf("resize") === -1;
+    }
+  };
+
+  ScrollTrigger.scrollerProxy = function scrollerProxy(target, vars) {
+    var t = _toArray(target)[0],
+        i = _scrollers.indexOf(t),
+        isViewport = _isViewport(t);
+
+    if (~i) {
+      _scrollers.splice(i, isViewport ? 6 : 2);
+    }
+
+    isViewport ? _proxies.unshift(_win, vars, _body, vars, _docEl, vars) : _proxies.unshift(t, vars);
+  };
+
+  ScrollTrigger.matchMedia = function matchMedia(vars) {
+    // _media is populated in the following order: mediaQueryString, onMatch, onUnmatch, isMatched. So if there are two media queries, the Array would have a length of 8
+    var mq, p, i, func, result;
+
+    for (p in vars) {
+      i = _media.indexOf(p);
+      func = vars[p];
+      _creatingMedia = p;
+
+      if (p === "all") {
+        func();
+      } else {
+        mq = _win.matchMedia(p);
+
+        if (mq) {
+          mq.matches && (result = func());
+
+          if (~i) {
+            _media[i + 1] = _combineFunc(_media[i + 1], func);
+            _media[i + 2] = _combineFunc(_media[i + 2], result);
+          } else {
+            i = _media.length;
+
+            _media.push(p, func, result);
+
+            mq.addListener ? mq.addListener(_onMediaChange) : mq.addEventListener("change", _onMediaChange);
+          }
+
+          _media[i + 3] = mq.matches;
+        }
+      }
+
+      _creatingMedia = 0;
+    }
+
+    return _media;
+  };
+
+  ScrollTrigger.clearMatchMedia = function clearMatchMedia(query) {
+    query || (_media.length = 0);
+    query = _media.indexOf(query);
+    query >= 0 && _media.splice(query, 4);
+  };
+
+  return ScrollTrigger;
+}();
+
+exports.default = exports.ScrollTrigger = ScrollTrigger;
+ScrollTrigger.version = "3.6.0";
+
+ScrollTrigger.saveStyles = function (targets) {
+  return targets ? _toArray(targets).forEach(function (target) {
+    if (target && target.style) {
+      var i = _savedStyles.indexOf(target);
+
+      i >= 0 && _savedStyles.splice(i, 4);
+
+      _savedStyles.push(target, target.style.cssText, gsap.core.getCache(target), _creatingMedia);
+    }
+  }) : _savedStyles;
+};
+
+ScrollTrigger.revert = function (soft, media) {
+  return _revertAll(!soft, media);
+};
+
+ScrollTrigger.create = function (vars, animation) {
+  return new ScrollTrigger(vars, animation);
+};
+
+ScrollTrigger.refresh = function (safe) {
+  return safe ? _onResize() : _refreshAll(true);
+};
+
+ScrollTrigger.update = _updateAll;
+
+ScrollTrigger.maxScroll = function (element, horizontal) {
+  return _maxScroll(element, horizontal ? _horizontal : _vertical);
+};
+
+ScrollTrigger.getScrollFunc = function (element, horizontal) {
+  return _getScrollFunc(_toArray(element)[0], horizontal ? _horizontal : _vertical);
+};
+
+ScrollTrigger.getById = function (id) {
+  return _ids[id];
+};
+
+ScrollTrigger.getAll = function () {
+  return _triggers.slice(0);
+};
+
+ScrollTrigger.isScrolling = function () {
+  return !!_lastScrollTime;
+};
+
+ScrollTrigger.addEventListener = function (type, callback) {
+  var a = _listeners[type] || (_listeners[type] = []);
+  ~a.indexOf(callback) || a.push(callback);
+};
+
+ScrollTrigger.removeEventListener = function (type, callback) {
+  var a = _listeners[type],
+      i = a && a.indexOf(callback);
+  i >= 0 && a.splice(i, 1);
+};
+
+ScrollTrigger.batch = function (targets, vars) {
+  var result = [],
+      varsCopy = {},
+      interval = vars.interval || 0.016,
+      batchMax = vars.batchMax || 1e9,
+      proxyCallback = function proxyCallback(type, callback) {
+    var elements = [],
+        triggers = [],
+        delay = gsap.delayedCall(interval, function () {
+      callback(elements, triggers);
+      elements = [];
+      triggers = [];
+    }).pause();
+    return function (self) {
+      elements.length || delay.restart(true);
+      elements.push(self.trigger);
+      triggers.push(self);
+      batchMax <= elements.length && delay.progress(1);
+    };
+  },
+      p;
+
+  for (p in vars) {
+    varsCopy[p] = p.substr(0, 2) === "on" && _isFunction(vars[p]) && p !== "onRefreshInit" ? proxyCallback(p, vars[p]) : vars[p];
+  }
+
+  if (_isFunction(batchMax)) {
+    batchMax = batchMax();
+
+    _addListener(ScrollTrigger, "refresh", function () {
+      return batchMax = vars.batchMax();
+    });
+  }
+
+  _toArray(targets).forEach(function (target) {
+    var config = {};
+
+    for (p in varsCopy) {
+      config[p] = varsCopy[p];
+    }
+
+    config.trigger = target;
+    result.push(ScrollTrigger.create(config));
+  });
+
+  return result;
+};
+
+ScrollTrigger.sort = function (func) {
+  return _triggers.sort(func || function (a, b) {
+    return (a.vars.refreshPriority || 0) * -1e6 + a.start - (b.start + (b.vars.refreshPriority || 0) * -1e6);
+  });
+};
+
+_getGSAP() && gsap.registerPlugin(ScrollTrigger);
+},{}],"views/partials/splash.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litHtml = require("lit-html");
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["\n\n  <div class=\"app-splash\">\n    <div class=\"inner\">\n      <img class=\"app-logo\" src=\"/images/OP_logo_2012_medium.png\" />\n      <sl-spinner style=\"font-size: 2em;\"></sl-spinner>\n    </div>\n  </div>\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+const splash = (0, _litHtml.html)(_templateObject());
+var _default = splash;
+exports.default = _default;
+},{"lit-html":"../node_modules/lit-html/lit-html.js"}],"Toast.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7765,6 +9441,10 @@ exports.default = void 0;
 
 var _litHtml = require("lit-html");
 
+var _gsap = _interopRequireDefault(require("gsap"));
+
+var _ScrollTrigger = require("gsap/ScrollTrigger");
+
 var _App = _interopRequireDefault(require("./../../App"));
 
 var _Router = require("./../../Router");
@@ -7782,7 +9462,7 @@ var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\">\n      \n        <section class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button>\n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n\n        </section>\n  \n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n\n      \n      </div>\n\n      \n      \n     \n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header  title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\" >\n      \n        <section id=\"top\" class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button> \n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n\n        </section>\n\n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7793,7 +9473,24 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+_gsap.default.registerPlugin(_ScrollTrigger.ScrollTrigger);
+
 class HomeView {
+  constructor() {
+    _defineProperty(this, "animateButton", e => {
+      e.preventDefault; //reset animation
+
+      e.target.classList.remove('animate');
+      e.target.classList.add('animate');
+      setTimeout(function () {
+        e.target.classList.remove('animate');
+        (0, _Router.gotoRoute)('/game');
+      }, 700);
+    });
+  }
+
   init() {
     console.log('HomeView.init');
     console.log(localStorage);
@@ -7804,9 +9501,69 @@ class HomeView {
 
     _Utils.default.pageIntroAnim();
 
+    this.homePageAnim();
+    this.animateButton();
     this.products = null; //localStorage.removeItem('cartProducts');
 
     this.getProducts();
+  }
+
+  homePageAnim() {
+    // gsap.fromTo(pageContent, {opacity: 0, y: -12}, {opacity: 1, y: 0, ease: 'power2.out', duration: 0.3})
+    const homeTl = _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: ".page-content",
+        start: "top center"
+      }
+    }).from('.rooted h1', {
+      y: 50,
+      opacity: 0,
+      duration: 1
+    }).from('.rooted p', {
+      y: 50,
+      opacity: 0,
+      duration: 1
+    }, "-=0.5").from('.rooted button', {
+      x: 50,
+      opacity: 0,
+      ease: "Back.easeOut",
+      duration: 0.5
+    }, "+=0.5");
+
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '.page-content .new-pig h1',
+        start: "center center",
+        scroller: '.page-content'
+      }
+    }).from('.new-pig .pink-tilted', {
+      x: -200,
+      transform: "rotate(50deg)",
+      ease: "Back.easeOut",
+      opacity: 0,
+      duration: 1
+    }).from('.new-pig .homepg-btn', {
+      y: 50,
+      opacity: 0,
+      duration: 1
+    }, "-=0.5");
+
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '.hog',
+        start: "center bottom",
+        scroller: '.page-content'
+      }
+    }).from('.pignbottles', {
+      x: 200,
+      ease: "Back.easeOut",
+      opacity: 0,
+      duration: 1
+    }).from('.hog .homepg-btn', {
+      y: 50,
+      opacity: 0,
+      duration: 1
+    }, "-=0.5");
   }
 
   async getTeam() {
@@ -7829,37 +9586,31 @@ class HomeView {
     } catch (err) {
       _Toast.default.show(err, 'error');
     }
-  } // method from lit library which allows us 
-  // to render html from within js to a container
+  } //bubbly button animation
+  //code from https://codepen.io/nourabusoud/pen/ypZzMM
 
 
+  // method from lit library which allows us 
+  // to render html from within js to a container //@click=${() => gotoRoute('/game')
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), () => (0, _Router.gotoRoute)('/game'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'));
+    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), this.animateButton, () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'));
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
 }
 
 var _default = new HomeView();
-/*<div class="page-content">
-<h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
-<h1>Team-Linen:</h1>
-<h2>${this.team[0].first_name}${this.team[0].last_name}${this.team[0].role}</h2>
-<h2>${this.team[1].first_name}${this.team[1].last_name}${this.team[1].role}</h2>
-<h2>${this.team[2].first_name}${this.team[2].last_name}${this.team[2].role}</h2>
-<h2>${this.team[3].first_name}${this.team[3].last_name}${this.team[3].role}</h2>
-<h2>${this.team[4].first_name}${this.team[4].last_name}${this.team[4].role}</h2>
-<h3>Button example:</h3>
-<sl-button class="anim-in" @click=${() => gotoRoute('/profile')}>View Profile</sl-button>
-<p>&nbsp;</p>
-<h3>Link example</h3>
-<a href="/profile" @click=${anchorRoute}>View Profile</a>
+/*  
+          <div class="linktop" style="width:80px; height:80px; z-index:200; position:absolute; right: 10px; bottom: 50px;">
+          <!-- this anchor brings the user back to the top of page -->
+          <a href="#top" title="Return to Top" target="_top"><img src="/images/arrow.png" width="70px" height="70px"/></a>
+          </div>
 
-</div>*/
+*/
 
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js","../../Toast":"Toast.js","./../../ProductsAPI":"ProductsAPI.js"}],"views/pages/404.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","gsap":"../node_modules/gsap/index.js","gsap/ScrollTrigger":"../node_modules/gsap/ScrollTrigger.js","./../../App":"App.js","./../../Router":"Router.js","./../../Auth":"Auth.js","./../../TeamAPI":"TeamAPI.js","./../../Utils":"Utils.js","../../Toast":"Toast.js","./../../ProductsAPI":"ProductsAPI.js"}],"views/pages/404.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8038,6 +9789,10 @@ exports.default = void 0;
 
 var _litHtml = require("lit-html");
 
+var _gsap = _interopRequireDefault(require("gsap"));
+
+var _ScrollTrigger = require("gsap/ScrollTrigger");
+
 var _App = _interopRequireDefault(require("../../App"));
 
 var _Router = require("../../Router");
@@ -8049,7 +9804,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About Us\" products=", "></va-app-header>\n      <div class=\"page-content about-page\">  \n        \n        <!-- Swiper -->\n        <div class=\"swiper-container mySwiper\">\n          <div class=\"swiper-wrapper\">\n            <div class=\"swiper-slide slide1\"><img src='/images/carousel1.jpg'></div>\n            <div class=\"swiper-slide slide2\"><img src='/images/carousel2.jpg'></div>\n            <div class=\"swiper-slide slide3\"><img src='/images/carousel3.jpg'></div>\n            <div class=\"swiper-slide slide4\"><img src='/images/carousel4.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel5.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel6.jpg'></div>\n          </div>\n          <!-- If we need pagination -->\n          <div class=\"swiper-pagination\"></div>\n          <!-- navigation buttons -->\n          <div class=\"swiper-button-prev\"></div>\n          <div class=\"swiper-button-next\"></div>\n        </div>\n\n        <img class='pigsteps ps1' src='/images/pigsteps.png'>\n        <img class='pigsteps ps2' src='/images/pigsteps.png'>\n        <img class='pigsteps ps3' src='/images/pigsteps.png'>\n\n        <h4>Crack a cold one n' let us tell you a story</h4>\n\n        <div class='about-us-flex'>\n          <div class='info info-left '>\n            <h2>The Beginning</h2>\n            <p>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>\n            Orchard Pig was born out of a shared passion for great food and Old Spots, <br>\n            the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>\n          </div>\n          <img  class='img-right' src='/images/op-founder.png'> \n        </div>\n        \n        <div class='about-us-flex'>\n          <img class='img-left' src='/images/op-sail.png'> \n          <div class='info info-right'>\n            <h2>Our Beliefs</h2>\n            <p>\u2018Stay rooted\u2019 is what we say to the modern world. <br><br>\n            Appreciating simplicity (and cider), <br><br>\n            We like to poke fun at the world and ourselves\u2026 and each other. \n            </p>\n          </div>\n        </div>\n        <div class='about-us-flex'>\n          <div class='info info-left'>\n            <h2>Our Home</h2>\n            <p>Orchard Pig's home in West Bradley Orchards is well and truly rooted in Somerset\u2019s cider-making history, dating back to the 1850s and W.T. Allen\u2019s, award winning Somerset cider.</p>\n          </div>\n          <img class='img-right' src='/images/op-pub.png'> \n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"About Us\" products=", "></va-app-header>\n      <div class=\"page-content about-page\">  \n        \n        <!-- Swiper -->\n        <div class=\"swiper-container mySwiper\">\n          <div class=\"swiper-wrapper\">\n            <div class=\"swiper-slide slide1\"><img src='/images/carousel1.jpg'></div>\n            <div class=\"swiper-slide slide2\"><img src='/images/carousel2.jpg'></div>\n            <div class=\"swiper-slide slide3\"><img src='/images/carousel3.jpg'></div>\n            <div class=\"swiper-slide slide4\"><img src='/images/carousel4.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel5.jpg'></div>\n            <div class=\"swiper-slide slide5\"><img src='/images/carousel6.jpg'></div>\n          </div>\n          <!-- If we need pagination -->\n          <div class=\"swiper-pagination\"></div>\n          <!-- navigation buttons -->\n          <div class=\"swiper-button-prev\"></div>\n          <div class=\"swiper-button-next\"></div>\n        </div>\n\n        <img class='pigsteps ps1' src='/images/pigsteps.png'>\n        <img class='pigsteps ps2' src='/images/pigsteps.png'>\n        <img class='pigsteps ps3' src='/images/pigsteps.png'>\n        <img class='pigsteps ps4' src='/images/pigsteps.png'>\n\n        <h4>Crack a cold one n' let us tell you a story</h4>\n\n        <div class='about-us-flex'>\n          <div class='info info-left thebeg'>\n            <h2 id='flex-beg'>The Beginning</h2>\n            <p class='beg'>It all started just outside Glastonbury when Andrew and Neil were enjoying their home-made cider and hog roast with friends...<br><br>\n            Orchard Pig was born out of a shared passion for great food and Old Spots, <br>\n            the original orchard pigs, and an accidental discovery that West Country apples make the best tasting cider...  </p>\n          </div>\n          <img data-aos=\"fade-left\"  class='img-right' id='flex-beg-img' src='/images/op-founder.png'> \n        </div>\n        \n        <div class='about-us-flex'>\n          <img class='img-left' id='flex-belief-img' src='/images/op-sail.png'> \n          <div class='info info-right'>\n            <h2 id='flex-belief'>Our Beliefs</h2>\n            <p>\u2018Stay rooted\u2019 is what we say to the modern world. <br><br>\n            Appreciating simplicity (and cider), <br><br>\n            We like to poke fun at the world and ourselves\u2026 and each other. \n            </p>\n          </div>\n        </div>\n        <div class='about-us-flex'>\n          <div class='info info-left ourhome'>\n            <h2 id='flex-home'>Our Home</h2>\n            <p>Orchard Pig's home in West Bradley Orchards is well and truly rooted in Somerset\u2019s cider-making history, dating back to the 1850s and W.T. Allen\u2019s, award winning Somerset cider.</p>\n          </div>\n          <img class='img-right' id='flex-home-img' src='/images/op-pub.png'> \n\n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8060,6 +9815,8 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+_gsap.default.registerPlugin(_ScrollTrigger.ScrollTrigger);
+
 class AboutView {
   init() {
     document.title = 'About';
@@ -8067,13 +9824,18 @@ class AboutView {
     this.swiperInit();
 
     _Utils.default.pageIntroAnim();
+
+    this.aboutPageAnim();
   }
 
   swiperInit() {
     var swiper = new Swiper(".mySwiper", {
       loop: true,
-      slidesPerView: 'auto',
-      loopedSlides: 5,
+      slidesPerView: 1,
+      autoplay: {
+        delay: 3000
+      },
+      spaceBetween: 50,
       pagination: {
         el: '.swiper-pagination'
       },
@@ -8084,6 +9846,53 @@ class AboutView {
       }
     });
     this.render();
+  }
+
+  aboutPageAnim() {
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '#flex-beg',
+        start: "top bottom",
+        scroller: '.page-content',
+        scrub: true
+      }
+    }).from('#flex-beg-img', {
+      x: 150,
+      y: 50,
+      ease: "easeInOut",
+      opacity: 0,
+      duration: 0.5
+    });
+
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '#flex-belief',
+        start: "top bottom",
+        scroller: '.page-content',
+        scrub: true
+      }
+    }).from('#flex-belief-img', {
+      x: -150,
+      y: 50,
+      ease: "easeInOut",
+      opacity: 0,
+      duration: 0.5
+    });
+
+    _gsap.default.timeline({
+      scrollTrigger: {
+        trigger: '#flex-home',
+        start: "top bottom",
+        scroller: '.page-content',
+        scrub: true
+      }
+    }).from('#flex-home-img', {
+      x: 150,
+      y: 50,
+      ease: "easeInOut",
+      opacity: 0,
+      duration: 0.5
+    });
   } // method from lit library which allows us 
   // to render html from within js to a container
 
@@ -8101,7 +9910,7 @@ class AboutView {
 var _default = new AboutView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"CartAPI.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","gsap":"../node_modules/gsap/index.js","gsap/ScrollTrigger":"../node_modules/gsap/ScrollTrigger.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"CartAPI.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8125,8 +9934,10 @@ class CartAPI {
   }
 
   async addProduct(item, name, quantity, sku, price) {
-    let qty = quantity.toFixed(2);
-    let totalCost = price.$numberDecimal * qty;
+    let productExists = false;
+    let qty = quantity.toFixed(2); // let totalCost = price.$numberDecimal * qty 
+
+    let totalCost = price * qty;
     totalCost = parseFloat(totalCost.toFixed(2));
     let product = {
       item: item,
@@ -8146,19 +9957,108 @@ class CartAPI {
 
     if (localStorage.getItem('cartProducts')) {
       this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    } //second array for order products to match the data types for order
+
+
+    if (localStorage.getItem('orderProducts')) {
+      this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
+    } //if the cart is empty simply add the product to the cart
+
+
+    if (this.cartProducts.length == 0) {
+      this.cartProducts.push(product);
+      this.orderProducts.push(orderProduct);
+      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+      localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+      console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+      return;
     }
 
-    this.cartProducts.push(product);
-    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts)); //second array for order products to match the data types for order
+    console.log("out of function 1!"); // if we already have products in the cart, we need to check if the product exists 
+    // and if yes, update the quantity (instead of adding a new product)
+
+    this.cartProducts.forEach(product => {
+      if (product.name == name) {
+        console.log("product already in cart");
+        productExists = true;
+        product.quantity += quantity;
+        product.totalCost = product.price * quantity;
+      }
+    });
+
+    if (productExists != true) {
+      console.log("product not in cart");
+      this.cartProducts.push(product);
+      this.orderProducts.push(orderProduct);
+    }
+
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+    localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+  }
+
+  updateQty(name, qty) {
+    let updatedProduct;
+
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    } //second array for order products to match the data types for order
+
 
     if (localStorage.getItem('orderProducts')) {
       this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
     }
 
-    this.orderProducts.push(orderProduct);
+    this.cartProducts.forEach(product => {
+      if (product.name == name) {
+        updatedProduct = product;
+        product.quantity = qty;
+        product.totalCost = product.price * qty;
+        localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+      }
+    });
+    return updatedProduct;
+  }
+
+  removeItem(name) {
+    if (localStorage.getItem('cartProducts')) {
+      this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+    } //second array for order products to match the data types for order
+
+
+    if (localStorage.getItem('orderProducts')) {
+      this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
+    }
+
+    this.cartProducts.forEach(product => {
+      if (product.name == name) {
+        const index = this.cartProducts.indexOf(product);
+
+        if (index > -1) {
+          this.cartProducts.splice(index, 1);
+          this.orderProducts.splice(index, 1);
+        }
+
+        localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+        console.log("removed item from cart: " + name);
+        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+      }
+    });
+  }
+
+  emptyCart() {
+    this.cartProducts.length = 0;
+    this.orderProducts.length = 0;
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
     localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+    console.log("cart emptied");
     console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
   }
+
+  removeFromCart(name) {}
 
   async getProducts() {
     return JSON.stringify(localStorage.getItem('cartProducts')); // if(localStorage.getItem('cartProducts')){
@@ -8176,7 +10076,7 @@ class CartAPI {
 
     this.cartProducts.forEach(product => {
       //total += parseInt(product.price.$numberDecimal)
-      total += parseInt(product.price);
+      total += parseInt(product.totalCost);
     });
 
     if (localStorage.getItem('shippingFee')) {
@@ -8225,28 +10125,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class OrderAPI {
   constructor() {
-    this.customerId = "611817197c96fc001680133c"; //placeholder customer id
-
-    this.orderId = "61183d1fff4dad9c013b2a9c"; //placeholder order id
-
+    this.customerId = null;
+    this.orderId = null;
     this.userData = {};
     this.orderData = {};
     this.shipping = {};
     this.payment = {};
+    this.cardNum;
   } // create a guest user
 
 
-  async createGuest(firstName, lastName, email, phoneNumber) {
+  async createGuest(guest) {
+    //need to convert 'guest' formData object to a JSON object
+    var object = {};
+    guest.forEach((value, key) => object[key] = value);
+    this.usershippingData = object;
+    console.log("formData convert to userData", this.usershippingData); //create user object
+
     this.userData = {
-      "firstName": firstName,
-      "lastName": lastName,
-      "email": email,
-      "phoneNumber": phoneNumber
+      "firstName": this.usershippingData.firstName,
+      "lastName": this.usershippingData.lastName,
+      "email": this.usershippingData.email,
+      "phoneNumber": this.usershippingData.phoneNumber
     };
+    console.log("GUEST USER : ", this.userData); //create shipping object
+
+    this.shipping = {
+      "address": this.usershippingData.address,
+      "address2": this.usershippingData.address2,
+      "shipping": this.usershippingData.shipping
+    };
+    console.log("SHIPPING : ", this.shipping);
     const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
       method: 'POST',
-      // headers: { "Content-Type" : "application/json" },
-      body: this.userData
+      body: guest
     }); // if response not ok
 
     if (!response.ok) {
@@ -8258,30 +10170,59 @@ class OrderAPI {
 
 
       if (typeof fail == 'function') fail();
-    } /// sign up success - show toast and redirect to sign in page
+    }
 
-
-    console.log("response: " + JSON.stringify(response.json())); //get the customerID via the response and save to use for the order and payment
+    const data = await response.json();
+    this.customerId = data._id;
+    console.log("Response customerId: ", this.customerId);
+    this.userEmail = guest.get('email');
+    console.log("userEmail", this.userEmail);
+    console.log("retreivedUserData: ", data);
   } // place an order
 
 
   async placeOrder() {
-    let products = localStorage.getItem('cartProducts');
-    products = JSON.parse(products); // place the order
+    var products = localStorage.getItem('cartProducts');
+    products = JSON.parse(products); // for (let i=0;i<products.length;i++){
+    //   products[i] = JSON.parse(products[i]);
+    // }
+
+    const totalCost = _CartAPI.default.getTotal();
+
+    var shippingFormData = new FormData();
+
+    for (var key in this.shipping) {
+      shippingFormData.append(key, this.shipping[key]);
+    }
+
+    var productsFormData = new FormData();
+
+    for (var key in products) {
+      productsFormData.append(key, products[key]);
+    } // place the order
+
 
     this.orderData = {
       "currency": "BPS",
       "customerId": this.customerId,
       "paymentStatus": "unpaid",
       "status": "awaitingShipment",
-      "totalCost": _CartAPI.default.getTotal(),
-      "products": products,
+      "totalCost": totalCost,
+      //"products": products,
       "shipping": this.shipping
-    };
+    }; //convert to a FormData object
+
+    var orderFormData = new FormData();
+
+    for (var key in this.orderData) {
+      orderFormData.append(key, this.orderData[key]);
+    }
+
     console.log("Order DATA : ", this.orderData);
     const response = await fetch("".concat(_App.default.apiBase, "/order"), {
       method: 'POST',
-      body: this.orderData
+      // body: this.orderData
+      body: orderFormData
     }); // if response not ok
 
     if (!response.ok) {
@@ -8289,13 +10230,18 @@ class OrderAPI {
       const err = await response.json();
       if (err) console.log(err); // show error      
 
-      _Toast.default.show("Problem getting user: ".concat(response.status)); // run fail() functon if set
+      _Toast.default.show("Problem submitting Order: ".concat(response.status)); // run fail() functon if set
 
 
       if (typeof fail == 'function') fail();
     } //get hold of the order ID in order to make a payment
-    // await this.makePayment()
 
+
+    const data = await response.json();
+    console.log("Order Response : ", data);
+    this.orderId = data._id;
+    console.log("OrderId : ", this.orderId);
+    await this.makePayment();
   } // post a payment
 
 
@@ -8308,19 +10254,28 @@ class OrderAPI {
       "paymentType": "credit",
       "amount": _CartAPI.default.getTotal(),
       "card": this.payment
-    };
+    }; //convert to a FormData object
+
+    var paymentFormData = new FormData();
+
+    for (var key in paymentData) {
+      paymentFormData.append(key, paymentData[key]);
+    }
+
+    console.log("paymentFORMDATA: ", paymentFormData);
+    console.log("paymentDATA: ", paymentData);
     const response = await fetch("".concat(_App.default.apiBase, "/payment"), {
       method: 'POST',
-      //headers: { "Authorization": `Bearer ${localStorage.accessToken}`},  //  , "Access-Control-Allow-Origin":"*" , "Content-Type" : "application/json" 
-      body: paymentData
+      body: paymentFormData
     }); // if response not ok
 
     if (!response.ok) {
       // console log error
       const err = await response.json();
       if (err) console.log(err); // show error      
+      //Toast.show(`Problem getting user: ${response.status}`)
 
-      _Toast.default.show("Problem getting user: ".concat(response.status)); // run fail() functon if set
+      _Toast.default.show("Your Payment has been Succesful!: ".concat(response.status)); // run fail() functon if set
 
 
       if (typeof fail == 'function') fail();
@@ -8336,10 +10291,22 @@ class OrderAPI {
       "shippingOption": shipping
     };
     console.log("shipping: " + JSON.stringify(this.shipping));
+    console.log("shipping: " + this.shipping);
   } // save payment info to object for further use
 
 
-  paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified) {
+  paymentInfo(paymentFormData) {
+    let cardNum = paymentFormData.get('cardNumber');
+    let lastFourDigits = cardNum.slice(cardNum.length - 4);
+    paymentFormData.set('cardNumber', lastFourDigits);
+    let expMonth = paymentFormData.get('expMonth');
+    let expYear = paymentFormData.get('expYear');
+    let cvvVerified = true; //need to convert 'payment' formData object to a JSON object
+    // var object = {}
+    // paymentFormData.forEach((value, key) => object[key] = value);
+    // this.payment = object;
+
+    this.payment = JSON.stringify(this.payment);
     this.payment = {
       "brand": "visa",
       "lastFourDigits": lastFourDigits,
@@ -8347,7 +10314,7 @@ class OrderAPI {
       "expYear": expYear,
       "cvvVerified": cvvVerified
     };
-    console.log("payment: " + JSON.stringify(this.payment));
+    console.log("payment: " + this.payment);
   }
 
   getUserData() {
@@ -8424,7 +10391,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n        \n      <div class='left'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone Number\" required></sl-input>\n            </div>    \n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n      <div class='left-checkout'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"number\" label=\"Phone Number\" required></sl-input>\n            </div>    \n\n\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right-checkout'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "], ["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout1\"> \n      <div class='left-checkout'>\n        <h2>Shipping Details</h2>\n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class='name-input'>\n              <div class=\"input-group\">\n                <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input id=\"right\" name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n              </div>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"phoneNumber\" type=\"number\" label=\"Phone Number\" required></sl-input>\n            </div>    \n\n\n            <div class=\"input-group\">\n              <sl-input name=\"address\" type=\"text\" label=\"Address\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"address2\" type=\"text\" label=\"Address Line 2 (optional)\"></sl-input>\n            </div> \n            <div class=\"input-group\">\n              <sl-select name='shipping' label='Select a shipping option' required>\n                <sl-menu-item value='standard'>Standard Shipping &pound;6.00</sl-menu-item>\n                <sl-menu-item value='express'>Express Shipping &pound;12.00</sl-menu-item>\\\n              </sl-select>\n            </div>  \n            <button class=\"checkout-btn\" submit>Payment Details</button>     \n          </sl-form>\n      </div>\n\n      <div class='right-checkout'>\n        <h1>Your Basket</h1>\n          ", "\n          \n\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8447,23 +10414,20 @@ class Checkout1View {
 
   async shippingSubmitHandler(e) {
     e.preventDefault();
-    const formData = e.detail.formData;
-    let firstName = formData.get('firstName');
-    let lastName = formData.get('lastName');
-    let email = formData.get('email');
-    let phoneNumber = formData.get('phoneNumber');
+    const formData = e.detail.formData; // let firstName = formData.get('firstName')
+    // let lastName = formData.get('lastName')
+    // let email = formData.get('email')
+    // let phoneNumber = formData.get('phoneNumber')
 
     try {
-      await _OrderAPI.default.createGuest(firstName, lastName, email, phoneNumber);
+      await _OrderAPI.default.createGuest(formData);
     } catch (err) {
       console.log(err);
-    }
+    } // let address = formData.get('address')
+    // let address2 = formData.get('address2')
 
-    let address = formData.get('address');
-    let address2 = formData.get('address2');
-    let shipping = formData.get('shipping');
 
-    _OrderAPI.default.shippingInfo(address, address2, shipping);
+    let shipping = formData.get('shipping'); // OrderAPI.shippingInfo(address, address2, shipping)
 
     _CartAPI.default.setShipping(shipping);
 
@@ -8556,7 +10520,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left'>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"text\" label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expMonth' label='Select Expiry Month' required>\n                <sl-menu-item value='01'>January</sl-menu-item>\n                <sl-menu-item value='02'>February</sl-menu-item>\n                <sl-menu-item value='03'>March</sl-menu-item>\n                <sl-menu-item value='04'>April</sl-menu-item>\n                <sl-menu-item value='05'>May</sl-menu-item>\n                <sl-menu-item value='06'>June</sl-menu-item>\n                <sl-menu-item value='07'>July</sl-menu-item>\n                <sl-menu-item value='08'>August</sl-menu-item>\n                <sl-menu-item value='09'>September</sl-menu-item>\n                <sl-menu-item value='10'>October</sl-menu-item>\n                <sl-menu-item value='11'>November</sl-menu-item>\n                <sl-menu-item value='12'>December</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expYear' label='Select Expiry Year' required>\n                <sl-menu-item value='21'>2021</sl-menu-item>\n                <sl-menu-item value='22'>2022</sl-menu-item>\n                <sl-menu-item value='23'>2023</sl-menu-item>\n                <sl-menu-item value='24'>2024</sl-menu-item>\n                <sl-menu-item value='25'>2025</sl-menu-item>\n                <sl-menu-item value='26'>2026</sl-menu-item>\n                <sl-menu-item value='27'>2027</sl-menu-item>\n                <sl-menu-item value='28'>2028</sl-menu-item>\n                <sl-menu-item value='29'>2029</sl-menu-item>\n                <sl-menu-item value='30'>2030</sl-menu-item>\n                <sl-menu-item value='31'>2031</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cvv\" type=\"text\" label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left-checkout'>\n      <p class='go-back' @click=", "> < Back</p>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"number\" min=7 max=16 label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expMonth' label='Select Expiry Month' required>\n                <sl-menu-item value='01'>January</sl-menu-item>\n                <sl-menu-item value='02'>February</sl-menu-item>\n                <sl-menu-item value='03'>March</sl-menu-item>\n                <sl-menu-item value='04'>April</sl-menu-item>\n                <sl-menu-item value='05'>May</sl-menu-item>\n                <sl-menu-item value='06'>June</sl-menu-item>\n                <sl-menu-item value='07'>July</sl-menu-item>\n                <sl-menu-item value='08'>August</sl-menu-item>\n                <sl-menu-item value='09'>September</sl-menu-item>\n                <sl-menu-item value='10'>October</sl-menu-item>\n                <sl-menu-item value='11'>November</sl-menu-item>\n                <sl-menu-item value='12'>December</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expYear' label='Select Expiry Year' required>\n                <sl-menu-item value='21'>2021</sl-menu-item>\n                <sl-menu-item value='22'>2022</sl-menu-item>\n                <sl-menu-item value='23'>2023</sl-menu-item>\n                <sl-menu-item value='24'>2024</sl-menu-item>\n                <sl-menu-item value='25'>2025</sl-menu-item>\n                <sl-menu-item value='26'>2026</sl-menu-item>\n                <sl-menu-item value='27'>2027</sl-menu-item>\n                <sl-menu-item value='28'>2028</sl-menu-item>\n                <sl-menu-item value='29'>2029</sl-menu-item>\n                <sl-menu-item value='30'>2030</sl-menu-item>\n                <sl-menu-item value='31'>2031</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cvv\" type=\"number\" min=3 max=4 label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right-checkout'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8600,15 +10564,19 @@ class Checkout2View {
       cvvVerified = true;
     }
 
-    _OrderAPI.default.paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified);
+    _OrderAPI.default.paymentInfo(formData);
 
     (0, _Router.gotoRoute)('/checkout3');
+  }
+
+  continueShopping() {
+    (0, _Router.gotoRoute)('/products');
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), () => (0, _Router.gotoRoute)('/checkout1'), this.paymentSubmitHandler, this.products == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.products.map(product => (0, _litHtml.html)(_templateObject4(), product.item, product.name, product.name, product.quantity, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8677,7 +10645,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  const data = _taggedTemplateLiteral(["\n              <p>**** **** **** ", "</p>\n              <p>", "</p>\n              <p>20", "</p>"]);
+  const data = _taggedTemplateLiteral(["\n              <p><b>Credit Card :</b> **** **** **** ", "</p>\n              <p><b>Expires :</b> ", "/20", "</p>"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -8697,7 +10665,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  const data = _taggedTemplateLiteral(["\n              <p>", "</p>\n              <p>", "</p>\n              <p>", "</p>"]);
+  const data = _taggedTemplateLiteral(["\n              <p><b>Address Line 1 :</b> ", "</p>\n              <p><b>Address Line 2 :</b> ", "</p>\n              <p><b>Shipping Option :</b> ", "</p>"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -8717,7 +10685,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  const data = _taggedTemplateLiteral(["\n              <p>", "</p>\n              <p>", "</p>\n              <p>", "</p>"]);
+  const data = _taggedTemplateLiteral(["\n              <p><b>First Name :</b> ", "</p>\n              <p><b>Last Name :</b> ", "</p>\n              <p><b>Phone : </b>", "</p>"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -8737,7 +10705,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout3\">        \n      \n      <div class='left'>\n        <h1>Review Order</h1>\n        <div class='shipping-details'>\n          \t<h2>Shipping Details</h2>\n            ", "\n            \n            ", "  \n            \n            <a @click=\"", "\">Edit</a>\n        </div>\n\n        <div class='payment-details'>\n          \t<h2>Payment Details</h2>\n            ", "\n\n              <a @click=\"", "\">Edit</a>\n        </div>\n\n        <button class='checkout-btn' @click=", ">Place Order</button>\n        \n      </div>\n        \n      <div class='right'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout3\">        \n      \n      <div class='left-checkout'>\n      <p class='go-back' @click=", "> < Back</p>\n        <h1>Review Order</h1>\n        <div class='shipping-details'>\n          \t<h2>Shipping Details</h2>\n            ", "\n            \n            ", "  \n            \n            <a style=\"color:red; cursor:pointer;\" @click=\"", "\">Edit</a>\n        </div>\n\n        <div class='payment-details'>\n          \t<h2>Payment Details</h2>\n            ", "\n      \n\n              <a style=\"color:red; cursor:pointer;\" @click=\"", "\">Edit</a>\n        </div>\n\n        <button class='checkout-btn' @click=", ">Place Order</button>\n        \n      </div>\n        \n      <div class='right-checkout'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8778,8 +10746,9 @@ class Checkout3View {
       this.userData = _OrderAPI.default.getUserData();
       this.shipping = _OrderAPI.default.getShipping();
       this.payment = _OrderAPI.default.getPayment();
-      console.log("shipping: " + JSON.stringify(this.shipping));
-      console.log("payment: " + JSON.stringify(this.payment));
+      console.log("userdata checkout: " + JSON.stringify(this.userData));
+      console.log("shipping checkout: " + JSON.stringify(this.shipping));
+      console.log("payment checkout: " + JSON.stringify(this.payment));
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -8787,13 +10756,23 @@ class Checkout3View {
   }
 
   async placeOrder() {
-    await _OrderAPI.default.placeOrder();
+    try {
+      await _OrderAPI.default.placeOrder();
+
+      _Toast.default.show('Your order has been submitted. A receipt will be sent to you email');
+    } catch (err) {
+      _Toast.default.show(err, 'error');
+    }
+  }
+
+  continueShopping() {
+    (0, _Router.gotoRoute)('/products');
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.shipping == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.placeOrder, this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), () => (0, _Router.gotoRoute)('/checkout2'), this.userData == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.userData.firstName, this.userData.lastName, this.userData.phoneNumber), this.shipping == null ? (0, _litHtml.html)(_templateObject4()) : (0, _litHtml.html)(_templateObject5(), this.shipping.address, this.shipping.address2, this.shipping.shippingOption), () => (0, _Router.gotoRoute)('/checkout1'), this.payment == null ? (0, _litHtml.html)(_templateObject6()) : (0, _litHtml.html)(_templateObject7(), this.payment.lastFourDigits, this.payment.expMonth, this.payment.expYear), () => (0, _Router.gotoRoute)('/checkout2'), this.placeOrder, this.products == null ? (0, _litHtml.html)(_templateObject8()) : (0, _litHtml.html)(_templateObject9(), this.products.map(product => (0, _litHtml.html)(_templateObject10(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price))), _CartAPI.default.getShipping(), _CartAPI.default.getTotal(), this.continueShopping); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -8826,7 +10805,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class=\"age-confirm\">   \n        <div class=\"img-cont\">\n          <img class='orchard-img' src=\"images/age-check.png\">\n          <img class='logo' src='images/logo-black.png'>\n        </div>   \n        <h1> Rooted in Somerset</h1>\n        <p>You must be over 18 to enter this site</p>\n        <div class='center-btn'>\n          <button @click=", ">I am 18 or over</button>\n        </div>\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class=\"age-confirm\">   \n        <div class=\"img-cont\">\n          <img class='orchard-img' src=\"images/age-check.png\">\n          <img class='logo' src='images/logo-shape.png'>\n        </div>   \n        <h1> Rooted in Somerset</h1>\n        <p>You must be over 18 to enter this site</p>\n        <div class='center-btn'>\n          <button @click=", ">I am 18 or over</button>\n        </div>\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8865,7 +10844,68 @@ class AgeConfirmView {
 var _default = new AgeConfirmView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/contact.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"ContactAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("./App"));
+
+var _Toast = _interopRequireDefault(require("./Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class ContactAPI {
+  constructor() {//this.contactData = {}
+  } // create a guest user
+
+
+  async postMessage(contactData) {
+    //   this.contactData = {
+    //      firstName: firstName,
+    //      lastName: lastName,
+    //      email: email,
+    //      phoneNumber: phoneNumber,
+    //      subject : subject,
+    //      message : message
+    //  }
+    console.log("Message data : ", contactData);
+    const response = await fetch("".concat(_App.default.apiBase, "/message"), {
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer ".concat(localStorage.accessToken)
+      },
+      body: contactData
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // show error      
+
+      _Toast.default.show("Problem Posting Message: ".concat(response.status)); // run fail() functon if set
+
+
+      if (typeof fail == 'function') fail();
+    } /// sign up success - show toast and redirect to sign in page
+
+
+    console.log("response: " + JSON.stringify(response)); //get the customerID via the response and save to use for the order and payment
+  }
+
+  getContactData() {
+    return this.contactData;
+  }
+
+}
+
+var _default = new ContactAPI();
+
+exports.default = _default;
+},{"./App":"App.js","./Toast":"Toast.js"}],"views/pages/contact.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8883,10 +10923,14 @@ var _Auth = _interopRequireDefault(require("../../Auth"));
 
 var _Utils = _interopRequireDefault(require("../../Utils"));
 
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
+var _ContactAPI = _interopRequireDefault(require("../../ContactAPI"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Contact Us\" products=", "></va-app-header>\n\n      <div class=\"page-content contact-page\">   \n\n        <img class='pigsteps' src='/images/pigsteps.png'>\n        <h1>Get In Touch</h1> \n\n        <div class='flex'>\n\n          <div class='contact-us-form'>\n            <sl-form class=\"contact-shipping\" @sl-submit=", ">\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n                </div>\n              </div>\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone\" required></sl-input>\n                </div> \n              </div>\n              <div class=\"input-group\">\n                <sl-select name='Subject' label='Subject' required>\n                  <sl-menu-item value='order'>My Order</sl-menu-item>\n                  <sl-menu-item value='shipping'>Shipping</sl-menu-item>\n                  <sl-menu-item value='returns'>Returns</sl-menu-item>\n                  <sl-menu-item value='drinks'>Drinks</sl-menu-item>\n                  <sl-menu-item value='corp'>Corporate Events</sl-menu-item>\n                </sl-select>\n              </div>\n              <div class='input-group'>\n                <sl-textarea label=\"Message\" placeholder=\"Type your message here\"></sl-textarea>\n              </div>\n              <button class=\"submit-btn\" submit>Submit</button>     \n            </sl-form>\n          </div>\n\n          <div class='flex-column'>\n\n            <div class='right'>\n              <div class='contact-info-grid'> \n                <img src='/images/pin-white.png'>\n                <p>275 Burnfield Road, Thornliebank</p>\n                <img src='/images/phone-white.png'>\n                <p>01632 960493</p>\n                <img src='/images/email-white.png'>\n                <p>oink@orchardpig.co.uk</p>\n              </div>\n              <!-- <div class='sm-icons'> \n              <a href='https://www.facebook.com/OrchardPig'><img src='/images/facebook-white.png'></a>\n              <a href='https://www.instagram.com/theorchardpig/'><img src='/images/instagram-white.png'></a>\n              <a href='https://twitter.com/Orchardpig'><img src='/images/twitter-white.png'></a>\n              </div> -->\n            </div>\n            \n            <div class=\"mapouter\">\n              <div class=\"gmap_canvas\">\n                <iframe style=\"height:100%;width:100%;\" id=\"gmap_canvas\" src=\"https://maps.google.com/maps?q=275%20Burnfield%20Road,%20Thornliebank&t=&z=7&ie=UTF8&iwloc=&output=embed\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>\n              </div>\n            </div>\n\n          </div>\n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer> \n        \n      </div> \n          \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Contact Us\" products=", "></va-app-header>\n\n      <div class=\"page-content contact-page\">   \n\n        <img class='pigsteps' src='/images/pigsteps.png'>\n        <h1>Get In Touch</h1> \n\n        <div class='flex'>\n\n          <div class='contact-us-form'>\n            <sl-form class=\"contact-shipping\" @sl-submit=", ">\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"firstName\" type=\"text\" label=\"First Name\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"lastName\" type=\"text\" label=\"Last Name\" required></sl-input>\n                </div>\n              </div>\n              <div class='name-input'>\n                <div class=\"input-group\">\n                  <sl-input name=\"email\" type=\"email\" label=\"Email\" required></sl-input>\n                </div>\n                <div class=\"input-group\">\n                  <sl-input name=\"phoneNumber\" type=\"text\" label=\"Phone\" required></sl-input>\n                </div> \n              </div>\n              <div class=\"input-group\">\n                <sl-select name='subject' label='Subject' required>\n                  <sl-menu-item value='order'>My Order</sl-menu-item>\n                  <sl-menu-item value='shipping'>Shipping</sl-menu-item>\n                  <sl-menu-item value='returns'>Returns</sl-menu-item>\n                  <sl-menu-item value='drinks'>Drinks</sl-menu-item>\n                  <sl-menu-item value='corp'>Corporate Events</sl-menu-item>\n                </sl-select>\n              </div>\n              <div class='input-group'>\n                <sl-textarea name=\"message\" label=\"Message\" placeholder=\"Type your message here\"></sl-textarea>\n              </div>\n              <button class=\"submit-btn\" submit >Submit</button>     \n            </sl-form>\n          </div>\n\n          <div class='flex-column'>\n\n            <div class='contact-right'>\n              <div class='contact-info-grid'> \n                <img src='/images/pin-white.png'>\n                <p>275 Burnfield Road, Thornliebank</p>\n                <img src='/images/phone-white.png'>\n                <p>01632 960493</p>\n                <img src='/images/email-white.png'>\n                <p>oink@orchardpig.co.uk</p>\n              </div>\n              <!-- <div class='sm-icons'> \n              <a href='https://www.facebook.com/OrchardPig'><img src='/images/facebook-white.png'></a>\n              <a href='https://www.instagram.com/theorchardpig/'><img src='/images/instagram-white.png'></a>\n              <a href='https://twitter.com/Orchardpig'><img src='/images/twitter-white.png'></a>\n              </div> -->\n            </div>\n            \n            <div class=\"mapouter\">\n              <div class=\"gmap_canvas\">\n                <iframe style=\"height:100%;width:100%;\" id=\"gmap_canvas\" src=\"https://maps.google.com/maps?q=275%20Burnfield%20Road,%20Thornliebank&t=&z=7&ie=UTF8&iwloc=&output=embed\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>\n              </div>\n            </div>\n\n          </div>\n        </div>\n        \n        <va-app-footer margin=\"true\"></va-app-footer> \n        \n      </div> \n          \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -8900,9 +10944,26 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 class ContactView {
   init() {
     document.title = 'Contact';
-    this.render();
 
     _Utils.default.pageIntroAnim();
+
+    this.contactSubmitHandler;
+    this.render();
+  }
+
+  contactSubmitHandler(e) {
+    _Toast.default.show("Thanks for reaching out! We will respond as soon as we can.");
+
+    e.preventDefault();
+    const formData = e.detail.formData; // let firstName = formData.get('firstName')
+    // let lastName = formData.get('lastName')
+    // let email = formData.get('email')
+    // let phoneNumber = formData.get('phoneNumber')
+    // let subject = formData.get('subject')
+    // let message = formData.get('message')
+    // ContactAPI.postMessage(firstName, lastName, email, phoneNumber, subject, message)
+
+    _ContactAPI.default.postMessage(formData);
   } // method from lit library which allows us 
   // to render html from within js to a container
 
@@ -8920,7 +10981,7 @@ class ContactView {
 var _default = new ContactView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/game.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js","../../ContactAPI":"ContactAPI.js"}],"views/pages/game.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9012,7 +11073,7 @@ function _templateObject17() {
 }
 
 function _templateObject16() {
-  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <!--<button @click=", ">Buy Now</button>-->\n                </div>\n                "]);
+  const data = _taggedTemplateLiteral(["\n                <div class='product-card'>  \n                  <!-- <img @click=", " src='", "/", "' alt='", "'> -->\n                  <img id='", "' @click=", " @mouseover=", "  @mouseout=", "\n                      src='/images/", ".png' alt='", "'>\n                  <h2>", "</h2>\n                  <button class='bubble-button' @click=", " style=\"--content: 'Buy Now';\">\n                    <div class=\"left\"></div>\n                      Buy Now\n                    <div class=\"right\"></div>\n                  </button>\n                </div>\n                "]);
 
   _templateObject16 = function _templateObject16() {
     return data;
@@ -9052,7 +11113,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Shop\" products=", "></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n          </div>\n\n          <va-app-footer margin=\"true\"></va-app-footer> \n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header title=\"Shop\" products=", "></va-app-header>\n      <div class=\"page-content products\">      \n        <h1>Meet Our Pigs</h1>  \n        <img class='pigsteps pigsteps1' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps2' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps3' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps4' src='/images/pigsteps.png'>\n        <img class='pigsteps pigsteps5' src='/images/pigsteps.png'>\n        <div class='products-grid'>\n            ", "\n\n          </div>\n        <div id=\"footer-buffer\" style=\"height: 150px;\"></div>\n          <va-app-footer margin=\"false\"></va-app-footer>\n      </div>      \n    "]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -9162,7 +11223,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <style>\n        .product-dialog{\n          --width: 80vw;\n          \n        }\n        #image-bottle {\n          position: absolute;\n          left: 0px;\n          top: 150px;\n        }\n        #image-can {\n          position: absolute;\n          right: 0px;\n          top: 150px;\n        }\n        img.pp-img{\n          object-fit: cover;\n          //max-height: 60vh;\n          width: 50%;\n          max-width 100%;\n          z-index: 99;\n          transition: width 1s;\n          \n        }\n        .pp-img:hover {\n          cursor: pointer;\n          transition: width 1s;\n          max-height: 60vh;\n          z-index: 100;\n          width: 100%;\n          \n        }\n\n        img.pp-img-single{\n          max-height: 60vh;\n        }\n        .product-dialog::part(panel){\n          background-color: var(--dark-blue);\n          color:white;\n        }\n        .product-dialog::part(body){\n          display: grid;\n          padding: 50px;\n          /*background-color: var(--dark-blue);*/\n        }\n        .product-dialog::part(close-button){\n          color: white;\n          font-size: 40px;\n        }\n      \n\n        .pp-left h2{\n          font-size: 36px;\n          color: white;\n        }\n        .pp-left button {\n          color: black;\n          font-family: var(--base-font-family);\n        }\n        .pp-left button{\n          color: white;\n          background-color: var(--med-blue);\n          font-family: var(--base-font-family);\n        }\n        .pp-left button:hover {\n          color: black;\n          background-color: var(--light-blue);\n        }\n        .pp-left button:active {\n          color: black;\n          background-color: var(--light-blue);\n\n        }\n        .pp-left{\n          grid-column: 1/2;\n          position: relative;\n        }\n        \n        .pp-right h3{\n          font-size: 32px;\n          font-family :var(--base-font-family);\n          font-weight: bold;\n        }\n        .pp-right{\n          grid-column: 3/3;\n          //margin-left: 20%;\n          margin-left: 10%;\n        }\n        .pp-right-top{\n          background-color: var(--light-blue);\n          border-radius: 5px;\n          color: black;\n          padding: 15px;\n        }\n        .pp-boxes{\n          display: flex;\n          width: 80%;\n          margin: auto;\n          font-weight: bold;\n        }\n        .pp-boxes img{\n          width: 40px;\n          height: 40px;\n          transform: translateY(50%);\n        }\n        .pp-boxes p{\n          width: 50%;\n          padding: 1em;\n        }\n        .pp-boxes button{\n          background-color: var(--med-blue);\n          box-shadow: none;\n          transform: translateX(30%);\n          width: 60%;\n        }\n        .pp-boxes button:hover{\n          color: black;\n          background-color: var(--white);\n          border: 1px solid var(--med-blue);\n        }\n        .pp-right-bottom{\n          display: grid;\n          grid-template-columns: repeat(2, auto);\n          grid-row-gap: 10px;\n        }\n        .pp-right-bottom img{\n          height: 50px;\n        }\n        #desc{\n          font-weight: 300;\n        }\n      </style>\n        \n        <div class='pp-left'>\n          ", "\n          \n          <h2 id=\"productName\">", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          \n          ", "\n          ", "\n          ", "\n          \n          </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p id=\"abv\" >", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p id=\"packSizeVolume\">", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <h3 id=\"price\" >&pound;", "</h3> \n                <button @click=", ">Add to Basket +</button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p id=\"flavour\" >", "</p>\n            <img src='/images/vegan-white.png'>\n            <p id=\"dietary\" >", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n    \n        \n        <div class='pp-left'>\n          ", "\n          \n          <h2 id=\"productName\">", "</h2>\n          <!-- <img class='pp-img' src='", "/", "' alt='", "'> -->\n          <!-- pull images from frontend  -->\n          \n          ", "\n          ", "\n          ", "\n          \n        </div>\n\n        <div class='pp-right'>\n          <div class='pp-right-top'>\n              <div class='pp-boxes'>\n              <h3 id=\"price\" >&pound;", ".00</h3>\n              </div>\n              <div class='pp-boxes'>\n                <img src='/images/alcohol-black.png'>\n                <p id=\"abv\" >", " ABV</p>\n                <img src='/images/bottle-black.png'>\n                <p id=\"packSizeVolume\">", " X ", "</p>\n              </div>\n              <div class='pp-boxes'>\n                <!-- <h3>&pound;", "</h3> -->\n                <!-- <h3 id=\"price\" >&pound;", "</h3>  -->\n                <button class='bubble-button bubble-button-modal' @click=", " style=\"--content: 'Add to Basket';\">\n                  <div class=\"left\"></div>\n                    Add to Basket\n                  <div class=\"right\"></div>\n                </button>\n              </div>\n          </div>\n          <p id='desc'>", "</p>\n          <div class='pp-right-bottom'> \n            <img src='/images/tongue-white.png'>\n            <p id=\"flavour\" >", "</p>\n            <img src='/images/vegan-white.png'>\n            <p id=\"dietary\" >", "</p>\n            <img src='/images/allergies-white.png'>\n            <p>Contains Sulfur Dioxide/Sulphites</p>\n          </div>\n          ", "\n        </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -9230,7 +11291,7 @@ class ProductsView {
     } //add content
 
 
-    const dialogContent = (0, _litHtml.html)(_templateObject(), this.cans ? (0, _litHtml.html)(_templateObject2(), () => this.moreInfoBottleHandler(product), () => this.moreInfoCanHandler(product)) : (0, _litHtml.html)(_templateObject3()), product.name, _App.default.apiBase, product.image, product.name, !this.canImage ? (0, _litHtml.html)(_templateObject4(), () => this.moreInfoBottleHandler(product), product.image, product.name) : (0, _litHtml.html)(_templateObject5()), this.canImage ? (0, _litHtml.html)(_templateObject6(), () => this.moreInfoBottleHandler(product), product.image, product.name) : (0, _litHtml.html)(_templateObject7()), this.canImage ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoCanHandler(product), this.canImage, product.name) : (0, _litHtml.html)(_templateObject9()), product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, () => this.addToCart(product), product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject10(), product.allergen) : (0, _litHtml.html)(_templateObject11()));
+    const dialogContent = (0, _litHtml.html)(_templateObject(), this.cans ? (0, _litHtml.html)(_templateObject2(), () => this.moreInfoBottleHandler(product), () => this.moreInfoCanHandler(product)) : (0, _litHtml.html)(_templateObject3()), product.name, _App.default.apiBase, product.image, product.name, !this.canImage ? (0, _litHtml.html)(_templateObject4(), () => this.moreInfoBottleHandler(product), product.image, product.name) : (0, _litHtml.html)(_templateObject5()), this.canImage ? (0, _litHtml.html)(_templateObject6(), () => this.moreInfoBottleHandler(product), product.image, product.name) : (0, _litHtml.html)(_templateObject7()), this.canImage ? (0, _litHtml.html)(_templateObject8(), () => this.moreInfoCanHandler(product), this.canImage, product.name) : (0, _litHtml.html)(_templateObject9()), product.price, product.abv, product.packSize, product.containerVolume, product.price.$numberDecimal, product.price, () => this.addToCart(product), product.description, product.flavour, product.dietary, product.allergen ? (0, _litHtml.html)(_templateObject10(), product.allergen) : (0, _litHtml.html)(_templateObject11()));
     (0, _litHtml.render)(dialogContent, this.productDialog); //append to document.body
 
     document.body.append(this.productDialog); //show the dialog
@@ -9292,11 +11353,21 @@ class ProductsView {
       }
     }
   } // if the user presses 'add to cart' from product page, then qty == 1
-  // else grab the qty that the user has entered
-  // as it will be easier than havign to update the quantity when it is already in the cart
+  // they can update the qty from the cart
 
 
   addToCart(product) {
+    //if its a can
+    if (this.canInfoDisplay == true) {
+      for (var i = 0; i < this.products.length; i++) {
+        if (this.products[i].shortName === product.shortName && this.products[i].packSize === "24") {
+          // this.productDialog.remove();
+          product = this.products[i];
+        }
+      }
+    } //if its a bottle
+
+
     console.log("added to cart: " + product.name);
 
     _CartAPI.default.addProduct(product.item, product.name, 1, product.sku, product.price);
@@ -9309,7 +11380,7 @@ class ProductsView {
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject12(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject13()) : (0, _litHtml.html)(_templateObject14(), this.products.map(product => (0, _litHtml.html)(_templateObject15(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject16(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.addToCart(product)) : (0, _litHtml.html)(_templateObject17()))))); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject12(), localStorage.getItem('cartProducts'), this.products == null ? (0, _litHtml.html)(_templateObject13()) : (0, _litHtml.html)(_templateObject14(), this.products.map(product => (0, _litHtml.html)(_templateObject15(), product.containerType == "bottle" ? (0, _litHtml.html)(_templateObject16(), () => this.moreInfoHandler(product), _App.default.apiBase, product.image, product.name, product.name, () => this.moreInfoHandler(product), () => this.hoverImage(product), () => this.unhoverImage(product), product.item, product.name, product.shortName, () => this.moreInfoHandler(product)) : (0, _litHtml.html)(_templateObject17()))))); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -11220,7 +13291,10 @@ LitElement.finalized = true;
  */
 
 LitElement.render = _shadyRender.render;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","lit-html/lib/shady-render":"../node_modules/lit-html/lib/shady-render.js","./lib/updating-element.js":"../node_modules/@polymer/lit-element/lib/updating-element.js","./lib/decorators.js":"../node_modules/@polymer/lit-element/lib/decorators.js","lit-html/lit-html":"../node_modules/lit-html/lit-html.js","./lib/css-tag.js":"../node_modules/@polymer/lit-element/lib/css-tag.js"}],"components/va-app-header.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","lit-html/lib/shady-render":"../node_modules/lit-html/lib/shady-render.js","./lib/updating-element.js":"../node_modules/@polymer/lit-element/lib/updating-element.js","./lib/decorators.js":"../node_modules/@polymer/lit-element/lib/decorators.js","lit-html/lit-html":"../node_modules/lit-html/lit-html.js","./lib/css-tag.js":"../node_modules/@polymer/lit-element/lib/css-tag.js"}],"../node_modules/aos/dist/aos.js":[function(require,module,exports) {
+var define;
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.AOS=t():e.AOS=t()}(this,function(){return function(e){function t(o){if(n[o])return n[o].exports;var i=n[o]={exports:{},id:o,loaded:!1};return e[o].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var n={};return t.m=e,t.c=n,t.p="dist/",t(0)}([function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{default:e}}var i=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},r=n(1),a=(o(r),n(6)),u=o(a),c=n(7),s=o(c),f=n(8),d=o(f),l=n(9),p=o(l),m=n(10),b=o(m),v=n(11),y=o(v),g=n(14),h=o(g),w=[],k=!1,x={offset:120,delay:0,easing:"ease",duration:400,disable:!1,once:!1,startEvent:"DOMContentLoaded",throttleDelay:99,debounceDelay:50,disableMutationObserver:!1},j=function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];if(e&&(k=!0),k)return w=(0,y.default)(w,x),(0,b.default)(w,x.once),w},O=function(){w=(0,h.default)(),j()},M=function(){w.forEach(function(e,t){e.node.removeAttribute("data-aos"),e.node.removeAttribute("data-aos-easing"),e.node.removeAttribute("data-aos-duration"),e.node.removeAttribute("data-aos-delay")})},S=function(e){return e===!0||"mobile"===e&&p.default.mobile()||"phone"===e&&p.default.phone()||"tablet"===e&&p.default.tablet()||"function"==typeof e&&e()===!0},_=function(e){x=i(x,e),w=(0,h.default)();var t=document.all&&!window.atob;return S(x.disable)||t?M():(x.disableMutationObserver||d.default.isSupported()||(console.info('\n      aos: MutationObserver is not supported on this browser,\n      code mutations observing has been disabled.\n      You may have to call "refreshHard()" by yourself.\n    '),x.disableMutationObserver=!0),document.querySelector("body").setAttribute("data-aos-easing",x.easing),document.querySelector("body").setAttribute("data-aos-duration",x.duration),document.querySelector("body").setAttribute("data-aos-delay",x.delay),"DOMContentLoaded"===x.startEvent&&["complete","interactive"].indexOf(document.readyState)>-1?j(!0):"load"===x.startEvent?window.addEventListener(x.startEvent,function(){j(!0)}):document.addEventListener(x.startEvent,function(){j(!0)}),window.addEventListener("resize",(0,s.default)(j,x.debounceDelay,!0)),window.addEventListener("orientationchange",(0,s.default)(j,x.debounceDelay,!0)),window.addEventListener("scroll",(0,u.default)(function(){(0,b.default)(w,x.once)},x.throttleDelay)),x.disableMutationObserver||d.default.ready("[data-aos]",O),w)};e.exports={init:_,refresh:j,refreshHard:O}},function(e,t){},,,,,function(e,t){(function(t){"use strict";function n(e,t,n){function o(t){var n=b,o=v;return b=v=void 0,k=t,g=e.apply(o,n)}function r(e){return k=e,h=setTimeout(f,t),M?o(e):g}function a(e){var n=e-w,o=e-k,i=t-n;return S?j(i,y-o):i}function c(e){var n=e-w,o=e-k;return void 0===w||n>=t||n<0||S&&o>=y}function f(){var e=O();return c(e)?d(e):void(h=setTimeout(f,a(e)))}function d(e){return h=void 0,_&&b?o(e):(b=v=void 0,g)}function l(){void 0!==h&&clearTimeout(h),k=0,b=w=v=h=void 0}function p(){return void 0===h?g:d(O())}function m(){var e=O(),n=c(e);if(b=arguments,v=this,w=e,n){if(void 0===h)return r(w);if(S)return h=setTimeout(f,t),o(w)}return void 0===h&&(h=setTimeout(f,t)),g}var b,v,y,g,h,w,k=0,M=!1,S=!1,_=!0;if("function"!=typeof e)throw new TypeError(s);return t=u(t)||0,i(n)&&(M=!!n.leading,S="maxWait"in n,y=S?x(u(n.maxWait)||0,t):y,_="trailing"in n?!!n.trailing:_),m.cancel=l,m.flush=p,m}function o(e,t,o){var r=!0,a=!0;if("function"!=typeof e)throw new TypeError(s);return i(o)&&(r="leading"in o?!!o.leading:r,a="trailing"in o?!!o.trailing:a),n(e,t,{leading:r,maxWait:t,trailing:a})}function i(e){var t="undefined"==typeof e?"undefined":c(e);return!!e&&("object"==t||"function"==t)}function r(e){return!!e&&"object"==("undefined"==typeof e?"undefined":c(e))}function a(e){return"symbol"==("undefined"==typeof e?"undefined":c(e))||r(e)&&k.call(e)==d}function u(e){if("number"==typeof e)return e;if(a(e))return f;if(i(e)){var t="function"==typeof e.valueOf?e.valueOf():e;e=i(t)?t+"":t}if("string"!=typeof e)return 0===e?e:+e;e=e.replace(l,"");var n=m.test(e);return n||b.test(e)?v(e.slice(2),n?2:8):p.test(e)?f:+e}var c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},s="Expected a function",f=NaN,d="[object Symbol]",l=/^\s+|\s+$/g,p=/^[-+]0x[0-9a-f]+$/i,m=/^0b[01]+$/i,b=/^0o[0-7]+$/i,v=parseInt,y="object"==("undefined"==typeof t?"undefined":c(t))&&t&&t.Object===Object&&t,g="object"==("undefined"==typeof self?"undefined":c(self))&&self&&self.Object===Object&&self,h=y||g||Function("return this")(),w=Object.prototype,k=w.toString,x=Math.max,j=Math.min,O=function(){return h.Date.now()};e.exports=o}).call(t,function(){return this}())},function(e,t){(function(t){"use strict";function n(e,t,n){function i(t){var n=b,o=v;return b=v=void 0,O=t,g=e.apply(o,n)}function r(e){return O=e,h=setTimeout(f,t),M?i(e):g}function u(e){var n=e-w,o=e-O,i=t-n;return S?x(i,y-o):i}function s(e){var n=e-w,o=e-O;return void 0===w||n>=t||n<0||S&&o>=y}function f(){var e=j();return s(e)?d(e):void(h=setTimeout(f,u(e)))}function d(e){return h=void 0,_&&b?i(e):(b=v=void 0,g)}function l(){void 0!==h&&clearTimeout(h),O=0,b=w=v=h=void 0}function p(){return void 0===h?g:d(j())}function m(){var e=j(),n=s(e);if(b=arguments,v=this,w=e,n){if(void 0===h)return r(w);if(S)return h=setTimeout(f,t),i(w)}return void 0===h&&(h=setTimeout(f,t)),g}var b,v,y,g,h,w,O=0,M=!1,S=!1,_=!0;if("function"!=typeof e)throw new TypeError(c);return t=a(t)||0,o(n)&&(M=!!n.leading,S="maxWait"in n,y=S?k(a(n.maxWait)||0,t):y,_="trailing"in n?!!n.trailing:_),m.cancel=l,m.flush=p,m}function o(e){var t="undefined"==typeof e?"undefined":u(e);return!!e&&("object"==t||"function"==t)}function i(e){return!!e&&"object"==("undefined"==typeof e?"undefined":u(e))}function r(e){return"symbol"==("undefined"==typeof e?"undefined":u(e))||i(e)&&w.call(e)==f}function a(e){if("number"==typeof e)return e;if(r(e))return s;if(o(e)){var t="function"==typeof e.valueOf?e.valueOf():e;e=o(t)?t+"":t}if("string"!=typeof e)return 0===e?e:+e;e=e.replace(d,"");var n=p.test(e);return n||m.test(e)?b(e.slice(2),n?2:8):l.test(e)?s:+e}var u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},c="Expected a function",s=NaN,f="[object Symbol]",d=/^\s+|\s+$/g,l=/^[-+]0x[0-9a-f]+$/i,p=/^0b[01]+$/i,m=/^0o[0-7]+$/i,b=parseInt,v="object"==("undefined"==typeof t?"undefined":u(t))&&t&&t.Object===Object&&t,y="object"==("undefined"==typeof self?"undefined":u(self))&&self&&self.Object===Object&&self,g=v||y||Function("return this")(),h=Object.prototype,w=h.toString,k=Math.max,x=Math.min,j=function(){return g.Date.now()};e.exports=n}).call(t,function(){return this}())},function(e,t){"use strict";function n(e){var t=void 0,o=void 0,i=void 0;for(t=0;t<e.length;t+=1){if(o=e[t],o.dataset&&o.dataset.aos)return!0;if(i=o.children&&n(o.children))return!0}return!1}function o(){return window.MutationObserver||window.WebKitMutationObserver||window.MozMutationObserver}function i(){return!!o()}function r(e,t){var n=window.document,i=o(),r=new i(a);u=t,r.observe(n.documentElement,{childList:!0,subtree:!0,removedNodes:!0})}function a(e){e&&e.forEach(function(e){var t=Array.prototype.slice.call(e.addedNodes),o=Array.prototype.slice.call(e.removedNodes),i=t.concat(o);if(n(i))return u()})}Object.defineProperty(t,"__esModule",{value:!0});var u=function(){};t.default={isSupported:i,ready:r}},function(e,t){"use strict";function n(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(){return navigator.userAgent||navigator.vendor||window.opera||""}Object.defineProperty(t,"__esModule",{value:!0});var i=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),r=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i,a=/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i,u=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i,c=/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i,s=function(){function e(){n(this,e)}return i(e,[{key:"phone",value:function(){var e=o();return!(!r.test(e)&&!a.test(e.substr(0,4)))}},{key:"mobile",value:function(){var e=o();return!(!u.test(e)&&!c.test(e.substr(0,4)))}},{key:"tablet",value:function(){return this.mobile()&&!this.phone()}}]),e}();t.default=new s},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=function(e,t,n){var o=e.node.getAttribute("data-aos-once");t>e.position?e.node.classList.add("aos-animate"):"undefined"!=typeof o&&("false"===o||!n&&"true"!==o)&&e.node.classList.remove("aos-animate")},o=function(e,t){var o=window.pageYOffset,i=window.innerHeight;e.forEach(function(e,r){n(e,i+o,t)})};t.default=o},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var i=n(12),r=o(i),a=function(e,t){return e.forEach(function(e,n){e.node.classList.add("aos-init"),e.position=(0,r.default)(e.node,t.offset)}),e};t.default=a},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var i=n(13),r=o(i),a=function(e,t){var n=0,o=0,i=window.innerHeight,a={offset:e.getAttribute("data-aos-offset"),anchor:e.getAttribute("data-aos-anchor"),anchorPlacement:e.getAttribute("data-aos-anchor-placement")};switch(a.offset&&!isNaN(a.offset)&&(o=parseInt(a.offset)),a.anchor&&document.querySelectorAll(a.anchor)&&(e=document.querySelectorAll(a.anchor)[0]),n=(0,r.default)(e).top,a.anchorPlacement){case"top-bottom":break;case"center-bottom":n+=e.offsetHeight/2;break;case"bottom-bottom":n+=e.offsetHeight;break;case"top-center":n+=i/2;break;case"bottom-center":n+=i/2+e.offsetHeight;break;case"center-center":n+=i/2+e.offsetHeight/2;break;case"top-top":n+=i;break;case"bottom-top":n+=e.offsetHeight+i;break;case"center-top":n+=e.offsetHeight/2+i}return a.anchorPlacement||a.offset||isNaN(t)||(o=t),n+o};t.default=a},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=function(e){for(var t=0,n=0;e&&!isNaN(e.offsetLeft)&&!isNaN(e.offsetTop);)t+=e.offsetLeft-("BODY"!=e.tagName?e.scrollLeft:0),n+=e.offsetTop-("BODY"!=e.tagName?e.scrollTop:0),e=e.offsetParent;return{top:n,left:t}};t.default=n},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=function(e){return e=e||document.querySelectorAll("[data-aos]"),Array.prototype.map.call(e,function(e){return{node:e}})};t.default=n}])});
+},{}],"components/va-app-header.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("@polymer/lit-element");
@@ -11233,10 +13307,14 @@ var _App = _interopRequireDefault(require("./../App"));
 
 var _CartAPI = _interopRequireDefault(require("./../CartAPI"));
 
+var _aos = require("aos");
+
+var _Toast = _interopRequireDefault(require("../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject8() {
-  const data = _taggedTemplateLiteral(["\n        <div class='cart-product'>\n          <img class='cart-img' src='/images/", ".png' alt='", "'>\n          <div class='cart-product-info'>\n            <p class='product-name'>", "</p> \n            <p>Quantity: ", "</p>\n            <!-- <p>&pound;", "</p> -->\n            <p>&pound;", "</p>\n          </div>\n        </div>\n      "]);
+  const data = _taggedTemplateLiteral(["\n        <div class='cart-product' id=\"", "\">\n          <img class='cart-img' src='/images/", ".png' alt='", "'>\n          <div class='cart-product-info'>\n            <p class='product-name'>", "</p> \n\n            <div class='qty'> \n              <p>Quantity:</p>\n              <div class=\"input-group\">\n                <sl-input class='qty-input' name='", "' min='1' size='small' type='number' value='", "'></sl-input>\n              </div>\n            </div>\n\n            <p class='total-cost' id='", "'>&pound;", "</p>\n            <p class='remove-btn' @click=\"", "\">remove item</p>\n          </div>\n        </div>\n      "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -11246,7 +13324,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  const data = _taggedTemplateLiteral(["\n\n    <h1>Your Basket</h1>\n      ", "\n\n      <h3>Subtotal: &pound;", ".00</h3>\n      <button class='checkout-btn' @click=\"", "\">Checkout</button>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n    <h1>Your Basket</h1>\n      ", "\n\n      <h3 class='total'>Subtotal: &pound;", ".00</h3>\n      <button class='empty-cart-btn' @click=\"", "\">Empty Cart</button>\n      <button class='checkout-btn' @click=\"", "\">Checkout</button>\n    "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -11296,7 +13374,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  const data = _taggedTemplateLiteral(["\n          <h2 style=\"color= var(--med-blue) class=\"page-title\">", "</h1>\n        "]);
+  const data = _taggedTemplateLiteral(["\n          <h2>", "</h2>\n        "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -11306,7 +13384,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 42%;\n        cursor: pointer;\n        display: block;\n      }\n\n      .nav-logo:hover{\n        animation-name: spin;\n        animation-duration: 2s;\n        animation-iteration-count: infinite;\n      }\n      @keyframes spin {\n        from {transform: rotate(0deg);}\n        to {transform : rotate(360deg);}\n      }\n      \n      .nav-logo2{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 42%;\n        cursor: pointer;\n        display: block;\n      }\n      .app-top-nav{\n        width: 40%;\n        display: flex;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .6em;\n        padding-bottom: .8em;\n        padding-top: 0;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n      .app-top-nav li:hover {\n        background-image: url('/images/navbar-pigstep.png');\n        color: red;\n        background-repeat: no-repeat;\n        background-position: center top;\n        background-size: 30px;\n      }\n      .app-top-nav li a:visited{\n        color: red;\n        background-image: url('/images/navbar-pigstep.png');\n        background-repeat: no-repeat;\n        background-position: center top;\n        background-size: 30px;\n      }\n      .app-top-nav li{\n        text-align: center;\n      }\n\n      .header-title {\n        color: var(--med-blue);\n        font-family: Rockwell, serif;\n        position: absolute;\n        right: 20%;\n      }\n\n      .app-menu {\n        display: none;\n        position: absolute;\n        font-family: var(--heading-font-family);\n        margin-top: 14px;\n        border: none;\n        width: 100%;\n        z-index: 1000;\n        \n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n      .app-menu li:hover {\n        background-image: url('/images/navbar-pigstep.png');\n        background-repeat: no-repeat;\n        background-position: center;\n        background-size: 50px;\n      }\n   \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        min-height: 70px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n        background-color: var(--light-blue);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      .header-cart-qty{\n        color: var(--med-blue);\n        position: absolute;\n        right: 1%;\n        top: 6px;\n\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n        \n      }\n      button {\n        background-color: white;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active {\n        font-weight: bold;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n        .header-title {\n          display: none;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        #hamburger {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        #close {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n      \n\n        .app-menu {\n          visibility: hidden;\n          display: none;\n          padding: none;\n          \n        }\n       \n      }\n\n    </style>\n\n    <header class=\"app-header\">\n\n      <nav class=\"app-top-nav\">\n        <ul>\n          <li class=\"nav-trotter\" ><a  @click=\"", "\">Home</a></li>\n          <li class=\"nav-trotter\" ><a @click=\"", "\">Shop</a></li>\n          <li class=\"nav-trotter\" ><a @click=\"", "\">About</a></li> \n          <li class=\"nav-trotter\" ><a @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      \n      <video allow=\"autoplay\" @click=\"", "\" class='nav-logo2' width=\"70\" height=\"50\" autoplay playsinline onmouseover=\"this.play()\" onmouseout=\"this.pause();\">\n        <source src=\"/images/logo-run.mp4\" type=\"video/mp4\">\n        <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      </video>\n      <div class=\"header-title\">\n        ", "\n        <slot></slot>\n      </div>\n    \n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n        <div class=\"header-cart-qty\">\n        ", "\n        <slot></slot>\n      </div>\n     \n      \n      </nav>\n      \n\n      <!-- dropdown menu -->\n      \n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n      <div id=\"drop-menu\" class=\"app-menu\">\n      <ul>\n        <li><a @click=\"", "\">Home</a></li>\n        <li><a @click=\"", "\">Shop</a></li>\n        <li><a @click=\"", "\">About</a></li>\n        <li><a @click=\"", "\">Contact</a></li>\n        <li><a @click=\"", "\" style=\"color: red;\">Play - Find the Pig!</a></li>\n      </ul>\n      </div>\n    \n      \n\n    </header>\n\n\n\n\n\n    <!--CART - styles----------------------->\n\n    <style>\n      .app-side-menu{\n        font-family: var(--base-font-family);\n      }\n      h1{\n        font-family: var(--heading-font-family);\n        padding: 0;\n        margin: 0;\n        padding-bottom: 30px;\n      }\n      sl-drawer.app-side-menu::part(panel){\n        background-color: var(--light-blue);\n        --header-spacing: 0;\n      }\n      sl-drawer.app-side-menu::part(title){\n        line-height: 0;\n        padding-top: 0;\n        padding-bottom: 0;\n      }\n      .app-side-menu .cart-product{\n          display: grid;\n          width: 70%;\n          grid-template-columns: repeat(2, auto);\n      }\n      .cart-img{\n        height: 20vh;\n        margin-bottom: 30px;\n      }\n      .product-name{\n        font-weight: bold;\n      }\n      .checkout-btn {\n        color: white;\n        background-color: var(--dark-blue);\n        text-transform: uppercase;\n        border: none;\n        font-family: var(--base-font-family);\n        cursor: pointer;\n        padding: 2% 4%;\n        border-radius: 8px;\n        font-size: 20px;\n        width: 100%;\n      }\n\n\n    </style>\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n    ", "\n    \n    </sl-drawer>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n    <script>\n    \n    \n    </script>\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .app-header {\n        position: fixed;\n        top: 0;\n        right: 0;\n        left: 0;\n        height: var(--app-header-height);\n        display: flex;\n        z-index: 9;\n        /*box-shadow: 4px 0px 10px rgba(0,0,0,0.2);*/\n        align-items: center;\n      }\n\n      .nav-logo{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 42%;\n        cursor: pointer;\n        display: block;\n      }\n\n      .nav-logo:hover{\n        animation-name: spin;\n        animation-duration: 2s;\n        animation-iteration-count: infinite;\n      }\n      @keyframes spin {\n        from {transform: rotate(0deg);}\n        to {transform : rotate(360deg);}\n      }\n      \n      .nav-logo2{\n        width: 9%;\n        min-width: 70px;\n        position: absolute;\n        left: 42%;\n        cursor: pointer;\n        display: block;\n      }\n      .app-top-nav{\n        width: 40%;\n        display: flex;\n      }\n      \n      .app-top-nav a {\n        display: inline-block;\n        padding: .6em;\n        padding-bottom: .8em;\n        padding-top: 0;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n      .app-top-nav li:hover {\n        background-image: url('/images/navbar-pigstep.png');\n        color: black;\n        background-repeat: no-repeat;\n        background-position: center top;\n        background-size: 30px;\n      }\n      .app-top-nav li a:visited{\n        color: black;\n        background-image: url('/images/navbar-pigstep.png');\n        background-repeat: no-repeat;\n        background-position: center top;\n        background-size: 30px;\n      }\n      .app-top-nav li{\n        text-align: center;\n      }\n\n      .header-title {\n        color: var(--med-blue);\n        /* color: #AACOCF; */\n        font-family: Rockwell, serif;\n        position: absolute;\n        right: 20%;\n      }\n\n      .app-menu {\n        display: none;\n        position: absolute;\n        font-family: var(--heading-font-family);\n        margin-top: 14px;\n        border: none;\n        width: 100%;\n        z-index: 1000;\n        \n      }\n      \n      .app-menu a {\n        display: block;\n        width: 100%;\n        padding: .8em;\n        text-decoration: none;\n        color: black;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n        cursor: pointer;\n      }\n      .app-menu li:hover {\n        background-image: url('/images/navbar-pigstep.png');\n        background-repeat: no-repeat;\n        background-position: center;\n        background-size: 50px;\n      }\n   \n\n      .app-menu li {\n        list-style-type: none;\n        border: 0px;\n        min-height: 70px;\n        margin-bottom: 0px;\n        text-align: center;\n        padding-left: 0px;\n        background-color: rgba(255,255,255,1.0);\n        background-color: var(--light-blue);\n      }\n\n      .app-menu ul {\n        margin: 0px;\n        padding: 0px;\n        \n      }\n\n      .cart-logo{\n        width: 3%;\n        min-width: 30px;\n        min-height: 30px;\n        cursor: pointer;\n        position: absolute;\n        right: 2%;\n        top: 6px;\n      }\n      .header-cart-qty{\n        color: var(--med-blue);\n        position: absolute;\n        right: 1%;\n        top: 6px;\n\n      }\n      #hamburger {\n        margin: 8px 5px 0px 10px;\n      }\n      #close {\n        display: none;\n        margin: 8px 5px 0px 10px;\n        \n      }\n      button {\n        background-color: white;\n      }\n\n\n      /* active nav links */\n      .app-top-nav a.active {\n        background-image: url('/images/navbar-pigstep.png');\n        background-repeat: no-repeat;\n        background-position: center top;\n        background-size: 30px;\n      }\n\n      /* RESPONSIVE - MOBILE ------------------- */\n      @media all and (max-width: 768px){       \n        \n        .app-header {\n          display: block;\n          height: var(--app-header-height);\n        }\n        .app-top-nav {\n          display: none;\n          width: 100%;\n        }\n       \n        .app-top-nav li {\n          display: block;\n          width: 100%;\n        }\n        .header-title {\n          display: none;\n        }\n      }\n\n      @media all and (min-width: 769px){       \n        \n        #hamburger {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        #close {\n          visibility: hidden;\n          position: absolute;\n          left: 10px;\n          top: 8px;\n        }\n        .app-top-nav {\n          display: block;\n        }\n        .app-top-nav ul {\n          list-style-type : none;\n        }\n        .app-top-nav li {\n          float: left;\n          width: 20%;\n        }\n      \n\n        .app-menu {\n          visibility: hidden;\n          display: none;\n          padding: none;\n          \n        }\n       \n      }\n\n    </style>\n\n    <header class=\"app-header\">\n\n      <nav class=\"app-top-nav\">\n        <ul>\n          <li class=\"nav-trotter\" ><a href=\"/\" @click=\"", "\">Home</a></li>\n          <li class=\"nav-trotter\" ><a href=\"/products\" @click=\"", "\">Shop</a></li>\n          <li class=\"nav-trotter\" ><a href=\"/about\" @click=\"", "\">About</a></li> \n          <li class=\"nav-trotter\" ><a href=\"/contact\" @click=\"", "\">Contact</a></li>  \n        </ul>\n      </nav>\n      \n      <video allow=\"autoplay\" muted @click=\"", "\" class='nav-logo2' width=\"70\" height=\"50\" autoplay playsinline onmouseover=\"this.play()\" onmouseout=\"this.pause();\">\n        <source src=\"/images/logo-run.mp4\" type=\"video/mp4\">\n        <img @click=\"", "\" class='nav-logo' src='/images/logo-black.png'>\n      </video>\n      <!-- <div class=\"header-title\">\n        ", "\n        <slot></slot>\n      </div> -->\n    \n      <nav class=\"basket right\">\n        <!-- change to apples2 or apples to see other options -->\n        <img @click=\"", "\" class='cart-logo' src='/images/apples3.png' alt='apple-basket'>\n        <div class=\"header-cart-qty\">\n        ", "\n        <slot></slot>\n      </div>\n     \n      \n      </nav>\n      \n\n      <!-- dropdown menu -->\n      \n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/srip\" title=\"srip\">srip</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"hamburger\" alt=\"menu\" width=\"28px\" height=\"28px\" src='/images/menu.png'>\n      <!-- Icons made by <a href=\"https://www.flaticon.com/authors/xnimrodx\" title=\"xnimrodx\">xnimrodx</a> from <a href=\"https://www.flaticon.com/\" title=\"Flaticon\">www.flaticon.com</a> -->\n      <img @click=\"", "\" id=\"close\" alt=\"close\" width=\"28px\" height=\"28px\" src='/images/close.png'>\n      \n      <div id=\"drop-menu\" class=\"app-menu\">\n      <ul>\n        <li><a href=\"/\" @click=\"", "\">Home</a></li>\n        <li><a href=\"/products\" @click=\"", "\">Shop</a></li>\n        <li><a href=\"/about\" @click=\"", "\">About</a></li>\n        <li><a href=\"/contact\" @click=\"", "\">Contact</a></li>\n        <li><a href=\"/game\" @click=\"", "\" style=\"color: red;\">Play - Find the Pig!</a></li>\n      </ul>\n      </div>\n    \n      \n\n    </header>\n\n\n\n\n\n    <!--CART - styles----------------------->\n\n    <style>\n      .app-side-menu{\n        font-family: var(--base-font-family);\n      }\n      h1{\n        font-family: var(--heading-font-family);\n        padding: 0;\n        margin: 0;\n        padding-bottom: 30px;\n      }\n      sl-drawer.app-side-menu::part(panel){\n        background-color: var(--light-blue);\n        --header-spacing: 0;\n      }\n      sl-drawer.app-side-menu::part(title){\n        line-height: 0;\n        padding-top: 0;\n        padding-bottom: 0;\n      }\n      .app-side-menu .cart-product{\n          display: grid;\n          width: 70%;\n          grid-template-columns: repeat(2, auto);\n          margin-bottom: 6%;\n      }\n      .cart-img{\n        height: 20vh;\n        margin-bottom: 30px;\n        margin-right: 10px;\n      }\n      .product-name{\n        font-weight: bold;\n      }\n      .checkout-btn {\n        color: white;\n        background-color: var(--dark-blue);\n        text-transform: uppercase;\n        border: none;\n        font-family: var(--base-font-family);\n        cursor: pointer;\n        padding: 2% 4%;\n        border-radius: 8px;\n        font-size: 20px;\n        width: 100%;\n      }\n      .qty{\n        display: flex;\n      }\n      .input-group{\n          width: 30%;\n          margin-left: 5%;\n      }\n\n      .empty-cart-btn {\n        position: relative;\n        float: right;\n        margin-bottom: 20px;\n        color: white;\n        background-color: #F4372D;\n        text-transform: uppercase;\n        border: none;\n        font-family: var(--base-font-family);\n        cursor: pointer;\n        padding: 2% 4%;\n        border-radius: 8px;\n        font-size: 10px;\n        width: 30%;\n      }\n\n      .remove-btn{\n        cursor: pointer;\n        color: grey;\n        display: inline;\n        font-size: 14px;\n        padding-top: 6%;\n      }\n      .remove-btn:hover{\n        color: red;\n      }\n      p{\n        margin: 3% 0;\n      }\n\n\n    </style>\n\n    <!--CART----------------------->\n    <sl-drawer class=\"app-side-menu\">\n    ", "\n    \n    </sl-drawer>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -11339,11 +13417,12 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   firstUpdated() {
     super.firstUpdated();
     this.navActiveLinks();
+    this.updateQty();
   }
 
   navActiveLinks() {
     const currentPath = window.location.pathname;
-    const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a, .app-side-menu-items a');
+    const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a');
     navLinks.forEach(navLink => {
       if (navLink.href.slice(-1) == '#') return;
 
@@ -11387,21 +13466,53 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   menuClick(e) {
     e.preventDefault();
     const pathname = e.target.closest('a').pathname;
-    const appSideMenu = this.shadowRoot.querySelector('.app-side-menu'); // hide appMenu
+    (0, _Router.gotoRoute)(pathname);
+  }
 
-    appSideMenu.hide();
-    appSideMenu.addEventListener('sl-after-hide', () => {
-      // goto route after menu is hidden
-      (0, _Router.gotoRoute)(pathname);
+  updateQty() {
+    const qtyInputs = this.shadowRoot.querySelectorAll('sl-input.qty-input');
+    qtyInputs.forEach(qty => {
+      qty.addEventListener('sl-blur', event => {
+        // console.log("qty updated")
+        let product = _CartAPI.default.updateQty(event.target.name, event.target.value);
+
+        let totalCosts = this.shadowRoot.querySelectorAll('.total-cost');
+        totalCosts.forEach(totalCost => {
+          if (totalCost.id == event.target.name) {
+            totalCost.innerHTML = '&pound;' + product.totalCost;
+          }
+        });
+        this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + _CartAPI.default.getTotal() + ".00";
+      });
     });
   }
 
+  emptyCart() {
+    _CartAPI.default.emptyCart();
+
+    this.products = null;
+    (0, _Router.gotoRoute)('/products');
+
+    _Toast.default.show("Your Cart has been emptied");
+  }
+
+  remove(name, sku) {
+    _CartAPI.default.removeItem(name);
+
+    var productDiv = this.shadowRoot.querySelector("#" + sku);
+    console.log(productDiv);
+    productDiv.remove();
+    this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + _CartAPI.default.getTotal() + ".00";
+
+    _Toast.default.show(name + " has been removed from your cart");
+  }
+
   render() {
-    return (0, _litElement.html)(_templateObject(), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/'), this.title ? (0, _litElement.html)(_templateObject2(), this.title) : (0, _litElement.html)(_templateObject3()), this.hamburgerClick, this.products ? (0, _litElement.html)(_templateObject4(), this.products.length) : (0, _litElement.html)(_templateObject5()), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.products == null ? (0, _litElement.html)(_templateObject6()) : (0, _litElement.html)(_templateObject7(), this.products.map(product => (0, _litElement.html)(_templateObject8(), product.item, product.name, product.name, product.quantity, product.price.$numberDecimal, product.price)), _CartAPI.default.getTotal(), this.checkoutClick));
+    return (0, _litElement.html)(_templateObject(), this.menuClick, this.menuClick, this.menuClick, this.menuClick, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/'), this.title ? (0, _litElement.html)(_templateObject2(), this.title) : (0, _litElement.html)(_templateObject3()), this.hamburgerClick, this.products ? (0, _litElement.html)(_templateObject4(), this.products.length) : (0, _litElement.html)(_templateObject5()), this.toggle, this.toggle, () => (0, _Router.gotoRoute)('/'), () => (0, _Router.gotoRoute)('/products'), () => (0, _Router.gotoRoute)('/about'), () => (0, _Router.gotoRoute)('/contact'), () => (0, _Router.gotoRoute)('/game'), this.products == null ? (0, _litElement.html)(_templateObject6()) : (0, _litElement.html)(_templateObject7(), this.products.map(product => (0, _litElement.html)(_templateObject8(), product.sku, product.item, product.name, product.name, product.name, product.quantity, product.name, product.totalCost, () => this.remove(product.name, product.sku))), _CartAPI.default.getTotal(), this.emptyCart, this.checkoutClick));
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js","./../CartAPI":"CartAPI.js"}],"components/va-app-footer.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js","./../CartAPI":"CartAPI.js","aos":"../node_modules/aos/dist/aos.js","../Toast":"Toast.js"}],"components/va-app-footer.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("@polymer/lit-element");
@@ -11409,7 +13520,7 @@ var _litElement = require("@polymer/lit-element");
 var _Router = require("./../Router");
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .margin{\n        margin-top: 200px;\n      }\n      footer {\n        padding: 3% 5%;\n        margin: 0;\n        color: white;\n        height: 90vh;\n        width: 100%;\n        background-color: rgb(73, 73, 73);\n      }\n\n      .footer-grid{\n        display: grid;\n        grid-template-columns: repeat(4, auto);\n        width: 100%;\n      }\n      .footer-grid div h2{\n        font-size: 24px;\n        color: white;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n      }\n      ul {\n        padding: 0;\n        list-style-type: none;\n      }\n      li{\n        margin: 4% 0;\n        cursor: pointer;\n      }\n\n\n      .footer-logo {\n        width: 25%;\n        cursor: pointer;\n        margin-left: auto;\n        margin-right: auto;\n        display: block;\n        margin-top: 3%;\n        margin-bottom: 4%;\n      }\n\n      a { color: inherit; text-decoration: none;} \n\n      #social img {\n          width: 70px;\n          height: 70px;\n          margin: 0px;\n          color: white;\n      }\n\n      #disclaimer{\n        font-size: 12px;\n      }\n    \n\n    </style>\n<footer>\n          <div class='footer-grid'>\n            <div >\n              <h2>Products</h2>\n              <ul @click=\"", "\">\n                <li>Reveller</li>\n                <li>Truffler</li>\n                <li>Hogfather</li>\n                <li>Pink</li>\n                <li>Charmer</li>\n              </ul>\n            </div>\n            <div class='help'>\n              <h2>Help</h2>\n              <ul>\n                <li>Delivery and Returns</li>\n                <li>Terms and Conditions</li>\n                <li>Privacy Policy</li>\n              </ul>\n            </div>\n            <div class='contact-us'>\n              <h2>Contact Us</h2>\n              <ul>\n                <li>275 Burnfield Road, Thornliebank</li>\n                <li>01632 960493</li>\n                <li>oink@orchardpig.co.uk</li>\n              </ul>\n            </div>\n            <div class='follow-us'>\n              <h2>Follow Us</h2>\n              <div id=\"social\">\n                <!--<a href='https://www.facebook.com/OrchardPig' target=\"_blank\"><i class=\"fab fa-facebook-square\" ></i></a>-->\n                <!--<a href='https://www.instagram.com/theorchardpig/' target=\"_blank\"><i class=\"fab fa-instagram\"></i></a>-->\n                <!--<a href='https://twitter.com/Orchardpig' target=\"_blank\"><i class=\"fab fa-twitter-square\"></i></a>-->\n                <a href='https://www.facebook.com/OrchardPig' target=\"_blank\"><img src=\"/images/facebook-white2.png\"></a>\n                <a href='https://www.instagram.com/theorchardpig/' target=\"_blank\"><img src=\"/images/instagram-white2.png\"></a>\n                <a href='https://twitter.com/Orchardpig' target=\"_blank\"><img src=\"/images/twitter-white2.png\"</a>\n              </div>\n            </div>\n          </div>\n\n          <img @click=\"", "\" class='footer-logo' src='/images/logo-white-cut.png'></a>  \n\n          <hr/>\n          <p id='disclaimer'>\n            This website has been created as part of an assignment in an approved course of study for Curtin University \n            and contains copyright material not created by the author. \n            All copyright material used remains copyright of the respective owners \n            and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). \n            No part of this work may be reproduced without consent of the original copyright owners. \n            See code comments for references.\n          </p>\n          </footer>\n    "]);
+  const data = _taggedTemplateLiteral(["\n    <style>      \n      * {\n        box-sizing: border-box;\n      }\n      .margin{\n        margin-top: 200px;\n      }\n      footer {\n        padding: 3% 5%;\n        margin: 0;\n        color: white;\n        height: 90vh;\n        width: 100%;\n        background-color: rgb(73, 73, 73);\n      }\n\n      .footer-grid{\n        display: grid;\n        grid-template-columns: repeat(4, auto);\n        width: 100%;\n      }\n      .footer-grid div h2{\n        font-size: 24px;\n        color: white;\n        font-family: var(--heading-font-family);\n        text-transform: uppercase;\n      }\n      ul {\n        padding: 0;\n        list-style-type: none;\n      }\n      li{\n        margin: 4% 0;\n        cursor: pointer;\n        transition: all ease 0.2s;\n      }\n      li:hover{\n        color: var(--med-blue);\n        margin-left: 2%;\n      }\n\n\n      .footer-logo {\n        width: 25%;\n        cursor: pointer;\n        margin-left: auto;\n        margin-right: auto;\n        display: block;\n        margin-top: 3%;\n        margin-bottom: 4%;\n      }\n\n      a { color: inherit; text-decoration: none;} \n\n      #social img {\n          width: 70px;\n          height: 70px;\n          margin: 0px;\n          color: white;\n          filter: hue-rotate(100deg);\n      }\n\n      #disclaimer{\n        font-size: 12px;\n      }\n\n      @media all and (max-width: 640px){\n        .footer-grid{\n          display: grid;\n          grid-template-columns: auto auto;\n          width: 100%;\n        }\n\n        footer{\n          height: 100vh;\n        }\n\n      }\n\n    \n\n    </style>\n<footer>\n          <div class='footer-grid'>\n            <div >\n              <h2>Products</h2>\n              <ul @click=\"", "\">\n                <li>Reveller</li>\n                <li>Truffler</li>\n                <li>Hogfather</li>\n                <li>Pink</li>\n                <li>Charmer</li>\n              </ul>\n            </div>\n            <div class='help'>\n              <h2>Help</h2>\n              <ul>\n                <li>Delivery and Returns</li>\n                <li>Terms and Conditions</li>\n                <li>Privacy Policy</li>\n              </ul>\n            </div>\n            <div class='contact-us'>\n              <h2>Contact Us</h2>\n              <ul>\n                <li>275 Burnfield Road, Thornliebank</li>\n                <li>01632 960493</li>\n                <li>oink@orchardpig.co.uk</li>\n              </ul>\n            </div>\n            <div class='follow-us'>\n              <h2>Follow Us</h2>\n              <div id=\"social\">\n                <!--<a href='https://www.facebook.com/OrchardPig' target=\"_blank\"><i class=\"fab fa-facebook-square\" ></i></a>-->\n                <!--<a href='https://www.instagram.com/theorchardpig/' target=\"_blank\"><i class=\"fab fa-instagram\"></i></a>-->\n                <!--<a href='https://twitter.com/Orchardpig' target=\"_blank\"><i class=\"fab fa-twitter-square\"></i></a>-->\n                <a href='https://www.facebook.com/OrchardPig' target=\"_blank\"><img src=\"/images/facebook-white2.png\"></a>\n                <a href='https://www.instagram.com/theorchardpig/' target=\"_blank\"><img src=\"/images/instagram-white2.png\"></a>\n                <a href='https://twitter.com/Orchardpig' target=\"_blank\"><img src=\"/images/twitter-white2.png\"</a>\n              </div>\n            </div>\n          </div>\n\n          <img @click=\"", "\" class='footer-logo' src='/images/logo-white-cut.png'></a>  \n\n          <hr/>\n          <p id='disclaimer'>\n            This website has been created as part of an assignment in an approved course of study for Curtin University \n            and contains copyright material not created by the author. \n            All copyright material used remains copyright of the respective owners \n            and has been used here pursuant to Section 40 of the Copyright Act 1968 (Commonwealth of Australia). \n            No part of this work may be reproduced without consent of the original copyright owners. \n            See code comments for references.\n          </p>\n          </footer>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -11554,7 +13665,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./..\\..\\static\\images\\stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./..\\..\\static\\images\\stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./..\\..\\static\\images\\stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -11603,7 +13714,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49535" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60895" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

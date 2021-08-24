@@ -67,139 +67,7 @@ class ProductsView {
     
     //add content
     const dialogContent = html `
-
-      <style>
-        .product-dialog{
-          --width: 80vw;
-          
-        }
-        #image-bottle {
-          position: absolute;
-          left: 0px;
-          top: 150px;
-        }
-        #image-can {
-          position: absolute;
-          right: 0px;
-          top: 150px;
-        }
-        img.pp-img{
-          object-fit: cover;
-          //max-height: 60vh;
-          width: 50%;
-          max-width 100%;
-          z-index: 99;
-          transition: width 1s;
-          
-        }
-        .pp-img:hover {
-          cursor: pointer;
-          transition: width 1s;
-          max-height: 60vh;
-          z-index: 100;
-          width: 100%;
-          
-        }
-
-        img.pp-img-single{
-          max-height: 60vh;
-        }
-        .product-dialog::part(panel){
-          background-color: var(--dark-blue);
-          color:white;
-        }
-        .product-dialog::part(body){
-          display: grid;
-          padding: 50px;
-          /*background-color: var(--dark-blue);*/
-        }
-        .product-dialog::part(close-button){
-          color: white;
-          font-size: 40px;
-        }
-      
-
-        .pp-left h2{
-          font-size: 36px;
-          color: white;
-        }
-        .pp-left button {
-          color: black;
-          font-family: var(--base-font-family);
-        }
-        .pp-left button{
-          color: white;
-          background-color: var(--med-blue);
-          font-family: var(--base-font-family);
-        }
-        .pp-left button:hover {
-          color: black;
-          background-color: var(--light-blue);
-        }
-        .pp-left button:active {
-          color: black;
-          background-color: var(--light-blue);
-
-        }
-        .pp-left{
-          grid-column: 1/2;
-          position: relative;
-        }
-        
-        .pp-right h3{
-          font-size: 32px;
-          font-family :var(--base-font-family);
-          font-weight: bold;
-        }
-        .pp-right{
-          grid-column: 3/3;
-          //margin-left: 20%;
-          margin-left: 10%;
-        }
-        .pp-right-top{
-          background-color: var(--light-blue);
-          border-radius: 5px;
-          color: black;
-          padding: 15px;
-        }
-        .pp-boxes{
-          display: flex;
-          width: 80%;
-          margin: auto;
-          font-weight: bold;
-        }
-        .pp-boxes img{
-          width: 40px;
-          height: 40px;
-          transform: translateY(50%);
-        }
-        .pp-boxes p{
-          width: 50%;
-          padding: 1em;
-        }
-        .pp-boxes button{
-          background-color: var(--med-blue);
-          box-shadow: none;
-          transform: translateX(30%);
-          width: 60%;
-        }
-        .pp-boxes button:hover{
-          color: black;
-          background-color: var(--white);
-          border: 1px solid var(--med-blue);
-        }
-        .pp-right-bottom{
-          display: grid;
-          grid-template-columns: repeat(2, auto);
-          grid-row-gap: 10px;
-        }
-        .pp-right-bottom img{
-          height: 50px;
-        }
-        #desc{
-          font-weight: 300;
-        }
-      </style>
+    
         
         <div class='pp-left'>
           ${this.cans ? html ` <div class='pp-button'>
@@ -215,10 +83,13 @@ class ProductsView {
           ${this.canImage ? html `<img id="image-bottle" @click=${() => this.moreInfoBottleHandler(product)} class='pp-img' src='/images/${product.image}' alt='${product.name}'>`:html``}
           ${this.canImage ? html `<img id="image-can" @click=${() => this.moreInfoCanHandler(product)} class='pp-img' src='/images/${this.canImage}' alt='${product.name}'>`:html`` }
           
-          </div>
+        </div>
 
         <div class='pp-right'>
           <div class='pp-right-top'>
+              <div class='pp-boxes'>
+              <h3 id="price" >&pound;${product.price}.00</h3>
+              </div>
               <div class='pp-boxes'>
                 <img src='/images/alcohol-black.png'>
                 <p id="abv" >${product.abv} ABV</p>
@@ -227,8 +98,12 @@ class ProductsView {
               </div>
               <div class='pp-boxes'>
                 <!-- <h3>&pound;${product.price.$numberDecimal}</h3> -->
-                <h3 id="price" >&pound;${product.price}</h3> 
-                <button @click=${() => this.addToCart(product)}>Add to Basket +</button>
+                <!-- <h3 id="price" >&pound;${product.price}</h3>  -->
+                <button class='bubble-button bubble-button-modal' @click=${() => this.addToCart(product)} style="--content: 'Add to Basket';">
+                  <div class="left"></div>
+                    Add to Basket
+                  <div class="right"></div>
+                </button>
               </div>
           </div>
           <p id='desc'>${product.description}</p>
@@ -240,7 +115,7 @@ class ProductsView {
             <img src='/images/allergies-white.png'>
             <p>Contains Sulfur Dioxide/Sulphites</p>
           </div>
-          ${product.allergen? html` <p id="allergen" >allergen: ${product.allergen}</p>` : html``}
+          ${product.allergen ? html` <p id="allergen" >allergen: ${product.allergen}</p>` : html``}
         </div>
     `
 
@@ -309,9 +184,18 @@ class ProductsView {
   }
 
   // if the user presses 'add to cart' from product page, then qty == 1
-  // else grab the qty that the user has entered
-  // as it will be easier than havign to update the quantity when it is already in the cart
+  // they can update the qty from the cart
   addToCart(product) {
+    //if its a can
+    if (this.canInfoDisplay == true) {
+      for (var i = 0; i < this.products.length; i++) {
+        if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "24")) {
+          // this.productDialog.remove();
+          product = this.products[i];
+        }
+      }
+    } 
+    //if its a bottle
     console.log("added to cart: " + product.name);
     CartAPI.addProduct(product.item, product.name, 1, product.sku, product.price);
     Toast.show(product.name + ' added to your Cart!')
@@ -343,16 +227,20 @@ class ProductsView {
                   <img id='${product.name}' @click=${() => this.moreInfoHandler(product)} @mouseover=${() => this.hoverImage(product)}  @mouseout=${() => this.unhoverImage(product)}
                       src='/images/${product.item}.png' alt='${product.name}'>
                   <h2>${product.shortName}</h2>
-                  <!--<button @click=${() => this.addToCart(product)}>Buy Now</button>-->
+                  <button class='bubble-button' @click=${() => this.moreInfoHandler(product)} style="--content: 'Buy Now';">
+                    <div class="left"></div>
+                      Buy Now
+                    <div class="right"></div>
+                  </button>
                 </div>
                 ` : html ``}
                 
               `)}
             `}
-          </div>
 
-          <va-app-footer margin="true"></va-app-footer> 
-        
+          </div>
+        <div id="footer-buffer" style="height: 150px;"></div>
+          <va-app-footer margin="false"></va-app-footer>
       </div>      
     `
     // this assigns the template html container to App.rootEl

@@ -26,6 +26,10 @@
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+.page-content {
+  scroll-behavior: smooth;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -173,14 +177,13 @@ a {
 
     .orchard-img {
       width: 100vw;
-      filter: brightness(150%);
     }
 
     .logo {
       position: absolute;
-      bottom: -15%;
-      left: 30%;
-      width: 40%;
+      top: 15%;
+      left: 35%;
+      width: 30%;
     }
   }
 
@@ -192,8 +195,9 @@ a {
   }
 
   .center-btn {
-    width: 15%;
+    display: flex;
     margin: auto;
+    padding: 2%;
   }
 
   button {
@@ -202,6 +206,7 @@ a {
     font-size: 20px;
     box-shadow: -2px 2px 3px rgb(0 0 0 / 90%);
     transition: transform .2s;
+    margin: auto;
   }
 }
 
@@ -209,6 +214,7 @@ a {
 .home-section {
   height: 95vh;
   padding: 1em;
+  overflow-x: hidden;
 }
 
 .home-section.rooted {
@@ -240,12 +246,118 @@ a {
     font-family: var(--heading-font-family);
   }
 
+  //bubbly button animation
+  //code from https://codepen.io/nourabusoud/pen/ypZzMM
+  $button-bg: #F4372D;
+
   button {
     background-color: #F4372D;
     margin: 0 auto;
     display: block;
     box-shadow: 0 0 20px 8px rgba(255, 180, 176, 0.9);
+    animation: btnWiggle 5s infinite;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    appearance: none;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:before, &:after{
+      position: absolute;
+      content: '';
+      display: block;
+      width: 140%;
+      height: 100%;
+      left: -20%;
+      z-index: -1000;
+      transition: all ease-in-out 0.5s;
+      background-repeat: no-repeat;
+    }
+    
+    &:before{
+      display: none;
+      top: -75%;
+      background-image:  
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle,  transparent 20%, $button-bg 20%, transparent 30%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%), 
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle,  transparent 10%, $button-bg 15%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%);
+      background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+    //background-position: 0% 80%, -5% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 85% 30%;
+    }
+    
+    &:after{
+      display: none;
+      bottom: -75%;
+      background-image:  
+      radial-gradient(circle, $button-bg 20%, transparent 20%), 
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle,  transparent 10%, $button-bg 15%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%),
+      radial-gradient(circle, $button-bg 20%, transparent 20%);
+      background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+    //background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+    }
+   
+    &:active{
+      transform: scale(0.9);
+      background-color: darken($button-bg, 5%);
+      box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+    }
+    
+    &.animate{
+      &:before{
+        display: block;
+        animation: topBubbles ease-in-out 0.75s forwards;
+      }
+      &:after{
+        display: block;
+        animation: bottomBubbles ease-in-out 0.75s forwards;
+      }
+    }
   }
+}
+
+@keyframes topBubbles {
+  0%{
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+  }
+    50% {
+      background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;}
+ 100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+  background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+}
+
+@keyframes bottomBubbles {
+  0%{
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;}
+ 100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+  background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+}
+
+// button wiggle animation
+// code from https://codepen.io/scottmagdalein/pen/nJivc
+@keyframes btnWiggle {
+	0% {-webkit-transform: rotate(0deg);}
+	2% {-webkit-transform: rotate(-2deg);}
+	3.5% {-webkit-transform: rotate(2deg);}
+	5% {-webkit-transform: rotate(0deg);}
+	100% {-webkit-transform: rotate(0deg);}
 }
 
 .home-section.new-pig {
@@ -317,7 +429,8 @@ button.homepg-btn {
   .left{
     width: 40%;
     position: absolute;
-    top: 45%;
+    top: 70%;
+    left: 0%;
     transform: translateY(-50%);
     margin-right: 5%;
     p{
@@ -410,11 +523,6 @@ button.homepg-btn {
       position: relative;
     }
     button{
-      padding: 2% 0%;
-      width: 150px;
-      background-color: #142838;
-      font-size: max(1.5vw, 16px);
-      border-radius: 8px;
       transform: translateY(-450px) translateX(300px);
       z-index: 100;
       position: relative;
@@ -424,6 +532,155 @@ button.homepg-btn {
 }
 
 // Product Dialog  ------------------------------
+
+.product-dialog::part(panel){
+  background-color: var(--dark-blue);
+  color:white;
+}
+
+.product-dialog::part(body){
+  display: grid;
+  padding: 50px;
+  padding-top: 0;
+  overflow: hidden;
+  /*background-color: var(--dark-blue);*/
+}
+
+.product-dialog::part(close-button){
+  color: white;
+  font-size: 40px;
+}
+
+.product-dialog{
+    --width: 80vw;
+
+  #image-bottle {
+    position: absolute;
+    left: 0px;
+    top: 150px;
+  }
+  #image-can {
+    position: absolute;
+    right: 0px;
+    top: 150px;
+  }
+
+  img.pp-img{
+    object-fit: cover;
+    //max-height: 60vh;
+    width: 50%;
+    max-width: 100%;
+    z-index: 99;
+    transition: width 1s;
+  }
+  .pp-img:hover {
+    cursor: pointer;
+    transition: width 1s;
+    max-height: 60vh;
+    z-index: 100;
+    width: 100%;
+  }
+
+  img.pp-img-single{
+    max-height: 60vh;
+    transform: translateY(-10%);
+  }
+
+  .pp-left{
+    grid-column: 1/2;
+    width: 100%;
+    position: relative;
+    h2{
+      font-size: 36px;
+      color: white;
+      padding-bottom: 0;
+    }
+    button {
+      color: black;
+      font-family: var(--base-font-family);
+    }
+    button{
+      color: white;
+      background-color: var(--med-blue);
+      font-family: var(--base-font-family);
+    }
+    button:hover {
+      color: black;
+      background-color: var(--light-blue);
+    }
+    button:active {
+      color: black;
+      background-color: var(--light-blue);
+
+    }
+  }
+  
+  .pp-right{
+    grid-column: 2/5;
+    margin-left: 10%;
+    h3{
+      font-size: 32px;
+      font-family :var(--base-font-family);
+      font-weight: bold;
+    }
+  }
+
+  .pp-right-top{
+    background-color: var(--light-blue);
+    border-radius: 5px;
+    color: black;
+    padding: 15px;
+  }
+
+  .pp-boxes{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    font-weight: bold;
+    text-align: center;
+    h3{
+      margin: auto;
+    }
+
+    img{
+      width: 40px;
+      height: 40px;
+      transform: translateY(50%);
+    }
+    p{
+      width: 50%;
+      padding: 1em;
+    }
+
+    //button styles in animation.scss
+    //due to bubbles button animation
+
+    // button{
+    //   background-color: var(--med-blue);
+    //   box-shadow: none;
+    //   transform: translateX(30%);
+    //   width: 60%;
+    // }
+    // button:hover{
+    //   color: black;
+    //   background-color: var(--white);
+    //   border: 1px solid var(--med-blue);
+    // }
+  }
+
+  .pp-right-bottom{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+    img{
+      height: 50px;
+    }
+  }
+  #desc{
+    font-weight: 300;
+  }
+}
 
 // Contact Page -------------------------------
 .contact-page {
@@ -494,7 +751,7 @@ button.homepg-btn {
     }
   }
 
-  .right {
+  .contact-right {
     margin-left: 5%;
     color: white;
     width: 100%;
@@ -554,19 +811,19 @@ button.homepg-btn {
 
 
       .swiper-container{
-        background: #eee;
+        background: rgba(0, 0, 0, 0);
         margin: 0;
         padding: 0;
       }
 
       .swiper-container {
         width: 100%;
-        height: 98%;
+        height: 100%;
       }
 
       .swiper-slide {
         text-align: center;
-        background: #fff;
+        background: rgba(0, 0, 0, 0);
 
         /* Center slide text vertically */
         display: flex;
@@ -577,8 +834,10 @@ button.homepg-btn {
       .swiper-slide img {
         display: block;
         width: 100%;
-        height: 100%;
+        height: 95%;
         object-fit: cover;
+        position: absolute;
+        top: 0;
       }
 
       .swiper-button-next, .swiper-button-prev {
@@ -588,6 +847,10 @@ button.homepg-btn {
       .swiper-pagination-bullet{
         background-color: white;
         opacity: 100%
+      }
+      .swiper-pagination{
+        z-index: 1000;
+        position: absolute;
       }
 
       .swiper-pagination-bullet-active{
@@ -600,13 +863,11 @@ button.homepg-btn {
 .about-page {
   background: linear-gradient(180deg, rgba(56, 101, 134, 1) 0%, rgba(65, 134, 183, 1) 100%);
   color: white;
-  overflow-x: hidden;
 
   .prints {
     position: absolute;
     top: 0;
     left: 0;
-    overflow: hidden;
     width: 100%;
     height: 100%;
     z-index: -100;
@@ -645,11 +906,11 @@ button.homepg-btn {
       color: white;
       font-family: var(--thin-heading-font-family);
       font-weight: 200;
-      font-size: 4vw;
+      font-size: max(4vw, 25px);
     }
 
     p {
-      font-size: max(1.5vw, 15px);
+      font-size: max(1.5vw, 16px);
       width: 70%;
     }
 
@@ -662,6 +923,26 @@ button.homepg-btn {
     .info-left {
       padding-right: 0;
       padding-left: 10%;
+    }
+
+    .thebeg{
+      background-image: url(../../static/images/stroke-the-beginning.png);
+      background-repeat: no-repeat;
+      background-size: 90% 60%;
+      background-position: 20px 30px;
+    }
+    .info-right{
+      background-image: url(../../static/images/stroke-beliefs.png);
+      background-repeat: no-repeat;
+      background-size: 70% 50%;
+      background-position: 0px 30px;
+      margin-left: 5%;
+    }
+    .ourhome{
+      background-image: url(../../static/images/stroke-our-home.png);
+      background-repeat: no-repeat;
+      background-size: 80% 50%;
+      background-position: 30px 30px;
     }
   }
 
@@ -681,6 +962,9 @@ button.homepg-btn {
 
   .ps3{
     transform: rotate(-5deg) translateY(1750px) translateX(-100px) scaleX(-1);
+  }
+  .ps4{
+    visibility: hidden;
   }
 
 }
@@ -706,14 +990,24 @@ button.homepg-btn {
 .checkout{
   background-color: var(--light-blue);
   display: flex;
-  .right{
+  .go-back{
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 0;
+    display: inline-block;
+    &:hover{
+      color: var(--med-blue);
+    }
+  }
+  .right-checkout{
     width: 30%;
     padding: 30px;
   }
   .input-group{
     width: 100%;
   }
-  .left{
+  .left-checkout{
     padding: 30px;
     width: 70%;
     .name-input{

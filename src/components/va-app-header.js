@@ -6,6 +6,8 @@ import { anchorRoute, gotoRoute } from './../Router'
 import Auth from './../Auth'
 import App from './../App'
 import CartAPI from './../CartAPI';
+import { refresh } from 'aos';
+import Toast from '../Toast';
 
 customElements.define('va-app-header', class AppHeader extends LitElement {
   constructor() {
@@ -29,11 +31,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
   firstUpdated() {
     super.firstUpdated()
     this.navActiveLinks()
+    this.updateQty()
   }
 
   navActiveLinks() {
     const currentPath = window.location.pathname
-    const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a, .app-side-menu-items a')
+    const navLinks = this.shadowRoot.querySelectorAll('.app-top-nav a')
     navLinks.forEach(navLink => {
       if (navLink.href.slice(-1) == '#') return
       if (navLink.pathname === currentPath) {
@@ -51,6 +54,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     //initialise all the vars needed for a checkout
     gotoRoute('/checkout1')
   }
+
   toggle() {
     const dropdownMenu = this.shadowRoot.querySelector('.app-menu');
     const hamburger = this.shadowRoot.querySelector('#hamburger');
@@ -75,13 +79,41 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
   menuClick(e){
     e.preventDefault()
     const pathname = e.target.closest('a').pathname
-    const appSideMenu = this.shadowRoot.querySelector('.app-side-menu')
-    // hide appMenu
-    appSideMenu.hide()
-    appSideMenu.addEventListener('sl-after-hide', () => {
-      // goto route after menu is hidden
-      gotoRoute(pathname)
+    gotoRoute(pathname)
+  }
+
+  updateQty(){
+    const qtyInputs = this.shadowRoot.querySelectorAll('sl-input.qty-input');
+    qtyInputs.forEach(qty =>{
+      qty.addEventListener('sl-blur', event => {
+        // console.log("qty updated")
+        let product = CartAPI.updateQty(event.target.name, event.target.value)
+        let totalCosts = this.shadowRoot.querySelectorAll('.total-cost')
+        totalCosts.forEach( totalCost => {
+          if (totalCost.id == event.target.name)
+          {
+            totalCost.innerHTML = '&pound;' + product.totalCost
+          }
+        })
+        this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + CartAPI.getTotal() + ".00"
+      });
     })
+  }
+
+  emptyCart() {
+    CartAPI.emptyCart()
+    this.products = null;
+    gotoRoute('/products');
+    Toast.show("Your Cart has been emptied")
+  }
+
+  remove(name, sku){
+    CartAPI.removeItem(name)
+    var productDiv = this.shadowRoot.querySelector("#" + sku);
+    console.log(productDiv)
+    productDiv.remove();
+    this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + CartAPI.getTotal() + ".00"
+    Toast.show(name + " has been removed from your cart")
   }
 
   render() {
@@ -152,13 +184,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       }
       .app-top-nav li:hover {
         background-image: url('/images/navbar-pigstep.png');
-        color: red;
+        color: black;
         background-repeat: no-repeat;
         background-position: center top;
         background-size: 30px;
       }
       .app-top-nav li a:visited{
-        color: red;
+        color: black;
         background-image: url('/images/navbar-pigstep.png');
         background-repeat: no-repeat;
         background-position: center top;
@@ -170,6 +202,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       .header-title {
         color: var(--med-blue);
+        /* color: #AACOCF; */
         font-family: Rockwell, serif;
         position: absolute;
         right: 20%;
@@ -252,7 +285,10 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       /* active nav links */
       .app-top-nav a.active {
-        font-weight: bold;
+        background-image: url('/images/navbar-pigstep.png');
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 30px;
       }
 
       /* RESPONSIVE - MOBILE ------------------- */
@@ -317,24 +353,23 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
       <nav class="app-top-nav">
         <ul>
-          <li class="nav-trotter" ><a  @click="${() => gotoRoute('/')}">Home</a></li>
-          <li class="nav-trotter" ><a @click="${() => gotoRoute('/products')}">Shop</a></li>
-          <li class="nav-trotter" ><a @click="${() => gotoRoute('/about')}">About</a></li> 
-          <li class="nav-trotter" ><a @click="${() => gotoRoute('/contact')}">Contact</a></li>  
+          <li class="nav-trotter" ><a href="/" @click="${this.menuClick}">Home</a></li>
+          <li class="nav-trotter" ><a href="/products" @click="${this.menuClick}">Shop</a></li>
+          <li class="nav-trotter" ><a href="/about" @click="${this.menuClick}">About</a></li> 
+          <li class="nav-trotter" ><a href="/contact" @click="${this.menuClick}">Contact</a></li>  
         </ul>
       </nav>
       
-      
-      <video allow="autoplay" @click="${() => gotoRoute('/')}" class='nav-logo2' width="70" height="50" autoplay playsinline onmouseover="this.play()" onmouseout="this.pause();">
+      <video allow="autoplay" muted @click="${() => gotoRoute('/')}" class='nav-logo2' width="70" height="50" autoplay playsinline onmouseover="this.play()" onmouseout="this.pause();">
         <source src="/images/logo-run.mp4" type="video/mp4">
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
       </video>
-      <div class="header-title">
+      <!-- <div class="header-title">
         ${this.title ? html`
-          <h2 style="color= var(--med-blue) class="page-title">${this.title}</h1>
+          <h2>${this.title}</h2>
         `: html``}
         <slot></slot>
-      </div>
+      </div> -->
     
       <nav class="basket right">
         <!-- change to apples2 or apples to see other options -->
@@ -359,11 +394,11 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       
       <div id="drop-menu" class="app-menu">
       <ul>
-        <li><a @click="${() => gotoRoute('/')}">Home</a></li>
-        <li><a @click="${() => gotoRoute('/products')}">Shop</a></li>
-        <li><a @click="${() => gotoRoute('/about')}">About</a></li>
-        <li><a @click="${() => gotoRoute('/contact')}">Contact</a></li>
-        <li><a @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!</a></li>
+        <li><a href="/" @click="${() => gotoRoute('/')}">Home</a></li>
+        <li><a href="/products" @click="${() => gotoRoute('/products')}">Shop</a></li>
+        <li><a href="/about" @click="${() => gotoRoute('/about')}">About</a></li>
+        <li><a href="/contact" @click="${() => gotoRoute('/contact')}">Contact</a></li>
+        <li><a href="/game" @click="${() => gotoRoute('/game')}" style="color: red;">Play - Find the Pig!</a></li>
       </ul>
       </div>
     
@@ -400,10 +435,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           display: grid;
           width: 70%;
           grid-template-columns: repeat(2, auto);
+          margin-bottom: 6%;
       }
       .cart-img{
         height: 20vh;
         margin-bottom: 30px;
+        margin-right: 10px;
       }
       .product-name{
         font-weight: bold;
@@ -420,6 +457,43 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         font-size: 20px;
         width: 100%;
       }
+      .qty{
+        display: flex;
+      }
+      .input-group{
+          width: 30%;
+          margin-left: 5%;
+      }
+
+      .empty-cart-btn {
+        position: relative;
+        float: right;
+        margin-bottom: 20px;
+        color: white;
+        background-color: #F4372D;
+        text-transform: uppercase;
+        border: none;
+        font-family: var(--base-font-family);
+        cursor: pointer;
+        padding: 2% 4%;
+        border-radius: 8px;
+        font-size: 10px;
+        width: 30%;
+      }
+
+      .remove-btn{
+        cursor: pointer;
+        color: grey;
+        display: inline;
+        font-size: 14px;
+        padding-top: 6%;
+      }
+      .remove-btn:hover{
+        color: red;
+      }
+      p{
+        margin: 3% 0;
+      }
 
 
     </style>
@@ -434,18 +508,26 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
     <h1>Your Basket</h1>
       ${this.products.map(product => html`
-        <div class='cart-product'>
+        <div class='cart-product' id="${product.sku}">
           <img class='cart-img' src='/images/${product.item}.png' alt='${product.name}'>
           <div class='cart-product-info'>
             <p class='product-name'>${product.name}</p> 
-            <p>Quantity: ${product.quantity}</p>
-            <!-- <p>&pound;${product.price.$numberDecimal}</p> -->
-            <p>&pound;${product.price}</p>
+
+            <div class='qty'> 
+              <p>Quantity:</p>
+              <div class="input-group">
+                <sl-input class='qty-input' name='${product.name}' min='1' size='small' type='number' value='${product.quantity}'></sl-input>
+              </div>
+            </div>
+
+            <p class='total-cost' id='${product.name}'>&pound;${product.totalCost}</p>
+            <p class='remove-btn' @click="${() => this.remove(product.name, product.sku)}">remove item</p>
           </div>
         </div>
       `)}
 
-      <h3>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
+      <h3 class='total'>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
+      <button class='empty-cart-btn' @click="${this.emptyCart}">Empty Cart</button>
       <button class='checkout-btn' @click="${this.checkoutClick}">Checkout</button>
     `}
     

@@ -40,8 +40,12 @@ class Checkout2View {
       cvvVerified = true
     }
 
-    OrderAPI.paymentInfo(lastFourDigits, expMonth, expYear, cvvVerified)
+    OrderAPI.paymentInfo(formData)
     gotoRoute('/checkout3')
+  }
+
+  continueShopping(){
+    gotoRoute('/products')
   }
 
   // method from lit library which allows us 
@@ -55,12 +59,13 @@ class Checkout2View {
 
       <div class="page-content checkout checkout2">        
       
-      <div class='left'>
+      <div class='left-checkout'>
+      <p class='go-back' @click=${() => gotoRoute('/checkout1')}> < Back</p>
         <h2>Payment Details</h2>
         
         <sl-form class="form-shipping" @sl-submit=${this.paymentSubmitHandler}>
             <div class="input-group">
-              <sl-input name="cardNumber" type="text" label="Card Number" required></sl-input>
+              <sl-input name="cardNumber" type="number" min=7 max=16 label="Card Number" required></sl-input>
             </div>
             <div class="input-group">
               <sl-select name='expMonth' label='Select Expiry Month' required>
@@ -94,13 +99,13 @@ class Checkout2View {
               </sl-select>
             </div>
             <div class="input-group">
-              <sl-input name="cvv" type="text" label="CVV" required></sl-input>
+              <sl-input name="cvv" type="number" min=3 max=4 label="CVV" required></sl-input>
             </div>      
             <button class="checkout-btn" submit >Review Order</button>
           </sl-form>
       </div>
         
-      <div class='right'>
+      <div class='right-checkout'>
         <h1>Your Basket</h1>
           ${this.products == null ? html`<p>no products</p>`: html `
             ${this.products.map(product => html`

@@ -10,7 +10,7 @@ sl-dialog::part(title){
 
 
 // RESPONSIVE - MOBILE -------------------
-@media all and (max-width: 768px){ 
+@media all and (max-width: 860px){ 
 
   sl-dialog::part(panel) {
     width: 100%;
