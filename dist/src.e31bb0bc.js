@@ -10022,6 +10022,15 @@ class CartAPI {
     return updatedProduct;
   }
 
+  emptyCart() {
+    this.cartProducts.length = 0;
+    this.orderProducts.length = 0;
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+    localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+    console.log("cart emptied");
+    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+  }
+
   removeFromCart(name) {}
 
   async getProducts() {
@@ -13255,6 +13264,8 @@ var _CartAPI = _interopRequireDefault(require("./../CartAPI"));
 
 var _aos = require("aos");
 
+var _Toast = _interopRequireDefault(require("../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject8() {
@@ -13384,13 +13395,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   checkoutClick() {
     //initialise all the vars needed for a checkout
     (0, _Router.gotoRoute)('/checkout1');
-  } // emptyCart() {
-  //   this.products = null;
-  //   localStorage.removeItem('cartProducts');
-  //   localStorage.removeItem('orderProducts');
-  //   gotoRoute('/products');
-  // }
-
+  }
 
   toggle() {
     const dropdownMenu = this.shadowRoot.querySelector('.app-menu');
@@ -13436,6 +13441,15 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
     });
   }
 
+  emptyCart() {
+    _CartAPI.default.emptyCart();
+
+    this.products = null;
+    (0, _Router.gotoRoute)('/products');
+
+    _Toast.default.show("Your Cart has been emptied");
+  }
+
   remove() {}
 
   render() {
@@ -13443,7 +13457,7 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js","./../CartAPI":"CartAPI.js","aos":"../node_modules/aos/dist/aos.js"}],"components/va-app-footer.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js","./../CartAPI":"CartAPI.js","aos":"../node_modules/aos/dist/aos.js","../Toast":"Toast.js"}],"components/va-app-footer.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("@polymer/lit-element");
@@ -13596,7 +13610,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./../../static/images/stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./../../static/images/stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./../../static/images/stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./..\\..\\static\\images\\stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./..\\..\\static\\images\\stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./..\\..\\static\\images\\stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -13645,7 +13659,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56755" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60504" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

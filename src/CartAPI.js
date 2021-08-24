@@ -94,7 +94,15 @@ class CartAPI {
             }
         })
         return updatedProduct
+    }
 
+    emptyCart(){
+        this.cartProducts.length = 0;
+        this.orderProducts.length = 0;
+        localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+        console.log("cart emptied")
+        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
     }
 
     removeFromCart(name){

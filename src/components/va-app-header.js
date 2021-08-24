@@ -7,6 +7,7 @@ import Auth from './../Auth'
 import App from './../App'
 import CartAPI from './../CartAPI';
 import { refresh } from 'aos';
+import Toast from '../Toast';
 
 customElements.define('va-app-header', class AppHeader extends LitElement {
   constructor() {
@@ -54,14 +55,6 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     gotoRoute('/checkout1')
   }
 
-  // emptyCart() {
-  //   this.products = null;
-  //   localStorage.removeItem('cartProducts');
-  //   localStorage.removeItem('orderProducts');
-  //   gotoRoute('/products');
-    
-  // }
-
   toggle() {
     const dropdownMenu = this.shadowRoot.querySelector('.app-menu');
     const hamburger = this.shadowRoot.querySelector('#hamburger');
@@ -104,6 +97,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + CartAPI.getTotal() + ".00"
       });
     })
+  }
+
+  emptyCart() {
+    CartAPI.emptyCart()
+    this.products = null;
+    gotoRoute('/products');
+    Toast.show("Your Cart has been emptied")
   }
 
   remove(){
