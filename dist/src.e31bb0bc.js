@@ -11353,11 +11353,21 @@ class ProductsView {
       }
     }
   } // if the user presses 'add to cart' from product page, then qty == 1
-  // else grab the qty that the user has entered
-  // as it will be easier than havign to update the quantity when it is already in the cart
+  // they can update the qty from the cart
 
 
   addToCart(product) {
+    //if its a can
+    if (this.canInfoDisplay == true) {
+      for (var i = 0; i < this.products.length; i++) {
+        if (this.products[i].shortName === product.shortName && this.products[i].packSize === "24") {
+          // this.productDialog.remove();
+          product = this.products[i];
+        }
+      }
+    } //if its a bottle
+
+
     console.log("added to cart: " + product.name);
 
     _CartAPI.default.addProduct(product.item, product.name, 1, product.sku, product.price);
