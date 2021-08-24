@@ -386,7 +386,8 @@ button.homepg-btn {
 .home-section.hog .left {
   width: 40%;
   position: absolute;
-  top: 45%;
+  top: 70%;
+  left: 0%;
   transform: translateY(-50%);
   margin-right: 5%;
 }
@@ -878,24 +879,24 @@ button.homepg-btn {
   background-color: var(--light-blue);
   display: flex;
 }
-.checkout .right {
+.checkout .right-checkout {
   width: 30%;
   padding: 30px;
 }
 .checkout .input-group {
   width: 100%;
 }
-.checkout .left {
+.checkout .left-checkout {
   padding: 30px;
   width: 70%;
 }
-.checkout .left .name-input {
+.checkout .left-checkout .name-input {
   display: flex;
 }
-.checkout .left .name-input .input-group:first-child {
+.checkout .left-checkout .name-input .input-group:first-child {
   margin-right: 3%;
 }
-.checkout .left .name-input .input-group {
+.checkout .left-checkout .name-input .input-group {
   width: 48%;
 }
 .checkout h1 {
@@ -1048,10 +1049,10 @@ sl-dialog::part(title) {
   }
 
   /*CHECKOUT*/
-  .checkout .left {
+  .checkout .left-checkout {
     width: 60%;
   }
-  .checkout .right {
+  .checkout .right-checkout {
     width: 40%;
   }
 

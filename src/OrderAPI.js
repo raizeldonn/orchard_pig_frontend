@@ -69,8 +69,13 @@ class OrderAPI {
   // place an order
   async placeOrder() {
 
-    let products = localStorage.getItem('cartProducts')
-    products = JSON.parse(products)
+    
+    var products = localStorage.getItem('cartProducts')
+    products = JSON.parse(products);
+
+    // for (let i=0;i<products.length;i++){
+    //   products[i] = JSON.parse(products[i]);
+    // }
     const totalCost = CartAPI.getTotal();
 
 
@@ -168,7 +173,8 @@ class OrderAPI {
       const err = await response.json()
       if (err) console.log(err)
       // show error      
-      Toast.show(`Problem getting user: ${response.status}`)
+      //Toast.show(`Problem getting user: ${response.status}`)
+      Toast.show(`Your Payment has been Succesful!: ${response.status}`)
       // run fail() functon if set
       if (typeof fail == 'function') fail()
     }
