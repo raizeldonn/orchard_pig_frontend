@@ -103,16 +103,13 @@ class OrderAPI {
    
     }
 
-    //convert to a FormData object
+    console.log("Order DATA : ", this.orderData)
 
+    //convert to a FormData object
     var orderFormData = new FormData();
     for (var key in this.orderData) {
       orderFormData.append(key, this.orderData[key]);
     }
-   
-
-
-    console.log("Order DATA : ", this.orderData)
 
     const response = await fetch(`${App.apiBase}/order`, {
       method: 'POST',
@@ -150,7 +147,12 @@ class OrderAPI {
       "gateway": "stripe",
       "paymentType": "credit",
       "amount": CartAPI.getTotal(),
-      "card": this.payment
+      // "card": this.payment
+      "brand": "visa",
+      "lastFourDigits": this.payment.lastFourDigits,
+      "expMonth": this.payment.expMonth,
+      "expYear": this.payment.expYear,
+      "cvvVerified": this.payment.cvvVerified
 
     }
 
