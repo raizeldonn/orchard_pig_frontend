@@ -69,6 +69,11 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
       li{
         margin: 4% 0;
         cursor: pointer;
+        transition: all ease 0.2s;
+      }
+      li:hover{
+        color: var(--med-blue);
+        margin-left: 2%;
       }
 
 
@@ -89,6 +94,7 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
           height: 70px;
           margin: 0px;
           color: white;
+          filter: hue-rotate(100deg);
       }
 
       #disclaimer{

@@ -7,6 +7,7 @@ import Auth from './../Auth'
 import App from './../App'
 import CartAPI from './../CartAPI';
 import { refresh } from 'aos';
+import Toast from '../Toast';
 
 customElements.define('va-app-header', class AppHeader extends LitElement {
   constructor() {
@@ -54,14 +55,6 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     gotoRoute('/checkout1')
   }
 
-  // emptyCart() {
-  //   this.products = null;
-  //   localStorage.removeItem('cartProducts');
-  //   localStorage.removeItem('orderProducts');
-  //   gotoRoute('/products');
-    
-  // }
-
   toggle() {
     const dropdownMenu = this.shadowRoot.querySelector('.app-menu');
     const hamburger = this.shadowRoot.querySelector('#hamburger');
@@ -93,6 +86,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     const qtyInputs = this.shadowRoot.querySelectorAll('sl-input.qty-input');
     qtyInputs.forEach(qty =>{
       qty.addEventListener('sl-blur', event => {
+        // console.log("qty updated")
         let product = CartAPI.updateQty(event.target.name, event.target.value)
         let totalCosts = this.shadowRoot.querySelectorAll('.total-cost')
         totalCosts.forEach( totalCost => {
@@ -106,8 +100,20 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
     })
   }
 
-  remove(){
+  emptyCart() {
+    CartAPI.emptyCart()
+    this.products = null;
+    gotoRoute('/products');
+    Toast.show("Your Cart has been emptied")
+  }
 
+  remove(name, sku){
+    CartAPI.removeItem(name)
+    var productDiv = this.shadowRoot.querySelector("#" + sku);
+    console.log(productDiv)
+    productDiv.remove();
+    this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + CartAPI.getTotal() + ".00"
+    Toast.show(name + " has been removed from your cart")
   }
 
   render() {
@@ -354,7 +360,6 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         </ul>
       </nav>
       
-      
       <video allow="autoplay" muted @click="${() => gotoRoute('/')}" class='nav-logo2' width="70" height="50" autoplay playsinline onmouseover="this.play()" onmouseout="this.pause();">
         <source src="/images/logo-run.mp4" type="video/mp4">
         <img @click="${() => gotoRoute('/')}" class='nav-logo' src='/images/logo-black.png'>
@@ -430,10 +435,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           display: grid;
           width: 70%;
           grid-template-columns: repeat(2, auto);
+          margin-bottom: 6%;
       }
       .cart-img{
         height: 20vh;
         margin-bottom: 30px;
+        margin-right: 10px;
       }
       .product-name{
         font-weight: bold;
@@ -474,6 +481,20 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         width: 30%;
       }
 
+      .remove-btn{
+        cursor: pointer;
+        color: grey;
+        display: inline;
+        font-size: 14px;
+        padding-top: 6%;
+      }
+      .remove-btn:hover{
+        color: red;
+      }
+      p{
+        margin: 3% 0;
+      }
+
 
     </style>
 
@@ -487,7 +508,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
 
     <h1>Your Basket</h1>
       ${this.products.map(product => html`
-        <div class='cart-product'>
+        <div class='cart-product' id="${product.sku}">
           <img class='cart-img' src='/images/${product.item}.png' alt='${product.name}'>
           <div class='cart-product-info'>
             <p class='product-name'>${product.name}</p> 
@@ -498,10 +519,9 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
                 <sl-input class='qty-input' name='${product.name}' min='1' size='small' type='number' value='${product.quantity}'></sl-input>
               </div>
             </div>
-            
-            <!-- <p>Quantity: ${product.quantity}</p> -->
-            <!-- <p>&pound;${product.price.$numberDecimal}</p> -->
+
             <p class='total-cost' id='${product.name}'>&pound;${product.totalCost}</p>
+            <p class='remove-btn' @click="${() => this.remove(product.name, product.sku)}">remove item</p>
           </div>
         </div>
       `)}

@@ -94,7 +94,40 @@ class CartAPI {
             }
         })
         return updatedProduct
+    }
 
+    removeItem(name){
+        if(localStorage.getItem('cartProducts')){
+            this.cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+        }
+        //second array for order products to match the data types for order
+        if(localStorage.getItem('orderProducts')){
+            this.orderProducts = JSON.parse(localStorage.getItem('orderProducts'));
+        }
+
+        this.cartProducts.forEach(product => {
+            if (product.name == name){
+                const index = this.cartProducts.indexOf(product);
+                if (index > -1) {
+                    this.cartProducts.splice(index, 1);
+                    this.orderProducts.splice(index, 1);
+                }
+
+                localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+                localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+                console.log("removed item from cart: " + name)
+                console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+            }
+        })
+    }
+
+    emptyCart(){
+        this.cartProducts.length = 0;
+        this.orderProducts.length = 0;
+        localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
+        console.log("cart emptied")
+        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
     }
 
     removeFromCart(name){
