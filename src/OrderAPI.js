@@ -185,7 +185,7 @@ class OrderAPI {
   shippingInfo(address, address2, shipping) {
     this.shipping = {
       "address": address,
-      "addressLine2": address2,
+      "address2": address2,
       "shippingOption": shipping
     }
     console.log("shipping: " + JSON.stringify(this.shipping))

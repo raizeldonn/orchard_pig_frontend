@@ -33,11 +33,11 @@ class Checkout1View {
       console.log(err)
     }
     
-    // let address = formData.get('address')
-    // let address2 = formData.get('address2')
+    let address = formData.get('address')
+    let address2 = formData.get('address2')
     let shipping = formData.get('shipping')
 
-    // OrderAPI.shippingInfo(address, address2, shipping)
+    OrderAPI.shippingInfo(address, address2, shipping)
 
     CartAPI.setShipping(shipping)
     gotoRoute('/checkout2')
