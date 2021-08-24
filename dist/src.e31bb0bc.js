@@ -10183,17 +10183,12 @@ class OrderAPI {
 
   async placeOrder() {
     var products = localStorage.getItem('cartProducts');
-    products = JSON.parse(products); // for (let i=0;i<products.length;i++){
+    products = JSON.parse(products); //const productsArray = [products];
+    // for (let i=0;i<products.length;i++){
     //   products[i] = JSON.parse(products[i]);
     // }
 
     const totalCost = _CartAPI.default.getTotal();
-
-    var shippingFormData = new FormData();
-
-    for (var key in this.shipping) {
-      shippingFormData.append(key, this.shipping[key]);
-    }
 
     var productsFormData = new FormData();
 
@@ -10209,16 +10204,19 @@ class OrderAPI {
       "status": "awaitingShipment",
       "totalCost": totalCost,
       //"products": products,
-      "shipping": this.shipping
-    }; //convert to a FormData object
+      "address": this.shipping.address,
+      "address2": this.shipping.address2,
+      "shipping": this.shipping.shippingOption
+    };
+    console.log("Order DATA : ", this.orderData); //convert to a FormData object
 
     var orderFormData = new FormData();
 
     for (var key in this.orderData) {
       orderFormData.append(key, this.orderData[key]);
-    }
+    } // POST main order form data
 
-    console.log("Order DATA : ", this.orderData);
+
     const response = await fetch("".concat(_App.default.apiBase, "/order"), {
       method: 'POST',
       // body: this.orderData
@@ -10240,7 +10238,25 @@ class OrderAPI {
     const data = await response.json();
     console.log("Order Response : ", data);
     this.orderId = data._id;
-    console.log("OrderId : ", this.orderId);
+    console.log("OrderId : ", this.orderId); // POST products array
+
+    const resp = await fetch("".concat(_App.default.apiBase, "/order/productsarray/").concat(this.orderId), {
+      method: 'PUT',
+      body: productsFormData //body: products
+
+    }); // if productsArry update response not ok
+
+    if (!resp.ok) {
+      // console log error
+      const err = await resp.json();
+      if (err) console.log(err); // show error      
+
+      _Toast.default.show("Problem adding products array: ".concat(resp.status)); // run fail() functon if set
+
+
+      if (typeof fail == 'function') fail();
+    }
+
     await this.makePayment();
   } // post a payment
 
@@ -10253,7 +10269,12 @@ class OrderAPI {
       "gateway": "stripe",
       "paymentType": "credit",
       "amount": _CartAPI.default.getTotal(),
-      "card": this.payment
+      // "card": this.payment
+      "brand": "visa",
+      "lastFourDigits": this.payment.lastFourDigits,
+      "expMonth": this.payment.expMonth,
+      "expYear": this.payment.expYear,
+      "cvvVerified": this.payment.cvvVerified
     }; //convert to a FormData object
 
     var paymentFormData = new FormData();
@@ -10287,7 +10308,7 @@ class OrderAPI {
   shippingInfo(address, address2, shipping) {
     this.shipping = {
       "address": address,
-      "addressLine2": address2,
+      "address2": address2,
       "shippingOption": shipping
     };
     console.log("shipping: " + JSON.stringify(this.shipping));
@@ -10423,11 +10444,13 @@ class Checkout1View {
       await _OrderAPI.default.createGuest(formData);
     } catch (err) {
       console.log(err);
-    } // let address = formData.get('address')
-    // let address2 = formData.get('address2')
+    }
 
+    let address = formData.get('address');
+    let address2 = formData.get('address2');
+    let shipping = formData.get('shipping');
 
-    let shipping = formData.get('shipping'); // OrderAPI.shippingInfo(address, address2, shipping)
+    _OrderAPI.default.shippingInfo(address, address2, shipping);
 
     _CartAPI.default.setShipping(shipping);
 
@@ -10520,7 +10543,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left-checkout'>\n      <p class='go-back' @click=", "> < Back</p>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"number\" min=7 max=16 label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expMonth' label='Select Expiry Month' required>\n                <sl-menu-item value='01'>January</sl-menu-item>\n                <sl-menu-item value='02'>February</sl-menu-item>\n                <sl-menu-item value='03'>March</sl-menu-item>\n                <sl-menu-item value='04'>April</sl-menu-item>\n                <sl-menu-item value='05'>May</sl-menu-item>\n                <sl-menu-item value='06'>June</sl-menu-item>\n                <sl-menu-item value='07'>July</sl-menu-item>\n                <sl-menu-item value='08'>August</sl-menu-item>\n                <sl-menu-item value='09'>September</sl-menu-item>\n                <sl-menu-item value='10'>October</sl-menu-item>\n                <sl-menu-item value='11'>November</sl-menu-item>\n                <sl-menu-item value='12'>December</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expYear' label='Select Expiry Year' required>\n                <sl-menu-item value='21'>2021</sl-menu-item>\n                <sl-menu-item value='22'>2022</sl-menu-item>\n                <sl-menu-item value='23'>2023</sl-menu-item>\n                <sl-menu-item value='24'>2024</sl-menu-item>\n                <sl-menu-item value='25'>2025</sl-menu-item>\n                <sl-menu-item value='26'>2026</sl-menu-item>\n                <sl-menu-item value='27'>2027</sl-menu-item>\n                <sl-menu-item value='28'>2028</sl-menu-item>\n                <sl-menu-item value='29'>2029</sl-menu-item>\n                <sl-menu-item value='30'>2030</sl-menu-item>\n                <sl-menu-item value='31'>2031</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cvv\" type=\"number\" min=3 max=4 label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right-checkout'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class='checkout-header'>\n        <h1>Checkout</h1>\n        <img class='nav-logo' src='/images/logo-black.png'>\n      </div>\n\n      <div class=\"page-content checkout checkout2\">        \n      \n      <div class='left-checkout'>\n      <p class='go-back' @click=", "> < Back</p>\n        <h2>Payment Details</h2>\n        \n        <sl-form class=\"form-shipping\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input name=\"cardNumber\" type=\"number\" minlength=7 maxlength=16 label=\"Card Number\" required></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expMonth' label='Select Expiry Month' required>\n                <sl-menu-item value='01'>January</sl-menu-item>\n                <sl-menu-item value='02'>February</sl-menu-item>\n                <sl-menu-item value='03'>March</sl-menu-item>\n                <sl-menu-item value='04'>April</sl-menu-item>\n                <sl-menu-item value='05'>May</sl-menu-item>\n                <sl-menu-item value='06'>June</sl-menu-item>\n                <sl-menu-item value='07'>July</sl-menu-item>\n                <sl-menu-item value='08'>August</sl-menu-item>\n                <sl-menu-item value='09'>September</sl-menu-item>\n                <sl-menu-item value='10'>October</sl-menu-item>\n                <sl-menu-item value='11'>November</sl-menu-item>\n                <sl-menu-item value='12'>December</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name='expYear' label='Select Expiry Year' required>\n                <sl-menu-item value='21'>2021</sl-menu-item>\n                <sl-menu-item value='22'>2022</sl-menu-item>\n                <sl-menu-item value='23'>2023</sl-menu-item>\n                <sl-menu-item value='24'>2024</sl-menu-item>\n                <sl-menu-item value='25'>2025</sl-menu-item>\n                <sl-menu-item value='26'>2026</sl-menu-item>\n                <sl-menu-item value='27'>2027</sl-menu-item>\n                <sl-menu-item value='28'>2028</sl-menu-item>\n                <sl-menu-item value='29'>2029</sl-menu-item>\n                <sl-menu-item value='30'>2030</sl-menu-item>\n                <sl-menu-item value='31'>2031</sl-menu-item>\n              </sl-select>\n            </div>\n            <div class=\"input-group\">\n              <sl-input name=\"cvv\" type=\"number\" minlength=3 maxlength=4 label=\"CVV\" required></sl-input>\n            </div>      \n            <button class=\"checkout-btn\" submit >Review Order</button>\n          </sl-form>\n      </div>\n        \n      <div class='right-checkout'>\n        <h1>Your Basket</h1>\n          ", "\n          \n        <p>Shipping: &pound;", ".00</p>\n        <h3>Subtotal: &pound;", ".00</h3>\n        <button class='checkout-btn' @click=\"", "\">Continue Shopping</button>\n      </div>\n\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13665,7 +13688,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./..\\..\\static\\images\\stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./..\\..\\static\\images\\stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./..\\..\\static\\images\\stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./../../static/images/stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./../../static/images/stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./../../static/images/stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -13714,7 +13737,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60895" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56899" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -72,17 +72,12 @@ class OrderAPI {
     
     var products = localStorage.getItem('cartProducts')
     products = JSON.parse(products);
+    //const productsArray = [products];
 
     // for (let i=0;i<products.length;i++){
     //   products[i] = JSON.parse(products[i]);
     // }
     const totalCost = CartAPI.getTotal();
-
-
-    var shippingFormData = new FormData();
-    for (var key in this.shipping) {
-      shippingFormData.append(key, this.shipping[key]);
-    }
 
     var productsFormData = new FormData();
     for (var key in products) {
@@ -111,6 +106,7 @@ class OrderAPI {
       orderFormData.append(key, this.orderData[key]);
     }
 
+    // POST main order form data
     const response = await fetch(`${App.apiBase}/order`, {
       method: 'POST',
       // body: this.orderData
@@ -133,6 +129,26 @@ class OrderAPI {
     console.log("Order Response : ", data);
     this.orderId = data._id;
     console.log("OrderId : ", this.orderId);
+
+
+    // POST products array
+
+    const resp = await fetch(`${App.apiBase}/order/productsarray/${this.orderId}`, {
+      method: 'PUT',
+      body: productsFormData
+      //body: products
+    })
+     // if productsArry update response not ok
+     if (!resp.ok) {
+      // console log error
+      const err = await resp.json()
+      if (err) console.log(err)
+      // show error      
+      Toast.show(`Problem adding products array: ${resp.status}`)
+      // run fail() functon if set
+      if (typeof fail == 'function') fail()
+    }
+
 
     await this.makePayment()
   }

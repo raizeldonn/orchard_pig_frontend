@@ -65,7 +65,7 @@ class Checkout2View {
         
         <sl-form class="form-shipping" @sl-submit=${this.paymentSubmitHandler}>
             <div class="input-group">
-              <sl-input name="cardNumber" type="number" min=7 max=16 label="Card Number" required></sl-input>
+              <sl-input name="cardNumber" type="number" minlength=7 maxlength=16 label="Card Number" required></sl-input>
             </div>
             <div class="input-group">
               <sl-select name='expMonth' label='Select Expiry Month' required>
@@ -99,7 +99,7 @@ class Checkout2View {
               </sl-select>
             </div>
             <div class="input-group">
-              <sl-input name="cvv" type="number" min=3 max=4 label="CVV" required></sl-input>
+              <sl-input name="cvv" type="number" minlength=3 maxlength=4 label="CVV" required></sl-input>
             </div>      
             <button class="checkout-btn" submit >Review Order</button>
           </sl-form>
