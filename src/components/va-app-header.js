@@ -436,10 +436,12 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
           display: grid;
           width: 70%;
           grid-template-columns: repeat(2, auto);
+          margin-bottom: 6%;
       }
       .cart-img{
         height: 20vh;
         margin-bottom: 30px;
+        margin-right: 10px;
       }
       .product-name{
         font-weight: bold;
@@ -484,9 +486,14 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
         cursor: pointer;
         color: grey;
         display: inline;
+        font-size: 14px;
+        padding-top: 6%;
       }
       .remove-btn:hover{
         color: red;
+      }
+      p{
+        margin: 3% 0;
       }
 
 
@@ -513,9 +520,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
                 <sl-input class='qty-input' name='${product.name}' min='1' size='small' type='number' value='${product.quantity}'></sl-input>
               </div>
             </div>
-            
-            <!-- <p>Quantity: ${product.quantity}</p> -->
-            <!-- <p>&pound;${product.price.$numberDecimal}</p> -->
+
             <p class='total-cost' id='${product.name}'>&pound;${product.totalCost}</p>
             <p class='remove-btn' @click="${() => this.remove(product.name, product.sku)}">remove item</p>
           </div>
