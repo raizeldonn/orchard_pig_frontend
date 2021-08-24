@@ -178,13 +178,13 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
       }
       .app-top-nav li:hover {
         background-image: url('/images/navbar-pigstep.png');
-        color: red;
+        color: black;
         background-repeat: no-repeat;
         background-position: center top;
         background-size: 30px;
       }
       .app-top-nav li a:visited{
-        color: red;
+        color: black;
         background-image: url('/images/navbar-pigstep.png');
         background-repeat: no-repeat;
         background-position: center top;
