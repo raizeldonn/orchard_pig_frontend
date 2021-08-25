@@ -119,13 +119,14 @@ class HomeView {
         </section>
 
         <section class='home-section hog' >
+        <img class='pigsteps' src='/images/pigsteps.png'>
           <div class='left'>
             <p>It all started in the noughties, just outside Glastonbury.</p>
             <p>When our founder started dabbling with cider making in his garden shed.</p>
             <button class='homepg-btn' @click=${() => gotoRoute('/about')}>Learn More</button>
           </div>
           <img class='pignbottles' src='/images/pig_n_bottles.png'>
-          <img class='pigsteps' src='/images/pigsteps.png'>
+          
 
         </section>
 
