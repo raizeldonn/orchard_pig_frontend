@@ -210,7 +210,6 @@ a {
 .game {
   background-color: var(--med-blue);
   display: flex;
-  overflow-x: hidden;
 }
 .game .pigsteps {
   position: absolute;
