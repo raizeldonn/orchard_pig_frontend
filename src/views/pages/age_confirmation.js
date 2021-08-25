@@ -24,7 +24,8 @@ class AgeConfirmView {
     const template = html`
       <div class="age-confirm">   
         <div class="img-cont">
-          <img class='orchard-img' src="images/age-check.png">
+          <div class='orchard-img'></div>
+          <!-- <img class='orchard-img' src="images/age-check.png"> -->
           <img class='logo' src='images/logo-shape.png'>
         </div>   
         <h1> Rooted in Somerset</h1>

@@ -1,6 +1,13 @@
 
 @media all and (max-width: 1125px){ 
 
+      /*AGE COFIRM*/
+      .age-confirm{
+        h1{
+          margin-top: 5%;
+        }
+      }
+
   /* HOME SECTION */
     .home-section.new-pig{
       .pigsteps{
@@ -38,6 +45,7 @@
 }
   
   @media all and (max-width: 1000px){ 
+
   
     /* HOME SECTION */
     .home-section.hog{
@@ -180,6 +188,12 @@
   }
   
   @media all and (max-width: 800px){ 
+    /*AGE CONFIRM*/
+    .age-confirm{
+      .orchard-img{
+        height: 60vh;
+      }
+    }
   
     /* HOME SECTION */
     .home-section{
@@ -360,6 +374,13 @@
 }
   
   @media all and (max-width: 640px){ 
+  /*AGE CONFIRM*/
+  .age-confirm{
+    .logo{
+     transform:translateX(-15%);
+    }
+  }
+
     .home-section.hog{
       overflow: hidden;
       .pignbottles{

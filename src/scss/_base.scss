@@ -177,13 +177,19 @@ a {
 
     .orchard-img {
       width: 100vw;
+      height: 50vh;
+      background-image: url(../../static/images/age-check.png);
+      background-size: cover;
+      background-position: center;
     }
 
     .logo {
       position: absolute;
       top: 15%;
-      left: 35%;
+      min-width: 250px;
       width: 30%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 

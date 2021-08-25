@@ -175,12 +175,18 @@ a {
 }
 .age-confirm .img-cont .orchard-img {
   width: 100vw;
+  height: 50vh;
+  background-image: url(/age-check.9c29e06e.png);
+  background-size: cover;
+  background-position: center;
 }
 .age-confirm .img-cont .logo {
   position: absolute;
   top: 15%;
-  left: 35%;
+  min-width: 250px;
   width: 30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .age-confirm h1,
 .age-confirm p {
@@ -1013,6 +1019,11 @@ sl-dialog::part(title) {
 }
 
 @media all and (max-width: 1125px) {
+  /*AGE COFIRM*/
+  .age-confirm h1 {
+    margin-top: 5%;
+  }
+
   /* HOME SECTION */
   .home-section.new-pig .pigsteps {
     transform: rotate(-5deg) translateY(-100px) scaleX(-1);
@@ -1155,6 +1166,11 @@ sl-dialog::part(title) {
   }
 }
 @media all and (max-width: 800px) {
+  /*AGE CONFIRM*/
+  .age-confirm .orchard-img {
+    height: 60vh;
+  }
+
   /* HOME SECTION */
   .home-section {
     height: 60vh;
@@ -1316,6 +1332,11 @@ sl-dialog::part(title) {
   }
 }
 @media all and (max-width: 640px) {
+  /*AGE CONFIRM*/
+  .age-confirm .logo {
+    transform: translateX(-15%);
+  }
+
   .home-section.hog {
     overflow: hidden;
   }
