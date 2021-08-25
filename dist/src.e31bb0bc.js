@@ -11043,7 +11043,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header products=", "></va-app-header>\n      <div class=\"page-content\"> \n          <style>\n              text{\n        font-family:Helvetica, Arial, sans-serif;\n        font-size:11px;\n        pointer-events:none;\n    }\n    #chart{\n        position:absolute;\n        width:500px;\n        height:500px;\n        top:13%;\n        left:0.5%;\n        transform: rotate(270deg);\n    }\n    img{\n        position:absolute;\n        height:700px;\n        top:0;\n        left:0;\n    }\n    #question{\n        position: absolute;\n        width:400px;\n        height:500px;\n        top:0;\n        left:520px;\n    }\n    #question h1{\n        font-size: 20px;\n        font-weight: bold;\n        font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n        position: absolute;\n        padding: 0;\n        margin: 0;\n        top:50%;\n        -webkit-transform:translate(0,-50%);\n                transform:translate(0,-50%);\n    }\n          </style>       \n        <h1>Pig Game</h1>\n        <p>Play to win</p>\n        <img  src='/images/wheel_back.png'>\n        <div id=\"chart\"></div>\n    <div id=\"question\"><h1></h1></div>\n\n        <h1>Ok!</h1>\n        <a href=\"/\" @click=", ">No thanks, I'm good</a>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header products=", "></va-app-header>\n      <div class=\"page-content game\"> \n      <img class='pigsteps' src='/images/pigsteps.png'>\n        <div class='game-left'>\n            <h1>SPIN TO WIN</h1>\n            <p>Press on the spin button and bet your lucky pigs youll win something!</p>\n            <a href=\"/\" @click=", ">No thanks, I'm good</a>\n        </div>  \n        <div class='game-center'>\n            <img  class='wheel-back'src='/images/wheel_back.png'>\n            <div id=\"chart\"></div>\n        </div>\n        <div class='game-right'>\n        <h1 class='you-win'>You Win:</h1>\n        <div id=\"question\">\n                <h1></h1>\n            </div>\n        </div>  \n        \n        \n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -11086,51 +11086,42 @@ class ProductsView {
       "label": "Free Cider",
       "value": 1,
       "question": "A free Case of Reveller Bottles!"
-    }, // padding
-    {
+    }, {
       "label": "Free Cider",
       "value": 2,
       "question": "A free Case of Reveller Bottles!"
-    }, //font-family
-    {
-      "label": "No Prize : (",
+    }, {
+      "label": "No Prize",
       "value": 3,
-      "question": "You dont win anything : ("
-    }, //color
-    {
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
       "label": "Tour",
       "value": 4,
       "question": "A free tour to visit us on the farm!!"
-    }, //font-weight
-    {
-      "label": "No Prize : (",
+    }, {
+      "label": "No Prize",
       "value": 5,
-      "question": "You dont win anything : ("
-    }, //font-size
-    {
-      "label": "No Prize : (",
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
+      "label": "No Prize",
       "value": 6,
-      "question": "You dont win anything : ("
-    }, //background-color
-    {
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
       "label": "T-shirt",
       "value": 7,
       "question": "Free Orchard Pig T-Shirt!!"
-    }, //nesting
-    {
+    }, {
       "label": "Pint Glass",
       "value": 8,
       "question": "Free Orchard Pig Pint Glass"
-    }, //bottom
-    {
-      "label": "No Prize : (",
+    }, {
+      "label": "No Prize",
       "value": 9,
-      "question": "You dont win anything : ("
-    }, //sans-serif
-    {
-      "label": "No Prize : (",
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
+      "label": "No Prize",
       "value": 10,
-      "question": "You dont win anything : ("
+      "question": "Sorry, You dont win anything. Better luck next time..."
     }];
     var svg = d3.select('#chart').append("svg").data([data]).attr("width", w + padding.left + padding.right).attr("height", h + padding.top + padding.bottom);
     var container = svg.append("g").attr("class", "chartholder").attr("transform", "translate(" + (w / 2 + padding.left) + "," + (h / 2 + padding.top) + ")");
@@ -11184,7 +11175,7 @@ class ProductsView {
       }
 
       rotation += 90 - Math.round(ps / 2);
-      vis.transition().duration(3000).attrTween("transform", rotTween).each("end", function () {
+      vis.transition().duration(12000).attrTween("transform", rotTween).each("end", function () {
         //mark question as seen
         d3.select(".slice:nth-child(" + (picked + 1) + ") path").attr("fill", "#111"); //populate question
 
@@ -11197,23 +11188,30 @@ class ProductsView {
 
         container.on("click", spin);
       });
-    } //make arrow
+    } // //make arrow
+    // svg.append("g")
+    //     .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
+    //     .append("path")
+    //     .attr("d", "M-" + (r*.15) + ",0L0," + (r*.05) + "L0,-" + (r*.05) + "Z")
+    //     .style({"fill":"black"});
+    //draw spin circle
 
-
-    svg.append("g").attr("transform", "translate(" + (w + padding.left + padding.right) + "," + (h / 2 + padding.top) + ")").append("path").attr("d", "M-" + r * .15 + ",0L0," + r * .05 + "L0,-" + r * .05 + "Z").style({
-      "fill": "black"
-    }); //draw spin circle
 
     container.append("circle").attr("cx", 0).attr("cy", 0).attr("r", 60).style({
       "fill": "white",
-      "cursor": "pointer"
+      "cursor": "pointer",
+      "background-image": "url'../../images/logo-black.png'"
     }); //spin text
 
     container.append("text").attr("x", 0).attr("y", 15).attr("text-anchor", "middle").text("SPIN").style({
       "font-weight": "bold",
       "font-size": "30px",
-      "transform": "rotate(90deg)"
-    });
+      "transform": "rotate(90deg)",
+      "cursor": "pointer"
+    }); // spin logo
+    // container.append("img")
+    //     .attr("src","/images/logo-black.png")
+    //     .style({"width":"10px", "height":"10px"});
 
     function rotTween(to) {
       var i = d3.interpolate(oldrotation % 360, rotation);

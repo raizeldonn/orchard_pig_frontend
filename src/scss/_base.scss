@@ -215,6 +215,100 @@ a {
   }
 }
 
+// GAME-----------------------
+.game{
+  background-color: var(--med-blue);
+  display: flex;
+  overflow-x: hidden;
+  .pigsteps {
+    position: absolute;
+    width: 75%;
+    transform: rotate(-15deg);
+    bottom: 0;
+    right: 0;
+  }
+  .game-left{
+    width: 30%;
+  }
+  .game-right{
+    padding: 5%;
+    h1.you-win{
+      color: white;
+      font-style: italic;
+      width: 80%;
+    }
+    div h1{
+      font-size: 20px;
+      font-family: var(--base-font-family);
+    }
+  }
+  .game-left{
+    padding: 5%;
+    h1{
+      color: white;
+      font-style: italic;
+      width: 80%;
+    }
+    p{
+      font-size: 22px;
+      font-weight: bold;
+    }
+    a{
+      text-decoration: none;
+      color: rgb(34, 34, 34);
+    }
+  }
+
+  #chart{
+    transform: rotate(270deg) translateX(111%) translateY(-9%);
+  }
+  #chart svg{
+    transform: scale(0.85);
+  }
+
+#chart svg g g path{
+    font-weight: bold;
+}
+#chart svg g g text{
+    fill: black;
+    font-family: var(--base-font-family) !important;
+    font-size: 16px;
+}
+img.wheel-back{
+    height:90vh;
+}
+
+// #question{
+//     position: absolute;
+//     width:400px;
+//     height:500px;
+//     top:0;
+//     left:520px;
+// }
+}
+
+#chart svg g g:nth-child(4), #chart svg g g:nth-child(8){
+  path{
+    fill: rgb(31, 119, 180);
+  }
+}
+#chart svg g g:nth-child(6), #chart svg g g:nth-child(10){
+  path{
+    fill: var(--olive);
+  }
+}
+
+#chart svg g g:nth-child(2), #chart svg g g:nth-child(7){
+  path{
+    fill: var(--brown);
+  }
+}
+
+#chart svg g g:nth-child(3), #chart svg g g:nth-child(5), #chart svg g g:nth-child(9){
+  path{
+    fill: var(--sand);
+  }
+}
 // Home Page -------------------
 .home-section {
   height: 95vh;
@@ -697,7 +791,6 @@ button.homepg-btn {
     transform: rotate(-15deg);
     bottom: 5%;
     right: 0;
-    z-index: -1;
   }
   h1{
     font-size: 40px;

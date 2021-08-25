@@ -207,6 +207,83 @@ a {
   margin: auto;
 }
 
+.game {
+  background-color: var(--med-blue);
+  display: flex;
+  overflow-x: hidden;
+}
+.game .pigsteps {
+  position: absolute;
+  width: 75%;
+  transform: rotate(-15deg);
+  bottom: 0;
+  right: 0;
+}
+.game .game-left {
+  width: 30%;
+}
+.game .game-right {
+  padding: 5%;
+}
+.game .game-right h1.you-win {
+  color: white;
+  font-style: italic;
+  width: 80%;
+}
+.game .game-right div h1 {
+  font-size: 20px;
+  font-family: var(--base-font-family);
+}
+.game .game-left {
+  padding: 5%;
+}
+.game .game-left h1 {
+  color: white;
+  font-style: italic;
+  width: 80%;
+}
+.game .game-left p {
+  font-size: 22px;
+  font-weight: bold;
+}
+.game .game-left a {
+  text-decoration: none;
+  color: #222222;
+}
+.game #chart {
+  transform: rotate(270deg) translateX(111%) translateY(-9%);
+}
+.game #chart svg {
+  transform: scale(0.85);
+}
+.game #chart svg g g path {
+  font-weight: bold;
+}
+.game #chart svg g g text {
+  fill: black;
+  font-family: var(--base-font-family) !important;
+  font-size: 16px;
+}
+.game img.wheel-back {
+  height: 90vh;
+}
+
+#chart svg g g:nth-child(4) path, #chart svg g g:nth-child(8) path {
+  fill: #1f77b4;
+}
+
+#chart svg g g:nth-child(6) path, #chart svg g g:nth-child(10) path {
+  fill: var(--olive);
+}
+
+#chart svg g g:nth-child(2) path, #chart svg g g:nth-child(7) path {
+  fill: var(--brown);
+}
+
+#chart svg g g:nth-child(3) path, #chart svg g g:nth-child(5) path, #chart svg g g:nth-child(9) path {
+  fill: var(--sand);
+}
+
 .home-section {
   height: 95vh;
   padding: 1em;
@@ -619,7 +696,6 @@ button.homepg-btn {
   transform: rotate(-15deg);
   bottom: 5%;
   right: 0;
-  z-index: -1;
 }
 .contact-page h1 {
   font-size: 40px;
