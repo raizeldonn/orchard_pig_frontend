@@ -72,17 +72,14 @@ class OrderAPI {
     
     var products = localStorage.getItem('cartProducts')
     products = JSON.parse(products);
-    //const productsArray = [products];
+    console.log('Products in placeORder()',products);
 
     // for (let i=0;i<products.length;i++){
     //   products[i] = JSON.parse(products[i]);
     // }
     const totalCost = CartAPI.getTotal();
 
-    var productsFormData = new FormData();
-    for (var key in products) {
-    productsFormData.append(key, products[key]);
-    }
+
     
     // place the order
     this.orderData = {
@@ -133,10 +130,22 @@ class OrderAPI {
 
     // POST products array
 
-    const resp = await fetch(`${App.apiBase}/order/productsarray/${this.orderId}`, {
+    var productsFormData = new FormData();
+    for (var key in products) {
+    productsFormData.append(key, products[key]);
+    }
+    var resp;
+    for(let i=0;i<products.length;i++){
+
+      var product = products[i];
+      var productsFormData = new FormData();
+      for (var key in product) {
+      productsFormData.append(key, product[key]);
+      }
+      resp = await fetch(`${App.apiBase}/order/productsarray/${this.orderId}`, {
       method: 'PUT',
       body: productsFormData
-      //body: products
+      //body: products[i]
     })
      // if productsArry update response not ok
      if (!resp.ok) {
@@ -148,6 +157,7 @@ class OrderAPI {
       // run fail() functon if set
       if (typeof fail == 'function') fail()
     }
+  }
 
 
     await this.makePayment()

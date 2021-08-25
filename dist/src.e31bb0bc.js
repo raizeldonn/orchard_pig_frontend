@@ -10183,18 +10183,12 @@ class OrderAPI {
 
   async placeOrder() {
     var products = localStorage.getItem('cartProducts');
-    products = JSON.parse(products); //const productsArray = [products];
-    // for (let i=0;i<products.length;i++){
+    products = JSON.parse(products);
+    console.log('Products in placeORder()', products); // for (let i=0;i<products.length;i++){
     //   products[i] = JSON.parse(products[i]);
     // }
 
-    const totalCost = _CartAPI.default.getTotal();
-
-    var productsFormData = new FormData();
-
-    for (var key in products) {
-      productsFormData.append(key, products[key]);
-    } // place the order
+    const totalCost = _CartAPI.default.getTotal(); // place the order
 
 
     this.orderData = {
@@ -10240,21 +10234,38 @@ class OrderAPI {
     this.orderId = data._id;
     console.log("OrderId : ", this.orderId); // POST products array
 
-    const resp = await fetch("".concat(_App.default.apiBase, "/order/productsarray/").concat(this.orderId), {
-      method: 'PUT',
-      body: productsFormData //body: products
+    var productsFormData = new FormData();
 
-    }); // if productsArry update response not ok
+    for (var key in products) {
+      productsFormData.append(key, products[key]);
+    }
 
-    if (!resp.ok) {
-      // console log error
-      const err = await resp.json();
-      if (err) console.log(err); // show error      
+    var resp;
 
-      _Toast.default.show("Problem adding products array: ".concat(resp.status)); // run fail() functon if set
+    for (let i = 0; i < products.length; i++) {
+      var product = products[i];
+      var productsFormData = new FormData();
+
+      for (var key in product) {
+        productsFormData.append(key, product[key]);
+      }
+
+      resp = await fetch("".concat(_App.default.apiBase, "/order/productsarray/").concat(this.orderId), {
+        method: 'PUT',
+        body: productsFormData //body: products[i]
+
+      }); // if productsArry update response not ok
+
+      if (!resp.ok) {
+        // console log error
+        const err = await resp.json();
+        if (err) console.log(err); // show error      
+
+        _Toast.default.show("Problem adding products array: ".concat(resp.status)); // run fail() functon if set
 
 
-      if (typeof fail == 'function') fail();
+        if (typeof fail == 'function') fail();
+      }
     }
 
     await this.makePayment();
@@ -11718,9 +11729,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class App {
   constructor() {
     this.name = "Orchard-Pig";
-    this.version = "1.0.0"; //this.apiBase = 'http://localhost:3000'
+    this.version = "1.0.0";
+    this.apiBase = 'http://localhost:3000'; //this.apiBase = 'https://orchard-pig-backend.herokuapp.com'
 
-    this.apiBase = 'https://orchard-pig-backend.herokuapp.com';
     this.rootEl = document.getElementById("root");
     this.version = "1.0.0";
   }
@@ -13915,7 +13926,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56899" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64947" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
