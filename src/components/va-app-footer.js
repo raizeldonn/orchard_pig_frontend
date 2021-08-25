@@ -33,6 +33,26 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
 
   }
 
+  // hoverFbImage() {
+  //   document.getElementById("facebook").src = "/images/facebook-blue.png"
+  // }
+  // unhoverFbImage() {
+  //   document.getElementById("facebook").src = "/images/facebook-white2.png"
+  // }
+  // hoverIgImage() {
+  //   document.getElementById("instagram").src = "/images/instagram-blue.png"
+  // }
+  // unhoverIgImage() {
+  //   document.getElementById("instagram").src = "/images/instagram-white2.png"
+  // }
+  // hoverTwImage() {
+  //   document.getElementById("twitter").src = "/images/twitter-blue.png"
+  // }
+  // unhoverTwImage() {
+  //   document.getElementById("twitter").src = "/images/twitter-white2.png"
+  // }
+
+
   render(){    
     return html`
     <style>      
@@ -151,9 +171,10 @@ customElements.define('va-app-footer', class AppFooter extends LitElement {
                 <!--<a href='https://www.facebook.com/OrchardPig' target="_blank"><i class="fab fa-facebook-square" ></i></a>-->
                 <!--<a href='https://www.instagram.com/theorchardpig/' target="_blank"><i class="fab fa-instagram"></i></a>-->
                 <!--<a href='https://twitter.com/Orchardpig' target="_blank"><i class="fab fa-twitter-square"></i></a>-->
-                <a href='https://www.facebook.com/OrchardPig' target="_blank"><img src="/images/facebook-white2.png"></a>
-                <a href='https://www.instagram.com/theorchardpig/' target="_blank"><img src="/images/instagram-white2.png"></a>
-                <a href='https://twitter.com/Orchardpig' target="_blank"><img src="/images/twitter-white2.png"</a>
+                <!--<a id="facebook" href='https://www.facebook.com/OrchardPig' target="_blank"><img src="/images/facebook-white2.png"></a>-->
+                <a id="facebook" href='https://www.facebook.com/OrchardPig' target="_blank"><img @mouseover=${() => this.hoverFbImage()}  @mouseout=${() => this.unhoverFbImage()} src="/images/facebook-white2.png"></a>
+                <a id="instagram" href='https://www.instagram.com/theorchardpig/' target="_blank"><img src="/images/instagram-white2.png"></a>
+                <a id="twitter" href='https://twitter.com/Orchardpig' target="_blank"><img src="/images/twitter-white2.png"</a>
               </div>
             </div>
           </div>
