@@ -89,6 +89,7 @@ class HomeView {
 
   };
 
+
   
   // method from lit library which allows us 
   // to render html from within js to a container //@click=${() => gotoRoute('/game')
