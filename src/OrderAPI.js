@@ -22,7 +22,7 @@ class OrderAPI {
     var object = {}
     guest.forEach((value, key) => object[key] = value);
     this.usershippingData = object;
-    console.log("formData convert to userData", this.usershippingData);
+    // console.log("formData convert to userData", this.usershippingData);
 
     //create user object
     this.userData = {
@@ -31,7 +31,7 @@ class OrderAPI {
       "email": this.usershippingData.email,
       "phoneNumber": this.usershippingData.phoneNumber
     }
-    console.log("GUEST USER : ", this.userData);
+    // console.log("GUEST USER : ", this.userData);
 
     //create shipping object
     this.shipping = {
@@ -39,7 +39,7 @@ class OrderAPI {
       "address2": this.usershippingData.address2,
       "shipping": this.usershippingData.shipping
     }
-    console.log("SHIPPING : ", this.shipping);
+    // console.log("SHIPPING : ", this.shipping);
 
     const response = await fetch(`${App.apiBase}/user/guest`, {
       method: 'POST',
@@ -58,11 +58,11 @@ class OrderAPI {
     }
     const data = await response.json();
     this.customerId = data._id;
-    console.log("Response customerId: ", this.customerId);
+    // console.log("Response customerId: ", this.customerId);
     this.userEmail = guest.get('email');
-    console.log("userEmail", this.userEmail);
+    // console.log("userEmail", this.userEmail);
 
-    console.log("retreivedUserData: ", data);
+    // console.log("retreivedUserData: ", data);
 
   }
 
@@ -72,7 +72,7 @@ class OrderAPI {
     
     var products = localStorage.getItem('cartProducts')
     products = JSON.parse(products);
-    console.log('Products in placeORder()',products);
+    // console.log('Products in placeORder()',products);
 
     // for (let i=0;i<products.length;i++){
     //   products[i] = JSON.parse(products[i]);
@@ -95,7 +95,7 @@ class OrderAPI {
    
     }
 
-    console.log("Order DATA : ", this.orderData)
+    // console.log("Order DATA : ", this.orderData)
 
     //convert to a FormData object
     var orderFormData = new FormData();
@@ -123,9 +123,9 @@ class OrderAPI {
 
     //get hold of the order ID in order to make a payment
     const data = await response.json();
-    console.log("Order Response : ", data);
+    // console.log("Order Response : ", data);
     this.orderId = data._id;
-    console.log("OrderId : ", this.orderId);
+    // console.log("OrderId : ", this.orderId);
 
 
     // POST products array
@@ -188,8 +188,8 @@ class OrderAPI {
     for (var key in paymentData) {
       paymentFormData.append(key, paymentData[key]);
     }
-   console.log("paymentFORMDATA: ",paymentFormData);
-   console.log("paymentDATA: ",paymentData);
+  //  console.log("paymentFORMDATA: ",paymentFormData);
+  //  console.log("paymentDATA: ",paymentData);
 
 
    const response = await fetch(`${App.apiBase}/payment`, {
@@ -218,8 +218,8 @@ class OrderAPI {
       "address2": address2,
       "shippingOption": shipping
     }
-    console.log("shipping: " + JSON.stringify(this.shipping))
-    console.log("shipping: " + this.shipping)
+    // console.log("shipping: " + JSON.stringify(this.shipping))
+    // console.log("shipping: " + this.shipping)
   }
 
   // save payment info to object for further use
@@ -247,7 +247,7 @@ class OrderAPI {
         "cvvVerified": cvvVerified
     }
 
-    console.log("payment: " + this.payment)
+    // console.log("payment: " + this.payment)
   }
 
   getUserData() {

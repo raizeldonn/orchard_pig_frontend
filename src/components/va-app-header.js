@@ -110,7 +110,7 @@ customElements.define('va-app-header', class AppHeader extends LitElement {
   remove(name, sku){
     CartAPI.removeItem(name)
     var productDiv = this.shadowRoot.querySelector("#" + sku);
-    console.log(productDiv)
+    // console.log(productDiv)
     productDiv.remove();
     this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + CartAPI.getTotal() + ".00"
     Toast.show(name + " has been removed from your cart")

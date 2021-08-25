@@ -6,7 +6,7 @@ import Utils from './../../Utils'
 
 class SignInView {
   init(){
-    console.log('SignInView.init')
+    // console.log('SignInView.init')
     document.title = 'Sign In'
     this.render()
     Utils.pageIntroAnim()

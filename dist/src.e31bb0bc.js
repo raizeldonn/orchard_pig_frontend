@@ -9492,8 +9492,8 @@ class HomeView {
   }
 
   init() {
-    console.log('HomeView.init');
-    console.log(localStorage);
+    // console.log('HomeView.init');
+    // console.log(localStorage);
     document.title = 'Home'; //this.team = null 
     //this.getTeam()
 
@@ -9569,8 +9569,8 @@ class HomeView {
   async getTeam() {
     try {
       this.team = await _TeamAPI.default.getTeam(); //***** */
+      // console.log(this.team)
 
-      console.log(this.team);
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -9580,8 +9580,8 @@ class HomeView {
 
   async getProducts() {
     try {
-      this.products = await _ProductsAPI.default.getProducts();
-      console.log("AllProducts: ", this.products);
+      this.products = await _ProductsAPI.default.getProducts(); // console.log("AllProducts: ",this.products)
+
       localStorage.setItem('allProducts', JSON.stringify(this.products));
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -9638,7 +9638,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 class FourOFourView {
   init() {
-    console.log('FourOFourView.init');
+    // console.log('FourOFourView.init')    
     document.title = '404 File not found';
     this.render();
   }
@@ -9687,7 +9687,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 class SignInView {
   init() {
-    console.log('SignInView.init');
+    // console.log('SignInView.init')
     document.title = 'Sign In';
     this.render();
 
@@ -9749,7 +9749,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 class SignUpView {
   init() {
-    console.log('SignUpView.init');
+    // console.log('SignUpView.init')  
     document.title = 'Sign In';
     this.render();
 
@@ -9969,17 +9969,17 @@ class CartAPI {
       this.cartProducts.push(product);
       this.orderProducts.push(orderProduct);
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-      localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-      console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
-      return;
-    }
+      localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts)); // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
 
-    console.log("out of function 1!"); // if we already have products in the cart, we need to check if the product exists 
+      return;
+    } // console.log("out of function 1!")
+    // if we already have products in the cart, we need to check if the product exists 
     // and if yes, update the quantity (instead of adding a new product)
+
 
     this.cartProducts.forEach(product => {
       if (product.name == name) {
-        console.log("product already in cart");
+        // console.log("product already in cart")
         productExists = true;
         product.quantity += quantity;
         product.totalCost = product.price * quantity;
@@ -9987,14 +9987,13 @@ class CartAPI {
     });
 
     if (productExists != true) {
-      console.log("product not in cart");
+      // console.log("product not in cart")
       this.cartProducts.push(product);
       this.orderProducts.push(orderProduct);
     }
 
     localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-    localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+    localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts)); // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
   }
 
   updateQty(name, qty) {
@@ -10015,8 +10014,7 @@ class CartAPI {
         product.quantity = qty;
         product.totalCost = product.price * qty;
         localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts)); // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
       }
     });
     return updatedProduct;
@@ -10042,9 +10040,8 @@ class CartAPI {
         }
 
         localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-        console.log("removed item from cart: " + name);
-        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+        localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts)); // console.log("removed item from cart: " + name)
+        // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
       }
     });
   }
@@ -10053,9 +10050,8 @@ class CartAPI {
     this.cartProducts.length = 0;
     this.orderProducts.length = 0;
     localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-    localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-    console.log("cart emptied");
-    console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')));
+    localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts)); // console.log("cart emptied")
+    // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
   }
 
   removeFromCart(name) {}
@@ -10139,23 +10135,23 @@ class OrderAPI {
     //need to convert 'guest' formData object to a JSON object
     var object = {};
     guest.forEach((value, key) => object[key] = value);
-    this.usershippingData = object;
-    console.log("formData convert to userData", this.usershippingData); //create user object
+    this.usershippingData = object; // console.log("formData convert to userData", this.usershippingData);
+    //create user object
 
     this.userData = {
       "firstName": this.usershippingData.firstName,
       "lastName": this.usershippingData.lastName,
       "email": this.usershippingData.email,
       "phoneNumber": this.usershippingData.phoneNumber
-    };
-    console.log("GUEST USER : ", this.userData); //create shipping object
+    }; // console.log("GUEST USER : ", this.userData);
+    //create shipping object
 
     this.shipping = {
       "address": this.usershippingData.address,
       "address2": this.usershippingData.address2,
       "shipping": this.usershippingData.shipping
-    };
-    console.log("SHIPPING : ", this.shipping);
+    }; // console.log("SHIPPING : ", this.shipping);
+
     const response = await fetch("".concat(_App.default.apiBase, "/user/guest"), {
       method: 'POST',
       body: guest
@@ -10173,18 +10169,17 @@ class OrderAPI {
     }
 
     const data = await response.json();
-    this.customerId = data._id;
-    console.log("Response customerId: ", this.customerId);
-    this.userEmail = guest.get('email');
-    console.log("userEmail", this.userEmail);
-    console.log("retreivedUserData: ", data);
+    this.customerId = data._id; // console.log("Response customerId: ", this.customerId);
+
+    this.userEmail = guest.get('email'); // console.log("userEmail", this.userEmail);
+    // console.log("retreivedUserData: ", data);
   } // place an order
 
 
   async placeOrder() {
     var products = localStorage.getItem('cartProducts');
-    products = JSON.parse(products);
-    console.log('Products in placeORder()', products); // for (let i=0;i<products.length;i++){
+    products = JSON.parse(products); // console.log('Products in placeORder()',products);
+    // for (let i=0;i<products.length;i++){
     //   products[i] = JSON.parse(products[i]);
     // }
 
@@ -10201,8 +10196,8 @@ class OrderAPI {
       "address": this.shipping.address,
       "address2": this.shipping.address2,
       "shipping": this.shipping.shippingOption
-    };
-    console.log("Order DATA : ", this.orderData); //convert to a FormData object
+    }; // console.log("Order DATA : ", this.orderData)
+    //convert to a FormData object
 
     var orderFormData = new FormData();
 
@@ -10229,10 +10224,10 @@ class OrderAPI {
     } //get hold of the order ID in order to make a payment
 
 
-    const data = await response.json();
-    console.log("Order Response : ", data);
-    this.orderId = data._id;
-    console.log("OrderId : ", this.orderId); // POST products array
+    const data = await response.json(); // console.log("Order Response : ", data);
+
+    this.orderId = data._id; // console.log("OrderId : ", this.orderId);
+    // POST products array
 
     var productsFormData = new FormData();
 
@@ -10292,10 +10287,10 @@ class OrderAPI {
 
     for (var key in paymentData) {
       paymentFormData.append(key, paymentData[key]);
-    }
+    } //  console.log("paymentFORMDATA: ",paymentFormData);
+    //  console.log("paymentDATA: ",paymentData);
 
-    console.log("paymentFORMDATA: ", paymentFormData);
-    console.log("paymentDATA: ", paymentData);
+
     const response = await fetch("".concat(_App.default.apiBase, "/payment"), {
       method: 'POST',
       body: paymentFormData
@@ -10321,9 +10316,8 @@ class OrderAPI {
       "address": address,
       "address2": address2,
       "shippingOption": shipping
-    };
-    console.log("shipping: " + JSON.stringify(this.shipping));
-    console.log("shipping: " + this.shipping);
+    }; // console.log("shipping: " + JSON.stringify(this.shipping))
+    // console.log("shipping: " + this.shipping)
   } // save payment info to object for further use
 
 
@@ -10345,8 +10339,7 @@ class OrderAPI {
       "expMonth": expMonth,
       "expYear": expYear,
       "cvvVerified": cvvVerified
-    };
-    console.log("payment: " + this.payment);
+    }; // console.log("payment: " + this.payment)
   }
 
   getUserData() {
@@ -10454,8 +10447,7 @@ class Checkout1View {
 
     try {
       await _OrderAPI.default.createGuest(formData);
-    } catch (err) {
-      console.log(err);
+    } catch (err) {// console.log(err)
     }
 
     let address = formData.get('address');
@@ -10769,8 +10761,8 @@ class Checkout3View {
   getProducts() {
     try {
       this.products = localStorage.getItem('cartProducts');
-      this.products = JSON.parse(this.products);
-      console.log(this.products);
+      this.products = JSON.parse(this.products); // console.log(this.products)
+
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -10781,10 +10773,10 @@ class Checkout3View {
     try {
       this.userData = _OrderAPI.default.getUserData();
       this.shipping = _OrderAPI.default.getShipping();
-      this.payment = _OrderAPI.default.getPayment();
-      console.log("userdata checkout: " + JSON.stringify(this.userData));
-      console.log("shipping checkout: " + JSON.stringify(this.shipping));
-      console.log("payment checkout: " + JSON.stringify(this.payment));
+      this.payment = _OrderAPI.default.getPayment(); // console.log("userdata checkout: " + JSON.stringify(this.userData))
+      // console.log("shipping checkout: " + JSON.stringify(this.shipping))
+      // console.log("payment checkout: " + JSON.stringify(this.payment))
+
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -10913,7 +10905,7 @@ class ContactAPI {
     //      subject : subject,
     //      message : message
     //  }
-    console.log("Message data : ", contactData);
+    //  console.log("Message data : ",contactData);
     const response = await fetch("".concat(_App.default.apiBase, "/message"), {
       method: 'POST',
       headers: {
@@ -10932,9 +10924,9 @@ class ContactAPI {
 
       if (typeof fail == 'function') fail();
     } /// sign up success - show toast and redirect to sign in page
+    //  console.log("response: "+ JSON.stringify(response))
+    //get the customerID via the response and save to use for the order and payment
 
-
-    console.log("response: " + JSON.stringify(response)); //get the customerID via the response and save to use for the order and payment
   }
 
   getContactData() {
@@ -11160,11 +11152,10 @@ class ProductsView {
 
     function spin(d) {
       container.on("click", null); //all slices have been seen, all done
-
-      console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+      // console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
 
       if (oldpick.length == data.length) {
-        console.log("done");
+        // console.log("done");
         container.on("click", null);
         return;
       }
@@ -11191,8 +11182,8 @@ class ProductsView {
         d3.select("#question h1").text(data[picked].question);
         oldrotation = rotation;
         /* Get the result value from object "data" */
+        // console.log(data[picked].value)
 
-        console.log(data[picked].value);
         /* Comment the below line for restrict spin to sngle time */
 
         container.on("click", spin);
@@ -11227,8 +11218,7 @@ class ProductsView {
       var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
 
       if (window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function") {
-        window.crypto.getRandomValues(array);
-        console.log("works");
+        window.crypto.getRandomValues(array); // console.log("works");
       } else {
         //no support for crypto, get crappy random numbers
         for (var i = 0; i < 1000; i++) {
@@ -11470,16 +11460,16 @@ class ProductsView {
       this.products = JSON.parse(localStorage.getItem('allProducts'));
     } else {
       this.getProducts();
-    }
+    } // console.log("On Products Page:", this.products);
 
-    console.log("On Products Page:", this.products);
+
     this.render(); //localStorage.removeItem('allProducts');
   }
 
   async getProducts() {
     try {
-      this.products = await _ProductsAPI.default.getProducts();
-      console.log(this.products);
+      this.products = await _ProductsAPI.default.getProducts(); // console.log(this.products)
+
       this.render();
     } catch (err) {
       _Toast.default.show(err, 'error');
@@ -11581,9 +11571,8 @@ class ProductsView {
         }
       }
     } //if its a bottle
+    // console.log("added to cart: " + product.name);
 
-
-    console.log("added to cart: " + product.name);
 
     _CartAPI.default.addProduct(product.item, product.name, 1, product.sku, product.price);
 
@@ -11740,8 +11729,8 @@ class App {
   }
 
   init() {
-    console.log("App.init"); // Toast init
-
+    // console.log("App.init")
+    // Toast init
     _Toast.default.init(); // Authentication check    
 
 
@@ -13714,8 +13703,8 @@ customElements.define('va-app-header', class AppHeader extends _litElement.LitEl
   remove(name, sku) {
     _CartAPI.default.removeItem(name);
 
-    var productDiv = this.shadowRoot.querySelector("#" + sku);
-    console.log(productDiv);
+    var productDiv = this.shadowRoot.querySelector("#" + sku); // console.log(productDiv)
+
     productDiv.remove();
     this.shadowRoot.querySelector('.total').innerHTML = "Subtotal: &pound;" + _CartAPI.default.getTotal() + ".00";
 

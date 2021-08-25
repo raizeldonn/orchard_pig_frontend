@@ -31,7 +31,7 @@ class Checkout1View {
       
     }
     catch(err){
-      console.log(err)
+      // console.log(err)
     }
     
     let address = formData.get('address')

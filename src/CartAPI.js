@@ -45,17 +45,17 @@ class CartAPI {
             this.orderProducts.push(orderProduct);
             localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
             localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-            console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+            // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
             return;
         }
 
-        console.log("out of function 1!")
+        // console.log("out of function 1!")
 
         // if we already have products in the cart, we need to check if the product exists 
         // and if yes, update the quantity (instead of adding a new product)
         this.cartProducts.forEach(product => {
             if (product.name == name){
-                console.log("product already in cart")
+                // console.log("product already in cart")
                 productExists = true;
                 product.quantity += quantity;
                 product.totalCost = (product.price * quantity);
@@ -63,14 +63,14 @@ class CartAPI {
         })
 
         if (productExists != true){
-            console.log("product not in cart")
+            // console.log("product not in cart")
             this.cartProducts.push(product);
             this.orderProducts.push(orderProduct);
         }      
         
         localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
         localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+        // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
     }
 
     updateQty(name, qty){
@@ -90,7 +90,7 @@ class CartAPI {
                 product.totalCost = (product.price * qty);
                 localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
                 localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-                console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+                // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
             }
         })
         return updatedProduct
@@ -115,8 +115,8 @@ class CartAPI {
 
                 localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
                 localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-                console.log("removed item from cart: " + name)
-                console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+                // console.log("removed item from cart: " + name)
+                // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
             }
         })
     }
@@ -126,8 +126,8 @@ class CartAPI {
         this.orderProducts.length = 0;
         localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
         localStorage.setItem('orderProducts', JSON.stringify(this.orderProducts));
-        console.log("cart emptied")
-        console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
+        // console.log("cart emptied")
+        // console.log("cart: " + JSON.stringify(localStorage.getItem('cartProducts')))
     }
 
     removeFromCart(name){

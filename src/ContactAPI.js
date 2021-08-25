@@ -19,7 +19,7 @@ class ContactAPI {
 //      subject : subject,
 //      message : message
 //  }
- console.log("Message data : ",contactData);
+//  console.log("Message data : ",contactData);
 
  const response = await fetch(`${App.apiBase}/message`, {
    method: 'POST',
@@ -38,7 +38,7 @@ class ContactAPI {
    if(typeof fail == 'function') fail()
  }
  /// sign up success - show toast and redirect to sign in page
- console.log("response: "+ JSON.stringify(response))
+//  console.log("response: "+ JSON.stringify(response))
  //get the customerID via the response and save to use for the order and payment
 }
 

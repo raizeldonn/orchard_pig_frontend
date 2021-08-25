@@ -78,9 +78,9 @@ initWheel(){
             
             container.on("click", null);
             //all slices have been seen, all done
-            console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+            // console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
             if(oldpick.length == data.length){
-                console.log("done");
+                // console.log("done");
                 container.on("click", null);
                 return;
             }
@@ -112,7 +112,7 @@ initWheel(){
                     oldrotation = rotation;
               
                     /* Get the result value from object "data" */
-                    console.log(data[picked].value)
+                    // console.log(data[picked].value)
               
                     /* Comment the below line for restrict spin to sngle time */
                     container.on("click", spin);
@@ -152,7 +152,7 @@ initWheel(){
             var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
             if(window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function"){
                 window.crypto.getRandomValues(array);
-                console.log("works");
+                // console.log("works");
             } else {
                 //no support for crypto, get crappy random numbers
                 for(var i=0; i < 1000; i++){

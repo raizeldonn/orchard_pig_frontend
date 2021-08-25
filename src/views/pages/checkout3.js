@@ -25,7 +25,7 @@ class Checkout3View {
     try{
       this.products = localStorage.getItem('cartProducts')
       this.products = JSON.parse(this.products)
-      console.log(this.products)
+      // console.log(this.products)
       this.render()
     }catch(err){
       Toast.show(err, 'error')
@@ -37,9 +37,9 @@ class Checkout3View {
       this.userData = OrderAPI.getUserData()
       this.shipping = OrderAPI.getShipping()
       this.payment = OrderAPI.getPayment()
-      console.log("userdata checkout: " + JSON.stringify(this.userData))
-      console.log("shipping checkout: " + JSON.stringify(this.shipping))
-      console.log("payment checkout: " + JSON.stringify(this.payment))
+      // console.log("userdata checkout: " + JSON.stringify(this.userData))
+      // console.log("shipping checkout: " + JSON.stringify(this.shipping))
+      // console.log("payment checkout: " + JSON.stringify(this.payment))
       this.render()
     }
     catch(err){

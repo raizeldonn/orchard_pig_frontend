@@ -17,8 +17,8 @@ import ProductsAPI from './../../ProductsAPI';
 
 class HomeView {
   init(){    
-    console.log('HomeView.init');
-    console.log(localStorage);
+    // console.log('HomeView.init');
+    // console.log(localStorage);
     document.title = 'Home'  
     //this.team = null 
     //this.getTeam()
@@ -54,7 +54,7 @@ class HomeView {
     try {
       this.team = await TeamAPI.getTeam()
       //***** */
-      console.log(this.team)
+      // console.log(this.team)
       this.render()
     }catch(err){
       Toast.show(err, 'error')
@@ -65,7 +65,7 @@ class HomeView {
   async getProducts(){
     try{
       this.products = await ProductsAPI.getProducts()
-      console.log("AllProducts: ",this.products)
+      // console.log("AllProducts: ",this.products)
       localStorage.setItem('allProducts', JSON.stringify(this.products));
       
     }catch(err){

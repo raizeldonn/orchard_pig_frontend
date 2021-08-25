@@ -25,7 +25,7 @@ class ProductsView {
     } else {
       this.getProducts();
     }
-    console.log("On Products Page:", this.products);
+    // console.log("On Products Page:", this.products);
     this.render()
     //localStorage.removeItem('allProducts');
 
@@ -34,7 +34,7 @@ class ProductsView {
   async getProducts() {
     try {
       this.products = await ProductsAPI.getProducts()
-      console.log(this.products)
+      // console.log(this.products)
       this.render()
     } catch (err) {
       Toast.show(err, 'error')
@@ -196,7 +196,7 @@ class ProductsView {
       }
     } 
     //if its a bottle
-    console.log("added to cart: " + product.name);
+    // console.log("added to cart: " + product.name);
     CartAPI.addProduct(product.item, product.name, 1, product.sku, product.price);
     Toast.show(product.name + ' added to your Cart!')
     this.render()
