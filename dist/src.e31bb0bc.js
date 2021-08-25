@@ -11178,8 +11178,8 @@ class ProductsView {
         d3.select("#question h1").text(data[picked].question);
         oldrotation = rotation;
         /* Get the result value from object "data" */
+        // console.log(data[picked].value)
 
-        console.log(data[picked].value);
         enterEmail(data[picked].value);
         /* Comment the below line for restrict spin to sngle time */
         // container.on("click", spin);
@@ -11234,7 +11234,7 @@ class ProductsView {
 
     function enterEmail(value) {
       if (value == 1 || value == 2 || value == 4 || value == 7 || value == 8) {
-        console.log("prize won");
+        // console.log("prize won")
         let claimPrize = document.querySelector(".claim-prize");
         claimPrize.style.visibility = "visible";
       }
