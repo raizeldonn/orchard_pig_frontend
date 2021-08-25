@@ -4,6 +4,7 @@ import App from '../../App'
 import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import Toast from '../../Toast'
 
 class ProductsView {
   init(){
@@ -15,6 +16,7 @@ class ProductsView {
   }
 
 initWheel(){
+    // spinning wheel code reused from https://codepen.io/sumeshkp18/pen/VGBPYg
     var padding = {top:20, right:40, bottom:0, left:0},
             w = 500 - padding.left - padding.right,
             h = 500 - padding.top  - padding.bottom,
@@ -27,16 +29,16 @@ initWheel(){
             //randomNumbers = getRandomNumbers();
         //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
         var data = [
-                    {"label":"Free Cider",  "value":1,  "question":"A free Case of Reveller Bottles!"}, // padding
-                    {"label":"Free Cider",  "value":2,  "question":"A free Case of Reveller Bottles!"}, //font-family
-                    {"label":"No Prize : (",  "value":3,  "question":"You dont win anything : ("}, //color
-                    {"label":"Tour",  "value":4,  "question":"A free tour to visit us on the farm!!"}, //font-weight
-                    {"label":"No Prize : (",  "value":5,  "question":"You dont win anything : ("}, //font-size
-                    {"label":"No Prize : (",  "value":6,  "question":"You dont win anything : ("}, //background-color
-                    {"label":"T-shirt",  "value":7,  "question":"Free Orchard Pig T-Shirt!!"}, //nesting
-                    {"label":"Pint Glass",  "value":8,  "question":"Free Orchard Pig Pint Glass"}, //bottom
-                    {"label":"No Prize : (",  "value":9,  "question":"You dont win anything : ("}, //sans-serif
-                    {"label":"No Prize : (", "value":10, "question":"You dont win anything : ("}
+                    {"label":"Free Cider",  "value":1,  "question":"A free Case of Reveller Bottles! "}, 
+                    {"label":"Free Cider",  "value":2,  "question":"A free Case of Reveller Bottles!"}, 
+                    {"label":"No Prize",  "value":3,  "question":"Sorry, You dont win anything. Better luck next time..."},
+                    {"label":"Tour",  "value":4,  "question":"A free tour to visit us on the farm!!"}, 
+                    {"label":"No Prize",  "value":5,  "question":"Sorry, You dont win anything. Better luck next time..."},
+                    {"label":"No Prize",  "value":6,  "question":"Sorry, You dont win anything. Better luck next time..."},
+                    {"label":"T-shirt",  "value":7,  "question":"Free Orchard Pig T-Shirt!!"}, 
+                    {"label":"Pint Glass",  "value":8,  "question":"Free Orchard Pig Pint Glass"},
+                    {"label":"No Prize",  "value":9,  "question":"Sorry, You dont win anything. Better luck next time..."},
+                    {"label":"No Prize", "value":10, "question":"Sorry, You dont win anything. Better luck next time..."}
         ];
         var svg = d3.select('#chart')
             .append("svg")
@@ -100,7 +102,7 @@ initWheel(){
             }
             rotation += 90 - Math.round(ps/2);
             vis.transition()
-                .duration(3000)
+                .duration(12000)
                 .attrTween("transform", rotTween)
                 .each("end", function(){
                     //mark question as seen
@@ -112,32 +114,40 @@ initWheel(){
                     oldrotation = rotation;
               
                     /* Get the result value from object "data" */
+<<<<<<< HEAD
                     // console.log(data[picked].value)
               
+=======
+                    console.log(data[picked].value)
+                    enterEmail(data[picked].value)
+>>>>>>> e13361a1e00e4d74d41e26ae80be105a9d8c71c1
                     /* Comment the below line for restrict spin to sngle time */
-                    container.on("click", spin);
+                    // container.on("click", spin);
                 });
         }
-        //make arrow
-        svg.append("g")
-            .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
-            .append("path")
-            .attr("d", "M-" + (r*.15) + ",0L0," + (r*.05) + "L0,-" + (r*.05) + "Z")
-            .style({"fill":"black"});
+        // //make arrow
+        // svg.append("g")
+        //     .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
+        //     .append("path")
+        //     .attr("d", "M-" + (r*.15) + ",0L0," + (r*.05) + "L0,-" + (r*.05) + "Z")
+        //     .style({"fill":"black"});
         //draw spin circle
         container.append("circle")
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("r", 60)
-            .style({"fill":"white","cursor":"pointer"});
+            .style({"fill":"white","cursor":"pointer", "background-image":"url'../../images/logo-black.png'"});
         //spin text
         container.append("text")
             .attr("x", 0)
             .attr("y", 15)
             .attr("text-anchor", "middle")
             .text("SPIN")
-            .style({"font-weight":"bold", "font-size":"30px", "transform": "rotate(90deg)"});
-        
+            .style({"font-weight":"bold", "font-size":"30px", "transform": "rotate(90deg)", "cursor":"pointer"});
+        // spin logo
+        // container.append("img")
+        //     .attr("src","/images/logo-black.png")
+        //     .style({"width":"10px", "height":"10px"});
         
         function rotTween(to) {
           var i = d3.interpolate(oldrotation % 360, rotation);
@@ -161,61 +171,55 @@ initWheel(){
             }
             return array;
         }
+
+        function enterEmail(value)
+        {
+            if (value==1 || value==2 || value==4 || value==7 ||value==8){
+                console.log("prize won")
+                let claimPrize = document.querySelector(".claim-prize")
+                claimPrize.style.visibility = "visible"
+            }
+        }
 }
+
+claimPrize(){
+    // send email addres t oclaim prize
+    // and redirect to home page
+    gotoRoute('/')
+    Toast.show("thank you for spinning to win! we have received your email address and will be in touch with you.")
+}
+
 
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
     const template = html`
       <va-app-header products=${localStorage.getItem('cartProducts')}></va-app-header>
-      <div class="page-content"> 
-          <style>
-              text{
-        font-family:Helvetica, Arial, sans-serif;
-        font-size:11px;
-        pointer-events:none;
-    }
-    #chart{
-        position:absolute;
-        width:500px;
-        height:500px;
-        top:13%;
-        left:0.5%;
-        transform: rotate(270deg);
-    }
-    img{
-        position:absolute;
-        height:700px;
-        top:0;
-        left:0;
-    }
-    #question{
-        position: absolute;
-        width:400px;
-        height:500px;
-        top:0;
-        left:520px;
-    }
-    #question h1{
-        font-size: 20px;
-        font-weight: bold;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        position: absolute;
-        padding: 0;
-        margin: 0;
-        top:50%;
-        -webkit-transform:translate(0,-50%);
-                transform:translate(0,-50%);
-    }
-          </style>       
-        <h1>Pig Game</h1>
-        <p>Play to win</p>
-        <img  src='/images/wheel_back.png'>
-        <div id="chart"></div>
-    <div id="question"><h1></h1></div>
-
-        <h1>Ok!</h1>
-        <a href="/" @click=${anchorRoute}>No thanks, I'm good</a>
+      <div class="page-content game"> 
+      <img class='pigsteps' src='/images/pigsteps.png'>
+        <div class='game-left'>
+            <h1>SPIN TO WIN</h1>
+            <p>Press on the spin button and bet your lucky pigs youll win something!</p>
+            <a href="/" @click=${anchorRoute}>No thanks, I'm good</a>
+        </div>  
+        <div class='game-center'>
+            <img  class='wheel-back'src='/images/wheel_back.png'>
+            <div id="chart"></div>
+        </div>
+        <div class='game-right'>
+        <h1 class='you-win'>You Win:</h1>
+            <div id="question">
+                <h1></h1>
+            </div>
+            <div class='claim-prize'>
+                <p>Let the pig know and it will deliver!</p>
+                <p>Enter email address to claim your prize:</p>
+                <sl-input type="text" placeholder='email address'></sl-input>
+                <sl-button @click='${this.claimPrize}'>Submit</sl-button>
+            </div>
+        </div>  
+        
+        
         
       </div>      
     `

@@ -9462,7 +9462,7 @@ var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header  title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\" >\n      \n        <section id=\"top\" class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button> \n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n\n        </section>\n\n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header  title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\" >\n      \n        <section id=\"top\" class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to win something pig?</p>\n          <button  @click=", ">Spin the wheel to win!</button> \n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n        <img class='pigsteps' src='/images/pigsteps.png'>\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          \n\n        </section>\n\n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -10790,6 +10790,8 @@ class Checkout3View {
       await _OrderAPI.default.placeOrder();
 
       _Toast.default.show('Your order has been submitted. A receipt will be sent to you email');
+
+      _CartAPI.default.emptyCart();
     } catch (err) {
       _Toast.default.show(err, 'error');
     }
@@ -10838,7 +10840,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class=\"age-confirm\">   \n        <div class=\"img-cont\">\n          <div class='orchard-img'></div>\n          <!-- <img class='orchard-img' src=\"images/age-check.png\"> -->\n          <img class='logo' src='images/logo-shape.png'>\n        </div>   \n        <h1> Rooted in Somerset</h1>\n        <p>You must be over 18 to enter this site</p>\n        <div class='center-btn'>\n          <button @click=", ">I am 18 or over</button>\n        </div>\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class=\"age-confirm\">   \n        <div class=\"img-cont\">\n          <img class='logo' src='images/logo-shape.png'>\n        </div>   \n\n        <p>You must be over 18 to enter this site</p>\n        <div class='center-btn'>\n          <button @click=", ">I am 18 or over</button>\n        </div>\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -11032,10 +11034,12 @@ var _Auth = _interopRequireDefault(require("../../Auth"));
 
 var _Utils = _interopRequireDefault(require("../../Utils"));
 
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header products=", "></va-app-header>\n      <div class=\"page-content\"> \n          <style>\n              text{\n        font-family:Helvetica, Arial, sans-serif;\n        font-size:11px;\n        pointer-events:none;\n    }\n    #chart{\n        position:absolute;\n        width:500px;\n        height:500px;\n        top:13%;\n        left:0.5%;\n        transform: rotate(270deg);\n    }\n    img{\n        position:absolute;\n        height:700px;\n        top:0;\n        left:0;\n    }\n    #question{\n        position: absolute;\n        width:400px;\n        height:500px;\n        top:0;\n        left:520px;\n    }\n    #question h1{\n        font-size: 20px;\n        font-weight: bold;\n        font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n        position: absolute;\n        padding: 0;\n        margin: 0;\n        top:50%;\n        -webkit-transform:translate(0,-50%);\n                transform:translate(0,-50%);\n    }\n          </style>       \n        <h1>Pig Game</h1>\n        <p>Play to win</p>\n        <img  src='/images/wheel_back.png'>\n        <div id=\"chart\"></div>\n    <div id=\"question\"><h1></h1></div>\n\n        <h1>Ok!</h1>\n        <a href=\"/\" @click=", ">No thanks, I'm good</a>\n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header products=", "></va-app-header>\n      <div class=\"page-content game\"> \n      <img class='pigsteps' src='/images/pigsteps.png'>\n        <div class='game-left'>\n            <h1>SPIN TO WIN</h1>\n            <p>Press on the spin button and bet your lucky pigs youll win something!</p>\n            <a href=\"/\" @click=", ">No thanks, I'm good</a>\n        </div>  \n        <div class='game-center'>\n            <img  class='wheel-back'src='/images/wheel_back.png'>\n            <div id=\"chart\"></div>\n        </div>\n        <div class='game-right'>\n        <h1 class='you-win'>You Win:</h1>\n            <div id=\"question\">\n                <h1></h1>\n            </div>\n            <div class='claim-prize'>\n                <p>Let the pig know and it will deliver!</p>\n                <p>Enter email address to claim your prize:</p>\n                <sl-input type=\"text\" placeholder='email address'></sl-input>\n                <sl-button @click='", "'>Submit</sl-button>\n            </div>\n        </div>  \n        \n        \n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -11057,6 +11061,7 @@ class ProductsView {
   }
 
   initWheel() {
+    // spinning wheel code reused from https://codepen.io/sumeshkp18/pen/VGBPYg
     var padding = {
       top: 20,
       right: 40,
@@ -11077,52 +11082,43 @@ class ProductsView {
     var data = [{
       "label": "Free Cider",
       "value": 1,
-      "question": "A free Case of Reveller Bottles!"
-    }, // padding
-    {
+      "question": "A free Case of Reveller Bottles! "
+    }, {
       "label": "Free Cider",
       "value": 2,
       "question": "A free Case of Reveller Bottles!"
-    }, //font-family
-    {
-      "label": "No Prize : (",
+    }, {
+      "label": "No Prize",
       "value": 3,
-      "question": "You dont win anything : ("
-    }, //color
-    {
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
       "label": "Tour",
       "value": 4,
       "question": "A free tour to visit us on the farm!!"
-    }, //font-weight
-    {
-      "label": "No Prize : (",
+    }, {
+      "label": "No Prize",
       "value": 5,
-      "question": "You dont win anything : ("
-    }, //font-size
-    {
-      "label": "No Prize : (",
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
+      "label": "No Prize",
       "value": 6,
-      "question": "You dont win anything : ("
-    }, //background-color
-    {
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
       "label": "T-shirt",
       "value": 7,
       "question": "Free Orchard Pig T-Shirt!!"
-    }, //nesting
-    {
+    }, {
       "label": "Pint Glass",
       "value": 8,
       "question": "Free Orchard Pig Pint Glass"
-    }, //bottom
-    {
-      "label": "No Prize : (",
+    }, {
+      "label": "No Prize",
       "value": 9,
-      "question": "You dont win anything : ("
-    }, //sans-serif
-    {
-      "label": "No Prize : (",
+      "question": "Sorry, You dont win anything. Better luck next time..."
+    }, {
+      "label": "No Prize",
       "value": 10,
-      "question": "You dont win anything : ("
+      "question": "Sorry, You dont win anything. Better luck next time..."
     }];
     var svg = d3.select('#chart').append("svg").data([data]).attr("width", w + padding.left + padding.right).attr("height", h + padding.top + padding.bottom);
     var container = svg.append("g").attr("class", "chartholder").attr("transform", "translate(" + (w / 2 + padding.left) + "," + (h / 2 + padding.top) + ")");
@@ -11175,7 +11171,7 @@ class ProductsView {
       }
 
       rotation += 90 - Math.round(ps / 2);
-      vis.transition().duration(3000).attrTween("transform", rotTween).each("end", function () {
+      vis.transition().duration(12000).attrTween("transform", rotTween).each("end", function () {
         //mark question as seen
         d3.select(".slice:nth-child(" + (picked + 1) + ") path").attr("fill", "#111"); //populate question
 
@@ -11184,27 +11180,38 @@ class ProductsView {
         /* Get the result value from object "data" */
         // console.log(data[picked].value)
 
+<<<<<<< HEAD
+=======
+        console.log(data[picked].value);
+        enterEmail(data[picked].value);
+>>>>>>> e13361a1e00e4d74d41e26ae80be105a9d8c71c1
         /* Comment the below line for restrict spin to sngle time */
-
-        container.on("click", spin);
+        // container.on("click", spin);
       });
-    } //make arrow
+    } // //make arrow
+    // svg.append("g")
+    //     .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
+    //     .append("path")
+    //     .attr("d", "M-" + (r*.15) + ",0L0," + (r*.05) + "L0,-" + (r*.05) + "Z")
+    //     .style({"fill":"black"});
+    //draw spin circle
 
-
-    svg.append("g").attr("transform", "translate(" + (w + padding.left + padding.right) + "," + (h / 2 + padding.top) + ")").append("path").attr("d", "M-" + r * .15 + ",0L0," + r * .05 + "L0,-" + r * .05 + "Z").style({
-      "fill": "black"
-    }); //draw spin circle
 
     container.append("circle").attr("cx", 0).attr("cy", 0).attr("r", 60).style({
       "fill": "white",
-      "cursor": "pointer"
+      "cursor": "pointer",
+      "background-image": "url'../../images/logo-black.png'"
     }); //spin text
 
     container.append("text").attr("x", 0).attr("y", 15).attr("text-anchor", "middle").text("SPIN").style({
       "font-weight": "bold",
       "font-size": "30px",
-      "transform": "rotate(90deg)"
-    });
+      "transform": "rotate(90deg)",
+      "cursor": "pointer"
+    }); // spin logo
+    // container.append("img")
+    //     .attr("src","/images/logo-black.png")
+    //     .style({"width":"10px", "height":"10px"});
 
     function rotTween(to) {
       var i = d3.interpolate(oldrotation % 360, rotation);
@@ -11228,12 +11235,28 @@ class ProductsView {
 
       return array;
     }
+
+    function enterEmail(value) {
+      if (value == 1 || value == 2 || value == 4 || value == 7 || value == 8) {
+        console.log("prize won");
+        let claimPrize = document.querySelector(".claim-prize");
+        claimPrize.style.visibility = "visible";
+      }
+    }
+  }
+
+  claimPrize() {
+    // send email addres t oclaim prize
+    // and redirect to home page
+    (0, _Router.gotoRoute)('/');
+
+    _Toast.default.show("thank you for spinning to win! we have received your email address and will be in touch with you.");
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), _Router.anchorRoute); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), _Router.anchorRoute, this.claimPrize); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -11245,7 +11268,7 @@ class ProductsView {
 var _default = new ProductsView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/products.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js"}],"views/pages/products.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13887,7 +13910,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/age-check.png":[["age-check.9c29e06e.png","../static/images/age-check.png"],"../static/images/age-check.png"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./../../static/images/stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./../../static/images/stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./../../static/images/stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\age-check.png":[["age-check.9c29e06e.png","../static/images/age-check.png"],"../static/images/age-check.png"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./..\\..\\static\\images\\stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./..\\..\\static\\images\\stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./..\\..\\static\\images\\stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -13936,7 +13959,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50805" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62960" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

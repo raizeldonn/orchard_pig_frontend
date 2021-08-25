@@ -52,6 +52,7 @@ class Checkout3View {
     try{
       await OrderAPI.placeOrder()
       Toast.show('Your order has been submitted. A receipt will be sent to you email')
+      CartAPI.emptyCart()
     }
     catch(err){
       Toast.show(err, 'error')
