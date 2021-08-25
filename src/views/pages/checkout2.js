@@ -29,6 +29,7 @@ class Checkout2View {
 
   paymentSubmitHandler(e){
     e.preventDefault()    
+    document.getElementById('spinner').style = 'display:block;';
     const formData = e.detail.formData
 
     let cardNum = formData.get('cardNumber')
@@ -126,7 +127,8 @@ class Checkout2View {
         <button class='checkout-btn' @click="${this.continueShopping}">Continue Shopping</button>
       </div>
 
-      </div>      
+      </div>
+      <va-bottle-spinner id="spinner" style="display:none;"><va-bottle-spinner>        
     `
     // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 

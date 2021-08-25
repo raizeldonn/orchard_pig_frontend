@@ -217,7 +217,7 @@ class ProductsView {
         <div class='products-grid'>
             ${this.products == null ? html `
               <!-- <sl-spinner></sl-spinner> -->
-              <va-bottle-spinner></bottle-spinner>
+              <va-bottle-spinner></va-bottle-spinner>
             ` : html `
             <!--map is very similar to for each-->
               ${this.products.map(product => html`

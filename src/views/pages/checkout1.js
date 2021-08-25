@@ -20,14 +20,15 @@ class Checkout1View {
   async shippingSubmitHandler(e){
     e.preventDefault()    
     const formData = e.detail.formData
-    
+    document.getElementById('spinner').style = 'display:block;';
     // let firstName = formData.get('firstName')
     // let lastName = formData.get('lastName')
     // let email = formData.get('email')
     // let phoneNumber = formData.get('phoneNumber')
 
     try{
-      await OrderAPI.createGuest(formData)
+      await OrderAPI.createGuest(formData);
+      
     }
     catch(err){
       console.log(err)
@@ -57,16 +58,21 @@ class Checkout1View {
     gotoRoute('/products')
   }
 
+  
   // method from lit library which allows us 
   // to render html from within js to a container
   render(){
     const template = html`
+
+     
+
       <div class='checkout-header'>
         <h1>Checkout</h1>
         <img class='nav-logo' src='/images/logo-black.png'>
       </div>
 
       <div class="page-content checkout checkout1"> 
+      
       <div class='left-checkout'>
         <h2>Shipping Details</h2>
         <sl-form class="form-shipping" @sl-submit=${this.shippingSubmitHandler}>
@@ -122,8 +128,9 @@ class Checkout1View {
         <h3>Subtotal: &pound;${CartAPI.getTotal()}.00</h3>
         <button class='checkout-btn' @click="${this.continueShopping}">Continue Shopping</button>
       </div>
-        
-      </div>      
+      
+      </div>  
+      <va-bottle-spinner id="spinner" style="display:none;"><va-bottle-spinner>    
     `
     // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
