@@ -48,6 +48,7 @@ class Checkout3View {
   }
   
   async placeOrder(){
+    document.getElementById('spinner').style = 'display:block;';
     try{
       await OrderAPI.placeOrder()
       Toast.show('Your order has been submitted. A receipt will be sent to you email')
@@ -55,6 +56,8 @@ class Checkout3View {
     catch(err){
       Toast.show(err, 'error')
   }
+  document.getElementById('spinner').style = 'display:none;';
+  gotoRoute('/products')
   }
 
   continueShopping(){
@@ -131,7 +134,8 @@ class Checkout3View {
         <button class='checkout-btn' @click="${this.continueShopping}">Continue Shopping</button>
       </div>
 
-      </div>      
+      </div>
+      <va-bottle-spinner id="spinner" style="display:none;"><va-bottle-spinner>           
     `
     // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 

@@ -157,7 +157,7 @@ class ProductsView {
         if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "12")) {
           // this.productDialog.remove();
           product = this.products[i];
-          Toast.show("Yummy... Bottled Cider!");
+          //Toast.show("Yummy... Bottled Cider!");
           this.canInfoDisplay = false;
           this.changeCanBottleInfo(product);
           //this.moreInfoHandler(product);
@@ -173,7 +173,7 @@ class ProductsView {
         if ((this.products[i].shortName === product.shortName) && (this.products[i].packSize === "24")) {
           // this.productDialog.remove();
           product = this.products[i];
-          Toast.show("Delicious... Cider Cans!");
+          //Toast.show("Delicious... Cider Cans!");
           this.canInfoDisplay = true;
           this.changeCanBottleInfo(product);
           //this.moreInfoHandler(product);
