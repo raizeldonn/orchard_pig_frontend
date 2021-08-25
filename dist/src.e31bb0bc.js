@@ -10798,6 +10798,8 @@ class Checkout3View {
       await _OrderAPI.default.placeOrder();
 
       _Toast.default.show('Your order has been submitted. A receipt will be sent to you email');
+
+      _CartAPI.default.emptyCart();
     } catch (err) {
       _Toast.default.show(err, 'error');
     }
