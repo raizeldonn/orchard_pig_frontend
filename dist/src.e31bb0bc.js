@@ -11729,9 +11729,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class App {
   constructor() {
     this.name = "Orchard-Pig";
-    this.version = "1.0.0";
-    this.apiBase = 'http://localhost:3000'; //this.apiBase = 'https://orchard-pig-backend.herokuapp.com'
+    this.version = "1.0.0"; // this.apiBase = 'http://localhost:3000'
 
+    this.apiBase = 'https://orchard-pig-backend.herokuapp.com';
     this.rootEl = document.getElementById("root");
     this.version = "1.0.0";
   }
