@@ -4,6 +4,7 @@ import App from '../../App'
 import {gotoRoute, anchorRoute} from '../../Router'
 import Auth from '../../Auth'
 import Utils from '../../Utils'
+import Toast from '../../Toast'
 
 class ProductsView {
   init(){
@@ -15,6 +16,7 @@ class ProductsView {
   }
 
 initWheel(){
+    // spinning wheel code reused from https://codepen.io/sumeshkp18/pen/VGBPYg
     var padding = {top:20, right:40, bottom:0, left:0},
             w = 500 - padding.left - padding.right,
             h = 500 - padding.top  - padding.bottom,
@@ -176,7 +178,10 @@ initWheel(){
 }
 
 claimPrize(){
+    // send email addres t oclaim prize
+    // and redirect to home page
     gotoRoute('/')
+    Toast.show("thank you for spinning to win! we have received your email address and will be in touch with you.")
 }
 
 

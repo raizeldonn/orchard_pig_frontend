@@ -102,8 +102,8 @@ class HomeView {
         <section id="top" class='home-section rooted'>
         <!--<img class="splash" src="images/home-splash-2.png">-->
           <h1>Rooted In Somerset</h1>
-          <p>Want to earn a discount for your next order?</p>
-          <button  @click=${this.animateButton}>Find the pig to win!</button> 
+          <p>Want to win something pig?</p>
+          <button  @click=${this.animateButton}>Spin the wheel to win!</button> 
         </section>
 
         <section class='home-section new-pig'>

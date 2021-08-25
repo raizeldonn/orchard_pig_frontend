@@ -9462,7 +9462,7 @@ var _ProductsAPI = _interopRequireDefault(require("./../../ProductsAPI"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n\n      <va-app-header  title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\" >\n      \n        <section id=\"top\" class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to earn a discount for your next order?</p>\n          <button  @click=", ">Find the pig to win!</button> \n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n\n        </section>\n\n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n\n      <va-app-header  title=\"Home\" products=", "></va-app-header>\n\n      <div class=\"page-content\" >\n      \n        <section id=\"top\" class='home-section rooted'>\n        <!--<img class=\"splash\" src=\"images/home-splash-2.png\">-->\n          <h1>Rooted In Somerset</h1>\n          <p>Want to win something pig?</p>\n          <button  @click=", ">Spin the wheel to win!</button> \n        </section>\n\n        <section class='home-section new-pig'>\n          <img class='pink-tilted' src='/images/home-pinks.png'>\n          <div>\n            <h1>There's a new pig in town</h1>\n            <h3>and its....delicious!</h3>\n            <p>Wanna try it?</p>\n            <button class='homepg-btn' @click=", ">Click Here</button>\n          </div>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n          \n        </section>\n\n        <section class='home-section hog' >\n          <div class='left'>\n            <p>It all started in the noughties, just outside Glastonbury.</p>\n            <p>When our founder started dabbling with cider making in his garden shed.</p>\n            <button class='homepg-btn' @click=", ">Learn More</button>\n          </div>\n          <img class='pignbottles' src='/images/pig_n_bottles.png'>\n          <img class='pigsteps' src='/images/pigsteps.png'>\n\n        </section>\n\n    \t  <va-app-footer margin=\"false\"></va-app-footer>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -11040,6 +11040,8 @@ var _Auth = _interopRequireDefault(require("../../Auth"));
 
 var _Utils = _interopRequireDefault(require("../../Utils"));
 
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
@@ -11065,6 +11067,7 @@ class ProductsView {
   }
 
   initWheel() {
+    // spinning wheel code reused from https://codepen.io/sumeshkp18/pen/VGBPYg
     var padding = {
       top: 20,
       right: 40,
@@ -11247,7 +11250,11 @@ class ProductsView {
   }
 
   claimPrize() {
+    // send email addres t oclaim prize
+    // and redirect to home page
     (0, _Router.gotoRoute)('/');
+
+    _Toast.default.show("thank you for spinning to win! we have received your email address and will be in touch with you.");
   } // method from lit library which allows us 
   // to render html from within js to a container
 
@@ -11265,7 +11272,7 @@ class ProductsView {
 var _default = new ProductsView();
 
 exports.default = _default;
-},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"views/pages/products.js":[function(require,module,exports) {
+},{"lit-html":"../node_modules/lit-html/lit-html.js","../../App":"App.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js"}],"views/pages/products.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
