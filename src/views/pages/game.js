@@ -114,13 +114,8 @@ initWheel(){
                     oldrotation = rotation;
               
                     /* Get the result value from object "data" */
-<<<<<<< HEAD
-                    // console.log(data[picked].value)
-              
-=======
                     console.log(data[picked].value)
                     enterEmail(data[picked].value)
->>>>>>> e13361a1e00e4d74d41e26ae80be105a9d8c71c1
                     /* Comment the below line for restrict spin to sngle time */
                     // container.on("click", spin);
                 });

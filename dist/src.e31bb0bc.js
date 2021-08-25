@@ -11178,13 +11178,9 @@ class ProductsView {
         d3.select("#question h1").text(data[picked].question);
         oldrotation = rotation;
         /* Get the result value from object "data" */
-        // console.log(data[picked].value)
 
-<<<<<<< HEAD
-=======
         console.log(data[picked].value);
         enterEmail(data[picked].value);
->>>>>>> e13361a1e00e4d74d41e26ae80be105a9d8c71c1
         /* Comment the below line for restrict spin to sngle time */
         // container.on("click", spin);
       });
@@ -13910,7 +13906,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\age-check.png":[["age-check.9c29e06e.png","../static/images/age-check.png"],"../static/images/age-check.png"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./..\\..\\static\\images\\stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./..\\..\\static\\images\\stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./..\\..\\static\\images\\stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/age-check.png":[["age-check.9c29e06e.png","../static/images/age-check.png"],"../static/images/age-check.png"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./../../static/images/stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./../../static/images/stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./../../static/images/stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -13959,7 +13955,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62960" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50805" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
