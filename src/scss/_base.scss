@@ -231,6 +231,7 @@ a {
     width: 30%;
   }
   .game-right{
+    width: 30%;
     padding: 5%;
     h1.you-win{
       color: white;
@@ -257,6 +258,9 @@ a {
       text-decoration: none;
       color: rgb(34, 34, 34);
     }
+  }
+  .claim-prize{
+    visibility: hidden;
   }
 
   #chart{

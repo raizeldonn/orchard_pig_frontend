@@ -27,7 +27,7 @@ initWheel(){
             //randomNumbers = getRandomNumbers();
         //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
         var data = [
-                    {"label":"Free Cider",  "value":1,  "question":"A free Case of Reveller Bottles!"}, 
+                    {"label":"Free Cider",  "value":1,  "question":"A free Case of Reveller Bottles! "}, 
                     {"label":"Free Cider",  "value":2,  "question":"A free Case of Reveller Bottles!"}, 
                     {"label":"No Prize",  "value":3,  "question":"Sorry, You dont win anything. Better luck next time..."},
                     {"label":"Tour",  "value":4,  "question":"A free tour to visit us on the farm!!"}, 
@@ -113,9 +113,9 @@ initWheel(){
               
                     /* Get the result value from object "data" */
                     console.log(data[picked].value)
-              
+                    enterEmail(data[picked].value)
                     /* Comment the below line for restrict spin to sngle time */
-                    container.on("click", spin);
+                    // container.on("click", spin);
                 });
         }
         // //make arrow
@@ -164,7 +164,21 @@ initWheel(){
             }
             return array;
         }
+
+        function enterEmail(value)
+        {
+            if (value==1 || value==2 || value==4 || value==7 ||value==8){
+                console.log("prize won")
+                let claimPrize = document.querySelector(".claim-prize")
+                claimPrize.style.visibility = "visible"
+            }
+        }
 }
+
+claimPrize(){
+    gotoRoute('/')
+}
+
 
   // method from lit library which allows us 
   // to render html from within js to a container
@@ -184,8 +198,14 @@ initWheel(){
         </div>
         <div class='game-right'>
         <h1 class='you-win'>You Win:</h1>
-        <div id="question">
+            <div id="question">
                 <h1></h1>
+            </div>
+            <div class='claim-prize'>
+                <p>Let the pig know and it will deliver!</p>
+                <p>Enter email address to claim your prize:</p>
+                <sl-input type="text" placeholder='email address'></sl-input>
+                <sl-button @click='${this.claimPrize}'>Submit</sl-button>
             </div>
         </div>  
         

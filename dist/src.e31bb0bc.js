@@ -11043,7 +11043,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header products=", "></va-app-header>\n      <div class=\"page-content game\"> \n      <img class='pigsteps' src='/images/pigsteps.png'>\n        <div class='game-left'>\n            <h1>SPIN TO WIN</h1>\n            <p>Press on the spin button and bet your lucky pigs youll win something!</p>\n            <a href=\"/\" @click=", ">No thanks, I'm good</a>\n        </div>  \n        <div class='game-center'>\n            <img  class='wheel-back'src='/images/wheel_back.png'>\n            <div id=\"chart\"></div>\n        </div>\n        <div class='game-right'>\n        <h1 class='you-win'>You Win:</h1>\n        <div id=\"question\">\n                <h1></h1>\n            </div>\n        </div>  \n        \n        \n        \n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header products=", "></va-app-header>\n      <div class=\"page-content game\"> \n      <img class='pigsteps' src='/images/pigsteps.png'>\n        <div class='game-left'>\n            <h1>SPIN TO WIN</h1>\n            <p>Press on the spin button and bet your lucky pigs youll win something!</p>\n            <a href=\"/\" @click=", ">No thanks, I'm good</a>\n        </div>  \n        <div class='game-center'>\n            <img  class='wheel-back'src='/images/wheel_back.png'>\n            <div id=\"chart\"></div>\n        </div>\n        <div class='game-right'>\n        <h1 class='you-win'>You Win:</h1>\n            <div id=\"question\">\n                <h1></h1>\n            </div>\n            <div class='claim-prize'>\n                <p>Let the pig know and it will deliver!</p>\n                <p>Enter email address to claim your prize:</p>\n                <sl-input type=\"text\" placeholder='email address'></sl-input>\n                <sl-button @click='", "'>Submit</sl-button>\n            </div>\n        </div>  \n        \n        \n        \n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -11085,7 +11085,7 @@ class ProductsView {
     var data = [{
       "label": "Free Cider",
       "value": 1,
-      "question": "A free Case of Reveller Bottles!"
+      "question": "A free Case of Reveller Bottles! "
     }, {
       "label": "Free Cider",
       "value": 2,
@@ -11184,9 +11184,9 @@ class ProductsView {
         /* Get the result value from object "data" */
 
         console.log(data[picked].value);
+        enterEmail(data[picked].value);
         /* Comment the below line for restrict spin to sngle time */
-
-        container.on("click", spin);
+        // container.on("click", spin);
       });
     } // //make arrow
     // svg.append("g")
@@ -11236,12 +11236,24 @@ class ProductsView {
 
       return array;
     }
+
+    function enterEmail(value) {
+      if (value == 1 || value == 2 || value == 4 || value == 7 || value == 8) {
+        console.log("prize won");
+        let claimPrize = document.querySelector(".claim-prize");
+        claimPrize.style.visibility = "visible";
+      }
+    }
+  }
+
+  claimPrize() {
+    (0, _Router.gotoRoute)('/');
   } // method from lit library which allows us 
   // to render html from within js to a container
 
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), _Router.anchorRoute); // this assigns the template html container to App.rootEl
+    const template = (0, _litHtml.html)(_templateObject(), localStorage.getItem('cartProducts'), _Router.anchorRoute, this.claimPrize); // this assigns the template html container to App.rootEl
     // which provides the html to the <div id="root"></div> element 
     // in the index.html parent page
 
@@ -13896,7 +13908,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./../fonts/rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./../fonts/lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./../fonts/lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./../../static/images/age-check.png":[["age-check.9c29e06e.png","../static/images/age-check.png"],"../static/images/age-check.png"],"./../../static/images/home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./../../static/images/stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./../../static/images/stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./../../static/images/stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./..\\fonts\\rockwell.ttf":[["rockwell.87572e8a.ttf","fonts/rockwell.ttf"],"fonts/rockwell.ttf"],"./..\\fonts\\rockwell-bold.ttf":[["rockwell-bold.c9857f1a.ttf","fonts/rockwell-bold.ttf"],"fonts/rockwell-bold.ttf"],"./..\\fonts\\lato.ttf":[["lato.3bb7d66f.ttf","fonts/lato.ttf"],"fonts/lato.ttf"],"./..\\fonts\\lato-bold.ttf":[["lato-bold.b47b8680.ttf","fonts/lato-bold.ttf"],"fonts/lato-bold.ttf"],"./..\\..\\static\\images\\age-check.png":[["age-check.9c29e06e.png","../static/images/age-check.png"],"../static/images/age-check.png"],"./..\\..\\static\\images\\home-splash-2.png":[["home-splash-2.40814d4a.png","../static/images/home-splash-2.png"],"../static/images/home-splash-2.png"],"./..\\..\\static\\images\\stroke-the-beginning.png":[["stroke-the-beginning.c59e919e.png","../static/images/stroke-the-beginning.png"],"../static/images/stroke-the-beginning.png"],"./..\\..\\static\\images\\stroke-beliefs.png":[["stroke-beliefs.3148c938.png","../static/images/stroke-beliefs.png"],"../static/images/stroke-beliefs.png"],"./..\\..\\static\\images\\stroke-our-home.png":[["stroke-our-home.9ecfb41d.png","../static/images/stroke-our-home.png"],"../static/images/stroke-our-home.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _App = _interopRequireDefault(require("./App.js"));
@@ -13945,7 +13957,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50805" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50151" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
