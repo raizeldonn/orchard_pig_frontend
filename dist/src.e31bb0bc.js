@@ -10848,7 +10848,7 @@ var _Utils = _interopRequireDefault(require("../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class=\"age-confirm\">   \n        <div class=\"img-cont\">\n          <div class='orchard-img'></div>\n          <!-- <img class='orchard-img' src=\"images/age-check.png\"> -->\n          <img class='logo' src='images/logo-shape.png'>\n        </div>   \n        <h1> Rooted in Somerset</h1>\n        <p>You must be over 18 to enter this site</p>\n        <div class='center-btn'>\n          <button @click=", ">I am 18 or over</button>\n        </div>\n      </div>      \n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class=\"age-confirm\">   \n        <div class=\"img-cont\">\n          <img class='logo' src='images/logo-shape.png'>\n        </div>   \n\n        <p>You must be over 18 to enter this site</p>\n        <div class='center-btn'>\n          <button @click=", ">I am 18 or over</button>\n        </div>\n      </div>      \n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13966,7 +13966,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50151" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62960" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

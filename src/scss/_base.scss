@@ -172,23 +172,39 @@ a {
 
 // Age Confirm Page --------------
 .age-confirm {
+  background-image: url(../../static/images/age-check.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  color: white;
+  h1{
+    color: white;
+  }
+  p{
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.7);
+    padding-left: 5%;
+    padding-right: 5%;
+  }
   .img-cont {
-    position: relative;
+    height: 50vh;
+    text-align:center;
 
-    .orchard-img {
-      width: 100vw;
-      height: 60vh;
-      background-image: url(../../static/images/age-check.png);
-      background-size: cover;
-      background-position: center;
-    }
+    // .orchard-img {
+    //   width: 100vw;
+    //   height: 60vh;
+    //   background-image: url(../../static/images/age-check.png);
+    //   background-size: cover;
+    //   background-position: center;
+    // }
 
     .logo {
-      position: absolute;
-      top: 15%;
       min-width: 250px;
-      left: 35%;
       width: 30%;
+      margin-left: auto;
+      margin-left: auto;
+      margin-top: 3%;
+      display: inline-block;
     }
   }
 

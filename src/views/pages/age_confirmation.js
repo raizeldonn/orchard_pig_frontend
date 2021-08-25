@@ -24,11 +24,9 @@ class AgeConfirmView {
     const template = html`
       <div class="age-confirm">   
         <div class="img-cont">
-          <div class='orchard-img'></div>
-          <!-- <img class='orchard-img' src="images/age-check.png"> -->
           <img class='logo' src='images/logo-shape.png'>
         </div>   
-        <h1> Rooted in Somerset</h1>
+
         <p>You must be over 18 to enter this site</p>
         <div class='center-btn'>
           <button @click=${this.confirmAge.bind(this)}>I am 18 or over</button>

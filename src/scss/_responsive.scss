@@ -40,6 +40,7 @@
 }
   
   @media all and (max-width: 1000px){ 
+
       /*AGE COFIRM*/
       .age-confirm{
         h1{
@@ -374,12 +375,6 @@
 }
   
   @media all and (max-width: 640px){ 
-  /*AGE CONFIRM*/
-  .age-confirm{
-    .logo{
-     transform:translateX(-15%);
-    }
-  }
 
     .home-section.hog{
       overflow: hidden;

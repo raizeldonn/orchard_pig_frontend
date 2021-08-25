@@ -170,22 +170,33 @@ a {
   height: auto;
 }
 
-.age-confirm .img-cont {
-  position: relative;
-}
-.age-confirm .img-cont .orchard-img {
-  width: 100vw;
-  height: 60vh;
+.age-confirm {
   background-image: url(/age-check.9c29e06e.png);
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  color: white;
+}
+.age-confirm h1 {
+  color: white;
+}
+.age-confirm p {
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.7);
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.age-confirm .img-cont {
+  height: 50vh;
+  text-align: center;
 }
 .age-confirm .img-cont .logo {
-  position: absolute;
-  top: 15%;
   min-width: 250px;
-  left: 35%;
   width: 30%;
+  margin-left: auto;
+  margin-left: auto;
+  margin-top: 3%;
+  display: inline-block;
 }
 .age-confirm h1,
 .age-confirm p {
@@ -1410,11 +1421,6 @@ sl-dialog::part(title) {
   }
 }
 @media all and (max-width: 640px) {
-  /*AGE CONFIRM*/
-  .age-confirm .logo {
-    transform: translateX(-15%);
-  }
-
   .home-section.hog {
     overflow: hidden;
   }
